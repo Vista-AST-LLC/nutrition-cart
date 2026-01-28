@@ -56,6 +56,7 @@ ageGroupSelect.addEventListener('change', function () {
     checkFormCompletion();
 });
 
+//********UI DISPLAY FUNCTIONS********/
 function showDemographicsScreen() {
     welcomeScreen.classList.add('hidden');
     mainApp.classList.add('hidden');
@@ -336,6 +337,7 @@ document.addEventListener("keydown", function (e) {
     }
 });
 
+//********INSTRUCTIONS SIDEBAR FUNCTIONALITY********/
 function openInstructions() {
     instructionsPanel.classList.add('active');
     overlay.classList.add('active');
@@ -352,67 +354,7 @@ function closeInstructions() {
     menuBtn.focus();
 }
 
-function handleFileUpload(e) {
-    const file = e.target.files[0];
-    if (!file) return;
-
-    selectedFileName.textContent = `Selected: ${file.name}`;
-    loadingDiv.classList.remove('hidden');
-    messageDiv.classList.add('hidden');
-
-    // Clear any previous error
-    const fileHelp = document.getElementById('fileHelp');
-    fileHelp.classList.add('hidden');
-
-    Papa.parse(file, {
-        header: true,
-        skipEmptyLines: true,
-        dynamicTyping: true,
-        complete: function (results) {
-            loadingDiv.classList.add('hidden');
-
-            if (results.errors.length > 0) {
-                fileHelp.textContent = 'Error parsing CSV: ' + results.errors[0].message;
-                fileHelp.classList.remove('hidden');
-                showMessage('Error parsing CSV file', 'error');
-                return;
-            }
-
-            if (results.data.length === 0) {
-                fileHelp.textContent = 'No data found in CSV file.';
-                fileHelp.classList.remove('hidden');
-                showMessage('No data found in CSV file.', 'error');
-                return;
-            }
-
-            // Validate required columns
-            const requiredColumns = ['Reference #', 'Item', 'Calories'];
-            const missingColumns = requiredColumns.filter(col =>
-                !results.meta.fields || !results.meta.fields.includes(col)
-            );
-
-            if (missingColumns.length > 0) {
-                fileHelp.textContent = `Missing required columns: ${missingColumns.join(', ')}`;
-                fileHelp.classList.remove('hidden');
-                showMessage(`Missing required columns: ${missingColumns.join(', ')}`, 'error');
-                return;
-            }
-
-            nutritionData = results.data;
-            //console.log('Loaded nutrition data:', nutritionData);
-            updateTable();
-            saveToLocalStorage();
-            showMessage('CSV data loaded successfully! You can now add food items by code.', 'success');
-        },
-        error: function (error) {
-            loadingDiv.classList.add('hidden');
-            fileHelp.textContent = 'Error reading file: ' + error.message;
-            fileHelp.classList.remove('hidden');
-            showMessage('Error reading file: ' + error.message, 'error');
-        }
-    });
-}
-
+//********FOOD SCANNER FUNCTIONS********/
 function addFoodByCode() {
 
     const code = foodCodeInput.value.trim().toUpperCase();
@@ -602,6 +544,7 @@ function createFoodElement(item) {
     return foodDiv;  // prior removeFood was item.code, is now foodEntry
 }
 
+//********SCORE AND PROGRESS CALCULATION FUNCTIONS********/
 function updateSummary() {
     let calories = 0;
     let protein = 0;
@@ -808,6 +751,7 @@ function calculateSodiumScore(sodium) {
     }
 }
 
+//********TABLE FUNCTIONS********/
 function updateTable() {
     tableBody.innerHTML = '';
 
@@ -837,21 +781,36 @@ function updateTable() {
                     <td>${item['Trans Fat (%DV)'] || 'N/A'}</td>
                     <td>${item['Total Sugars (g)'] || 0}</td>
                     <td>${item['Total Sugars (%DV)'] || 'N/A'}</td>
-                    <td><span class="meal-type ${getMealTypeClass(item['meal type'])}">${item['meal type'] || 'N/A'}</span></td>
+                    <td>${getMealTypeClass(item['Reference #']) || 'N/A'}</td>
                 `;
 
         tableBody.appendChild(row);
     });
 }
 
-function getMealTypeClass(mealType) {
-    if (!mealType) return '';
-    const type = String(mealType).toLowerCase();
-    if (type.includes('breakfast')) return 'breakfast';
-    if (type.includes('lunch')) return 'lunch';
-    if (type.includes('dinner')) return 'dinner';
-    if (type.includes('dessert') || type.includes('fast')) return 'dessert';
-    return '';
+function getMealTypeClass(referenceNum) {
+    //if the referenceNum does not exist, return an empty string
+    if (!referenceNum)
+        return '';
+    else {
+        //else set type equal to lowerCase referenceNum 
+        const type = String(referenceNum).toLowerCase();
+        if (type.includes('bd') || type.includes('bm') || type.includes('bs'))
+            // if the string contains bd or bm or bs, then return Breakfast 
+            return 'Breakfast';
+        else if (type.includes('ld') || type.includes('lm') || type.includes('ls'))
+            //if the string contains ld or lm or ls, then return Lunch
+            return 'Lunch';
+        else if (type.includes('dd') || type.includes('dm') || type.includes('ds'))
+            //if the string contains dd or dm or ds, then return Dinner
+            return 'Dinner';
+        else if (type.includes('sd') || type.includes('ss'))
+            //if the string contains sd or ss, then return Snack
+            return 'Snack';
+        else
+            //if the string does not contain any of the above, return an empty string
+            return '';
+    }
 }
 
 function toggleTable() {
@@ -859,6 +818,68 @@ function toggleTable() {
     tableContainer.style.display = tableVisible ? 'block' : 'none';
     toggleTableBtn.textContent = tableVisible ? '📋 Hide Data Table' : '📋 Show Data Table';
     toggleTableBtn.setAttribute('aria-expanded', tableVisible);
+}
+
+//********CSV FILE FUNCTIONS********/
+function handleFileUpload(e) {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    selectedFileName.textContent = `Selected: ${file.name}`;
+    loadingDiv.classList.remove('hidden');
+    messageDiv.classList.add('hidden');
+
+    // Clear any previous error
+    const fileHelp = document.getElementById('fileHelp');
+    fileHelp.classList.add('hidden');
+
+    Papa.parse(file, {
+        header: true,
+        skipEmptyLines: true,
+        dynamicTyping: true,
+        complete: function (results) {
+            loadingDiv.classList.add('hidden');
+
+            if (results.errors.length > 0) {
+                fileHelp.textContent = 'Error parsing CSV: ' + results.errors[0].message;
+                fileHelp.classList.remove('hidden');
+                showMessage('Error parsing CSV file', 'error');
+                return;
+            }
+
+            if (results.data.length === 0) {
+                fileHelp.textContent = 'No data found in CSV file.';
+                fileHelp.classList.remove('hidden');
+                showMessage('No data found in CSV file.', 'error');
+                return;
+            }
+
+            // Validate required columns
+            const requiredColumns = ['Reference #', 'Item', 'Calories'];
+            const missingColumns = requiredColumns.filter(col =>
+                !results.meta.fields || !results.meta.fields.includes(col)
+            );
+
+            if (missingColumns.length > 0) {
+                fileHelp.textContent = `Missing required columns: ${missingColumns.join(', ')}`;
+                fileHelp.classList.remove('hidden');
+                showMessage(`Missing required columns: ${missingColumns.join(', ')}`, 'error');
+                return;
+            }
+
+            nutritionData = results.data;
+            //console.log('Loaded nutrition data:', nutritionData);
+            updateTable();
+            saveToLocalStorage();
+            showMessage('CSV data loaded successfully! You can now add food items by code.', 'success');
+        },
+        error: function (error) {
+            loadingDiv.classList.add('hidden');
+            fileHelp.textContent = 'Error reading file: ' + error.message;
+            fileHelp.classList.remove('hidden');
+            showMessage('Error reading file: ' + error.message, 'error');
+        }
+    });
 }
 
 function resetCsv() {
@@ -883,6 +904,7 @@ function resetCategories() {
     showMessage('All food items have been removed from categories.', 'success');
 }
 
+//********DATA STORAGE FUNCTIONS ********/
 function saveToLocalStorage() {
     //console.log("Saving to local storage");
     localStorage.setItem('nutritionData', JSON.stringify(nutritionData));
