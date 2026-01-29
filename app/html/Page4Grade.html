@@ -12,135 +12,157 @@
 </head>
 
 <body>
-    <!--Nutrition Progress Section-->
-    <div class="card">
-        <h2 class="card-title">Nutrition Summary</h2>
-        <!-- NEW Nutrition Progress Table -->
-        <table class="nutrition-progress-table">
-            <thead>
-                <tr>
-                    <th>Nutrient</th>
-                    <th>Your Intake</th>
-                    <th>Daily Goal</th>
-                    <th>Progress</th>
-                    <th>Status</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Calories</td>
-                    <td id="progressCalories">0 kcal</td>
-                    <td id="goalCalories">-</td>
-                    <td>
-                        <div class="progress-bar">
-                            <div id="caloriesProgress" class="progress-fill" style="width: 0%"></div>
-                        </div>
-                    </td>
-                    <td id="caloriesStatus" class="status-optimal">-</td>
-                </tr>
-                <tr>
-                    <td>Protein</td>
-                    <td id="progressProtein">0g</td>
-                    <td id="goalProtein">-</td>
-                    <td>
-                        <div class="progress-bar">
-                            <div id="proteinProgress" class="progress-fill" style="width: 0%"></div>
-                        </div>
-                    </td>
-                    <td id="proteinStatus" class="status-optimal">-</td>
-                </tr>
-                <tr>
-                    <td>Carbohydrates</td>
-                    <td id="progressCarbs">0g</td>
-                    <td id="goalCarbs">-</td>
-                    <td>
-                        <div class="progress-bar">
-                            <div id="carbsProgress" class="progress-fill" style="width: 0%"></div>
-                        </div>
-                    </td>
-                    <td id="carbsStatus" class="status-optimal">-</td>
-                </tr>
-                <tr>
-                    <td>Fiber</td>
-                    <td id="progressFiber">0g</td>
-                    <td id="goalFiber">-</td>
-                    <td>
-                        <div class="progress-bar">
-                            <div id="fiberProgress" class="progress-fill" style="width: 0%"></div>
-                        </div>
-                    </td>
-                    <td id="fiberStatus" class="status-optimal">-</td>
-                </tr>
-                <tr>
-                    <td>Sodium</td>
-                    <td id="progressSodium">0mg</td>
-                    <td id="goalSodium">-</td>
-                    <td>
-                        <div class="progress-bar">
-                            <div id="sodiumProgress" class="progress-fill" style="width: 0%"></div>
-                        </div>
-                    </td>
-                    <td id="sodiumStatus" class="status-optimal">-</td>
-                </tr>
-            </tbody>
-        </table>
-
-        <!-- Age-Specific Requirements Table -->
-        <h3 style="margin: 20px 0 10px;">Age Specific Requirements</h3>
-        <table class="requirements-table">
-            <thead>
-                <tr>
-                    <th>Age Group</th>
-                    <th>Calories (kcal/day)</th>
-                    <th>Sodium (mg/day, max)</th>
-                    <th>Cholesterol (mg/day, max)*</th>
-                    <th>Carbohydrate (g/day)**</th>
-                    <th>Protein (g/day, min)</th>
-                    <th>Fiber (g/day, goal)</th>
-                    <th>Total fat (% of kcal)</th>
-                </tr>
-            </thead>
-            <tbody id="requirementsBody">
-                <!-- Will be populated by JavaScript -->
-            </tbody>
-        </table>
-
-        <!--Nutrition Totals Section-->
-        <div class="summary-grid">
-            <div class="summary-card calories-card">
-                <div class="summary-label">Total Calories</div>
-                <div id="totalCalories" class="summary-value">0</div>
-                <div class="summary-label">kcal</div>
+    <div class="container">
+        <!--Nav-->
+        <div class="nav">
+            <div id="one">
+                <h1>🍎 Nutrition Tracker</h1>
+                <div class="subtitle">Track your daily nutrition intake with ease</div>
             </div>
-            <div class="summary-card protein-card">
-                <div class="summary-label">Total Protein</div>
-                <div id="totalProtein" class="summary-value">0</div>
-                <div class="summary-label">grams</div>
+            <div id="two">
+                <ul>
+                    <li><a href="../html/Page2Calendar.html">Calendar</a></li>
+                    <li><a href="../html/Page3Activity.html">Activity</a></li>
+                    <li><a href="../html/Page4Grade.html">Grade</a></li>
+                    <!--<li><a href="../html/">Page 4</a></li>-->
+                </ul>
             </div>
-            <div class="summary-card carbs-card">
-                <div class="summary-label">Total Carbs</div>
-                <div id="totalCarbs" class="summary-value">0</div>
-                <div class="summary-label">grams</div>
-            </div>
-            <div class="summary-card fats-card">
-                <div class="summary-label">Total Fats</div>
-                <div id="totalFats" class="summary-value">0</div>
-                <div class="summary-label">grams</div>
-            </div>
-            <div class="summary-card sodium-card">
-                <div class="summary-label">Total Sodium</div>
-                <div id="totalSodium" class="summary-value">0</div>
-                <div class="summary-label">mg</div>
-            </div>
-            <div class="summary-card fiber-card">
-                <div class="summary-label">Total Fiber</div>
-                <div id="totalFiber" class="summary-value">0</div>
-                <div class="summary-label">grams</div>
+            <div id="three">
+                <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="instructionsPanel">
+                    <span aria-hidden="true">☰</span> Instructions
+                </button>
             </div>
         </div>
-    </div>
 
-    <!--Health Score Section-->
+        <!--Nutrition Progress Section-->
+        <div class="card">
+            <h2 class="card-title">Nutrition Summary</h2>
+            <!-- NEW Nutrition Progress Table -->
+            <table class="nutrition-progress-table">
+                <thead>
+                    <tr>
+                        <th>Nutrient</th>
+                        <th>Your Intake</th>
+                        <th>Daily Goal</th>
+                        <th>Progress</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Calories</td>
+                        <td id="progressCalories">0 kcal</td>
+                        <td id="goalCalories">-</td>
+                        <td>
+                            <div class="progress-bar">
+                                <div id="caloriesProgress" class="progress-fill" style="width: 0%"></div>
+                            </div>
+                        </td>
+                        <td id="caloriesStatus" class="status-optimal">-</td>
+                    </tr>
+                    <tr>
+                        <td>Protein</td>
+                        <td id="progressProtein">0g</td>
+                        <td id="goalProtein">-</td>
+                        <td>
+                            <div class="progress-bar">
+                                <div id="proteinProgress" class="progress-fill" style="width: 0%"></div>
+                            </div>
+                        </td>
+                        <td id="proteinStatus" class="status-optimal">-</td>
+                    </tr>
+                    <tr>
+                        <td>Carbohydrates</td>
+                        <td id="progressCarbs">0g</td>
+                        <td id="goalCarbs">-</td>
+                        <td>
+                            <div class="progress-bar">
+                                <div id="carbsProgress" class="progress-fill" style="width: 0%"></div>
+                            </div>
+                        </td>
+                        <td id="carbsStatus" class="status-optimal">-</td>
+                    </tr>
+                    <tr>
+                        <td>Fiber</td>
+                        <td id="progressFiber">0g</td>
+                        <td id="goalFiber">-</td>
+                        <td>
+                            <div class="progress-bar">
+                                <div id="fiberProgress" class="progress-fill" style="width: 0%"></div>
+                            </div>
+                        </td>
+                        <td id="fiberStatus" class="status-optimal">-</td>
+                    </tr>
+                    <tr>
+                        <td>Sodium</td>
+                        <td id="progressSodium">0mg</td>
+                        <td id="goalSodium">-</td>
+                        <td>
+                            <div class="progress-bar">
+                                <div id="sodiumProgress" class="progress-fill" style="width: 0%"></div>
+                            </div>
+                        </td>
+                        <td id="sodiumStatus" class="status-optimal">-</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- Age-Specific Requirements Table -->
+            <h3 style="margin: 20px 0 10px;">Age Specific Requirements</h3>
+            <table class="requirements-table">
+                <thead>
+                    <tr>
+                        <th>Age Group</th>
+                        <th>Calories (kcal/day)</th>
+                        <th>Sodium (mg/day, max)</th>
+                        <th>Cholesterol (mg/day, max)*</th>
+                        <th>Carbohydrate (g/day)**</th>
+                        <th>Protein (g/day, min)</th>
+                        <th>Fiber (g/day, goal)</th>
+                        <th>Total fat (% of kcal)</th>
+                    </tr>
+                </thead>
+                <tbody id="requirementsBody">
+                    <!-- Will be populated by JavaScript -->
+                </tbody>
+            </table>
+
+            <!--Nutrition Totals Section-->
+            <div class="summary-grid">
+                <div class="summary-card calories-card">
+                    <div class="summary-label">Total Calories</div>
+                    <div id="totalCalories" class="summary-value">0</div>
+                    <div class="summary-label">kcal</div>
+                </div>
+                <div class="summary-card protein-card">
+                    <div class="summary-label">Total Protein</div>
+                    <div id="totalProtein" class="summary-value">0</div>
+                    <div class="summary-label">grams</div>
+                </div>
+                <div class="summary-card carbs-card">
+                    <div class="summary-label">Total Carbs</div>
+                    <div id="totalCarbs" class="summary-value">0</div>
+                    <div class="summary-label">grams</div>
+                </div>
+                <div class="summary-card fats-card">
+                    <div class="summary-label">Total Fats</div>
+                    <div id="totalFats" class="summary-value">0</div>
+                    <div class="summary-label">grams</div>
+                </div>
+                <div class="summary-card sodium-card">
+                    <div class="summary-label">Total Sodium</div>
+                    <div id="totalSodium" class="summary-value">0</div>
+                    <div class="summary-label">mg</div>
+                </div>
+                <div class="summary-card fiber-card">
+                    <div class="summary-label">Total Fiber</div>
+                    <div id="totalFiber" class="summary-value">0</div>
+                    <div class="summary-label">grams</div>
+                </div>
+            </div>
+        </div>
+
+        <!--Health Score Section-->
         <div class="healthScore">
             <!--Health Score Display-->
             <div class="scoreCard">
@@ -209,6 +231,8 @@
                 </div>
             </div>
         </div>
+    </div>
+
 </body>
 
 </html>
