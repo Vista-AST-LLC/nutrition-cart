@@ -7,10 +7,29 @@
 
 
 # Page 1: Instructions (this may be put in the slideshow)
+## Some ideas to gamify:
+    Have some unique requirements for each day, such as pizza on Thursday
+    Have a special "Diet Day" that has stricter requirements for a higher score
+    Punish score when having duplicate items on sequential days
+    Have a maximum of 3 (or perhaps 2) of the same item in the week
+    In page 2, have a special "Quests" type box that has additional requirements abstract from a specific day
+        For example, "Different lunch every day", or "No snacks between meals (dessert allowed)"
 
-# Page 2: Activity (scanning cards, putting together the mealplan)
+# Page 2: Calendar view of a week (M-F)
+    Each day will have its own separate daily mealplan
+    The calendar days should be clickable, each day leading to its own Activity (Page 3) page
+    There will be a "Submit" or "Finalize Mealplan" button that will lead to page 4
 
-# Page 3: Grade 
+# Page 3: Activity (scanning cards, putting together the mealplan)
+    What day is being worked on (and special requirements, if any)
+    Input box (for manual typing if needed)
+    Display for Breakfast, Lunch, Dinner, and Dessert/Snacks
+    
+# Page 4: Grade 
+    Each day will have its own score, and the week's score will be the average of the 5 days
+    There will be a breakdown of each day with comments saying what was done well and what could be better
+    There will be a "Keep Working"-type button that will return Page 2 and allow changes for resubmittion 
+
 ## Calories
     0-1000: 0 points awarded (there is a need for calories to live)
     1000-1500: Increase to maximum awarded score
