@@ -1,3 +1,26 @@
+.test-button {
+    background: var(--success-color);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 20px;
+    width: 100%;
+}
+
+.test-button:hover {
+    background: var(--success-dark);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.test-button:active {
+    transform: translateY(-1px);
+}
 
 .citations-section {
     background: #f8f9fa;
@@ -89,114 +112,6 @@
 .change-profile-btn:hover {
     background: var(--warning-dark);
     transform: translateY(-2px);
-}
-
-/* Nutrition Progress Table Styles */
-.nutrition-progress-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 20px 0;
-    background: white;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: var(--shadow);
-}
-
-.nutrition-progress-table th {
-    background: #2c3e50;
-    color: white;
-    padding: 12px 15px;
-    text-align: left;
-    font-weight: 600;
-}
-
-.nutrition-progress-table td {
-    padding: 12px 15px;
-    border-bottom: 1px solid var(--border-color);
-}
-
-.nutrition-progress-table tr:last-child td {
-    border-bottom: none;
-}
-
-.nutrition-progress-table tr:hover {
-    background-color: #f8f9fa;
-}
-
-.progress-bar {
-    width: 100%;
-    height: 8px;
-    background: #ecf0f1;
-    border-radius: 4px;
-    overflow: hidden;
-}
-
-.progress-fill {
-    height: 100%;
-    border-radius: 4px;
-    transition: width 0.5s ease;
-}
-
-.progress-optimal {
-    background: var(--success-color);
-}
-
-.progress-warning {
-    background: var(--warning-color);
-}
-
-.progress-danger {
-    background: var(--danger-color);
-}
-
-.status-optimal {
-    color: var(--success-color);
-    font-weight: 600;
-}
-
-.status-warning {
-    color: var(--warning-color);
-    font-weight: 600;
-}
-
-.status-danger {
-    color: var(--danger-color);
-    font-weight: 600;
-}
-
-/* Age-specific requirements table */
-.requirements-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 20px 0;
-    background: white;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: var(--shadow);
-    font-size: 0.9rem;
-}
-
-.requirements-table th {
-    background: #34495e;
-    color: white;
-    padding: 10px 12px;
-    text-align: center;
-    font-weight: 600;
-}
-
-.requirements-table td {
-    padding: 10px 12px;
-    border: 1px solid var(--border-color);
-    text-align: center;
-}
-
-.requirements-table tr:nth-child(even) {
-    background-color: #f8f9fa;
-}
-
-.user-requirements {
-    background: #e8f4fd !important;
-    font-weight: 600;
 }
 
 /* Rest of the CSS remains the same as previous implementation */
@@ -354,24 +269,6 @@ h1 {
     .main-content {
         flex-direction: column;
     }
-}
-
-.card {
-    background: var(--card-bg);
-    border-radius: 10px;
-    padding: 18px;
-    box-shadow: var(--shadow);
-}
-
-.card-title {
-    font-size: 1.3rem;
-    color: #2c3e50;
-    margin-bottom: 15px;
-    padding-bottom: 8px;
-    border-bottom: 1px solid var(--border-color);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
 }
 
 .upload-section {
@@ -594,60 +491,6 @@ h1 {
 
 .nutrition-value {
     font-weight: 600;
-}
-
-.summary-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 15px;
-    margin-top: 15px;
-}
-
-.summary-card {
-    background: #f8f9fa;
-    border-radius: 8px;
-    padding: 15px;
-    text-align: center;
-    border-top: 4px solid;
-}
-
-.summary-value {
-    font-size: 1.5rem;
-    font-weight: 700;
-    margin: 8px 0;
-}
-
-.summary-label {
-    color: #7f8c8d;
-    font-size: 0.8rem;
-}
-
-.calories-card {
-    border-top-color: var(--danger-color);
-}
-
-.protein-card {
-    border-top-color: var(--primary-color);
-}
-
-.carbs-card {
-    border-top-color: var(--success-color);
-}
-
-.fats-card {
-    border-top-color: #f39c12;
-}
-
-.sodium-card {
-    border-top-color: #9b59b6;
-}
-
-.fiber-card {
-    border-top-color: #1abc9c;
-}
-
-.points-card {
-    border-top-color: #8e44ad;
 }
 
 .table-container {
