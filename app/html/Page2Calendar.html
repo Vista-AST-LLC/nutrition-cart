@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/styles.css">
+    <title>Nutrition Tracker</title>
+    <meta name="description" content="Track your daily nutrition intake with our comprehensive nutrition tracker">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+    <script src="../js/functionality.js" defer></script>
+</head>
+
+<body>
+    <div class="welcome-screen-2" id="demographicsScreen">
+        <div class="demographics-form">
+            <h2 class="demographics-title">Tell Us About Yourself</h2>
+
+            <div class="form-group">
+                <label class="form-label" for="ageGroup">Select Your Age Group</label>
+                <select id="ageGroup" class="age-group-select" aria-required="true">
+                    <option value="">-- Select Age Group --</option>
+                    <option value="9-13">9-13 years</option>
+                    <option value="14-18">14-18 years</option>
+                </select>
+            </div>
+
+            <button class="start-btn" id="startBtn">Start Tracking</button>
+            <button class="back-btn" id="backBtn"><span aria-hidden="true">←</span> Back</button>
+        </div>
+    </div>
+</body>
+</html>

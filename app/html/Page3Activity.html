@@ -11,42 +11,7 @@
     <script src="../js/functionality.js" defer></script>
 </head>
 
-<!--Make UI/UX as easy as possible (Imagine you are a Middle School/High School Student)-->
-
 <body>
-    <!-- Skip link for keyboard users -->
-    <a href="#main-content" class="skip-link">Skip to main content</a>
-
-    <!-- Welcome Screen 1 -->
-    <div class="welcome-screen" id="welcomeScreen">
-        <div class="welcome-logo" aria-hidden="true"></div>
-        <h1 class="welcome-title">Welcome to Culinary Cart</h1>
-        <p class="welcome-subtitle">Your personalized nutrition tracking companion</p>
-        <button class="welcome-btn" id="welcomeNextBtn">
-            Get Started <span aria-hidden="true">→</span>
-        </button>
-    </div>
-
-    <!-- Welcome Screen 2 - Demographics -->
-    <div class="welcome-screen-2 hidden" id="demographicsScreen">
-        <div class="demographics-form">
-            <h2 class="demographics-title">Tell Us About Yourself</h2>
-
-            <div class="form-group">
-                <label class="form-label" for="ageGroup">Select Your Age Group</label>
-                <select id="ageGroup" class="age-group-select" aria-required="true">
-                    <option value="">-- Select Age Group --</option>
-                    <option value="9-13">9-13 years</option>
-                    <option value="14-18">14-18 years</option>
-                </select>
-            </div>
-
-            <button class="start-btn" id="startBtn" disabled>Start Tracking</button>
-            <button class="back-btn" id="backBtn"><span aria-hidden="true">←</span> Back</button>
-        </div>
-    </div>
-
-    <!-- Main Application (hidden initially) -->
     <div class="container hidden" id="mainApp">
         <!-- Profile Section -->
         <div class="profile-section">
@@ -493,5 +458,4 @@
         </main>
     </div>
 </body>
-
 </html>
