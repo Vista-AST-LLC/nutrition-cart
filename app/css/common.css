@@ -1,0 +1,46 @@
+:root {
+    --primary-color: #3498db;
+    --primary-dark: #2980b9;
+    --success-color: #2ecc71;
+    --success-dark: #27ae60;
+    --warning-color: #f39c12;
+    --warning-dark: #e67e22;
+    --danger-color: #e74c3c;
+    --danger-dark: #c0392b;
+    --text-color: #333;
+    --text-light: #7f8c8d;
+    --bg-color: #f5f7fa;
+    --card-bg: white;
+    --border-color: #ecf0f1;
+    --shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+    --shadow-hover: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    min-height: 100vh;
+    padding: 15px;
+    color: var(--text-color);
+    font-size: 14px;
+    line-height: 1.5;
+    width: 100%;
+}
+
+.container {
+    width: 100%;
+    margin: 0 auto;
+}
+
+button:focus-visible,
+input:focus-visible,
+select:focus-visible {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+}
