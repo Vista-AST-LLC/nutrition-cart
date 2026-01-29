@@ -58,9 +58,10 @@ ageGroupSelect.addEventListener('change', function () {
 
 //********UI DISPLAY FUNCTIONS********/
 function showDemographicsScreen() {
-    welcomeScreen.classList.add('hidden');
-    mainApp.classList.add('hidden');
-    demographicsScreen.classList.remove('hidden');
+    // welcomeScreen.classList.add('hidden');
+    // mainApp.classList.add('hidden');
+    // demographicsScreen.classList.remove('hidden');
+    window.location.href = "../html/Page2Calendar.html";
 
     // Reset form
     ageGroupSelect.value = '';
@@ -94,9 +95,10 @@ function startMainApp() {
     updateProfileDisplay();
 
     // Hide welcome screens and show main app
-    welcomeScreen.classList.add('hidden');
-    demographicsScreen.classList.add('hidden');
-    mainApp.classList.remove('hidden');
+    // welcomeScreen.classList.add('hidden');
+    // demographicsScreen.classList.add('hidden');
+    // mainApp.classList.remove('hidden');
+    window.location.href = "../html/Page3Activity.html";
 
     // Update requirements table
     updateRequirementsTable();

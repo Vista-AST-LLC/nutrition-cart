@@ -4,72 +4,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/styles.css">
-    <title>Nutrition Tracker</title>
-    <meta name="description" content="Track your daily nutrition intake with our comprehensive nutrition tracker">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/Page3Activity.css"
+    <title>Nutrition Cart</title>
+    <meta name="description" content="Website companion of Vista-AST's Nutrition Cart">
     <script src="../js/functionality.js" defer></script>
 </head>
 
-<!--Make UI/UX as easy as possible (Imagine you are a Middle School/High School Student)-->
-
 <body>
-    <!-- Skip link for keyboard users -->
-    <a href="#main-content" class="skip-link">Skip to main content</a>
-
-    <!-- Welcome Screen 1 -->
-    <div class="welcome-screen" id="welcomeScreen">
-        <div class="welcome-logo" aria-hidden="true"></div>
-        <h1 class="welcome-title">Welcome to Culinary Cart</h1>
-        <p class="welcome-subtitle">Your personalized nutrition tracking companion</p>
-        <button class="welcome-btn" id="welcomeNextBtn">
-            Get Started <span aria-hidden="true">→</span>
-        </button>
-    </div>
-
-    <!-- Welcome Screen 2 - Demographics -->
-    <div class="welcome-screen-2 hidden" id="demographicsScreen">
-        <div class="demographics-form">
-            <h2 class="demographics-title">Tell Us About Yourself</h2>
-
-            <div class="form-group">
-                <label class="form-label" for="ageGroup">Select Your Age Group</label>
-                <select id="ageGroup" class="age-group-select" aria-required="true">
-                    <option value="">-- Select Age Group --</option>
-                    <option value="9-13">9-13 years</option>
-                    <option value="14-18">14-18 years</option>
-                </select>
-            </div>
-
-            <button class="start-btn" id="startBtn" disabled>Start Tracking</button>
-            <button class="back-btn" id="backBtn"><span aria-hidden="true">←</span> Back</button>
-        </div>
-    </div>
-
-    <!-- Main Application (hidden initially) -->
-    <div class="container hidden" id="mainApp">
-        <!--Nav-->
-        <div class="nav">
-            <div id="one">
-                <h1>🍎 Nutrition Tracker</h1>
-                <div class="subtitle">Track your daily nutrition intake with ease</div>
-            </div>
-            <div id="two">
-                <ul>
-                    <li><a href="../html/">Page 1</a></li>
-                    <li><a href="../html/">Page 2</a></li>
-                    <li><a href="../html/">Page 3</a></li>
-                    <li><a href="../html/">Page 4</a></li>
-                </ul>
-            </div>
-            <div id="three">
-                <a class="test" href="https://www.google.com/">Instructions</a>
-                <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="instructionsPanel">
-                    <span aria-hidden="true">☰</span> Instructions
-                </button>
-            </div>
-        </div>
-
+    <a class="test-button" href="../html/Page4Grade.html">To Grade Page</a>
+    <div class="container" id="mainApp">
         <!-- Profile Section -->
         <div class="profile-section">
             <div class="profile-info">
@@ -81,6 +25,14 @@
             </div>
             <button class="change-profile-btn" id="changeProfileBtn">Change Profile</button>
         </div>
+
+        <header>
+            <h1>Nutrition Tracker</h1>
+            <div class="subtitle">Track your daily nutrition intake with ease</div>
+            <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="instructionsPanel">
+                <span aria-hidden="true">☰</span> Instructions
+            </button>
+        </header>
 
         <div class="overlay" id="overlay"></div>
         <!--INSTRUCTIONS SIDEBAR-->
@@ -221,134 +173,6 @@
                         </div>
                         <div id="selectedFileName" class="selected-file">No file selected</div>
                         <div id="fileHelp" class="error-message hidden" aria-live="polite"></div>
-                    </div>
-                </div>
-
-                <!--Nutrition Progress Section-->
-                <div class="card">
-                    <h2 class="card-title">Nutrition Summary</h2>
-                    <!-- NEW Nutrition Progress Table -->
-                    <table class="nutrition-progress-table">
-                        <thead>
-                            <tr>
-                                <th>Nutrient</th>
-                                <th>Your Intake</th>
-                                <th>Daily Goal</th>
-                                <th>Progress</th>
-                                <th>Status</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Calories</td>
-                                <td id="progressCalories">0 kcal</td>
-                                <td id="goalCalories">-</td>
-                                <td>
-                                    <div class="progress-bar">
-                                        <div id="caloriesProgress" class="progress-fill" style="width: 0%"></div>
-                                    </div>
-                                </td>
-                                <td id="caloriesStatus" class="status-optimal">-</td>
-                            </tr>
-                            <tr>
-                                <td>Protein</td>
-                                <td id="progressProtein">0g</td>
-                                <td id="goalProtein">-</td>
-                                <td>
-                                    <div class="progress-bar">
-                                        <div id="proteinProgress" class="progress-fill" style="width: 0%"></div>
-                                    </div>
-                                </td>
-                                <td id="proteinStatus" class="status-optimal">-</td>
-                            </tr>
-                            <tr>
-                                <td>Carbohydrates</td>
-                                <td id="progressCarbs">0g</td>
-                                <td id="goalCarbs">-</td>
-                                <td>
-                                    <div class="progress-bar">
-                                        <div id="carbsProgress" class="progress-fill" style="width: 0%"></div>
-                                    </div>
-                                </td>
-                                <td id="carbsStatus" class="status-optimal">-</td>
-                            </tr>
-                            <tr>
-                                <td>Fiber</td>
-                                <td id="progressFiber">0g</td>
-                                <td id="goalFiber">-</td>
-                                <td>
-                                    <div class="progress-bar">
-                                        <div id="fiberProgress" class="progress-fill" style="width: 0%"></div>
-                                    </div>
-                                </td>
-                                <td id="fiberStatus" class="status-optimal">-</td>
-                            </tr>
-                            <tr>
-                                <td>Sodium</td>
-                                <td id="progressSodium">0mg</td>
-                                <td id="goalSodium">-</td>
-                                <td>
-                                    <div class="progress-bar">
-                                        <div id="sodiumProgress" class="progress-fill" style="width: 0%"></div>
-                                    </div>
-                                </td>
-                                <td id="sodiumStatus" class="status-optimal">-</td>
-                            </tr>
-                        </tbody>
-                    </table>
-
-                    <!-- Age-Specific Requirements Table -->
-                    <h3 style="margin: 20px 0 10px;">Age Specific Requirements</h3>
-                    <table class="requirements-table">
-                        <thead>
-                            <tr>
-                                <th>Age Group</th>
-                                <th>Calories (kcal/day)</th>
-                                <th>Sodium (mg/day, max)</th>
-                                <th>Cholesterol (mg/day, max)*</th>
-                                <th>Carbohydrate (g/day)**</th>
-                                <th>Protein (g/day, min)</th>
-                                <th>Fiber (g/day, goal)</th>
-                                <th>Total fat (% of kcal)</th>
-                            </tr>
-                        </thead>
-                        <tbody id="requirementsBody">
-                            <!-- Will be populated by JavaScript -->
-                        </tbody>
-                    </table>
-
-                    <!--Nutrition Totals Section-->
-                    <div class="summary-grid">
-                        <div class="summary-card calories-card">
-                            <div class="summary-label">Total Calories</div>
-                            <div id="totalCalories" class="summary-value">0</div>
-                            <div class="summary-label">kcal</div>
-                        </div>
-                        <div class="summary-card protein-card">
-                            <div class="summary-label">Total Protein</div>
-                            <div id="totalProtein" class="summary-value">0</div>
-                            <div class="summary-label">grams</div>
-                        </div>
-                        <div class="summary-card carbs-card">
-                            <div class="summary-label">Total Carbs</div>
-                            <div id="totalCarbs" class="summary-value">0</div>
-                            <div class="summary-label">grams</div>
-                        </div>
-                        <div class="summary-card fats-card">
-                            <div class="summary-label">Total Fats</div>
-                            <div id="totalFats" class="summary-value">0</div>
-                            <div class="summary-label">grams</div>
-                        </div>
-                        <div class="summary-card sodium-card">
-                            <div class="summary-label">Total Sodium</div>
-                            <div id="totalSodium" class="summary-value">0</div>
-                            <div class="summary-label">mg</div>
-                        </div>
-                        <div class="summary-card fiber-card">
-                            <div class="summary-label">Total Fiber</div>
-                            <div id="totalFiber" class="summary-value">0</div>
-                            <div class="summary-label">grams</div>
-                        </div>
                     </div>
                 </div>
 
@@ -507,5 +331,4 @@
         </main>
     </div>
 </body>
-
 </html>
