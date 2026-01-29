@@ -140,5 +140,74 @@
         </div>
     </div>
 
+    <!--Health Score Section-->
+        <div class="healthScore">
+            <!--Health Score Display-->
+            <div class="scoreCard">
+                <h2 class="card-title">Health Score</h2>
+                <div class="summary-card points-card">
+                    <div class="points-display">
+                        <div class="points-circle" id="pointsCircle">0</div>
+                        <div class="points-label">Health Score</div>
+                        <div class="points-description">Based on your age group requirements</div>
+                    </div>
+                    <div class="points-breakdown">
+                        <div class="points-item">
+                            <div class="points-nutrient">Protein</div>
+                            <div class="points-bar-container">
+                                <div id="proteinBar" class="points-bar positive" style="width: 0%"></div>
+                            </div>
+                            <div id="proteinScore" class="points-score">0</div>
+                        </div>
+                        <div class="points-item">
+                            <div class="points-nutrient">Carbs</div>
+                            <div class="points-bar-container">
+                                <div id="carbsBar" class="points-bar positive" style="width: 0%"></div>
+                            </div>
+                            <div id="carbsScore" class="points-score">0</div>
+                        </div>
+                        <div class="points-item">
+                            <div class="points-nutrient">Fiber</div>
+                            <div class="points-bar-container">
+                                <div id="fiberBar" class="points-bar positive" style="width: 0%"></div>
+                            </div>
+                            <div id="fiberScore" class="points-score">0</div>
+                        </div>
+                        <div class="points-item">
+                            <div class="points-nutrient">Sodium</div>
+                            <div class="points-bar-container">
+                                <div id="sodiumBar" class="points-bar negative" style="width: 0%"></div>
+                            </div>
+                            <div id="sodiumScore" class="points-score">0</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Scoring Explanation Section -->
+            <div class="scoreCard">
+                <h3 class="scoring-title">How Your Health Score is Calculated</h3>
+                <div class="scoring-grid">
+                    <div class="scoring-category scoring-optimal">
+                        <h4>Scoring System (0-100 points)</h4>
+                        <p><strong>80-100 points (Green):</strong> Excellent nutrition! You're meeting or
+                            exceeding most recommendations.</p>
+                        <p><strong>60-79 points (Orange):</strong> Good nutrition, with some areas for
+                            improvement.</p>
+                        <p><strong>0-59 points (Red):</strong> Needs improvement in several nutritional areas.
+                        </p>
+                    </div>
+                    <div class="scoring-category scoring-warning">
+                        <h4>How to Improve Your Score</h4>
+                        <ul>
+                            <li><strong>Increase Protein:</strong> Add lean meats, beans, dairy</li>
+                            <li><strong>Reduce Sodium:</strong> Choose fresh foods over processed</li>
+                            <li><strong>Boost Fiber:</strong> Add fruits, vegetables, whole grains</li>
+                            <li><strong>Balance Carbs:</strong> Choose complex carbs over simple sugars</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
 </body>
 </html>
