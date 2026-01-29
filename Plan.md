@@ -3,7 +3,7 @@
 // 2) Fix Food Label entry field
 // 3) Research best way to cacluate nutrition score
 // 4) Resolve responsivness issues Ex) Table
-// 5) Replace age question page with ???? */
+// 5) Replace age question page with ???? */  
 
 
 # Page 1: Instructions (this may be put in the slideshow)
