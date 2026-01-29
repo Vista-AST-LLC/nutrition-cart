@@ -33,26 +33,6 @@ body {
     width: 100%;
 }
 
-.test {
-    text-decoration: none;
-    background: var(--primary-color);
-    color: white;
-    border: none;
-    border-radius: 6px;
-    padding: 10px 15px;
-    cursor: pointer;
-    font-weight: 600;
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.test:hover {
-    background-color: var(--primary-dark);
-    transform: translateY(-2px);
-}
-
 .nav {
     display: flex;
     flex-direction: row;
