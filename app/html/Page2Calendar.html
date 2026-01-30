@@ -11,23 +11,47 @@
 </head>
 
 <body>
-    <div class="welcome-screen-2" id="demographicsScreen">
-        <div class="demographics-form">
-            <h2 class="demographics-title">Tell Us About Yourself</h2>
-
-            <div class="form-group">
-                <label class="form-label" for="ageGroup">Select Your Age Group</label>
-                <select id="ageGroup" class="age-group-select" aria-required="true">
-                    <option value="">-- Select Age Group --</option>
-                    <option value="9-13">9-13 years</option>
-                    <option value="14-18">14-18 years</option>
-                </select>
+    <div class="container">
+        <!--Nav-->
+        <div class="nav">
+            <div id="one">
+                <h1>🍎 Nutrition Tracker</h1>
+                <div class="subtitle">Track your daily nutrition intake with ease</div>
             </div>
+            <div id="two">
+                <ul>
+                    <li><a href="../html/Page2Calendar.html">Calendar</a></li>
+                    <li><a href="../html/Page3Activity.html">Activity</a></li>
+                    <li><a href="../html/Page4Grade.html">Grade</a></li>
+                    <!--<li><a href="../html/">Page 4</a></li>-->
+                </ul>
+            </div>
+            <div id="three">
+                <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="instructionsPanel">
+                    <span aria-hidden="true">☰</span> Instructions
+                </button>
+            </div>
+        </div>
 
-            <a class="start-btn" href="../html/Page3Activity.html">Start Tracking</a>
-            <a class="back-btn" href="../html/Page1Landing.html">Back</a>
+        <div class="welcome-screen-2" id="demographicsScreen">
+            <div class="demographics-form">
+                <h2 class="demographics-title">Tell Us About Yourself</h2>
+
+                <div class="form-group">
+                    <label class="form-label" for="ageGroup">Select Your Age Group</label>
+                    <select id="ageGroup" class="age-group-select" aria-required="true">
+                        <option value="">-- Select Age Group --</option>
+                        <option value="9-13">9-13 years</option>
+                        <option value="14-18">14-18 years</option>
+                    </select>
+                </div>
+
+                <a class="start-btn" href="../html/Page3Activity.html">Start Tracking</a>
+                <a class="back-btn" href="../html/Page1Landing.html">Back</a>
+            </div>
         </div>
     </div>
+
 </body>
 
 </html>
