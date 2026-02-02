@@ -1,6 +1,12 @@
 // The total amount of cards we have
 const MAX_CARDS = 80;
 
+// Convenience consts for meal types (B, L, D, S)
+const BREAKFAST = 'B';
+const LUNCH = 'L';
+const DINNER = 'D';
+const SNACKS = 'S';
+
 // This function call should be wrapped in a try-catch
 async function createFoodItem(barcode) {
     // Fetch the csv and convert it to a string
@@ -23,10 +29,10 @@ async function createFoodItem(barcode) {
     // Throw error for no barcode match
     if (lineNumber > MAX_CARDS) throw Error("Failed to find barcode match!");
 
-    return foodItem(itemRows[lineNumber]);
+    return FoodItem(itemRows[lineNumber]);
 }
 
-class foodItem {
+class FoodItem {
     constructor(data){
         const item = data.split(',');
         this.#refNumber = item[0];
@@ -98,4 +104,98 @@ class foodItem {
     get sugarsG() { return this.#sugarsG; }
     #sugarsDV;
     get sugarsDV() { return this.#sugarsDV; }
+}
+
+class Weekday {
+    constructor() {
+        this.#breakfast = [];
+        this.#lunch = [];
+        this.#dinner = [];
+        this.#snacks = [];
+    }
+
+    addFoodItem(FoodItem) {
+        switch (FoodItem.refNumber().charAt(0)) {
+        case BREAKFAST:
+            FoodItem.arrayIndex = this.#breakfast.length;
+            this.#breakfast.push(FoodItem);
+            break;
+        case LUNCH:
+            FoodItem.arrayIndex = this.#lunch.length;
+            this.#lunch.push(FoodItem);
+            break;
+        case DINNER:
+            FoodItem.arrayIndex = this.#dinner.length;
+            this.#dinner.push(FoodItem);
+            break;
+        case SNACKS:
+            FoodItem.arrayIndex = this.#snacks.length;
+            this.#snacks.push(FoodItem);
+            break;
+        }
+    }
+
+    removeFoodItem(meal, index) {
+        let countDown = index;
+        let countUp = index+1;
+        switch (meal) {
+            case BREAKFAST:
+                while ((test1 = countDown > 0) || (test2 = countUp < this.#breakfast.length)) {
+                    if (test1) {
+                        this.#breakfast[countDown] = this.#breakfast[countDown-1];
+                        countDown--;
+                    }
+                    if (test2) {
+                        this.#breakfast[index].arrayIndex -= 1;
+                        index++;
+                    }
+                    this.#breakfast.shift();
+                }
+            case LUNCH:
+                while ((test1 = countDown > 0) || (test2 = countUp < this.#lunch.length)) {
+                    if (test1) {
+                        this.#lunch[countDown] = this.#lunch[countDown-1];
+                        countDown--;
+                    }
+                    if (test2) {
+                        this.#lunch[index].arrayIndex -= 1;
+                        index++;
+                    }
+                    this.#lunch.shift();
+                }
+            case DINNER:
+                while ((test1 = countDown > 0) || (test2 = countUp < this.#dinner.length)) {
+                    if (test1) {
+                        this.#dinner[countDown] = this.#dinner[countDown-1];
+                        countDown--;
+                    }
+                    if (test2) {
+                        this.#dinner[index].arrayIndex -= 1;
+                        index++;
+                    }
+                    this.#dinner.shift();
+                }
+            case SNACKS:
+                while ((test1 = countDown > 0) || (test2 = countUp < this.#snacks.length)) {
+                    if (test1) {
+                        this.#snacks[countDown] = this.#snacks[countDown-1];
+                        countDown--;
+                    }
+                    if (test2) {
+                        this.#snacks[index].arrayIndex -= 1;
+                        index++;
+                    }
+                    this.#snacks.shift();
+                }
+        }
+    }
+
+    #breakfast;
+    get breakfast() { return this.#breakfast; }
+    #lunch;
+    get lunch() { return this.#lunch; }
+    #dinner;
+    get dinner() { return this.#dinner; }
+    #snacks;
+    get snacks() { return this.#snacks; }
 }
