@@ -185,12 +185,6 @@ header {
     background-color: #efe;
 }
 
-.add-btn:disabled {
-    background: #95a5a6;
-    cursor: not-allowed;
-    transform: none;
-}
-
 .category-section {
     display: grid;
     grid-template-columns: 1fr;
@@ -351,7 +345,6 @@ tr:nth-child(even) {
 
 .error {
     background: var(--danger-color);
-    /*color: white;  // this made the text invisible */
     color: black;
     padding: 12px;
     border-radius: 6px;
@@ -362,7 +355,6 @@ tr:nth-child(even) {
 
 .success {
     background: var(--success-color);
-    /*color: white;  // this made the text invisible */
     color: black;
     padding: 12px;
     border-radius: 6px;
@@ -380,23 +372,6 @@ tr:nth-child(even) {
 
 .hidden {
     display: none !important;
-}
-
-.remove-btn {
-    background: var(--danger-color);
-    color: white;
-    border: none;
-    border-radius: 3px;
-    padding: 4px 8px;
-    cursor: pointer;
-    font-size: 0.75rem;
-    margin-top: 8px;
-    width: 100%;
-    transition: background 0.3s;
-}
-
-.remove-btn:hover {
-    background: var(--danger-dark);
 }
 
 @media (max-width: 768px) {
