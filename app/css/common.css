@@ -14,6 +14,8 @@
     --border-color: #ecf0f1;
     --shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
     --shadow-hover: 0 5px 15px rgba(0, 0, 0, 0.1);
+    --fc-border-color: var(--primary-color);
+    --fc-daygrid-event-dot-width: 5px;
 }
 
 * {
@@ -77,6 +79,7 @@ select:focus-visible {
     background: white;
     border-radius: 10px;
     box-shadow: var(--shadow);
+    width: 100%;
 }
 
 .nav #one {
@@ -115,7 +118,7 @@ select:focus-visible {
 
 .nav div ul li a:hover {
     color: white;
-    background-color: var(--primary-dark);
+    background-color: var(--primary-color);
     transform: translateY(-2px);
 }
 
@@ -124,6 +127,18 @@ select:focus-visible {
     text-decoration: none;
     border-radius: 5px;
     padding: 10px;
+}
+
+
+@media (max-width: 800px) {
+    .nav {
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .nav div ul {
+        gap: 5px;
+    }
 }
 
 h1 {
