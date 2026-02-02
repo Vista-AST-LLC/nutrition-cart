@@ -33,7 +33,6 @@
                 </button>
             </div>
         </div>
-
         <!-- Profile Section -->
         <div class="profile-section">
             <div class="profile-info">
@@ -43,92 +42,7 @@
                     <p id="profileDetails">Select your age group to get started</p>
                 </div>
             </div>
-            <button class="change-profile-btn" id="changeProfileBtn">Change Profile</button>
-        </div>
-
-        <header>
-            <h1>Nutrition Tracker</h1>
-            <div class="subtitle">Track your daily nutrition intake with ease</div>
-            <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="instructionsPanel">
-                <span aria-hidden="true">☰</span> Instructions
-            </button>
-        </header>
-
-        <div class="overlay" id="overlay"></div>
-        <!--INSTRUCTIONS SIDEBAR-->
-        <div class="instructions-panel" id="instructionsPanel" role="dialog" aria-labelledby="panel-title"
-            aria-modal="true">
-            <div class="panel-header">
-                <h2 class="panel-title" id="panel-title">Instructions</h2>
-                <button class="close-btn" id="closeBtn" aria-label="Close instructions">X</button>
-            </div>
-            <div class="instructions-content">
-                <h3>Getting Started</h3>
-                <p>Welcome to the Nutrition Tracker! Follow these steps to track your nutrition:</p>
-
-                <h3>1. Upload Your Data</h3>
-                <p>Start by uploading a CSV file containing your nutrition data:</p>
-                <ul>
-                    <li>Click the "Choose CSV File" button</li>
-                    <li>Select your nutrition data file</li>
-                    <li>The file should contain columns for food codes, names, and nutritional values</li>
-                </ul>
-
-                <h3>2. Add Food Items</h3>
-                <p>Once your data is loaded, you can add food items by:</p>
-                <ul>
-                    <li>Entering the food code in the input field (e.g., <code>B1</code>, <code>L20</code>,
-                        <code>D40</code>, <code>F60</code>)
-                    </li>
-                    <li>Clicking the "Add Food" button or pressing Enter</li>
-                    <li>Food items will automatically be categorized by meal type</li>
-                    <li>Duplicate items are not allowed - you'll receive a warning</li>
-                    <li>Invalid codes will be cleared from the input field</li>
-                </ul>
-
-                <h3>3. View Your Food Items</h3>
-                <p>Your added food items will appear in the appropriate categories:</p>
-                <ul>
-                    <li><strong>Breakfast</strong> - Morning meals</li>
-                    <li><strong>Lunch</strong> - Midday meals</li>
-                    <li><strong>Dinner</strong> - Evening meals</li>
-                    <li><strong>Dessert</strong> - Sweet treats and desserts</li>
-                </ul>
-
-                <h3>4. Monitor Nutrition Summary</h3>
-                <p>The Nutrition Summary shows your daily totals compared to recommended values:</p>
-                <ul>
-                    <li>Total calories consumed</li>
-                    <li>Macronutrients (protein, carbs, fats)</li>
-                    <li>Micronutrients and other components</li>
-                </ul>
-
-                <h3>5. Check Your Health Score</h3>
-                <p>Your Health Score is calculated based on how well your nutrition aligns with daily recommendations:
-                </p>
-                <ul>
-                    <li>Green score (80-100): Excellent nutrition</li>
-                    <li>Orange score (60-79): Good nutrition</li>
-                    <li>Red score (0-59): Needs improvement</li>
-                </ul>
-
-                <h3>Additional Features</h3>
-                <ul>
-                    <li>Use "Show/Hide Data Table" to view all available food items</li>
-                    <li>Remove individual food items with the "Remove" button</li>
-                    <li>Reset categories or CSV data using the respective reset buttons</li>
-                    <li>Your data is automatically saved between sessions</li>
-                </ul>
-
-                <h3>Tips for Success</h3>
-                <p>For best results:</p>
-                <ul>
-                    <li>Track all meals and snacks throughout the day</li>
-                    <li>Pay attention to portion sizes</li>
-                    <li>Aim for a balanced Health Score</li>
-                    <li>Use the data to make informed food choices</li>
-                </ul>
-            </div>
+            <button class="basic-button">Change Profile</button>
         </div>
 
         <!-- Two column section begins here -->
@@ -139,10 +53,10 @@
                     <div class="input-section">
                         <input type="text" id="foodCode" class="code-input"
                             placeholder="Enter food code (e.g., B1, L20, D40, F60)" aria-describedby="codeHelp">
-                        <button id="addFoodBtn" class="add-btn">Add Food</button>
+                        <button class="basic-button">Add Food</button>
                     </div>
                     <div id="codeHelp" class="error-message hidden" aria-live="polite"></div>
-                    <button id="toggleTableBtn" class="toggle-btn">Show/Hide Data Table</button>
+                    <button class="basic-button">Show/Hide Data Table</button>
                     <div id="tableContainer" class="table-container">
                         <div class="virtual-scroll-container">
                             <table id="nutritionTable">
@@ -183,7 +97,7 @@
                 <div class="card">
                     <h2 class="card-title">
                         Upload Your Data
-                        <button id="resetCsvBtn" class="reset-btn">Reset CSV</button>
+                        <button class="basic-button">Reset CSV</button>
                     </h2>
                     <div class="upload-section">
                         <div class="file-input-wrapper">
@@ -238,6 +152,7 @@
                 </div>
 
                 <!-- Citations Section -->
+                <!--
                 <div class="citations-section">
                     <h3 class="citations-title">Data Sources & Citations</h3>
                     <div class="citations-content">
@@ -271,7 +186,8 @@
                             https://www.heart.org/en/healthy-living/healthy-eating/eat-smart/nutrition-basics/dietary-recommendations-for-healthy-children
                         </div>
                     </div>
-                </div>
+                </div> 
+                -->
             </div>
             <div id="loading" class="card loading hidden">
                 <span class="loading-spinner" aria-hidden="true"></span> Loading and processing your nutrition data...

@@ -156,3 +156,24 @@ h1 {
     background: var(--primary-dark);
     transform: translateY(-2px);
 }
+
+/*THIS IS THE BASIC BUTTON TO BE USED THROUGHOUT*/
+.basic-button {
+    text-decoration: none;
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.basic-button:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-2px);
+}
