@@ -8,8 +8,6 @@
     <link rel="stylesheet" href="../css/Page2Calendar.css">
     <title>Nutrition Cart</title>
     <meta name="description" content="Website companion of Vista-AST's Nutrition Cart">
-    <!--CALENDAR IMPORT SCRIPT-->
-    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.20/index.global.min.js"></script>
     <script src="../js/Page2Calendar.js"></script>
 </head>
 
@@ -31,8 +29,67 @@
             </div>
         </div>
 
+        <form action="" onsubmit="handleSubmit(event)" id="inputForm">
+            <select name="" id="daySelect">
+                <option value="sunday">Sunday</option>
+                <option value="monday">Monday</option>
+                <option value="tuesday">Tuesday</option>
+                <option value="wednesday">Wednesday</option>
+                <option value="thursday">Thursday</option>
+                <option value="friday">Friday</option>
+                <option value="saturday">Saturday</option>
+            </select>
+            <select name="" id="mealSelect">
+                <option value="breakfast">Breakfast</option>
+                <option value="lunch">Lunch</option>
+                <option value="dinner">Dinner</option>
+                <option value="snack">Snack</option>
+            </select>
+            <input type="text" id="foodInput">
+            <input id="submitBtn" type="submit">
+        </form>
+
         <!--Calandar Container-->
-        <div id="calendar"></div>
+        <div id="calendar">
+            <table>
+                <thead>
+                    <tr>
+                        <th>
+                            Sunday
+                        </th>
+                        <th>
+                            Monday
+                        </th>
+                        <th>
+                            Tuesday
+                        </th>
+                        <th>
+                            Wednesday
+                        </th>
+                        <th>
+                            Thursday
+                        </th>
+                        <th>
+                            Friday
+                        </th>
+                        <th>
+                            Saturday
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 
 </body>

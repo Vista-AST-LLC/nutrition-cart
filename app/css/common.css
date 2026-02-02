@@ -14,8 +14,6 @@
     --border-color: #ecf0f1;
     --shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
     --shadow-hover: 0 5px 15px rgba(0, 0, 0, 0.1);
-    --fc-border-color: var(--primary-color);
-    --fc-daygrid-event-dot-width: 5px;
 }
 
 * {
