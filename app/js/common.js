@@ -108,6 +108,7 @@ class FoodItem {
 
 class Weekday {
     constructor() {
+        // Initialize the arrays to be empty
         this.#breakfast = [];
         this.#lunch = [];
         this.#dinner = [];
@@ -115,9 +116,12 @@ class Weekday {
     }
 
     addFoodItem(FoodItem) {
+        // Do a switch on the first char of the ref number (B, L, D, S)
         switch (FoodItem.refNumber().charAt(0)) {
         case BREAKFAST:
+            // Add the FoodItems's record of its position
             FoodItem.arrayIndex = this.#breakfast.length;
+            // Add the FoodItem to the array
             this.#breakfast.push(FoodItem);
             break;
         case LUNCH:
@@ -135,20 +139,32 @@ class Weekday {
         }
     }
 
+    // The idea behind this removeFoodItem method is as follows:
+    // Preserve FoodItem order keep each FoodItem.arrayIndex correct.
     removeFoodItem(meal, index) {
         let countDown = index;
         let countUp = index+1;
         switch (meal) {
             case BREAKFAST:
+                // This simultaneously counts up and down from the stating index and continues until 
+                // both the countDown has reached 0 and the countUp has reached the length of the array
                 while ((test1 = countDown > 0) || (test2 = countUp < this.#breakfast.length)) {
+                    // The countDown is for moving elements at and below the starting index
+                    // one slot to the right, which overrides the to-be-removed item and
+                    // moves every element below the starting index one to the right
                     if (test1) {
                         this.#breakfast[countDown] = this.#breakfast[countDown-1];
                         countDown--;
                     }
+                    // The countUp is for updating all FoodItems.arrayIndex above the removed item index
                     if (test2) {
                         this.#breakfast[index].arrayIndex -= 1;
                         index++;
                     }
+                    // This shifts every element in the array one to the left, effectively undoing the 
+                    // right-ward move in countDown (meaning they keep the same position in the array) and
+                    // moving every element above the starting index to be one lower, to reflect the 
+                    // update to arrayIndex that was done in countUp
                     this.#breakfast.shift();
                 }
             case LUNCH:
