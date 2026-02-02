@@ -1,6 +1,7 @@
 // The total amount of cards we have
 const MAX_CARDS = 80;
 
+// This function call should be wrapped in a try-catch
 async function createFoodItem(barcode) {
     // Fetch the csv and convert it to a string
     const rawcsv = fetch("../Nutrition-Cart-Data(Updated).csv");
@@ -17,17 +18,10 @@ async function createFoodItem(barcode) {
 
     // Using the refNumArray, match the item we are looking for
     let lineNumber = 0;
-    let foundCard = true;
-    for (; !barcode.match(refNumArray[lineNumber]); lineNumber++) {
-        // If the line number is greater than the amount of cards we have, break
-        if (lineNumber > MAX_CARDS) {
-            foundCard = false;
-            break;
-        }
-    }
+    for (; !barcode.match(refNumArray[lineNumber]) || lineNumber <= MAX_CARDS; lineNumber++);
 
     // Throw error for no barcode match
-    if (!foundCard) throw Error("Failed to find barcode match!");
+    if (lineNumber > MAX_CARDS) throw Error("Failed to find barcode match!");
 
     return foodItem(itemRows[lineNumber]);
 }
