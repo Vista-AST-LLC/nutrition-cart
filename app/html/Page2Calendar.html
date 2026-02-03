@@ -29,7 +29,7 @@
             </div>
         </div>
 
-        <form action="" onsubmit="handleSubmit(event)" id="inputForm">
+        <form action="" onsubmit="updateTable(event)" id="inputForm">
             <select name="" id="daySelect">
                 <option value="sunday">Sunday</option>
                 <option value="monday">Monday</option>
@@ -79,13 +79,76 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                        <td id="sunday">
+                            <h3>Breakfast</h3>
+                            <ul id="sunBfast"></ul>
+                            <h3>Lunch</h3>
+                            <ul id="sunLunch"></ul>
+                            <h3>Dinner</h3>
+                            <ul id="sunDinner"></ul>
+                            <h3>Snack</h3>
+                            <ul id="sunSnack"></ul>
+                        </td>
+                        <td id="monday">
+                            <h3>Breakfast</h3>
+                            <ul id="monBfast"></ul>
+                            <h3>Lunch</h3>
+                            <ul id="monLunch"></ul>
+                            <h3>Dinner</h3>
+                            <ul id="monDinner"></ul>
+                            <h3>Snack</h3>
+                            <ul id="monSnack"></ul>
+                        </td>
+                        <td id="tuesday">
+                            <h3>Breakfast</h3>
+                            <ul id="tuesBfast"></ul>
+                            <h3>Lunch</h3>
+                            <ul id="tuesLunch"></ul>
+                            <h3>Dinner</h3>
+                            <ul id="tuesDinner"></ul>
+                            <h3>Snack</h3>
+                            <ul id="tuesSnack"></ul>
+                        </td>
+                        <td id="wednesday">
+                            <h3>Breakfast</h3>
+                            <ul id="wedBfast"></ul>
+                            <h3>Lunch</h3>
+                            <ul id="wedLunch"></ul>
+                            <h3>Dinner</h3>
+                            <ul id="wedDinner"></ul>
+                            <h3>Snack</h3>
+                            <ul id="wedSnack"></ul>
+                        </td>
+                        <td id="thursday">
+                            <h3>Breakfast</h3>
+                            <ul id="thursBfast"></ul>
+                            <h3>Lunch</h3>
+                            <ul id="thursLunch"></ul>
+                            <h3>Dinner</h3>
+                            <ul id="thursDinner"></ul>
+                            <h3>Snack</h3>
+                            <ul id="thursSnack"></ul>
+                        </td>
+                        <td id="friday">
+                            <h3>Breakfast</h3>
+                            <ul id="friBfast"></ul>
+                            <h3>Lunch</h3>
+                            <ul id="friLunch"></ul>
+                            <h3>Dinner</h3>
+                            <ul id="friDinner"></ul>
+                            <h3>Snack</h3>
+                            <ul id="friSnack"></ul>
+                        </td>
+                        <td id="saturday">
+                            <h3>Breakfast</h3>
+                            <ul id="satBfast"></ul>
+                            <h3>Lunch</h3>
+                            <ul id="satLunch"></ul>
+                            <h3>Dinner</h3>
+                            <ul id="satDinner"></ul>
+                            <h3>Snack</h3>
+                            <ul id="satSnack"></ul>
+                        </td>
                     </tr>
                 </tbody>
             </table>

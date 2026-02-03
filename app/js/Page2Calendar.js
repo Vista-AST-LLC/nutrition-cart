@@ -1,70 +1,184 @@
-//Rendering Calendar Feature
-document.addEventListener('DOMContentLoaded', function () {
-    const calendarEl = document.getElementById('calendar')
-    const calendar = new FullCalendar.Calendar(calendarEl, {
-        initialView: 'dayGridWeek',
-        headerToolbar: {
-            start: '',
-            center: 'title',
-            end: ''
-        },
-        titleFormat: {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric'
-        }
-    })
-    calendar.render()
-
-    document.getElementById('submitBtn').addEventListener('click', function () {
-        day = document.getElementById("daySelect").value
-        meal = document.getElementById("mealSelect").value
-
-        if (typeof meal == "string") {
-            color = determineColor(meal)
-
-            var newEvent = {
-                title: meal,
-                start: '2026-02-02',
-                description: meal,
-                color: color,
-                textColor: "black"
-            }
-            console.log(newEvent)
-            calendar.addEvent(newEvent)
-        }
-        else {
-            alert("Cannot enter a number! Please enter a text value!")
-        }
-
-    })
-})
-
-//Determines the color used as the background of calendar event based on meal type  
-function determineColor(meal) {
-
-    if (meal == "breakfast") {
-        return "yellow"
-    }
-    else if (meal == "lunch") {
-        return "green"
-    }
-    else if (meal == "dinner") {
-        return "orange"
-    }
-    else if (meal == "snack") {
-        return "lavender"
-    }
-    else {
-        return ""
-    }
-}
-
-function handleSubmit(e) {
+// Function to update the table calendar
+function updateTable(e) {
     e.preventDefault();
 
-    text = document.getElementById("foodInput");
+    text = document.getElementById("foodInput").value;
+    meal = document.getElementById("mealSelect").value
+    day = document.getElementById("daySelect").value
 
+
+    switch (day) {
+        case "sunday":
+            switch (meal) {
+                case "breakfast":
+                    sunBfast = document.getElementById("sunBfast")
+                    updateHTML(sunBfast, text)
+                    break
+                case "lunch":
+                    sunLunch = document.getElementById('sunLunch')
+                    updateHTML(sunLunch, text)
+                    break
+                case "dinner":
+                    sunDinner = document.getElementById('sunDinner')
+                    updateHTML(sunDinner, text)
+                    break
+                case "snack":
+                    sunSnack = document.getElementById('sunSnack')
+                    updateHTML(sunSnack, text)
+                    break
+                default:
+                    alert("No meal was selected!")
+            }
+            break
+        case "monday":
+            switch (meal) {
+                case "breakfast":
+                    monBfast = document.getElementById("monBfast")
+                    updateHTML(monBfast, text)
+                    break
+                case "lunch":
+                    monLunch = document.getElementById('monLunch')
+                    updateHTML(monLunch, text)
+                    break
+                case "dinner":
+                    monDinner = document.getElementById('monDinner')
+                    updateHTML(monDinner, text)
+                    break
+                case "snack":
+                    monSnack = document.getElementById('monSnack')
+                    updateHTML(monSnack, text)
+                    break
+                default:
+                    alert("No meal was selected!")
+            }
+            break
+        case "tuesday":
+            switch (meal) {
+                case "breakfast":
+                    tuesBfast = document.getElementById("tuesBfast")
+                    updateHTML(tuesBfast, text)
+                    break
+                case "lunch":
+                    tuesLunch = document.getElementById('tuesLunch')
+                    updateHTML(tuesLunch, text)
+                    break
+                case "dinner":
+                    tuesDinner = document.getElementById('tuesDinner')
+                    updateHTML(tuesDinner, text)
+                    break
+                case "snack":
+                    tuesSnack = document.getElementById('tuesSnack')
+                    updateHTML(tuesSnack, text)
+                    break
+                default:
+                    alert("No meal was selected!")
+            }
+            break
+        case "wednesday":
+            switch (meal) {
+                case "breakfast":
+                    wedBfast = document.getElementById("wedBfast")
+                    updateHTML(wedBfast, text)
+                    break
+                case "lunch":
+                    wedLunch = document.getElementById('wedLunch')
+                    updateHTML(wedLunch, text)
+                    break
+                case "dinner":
+                    wedDinner = document.getElementById('wedDinner')
+                    updateHTML(wedDinner, text)
+                    break
+                case "snack":
+                    wedSnack = document.getElementById('wedSnack')
+                    updateHTML(wedSnack, text)
+                    break
+                default:
+                    alert("No meal was selected!")
+            }
+            break
+        case "thursday":
+            switch (meal) {
+                case "breakfast":
+                    thursBfast = document.getElementById("thursBfast")
+                    updateHTML(thursBfast, text)
+                    break
+                case "lunch":
+                    thursLunch = document.getElementById('thursLunch')
+                    updateHTML(thursLunch, text)
+                    break
+                case "dinner":
+                    thursDinner = document.getElementById('thursDinner')
+                    updateHTML(thursDinner, text)
+                    break
+                case "snack":
+                    thursSnack = document.getElementById('thursSnack')
+                    updateHTML(thursSnack, text)
+                    break
+                default:
+                    alert("No meal was selected!")
+            }
+            break
+        case "friday":
+            switch (meal) {
+                case "breakfast":
+                    friBfast = document.getElementById("friBfast")
+                    updateHTML(friBfast, text)
+                    break
+                case "lunch":
+                    friLunch = document.getElementById('friLunch')
+                    updateHTML(friLunch, text)
+                    break
+                case "dinner":
+                    friDinner = document.getElementById('friDinner')
+                    updateHTML(friDinner, text)
+                    break
+                case "snack":
+                    friSnack = document.getElementById('friSnack')
+                    updateHTML(friSnack, text)
+                    break
+                default:
+                    alert("No meal was selected!")
+            }
+            break
+        case "saturday":
+            switch (meal) {
+                case "breakfast":
+                    satBfast = document.getElementById("satBfast")
+                    updateHTML(satBfast, text)
+                    break
+                case "lunch":
+                    satLunch = document.getElementById('satLunch')
+                    updateHTML(satLunch, text)
+                    break
+                case "dinner":
+                    satDinner = document.getElementById('satDinner')
+                    updateHTML(satDinner, text)
+                    break
+                case "snack":
+                    satSnack = document.getElementById('satSnack')
+                    updateHTML(satSnack, text)
+                    break
+                default:
+                    alert("No meal was selected!")
+            }
+            break
+        default:
+            alert("No day was selected!")
+    }
+
+    document.getElementById("daySelect").value = 'sunday'
+    document.getElementById('mealSelect').value = 'breakfast'
+    document.getElementById('foodInput').value = ''
 }
 
+function updateHTML(tag, food) {
+    console.log(tag)
 
+    const listItem = document.createElement('li')
+
+    listItem.innerHTML = `
+        <h4>${food}</h4>
+    `
+
+    tag.appendChild(listItem)
+}

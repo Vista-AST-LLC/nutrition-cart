@@ -1,5 +1,8 @@
 /********CONTAINER FOR CALENDAR********/
 #calendar {
+    overflow-x: auto;
+    overflow-y: auto;
+    border-radius: 8px;
     width: 100%;
     margin: auto;
 
@@ -19,13 +22,24 @@ th {
     width: 10%;
 }
 
-tbody {
-    height: 75%;
+td {
+    border: 4px solid #3498db;
+    background-color: lightgray;
+    padding: 10px;
+    height: 600px;
+    vertical-align: text-top;
 }
 
-tr {
-    border: 4px solid #3498db;
-    height: 75%;
+tbody tr td h3 {
+    text-decoration: underline;
+    text-align: center;
+}
+
+tbody tr td ul {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 10px;
 }
 
 /********TEST FORM INFO********/
