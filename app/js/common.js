@@ -167,6 +167,7 @@ class Weekday {
                     // update to arrayIndex that was done in countUp
                     this.#breakfast.shift();
                 }
+                break;
             case LUNCH:
                 while ((test1 = countDown > 0) || (test2 = countUp < this.#lunch.length)) {
                     if (test1) {
@@ -179,6 +180,7 @@ class Weekday {
                     }
                     this.#lunch.shift();
                 }
+                break;
             case DINNER:
                 while ((test1 = countDown > 0) || (test2 = countUp < this.#dinner.length)) {
                     if (test1) {
@@ -191,6 +193,7 @@ class Weekday {
                     }
                     this.#dinner.shift();
                 }
+                break;
             case SNACKS:
                 while ((test1 = countDown > 0) || (test2 = countUp < this.#snacks.length)) {
                     if (test1) {
@@ -203,15 +206,25 @@ class Weekday {
                     }
                     this.#snacks.shift();
                 }
+                break;
+        }
+    }
+
+    getMealItems(meal) {
+        switch (meal) {
+            case BREAKFAST:
+                return this.#breakfast;
+            case LUNCH:
+                return this.#lunch;
+            case DINNER:
+                return this.#dinner;
+            case SNACKS:
+                return this.#snacks;
         }
     }
 
     #breakfast;
-    get breakfast() { return this.#breakfast; }
     #lunch;
-    get lunch() { return this.#lunch; }
     #dinner;
-    get dinner() { return this.#dinner; }
     #snacks;
-    get snacks() { return this.#snacks; }
 }
