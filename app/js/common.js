@@ -1,11 +1,23 @@
-// The total amount of cards we have
-const MAX_CARDS = 80;
-
-// Convenience consts for meal types (B, L, D, S)
-const BREAKFAST = 'B';
-const LUNCH = 'L';
-const DINNER = 'D';
-const SNACKS = 'S';
+export class Constants {
+    // The total amount of cards we have
+    static MAX_CARDS = 80
+    // Convenience consts for meal types
+    static BREAKFAST = 'B';
+    static LUNCH = 'L';
+    static DINNER = 'D';
+    static SNACKS = 'S';
+    // Used in grading
+    static CALORIES = 0;
+    static TOTALFAT = 1;
+    static SATFAT = 2;
+    static TRANSFAT = 3;
+    static CHOLESTEROL = 4;
+    static SODIUM = 5;
+    static CARBS = 6;
+    static FIBER = 7;
+    static SUGAR = 8;
+    static PROTEIN = 9;
+}
 
 // This function call should be wrapped in a try-catch
 async function createFoodItem(barcode) {
@@ -24,15 +36,15 @@ async function createFoodItem(barcode) {
 
     // Using the refNumArray, match the item we are looking for
     let lineNumber = 0;
-    for (; !barcode.match(refNumArray[lineNumber]) || lineNumber <= MAX_CARDS; lineNumber++);
+    for (; !barcode.match(refNumArray[lineNumber]) || lineNumber <= Constants.MAX_CARDS; lineNumber++);
 
     // Throw error for no barcode match
-    if (lineNumber > MAX_CARDS) throw Error("Failed to find barcode match!");
+    if (lineNumber > Constants.MAX_CARDS) throw Error("Failed to find barcode match!");
 
     return FoodItem(itemRows[lineNumber]);
 }
 
-class FoodItem {
+export class FoodItem {
     constructor(data){
         const item = data.split(',');
         this.#refNumber = item[0];
@@ -106,7 +118,7 @@ class FoodItem {
     get sugarsDV() { return this.#sugarsDV; }
 }
 
-class Weekday {
+export class Weekday {
     constructor() {
         // Initialize the arrays to be empty
         this.#breakfast = [];
@@ -118,21 +130,21 @@ class Weekday {
     addFoodItem(FoodItem) {
         // Do a switch on the first char of the ref number (B, L, D, S)
         switch (FoodItem.refNumber().charAt(0)) {
-        case BREAKFAST:
+        case Constants.BREAKFAST:
             // Add the FoodItems's record of its position
             FoodItem.arrayIndex = this.#breakfast.length;
             // Add the FoodItem to the array
             this.#breakfast.push(FoodItem);
             break;
-        case LUNCH:
+        case Constants.LUNCH:
             FoodItem.arrayIndex = this.#lunch.length;
             this.#lunch.push(FoodItem);
             break;
-        case DINNER:
+        case Constants.DINNER:
             FoodItem.arrayIndex = this.#dinner.length;
             this.#dinner.push(FoodItem);
             break;
-        case SNACKS:
+        case Constants.SNACKS:
             FoodItem.arrayIndex = this.#snacks.length;
             this.#snacks.push(FoodItem);
             break;
@@ -145,7 +157,7 @@ class Weekday {
         let countDown = index;
         let countUp = index+1;
         switch (meal) {
-            case BREAKFAST:
+            case Constants.BREAKFAST:
                 // This simultaneously counts up and down from the stating index and continues until 
                 // both the countDown has reached 0 and the countUp has reached the length of the array
                 while ((test1 = countDown > 0) || (test2 = countUp < this.#breakfast.length)) {
@@ -168,7 +180,7 @@ class Weekday {
                     this.#breakfast.shift();
                 }
                 break;
-            case LUNCH:
+            case Constants.LUNCH:
                 while ((test1 = countDown > 0) || (test2 = countUp < this.#lunch.length)) {
                     if (test1) {
                         this.#lunch[countDown] = this.#lunch[countDown-1];
@@ -181,7 +193,7 @@ class Weekday {
                     this.#lunch.shift();
                 }
                 break;
-            case DINNER:
+            case Constants.DINNER:
                 while ((test1 = countDown > 0) || (test2 = countUp < this.#dinner.length)) {
                     if (test1) {
                         this.#dinner[countDown] = this.#dinner[countDown-1];
@@ -194,7 +206,7 @@ class Weekday {
                     this.#dinner.shift();
                 }
                 break;
-            case SNACKS:
+            case Constants.SNACKS:
                 while ((test1 = countDown > 0) || (test2 = countUp < this.#snacks.length)) {
                     if (test1) {
                         this.#snacks[countDown] = this.#snacks[countDown-1];
@@ -212,13 +224,13 @@ class Weekday {
 
     getMealItems(meal) {
         switch (meal) {
-            case BREAKFAST:
+            case Constants.BREAKFAST:
                 return this.#breakfast;
-            case LUNCH:
+            case Constants.LUNCH:
                 return this.#lunch;
-            case DINNER:
+            case Constants.DINNER:
                 return this.#dinner;
-            case SNACKS:
+            case Constants.SNACKS:
                 return this.#snacks;
         }
     }
