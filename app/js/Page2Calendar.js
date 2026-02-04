@@ -172,7 +172,6 @@ function updateTable(e) {
 }
 
 function updateHTML(tag, food) {
-    console.log(tag)
 
     const listItem = document.createElement('li')
 
@@ -181,4 +180,81 @@ function updateHTML(tag, food) {
     `
 
     tag.appendChild(listItem)
+}
+
+function clearTable(e) {
+    e.preventDefault()
+    //Clearing all lists
+
+    //Getting day ul by ID
+    sunBfast = document.getElementById('sunBfast');
+    sunLunch = document.getElementById('sunLunch');
+    sunDinner = document.getElementById('sunDinner');
+    sunSnack = document.getElementById('sunSnack');
+
+    monBfast = document.getElementById('monBfast');
+    monLunch = document.getElementById('monLunch');
+    monDinner = document.getElementById('monDinner');
+    monSnack = document.getElementById('monSnack');
+
+    tuesBfast = document.getElementById('tuesBfast');
+    tuesLunch = document.getElementById('tuesLunch');
+    tuesDinner = document.getElementById('tuesDinner');
+    tuesSnack = document.getElementById('tuesSnack');
+
+    wedBfast = document.getElementById('wedBfast');
+    wedLunch = document.getElementById('wedLunch');
+    wedDinner = document.getElementById('wedDinner');
+    wedSnack = document.getElementById('wedSnack');
+
+    thursBfast = document.getElementById('thursBfast');
+    thursLunch = document.getElementById('thursLunch');
+    thursDinner = document.getElementById('thursDinner');
+    thursSnack = document.getElementById('thursSnack');
+
+    friBfast = document.getElementById('friBfast');
+    friLunch = document.getElementById('friLunch');
+    friDinner = document.getElementById('friDinner');
+    friSnack = document.getElementById('friSnack');
+
+    satBfast = document.getElementById('satBfast');
+    satLunch = document.getElementById('satLunch');
+    satDinner = document.getElementById('satDinner');
+    satSnack = document.getElementById('satSnack');
+
+    //Setting ul element to empty
+    sunBfast.innerHTML = ''
+    sunLunch.innerHTML = ''
+    sunDinner.innerHTML = ''
+    sunSnack.innerHTML = ''
+
+    monBfast.innerHTML = ''
+    monLunch.innerHTML = ''
+    monDinner.innerHTML = ''
+    monSnack.innerHTML = ''
+
+    tuesBfast.innerHTML = ''
+    tuesLunch.innerHTML = ''
+    tuesDinner.innerHTML = ''
+    tuesSnack.innerHTML = ''
+
+    wedBfast.innerHTML = ''
+    wedLunch.innerHTML = ''
+    wedDinner.innerHTML = ''
+    wedSnack.innerHTML = ''
+
+    thursBfast.innerHTML = ''
+    thursLunch.innerHTML = ''
+    thursDinner.innerHTML = ''
+    thursSnack.innerHTML = ''
+
+    friBfast.innerHTML = ''
+    friLunch.innerHTML = ''
+    friDinner.innerHTML = ''
+    friSnack.innerHTML = ''
+
+    satBfast.innerHTML = ''
+    satLunch.innerHTML = ''
+    satDinner.innerHTML = ''
+    satSnack.innerHTML = ''
 }
