@@ -181,9 +181,9 @@ h1 {
     cursor: pointer;
     font-weight: 600;
     transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
     gap: 8px;
+    width: 110px;
+    margin: auto;
 }
 
 .basic-button:hover {

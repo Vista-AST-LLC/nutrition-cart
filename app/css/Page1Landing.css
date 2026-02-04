@@ -1,18 +1,3 @@
-.welcome-screen {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    z-index: 2000;
-    transition: opacity 0.5s ease;
-}
-
 .welcome-screen.hidden {
     opacity: 0;
     pointer-events: none;
@@ -33,6 +18,6 @@
 .welcome-subtitle {
     font-size: 1.5rem;
     color: #7f8c8d;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
     text-align: center;
 }

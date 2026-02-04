@@ -1,11 +1,17 @@
 /* Nutrition Progress Table Styles */
+.nutrition-progress-container {
+    overflow-x: auto;
+    overflow-y: auto;
+    border-radius: 10px;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
 .nutrition-progress-table {
     width: 100%;
     border-collapse: collapse;
-    margin: 20px 0;
     background: white;
     border-radius: 10px;
-    overflow: hidden;
     box-shadow: var(--shadow);
 }
 
@@ -72,15 +78,20 @@
 }
 
 /* Age-specific requirements table */
+.requirements-table-container {
+    overflow-x: auto;
+    overflow-y: auto;
+    border-radius: 10px;
+    width: 100%;
+    margin: 20px 0;
+}
+
 .requirements-table {
     width: 100%;
     border-collapse: collapse;
-    margin: 20px 0;
     background: white;
     border-radius: 10px;
-    overflow: hidden;
     box-shadow: var(--shadow);
-    font-size: 0.9rem;
 }
 
 .requirements-table th {
