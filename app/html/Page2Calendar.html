@@ -8,8 +8,6 @@
     <link rel="stylesheet" href="../css/Page2Calendar.css">
     <title>Nutrition Cart</title>
     <meta name="description" content="Website companion of Vista-AST's Nutrition Cart">
-    <!--CALENDAR IMPORT SCRIPT-->
-    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.20/index.global.min.js"></script>
     <script src="../js/Page2Calendar.js"></script>
 </head>
 
@@ -31,8 +29,133 @@
             </div>
         </div>
 
+        <form action="" onsubmit="updateTable(event)" id="inputForm">
+            <select name="" id="daySelect">
+                <option value="sunday">Sunday</option>
+                <option value="monday">Monday</option>
+                <option value="tuesday">Tuesday</option>
+                <option value="wednesday">Wednesday</option>
+                <option value="thursday">Thursday</option>
+                <option value="friday">Friday</option>
+                <option value="saturday">Saturday</option>
+            </select>
+            <select name="" id="mealSelect">
+                <option value="breakfast">Breakfast</option>
+                <option value="lunch">Lunch</option>
+                <option value="dinner">Dinner</option>
+                <option value="snack">Snack</option>
+            </select>
+            <input type="text" id="foodInput">
+            <div class="form-div">
+                <input id="submitBtn" type="submit">
+                <input id="resetBtn" type="reset" onclick="clearTable(event)">
+            </div>
+        </form>
+
         <!--Calandar Container-->
-        <div id="calendar"></div>
+        <div id="calendar">
+            <table>
+                <thead>
+                    <tr>
+                        <th>
+                            Sunday
+                        </th>
+                        <th>
+                            Monday
+                        </th>
+                        <th>
+                            Tuesday
+                        </th>
+                        <th>
+                            Wednesday
+                        </th>
+                        <th>
+                            Thursday
+                        </th>
+                        <th>
+                            Friday
+                        </th>
+                        <th>
+                            Saturday
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td id="sunday">
+                            <h3>Breakfast</h3>
+                            <ul id="sunBfast"></ul>
+                            <h3>Lunch</h3>
+                            <ul id="sunLunch"></ul>
+                            <h3>Dinner</h3>
+                            <ul id="sunDinner"></ul>
+                            <h3>Snack</h3>
+                            <ul id="sunSnack"></ul>
+                        </td>
+                        <td id="monday">
+                            <h3>Breakfast</h3>
+                            <ul id="monBfast"></ul>
+                            <h3>Lunch</h3>
+                            <ul id="monLunch"></ul>
+                            <h3>Dinner</h3>
+                            <ul id="monDinner"></ul>
+                            <h3>Snack</h3>
+                            <ul id="monSnack"></ul>
+                        </td>
+                        <td id="tuesday">
+                            <h3>Breakfast</h3>
+                            <ul id="tuesBfast"></ul>
+                            <h3>Lunch</h3>
+                            <ul id="tuesLunch"></ul>
+                            <h3>Dinner</h3>
+                            <ul id="tuesDinner"></ul>
+                            <h3>Snack</h3>
+                            <ul id="tuesSnack"></ul>
+                        </td>
+                        <td id="wednesday">
+                            <h3>Breakfast</h3>
+                            <ul id="wedBfast"></ul>
+                            <h3>Lunch</h3>
+                            <ul id="wedLunch"></ul>
+                            <h3>Dinner</h3>
+                            <ul id="wedDinner"></ul>
+                            <h3>Snack</h3>
+                            <ul id="wedSnack"></ul>
+                        </td>
+                        <td id="thursday">
+                            <h3>Breakfast</h3>
+                            <ul id="thursBfast"></ul>
+                            <h3>Lunch</h3>
+                            <ul id="thursLunch"></ul>
+                            <h3>Dinner</h3>
+                            <ul id="thursDinner"></ul>
+                            <h3>Snack</h3>
+                            <ul id="thursSnack"></ul>
+                        </td>
+                        <td id="friday">
+                            <h3>Breakfast</h3>
+                            <ul id="friBfast"></ul>
+                            <h3>Lunch</h3>
+                            <ul id="friLunch"></ul>
+                            <h3>Dinner</h3>
+                            <ul id="friDinner"></ul>
+                            <h3>Snack</h3>
+                            <ul id="friSnack"></ul>
+                        </td>
+                        <td id="saturday">
+                            <h3>Breakfast</h3>
+                            <ul id="satBfast"></ul>
+                            <h3>Lunch</h3>
+                            <ul id="satLunch"></ul>
+                            <h3>Dinner</h3>
+                            <ul id="satDinner"></ul>
+                            <h3>Snack</h3>
+                            <ul id="satSnack"></ul>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 
 </body>
