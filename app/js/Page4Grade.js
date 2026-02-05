@@ -5,27 +5,29 @@ class ReportCard {
     static MAX_SCORE = 100;
 
     // Indices for internal arrays
-    static BREAKFASTSCORE = 0;
-    static LUNCHSCORE = 1;
-    static DINNERSCORE = 2;
-    static SNACKSSCORE = 3;
-    static COMMENTS = 4;
+    static SCORE = 0;
+    static COMMENTS = 1;
 
     constructor() {
-        for (let i = 0; i < 4; i++) {
-            this.#score[i] = [];
-            for (let j = 0; j < 10; j++) {
-                this.#score[i][j] = 0;
-            }
+        // Initialize the score categories to 0
+        this.#score[0] = [];
+        for (let i = 0; i < 10; i++) {
+            this.#score[0][i] = 0;
         }
+        
+        // Set the comments index to be an empty array
+        this.#score[1] = [];
 
         this.#days = [];
     }
 
+    // This is used to interpolate between values for scoring 
+    // Bottom = 0, top = 1
     normalize(bottom, top, value) {
         return ( (value - bottom) / (top - bottom) ) * MAX_SCORE;
     }
 
+    // Add days to the ReportCard, handles individual days and an array of days
     addDays(daysToAdd) {
         if (Array.isArray(daysToAdd)) {
             while (daysToAdd.length > 0) {
@@ -44,33 +46,79 @@ class ReportCard {
 
     basicGradeDay(day) {
         let meals = day.getMealItems(Constants.BREAKFAST);
-        let mealsAmount = meals.length;
+        // Meals are stored separately in the Weekday class, so we get all values
+        // from each category and store it in the score array
         while (meals.length > 0) {
             let foodItem = meals.pop();
-            this.#score[BREAKFASTSCORE][Constants.CALORIES] += this.basicGradeRubric(Constants.CALORIES, foodItem.calories());
-            this.#score[BREAKFASTSCORE][Constants.TOTALFAT] += this.basicGradeRubric(Constants.TOTALFAT, foodItem.totalFatG());
-            this.#score[BREAKFASTSCORE][Constants.SATFAT] += this.basicGradeRubric(Constants.SATFAT, foodItem.satFatG());
-            this.#score[BREAKFASTSCORE][Constants.TRANSFAT] += this.basicGradeRubric(Constants.TRANSFAT, foodItem.transFatG());
-            this.#score[BREAKFASTSCORE][Constants.CHOLESTEROL] += this.basicGradeRubric(Constants.CHOLESTEROL, foodItem.cholesterolMG());
-            this.#score[BREAKFASTSCORE][Constants.SODIUM] += this.basicGradeRubric(Constants.SODIUM, foodItem.sodiumMG());
-            this.#score[BREAKFASTSCORE][Constants.CARBS] += this.basicGradeRubric(Constants.CARBS, foodItem.carbsG());
-            this.#score[BREAKFASTSCORE][Constants.FIBER] += this.basicGradeRubric(Constants.FIBER, foodItem.fiberG());
-            this.#score[BREAKFASTSCORE][Constants.SUGAR] += this.basicGradeRubric(Constants.SUGAR, foodItem.sugarsG());
-            this.#score[BREAKFASTSCORE][Constants.PROTEIN] += this.basicGradeRubric(Constants.PROTEIN, foodItem.proteinG());
+            this.#score[SCORE][Constants.CALORIES] += foodItem.calories();
+            this.#score[SCORE][Constants.TOTALFAT] += foodItem.totalFatG();
+            this.#score[SCORE][Constants.SATFAT] += foodItem.satFatG();
+            this.#score[SCORE][Constants.TRANSFAT] += foodItem.transFatG();
+            this.#score[SCORE][Constants.CHOLESTEROL] += foodItem.cholesterolMG();
+            this.#score[SCORE][Constants.SODIUM] += foodItem.sodiumMG();
+            this.#score[SCORE][Constants.CARBS] += foodItem.carbsG();
+            this.#score[SCORE][Constants.FIBER] += foodItem.fiberG();
+            this.#score[SCORE][Constants.SUGAR] += foodItem.sugarsG();
+            this.#score[SCORE][Constants.PROTEIN] += foodItem.proteinG();
         }
-        this.#score[BREAKFASTSCORE][Constants.CALORIES] /= mealsAmount;
-        this.#score[BREAKFASTSCORE][Constants.TOTALFAT] /= mealsAmount;
-        this.#score[BREAKFASTSCORE][Constants.SATFAT] /= mealsAmount;
-        this.#score[BREAKFASTSCORE][Constants.TRANSFAT] /= mealsAmount;
-        this.#score[BREAKFASTSCORE][Constants.CHOLESTEROL] /= mealsAmount;
-        this.#score[BREAKFASTSCORE][Constants.SODIUM] /= mealsAmount;
-        this.#score[BREAKFASTSCORE][Constants.CARBS] /= mealsAmount;
-        this.#score[BREAKFASTSCORE][Constants.FIBER] /= mealsAmount;
-        this.#score[BREAKFASTSCORE][Constants.SUGAR] /= mealsAmount;
-        this.#score[BREAKFASTSCORE][Constants.PROTEIN] /= mealsAmount;
 
-        // Do the same for other 3 meals
+        meals = day.getMealItems(Constants.LUNCH);
+        while (meals.length > 0) {
+            let foodItem = meals.pop();
+            this.#score[SCORE][Constants.CALORIES] += foodItem.calories();
+            this.#score[SCORE][Constants.TOTALFAT] += foodItem.totalFatG();
+            this.#score[SCORE][Constants.SATFAT] += foodItem.satFatG();
+            this.#score[SCORE][Constants.TRANSFAT] += foodItem.transFatG();
+            this.#score[SCORE][Constants.CHOLESTEROL] += foodItem.cholesterolMG();
+            this.#score[SCORE][Constants.SODIUM] += foodItem.sodiumMG();
+            this.#score[SCORE][Constants.CARBS] += foodItem.carbsG();
+            this.#score[SCORE][Constants.FIBER] += foodItem.fiberG();
+            this.#score[SCORE][Constants.SUGAR] += foodItem.sugarsG();
+            this.#score[SCORE][Constants.PROTEIN] += foodItem.proteinG();
+        }
 
+        meals = day.getMealItems(Constants.DINNER);
+        while (meals.length > 0) {
+            let foodItem = meals.pop();
+            this.#score[SCORE][Constants.CALORIES] += foodItem.calories();
+            this.#score[SCORE][Constants.TOTALFAT] += foodItem.totalFatG();
+            this.#score[SCORE][Constants.SATFAT] += foodItem.satFatG();
+            this.#score[SCORE][Constants.TRANSFAT] += foodItem.transFatG();
+            this.#score[SCORE][Constants.CHOLESTEROL] += foodItem.cholesterolMG();
+            this.#score[SCORE][Constants.SODIUM] += foodItem.sodiumMG();
+            this.#score[SCORE][Constants.CARBS] += foodItem.carbsG();
+            this.#score[SCORE][Constants.FIBER] += foodItem.fiberG();
+            this.#score[SCORE][Constants.SUGAR] += foodItem.sugarsG();
+            this.#score[SCORE][Constants.PROTEIN] += foodItem.proteinG();
+        }
+
+        meals = day.getMealItems(Constants.SNACKS);
+        while (meals.length > 0) {
+            let foodItem = meals.pop();
+            this.#score[SCORE][Constants.CALORIES] += foodItem.calories();
+            this.#score[SCORE][Constants.TOTALFAT] += foodItem.totalFatG();
+            this.#score[SCORE][Constants.SATFAT] += foodItem.satFatG();
+            this.#score[SCORE][Constants.TRANSFAT] += foodItem.transFatG();
+            this.#score[SCORE][Constants.CHOLESTEROL] += foodItem.cholesterolMG();
+            this.#score[SCORE][Constants.SODIUM] += foodItem.sodiumMG();
+            this.#score[SCORE][Constants.CARBS] += foodItem.carbsG();
+            this.#score[SCORE][Constants.FIBER] += foodItem.fiberG();
+            this.#score[SCORE][Constants.SUGAR] += foodItem.sugarsG();
+            this.#score[SCORE][Constants.PROTEIN] += foodItem.proteinG();
+        }
+
+        // At this point, each category of the score array has the total amount of that
+        // field for the day, so we send the day's total through the grading rubric 
+        this.#score[SCORE][Constants.CALORIES] = this.basicGradeRubric(Constants.CALORIES, this.#score[SCORE][Constants.CALORIES]);
+        this.#score[SCORE][Constants.TOTALFAT] = this.basicGradeRubric(Constants.TOTALFAT, this.#score[SCORE][Constants.TOTALFAT]);
+        this.#score[SCORE][Constants.SATFAT] = this.basicGradeRubric(Constants.SATFAT, this.#score[SCORE][Constants.SATFAT]);
+        this.#score[SCORE][Constants.TRANSFAT] = this.basicGradeRubric(Constants.TRANSFAT, this.#score[SCORE][Constants.TRANSFAT]);
+        this.#score[SCORE][Constants.CHOLESTEROL] = this.basicGradeRubric(Constants.CHOLESTEROL, this.#score[SCORE][Constants.CHOLESTEROL]);
+        this.#score[SCORE][Constants.SODIUM] = this.basicGradeRubric(Constants.SODIUM, this.#score[SCORE][Constants.SODIUM]);
+        this.#score[SCORE][Constants.CARBS] = this.basicGradeRubric(Constants.CARBS, this.#score[SCORE][Constants.CARBS]);
+        this.#score[SCORE][Constants.FIBER] = this.basicGradeRubric(Constants.FIBER, this.#score[SCORE][Constants.FIBER]);
+        this.#score[SCORE][Constants.SUGAR] = this.basicGradeRubric(Constants.SUGAR, this.#score[SCORE][Constants.SUGAR]);
+        this.#score[SCORE][Constants.PROTEIN] = this.basicGradeRubric(Constants.PROTEIN, this.#score[SCORE][Constants.PROTEIN]);
     }
 
     basicGradeRubric(type, value) {
