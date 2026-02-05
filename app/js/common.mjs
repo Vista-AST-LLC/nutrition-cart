@@ -1,6 +1,6 @@
 export class Constants {
     // The total amount of cards we have
-    static MAX_CARDS = 80
+    static MAX_CARDS = 80;
     // Convenience consts for meal types
     static BREAKFAST = 'B';
     static LUNCH = 'L';
@@ -20,10 +20,10 @@ export class Constants {
 }
 
 // This function call should be wrapped in a try-catch
-async function createFoodItem(barcode) {
+export async function createFoodItem(barcode) {
     // Fetch the csv and convert it to a string
-    const rawcsv = fetch("../Nutrition-Cart-Data(Updated).csv");
-    const itemData = rawcsv.text();
+    const itemData = await fetch("../../Nutrition-Cart-Data(Updated).csv")
+        .then(itemData => itemData.text())
 
     // Split the itemData string by row (delineated by \n), 
     // then remove the first line (the names of columns)
@@ -34,14 +34,17 @@ async function createFoodItem(barcode) {
         return refNum.split(',')[0];
     })
 
+    refNumArray.push("END");
+
     // Using the refNumArray, match the item we are looking for
     let lineNumber = 0;
-    for (; !barcode.match(refNumArray[lineNumber]) || lineNumber <= Constants.MAX_CARDS; lineNumber++);
+    for (; !barcode.match(refNumArray[lineNumber]); lineNumber++) {
+        if (refNumArray[lineNumber] == "END") throw Error("Failed to find barcode match!")
+    }
 
-    // Throw error for no barcode match
-    if (lineNumber > Constants.MAX_CARDS) throw Error("Failed to find barcode match!");
+    console.log(itemRows[lineNumber]);
 
-    return FoodItem(itemRows[lineNumber]);
+    return new FoodItem(itemRows[lineNumber]);
 }
 
 export class FoodItem {
@@ -121,10 +124,10 @@ export class FoodItem {
 export class Weekday {
     constructor() {
         // Initialize the arrays to be empty
-        this.#breakfast = [];
-        this.#lunch = [];
-        this.#dinner = [];
-        this.#snacks = [];
+        this.breakfast = [];
+        this.lunch = [];
+        this.dinner = [];
+        this.snacks = [];
     }
 
     addFoodItem(FoodItem) {
@@ -132,21 +135,21 @@ export class Weekday {
         switch (FoodItem.refNumber().charAt(0)) {
         case Constants.BREAKFAST:
             // Add the FoodItems's record of its position
-            FoodItem.arrayIndex = this.#breakfast.length;
+            FoodItem.arrayIndex = this.breakfast.length;
             // Add the FoodItem to the array
-            this.#breakfast.push(FoodItem);
+            this.breakfast.push(FoodItem);
             break;
         case Constants.LUNCH:
-            FoodItem.arrayIndex = this.#lunch.length;
-            this.#lunch.push(FoodItem);
+            FoodItem.arrayIndex = this.lunch.length;
+            this.lunch.push(FoodItem);
             break;
         case Constants.DINNER:
-            FoodItem.arrayIndex = this.#dinner.length;
-            this.#dinner.push(FoodItem);
+            FoodItem.arrayIndex = this.dinner.length;
+            this.dinner.push(FoodItem);
             break;
         case Constants.SNACKS:
-            FoodItem.arrayIndex = this.#snacks.length;
-            this.#snacks.push(FoodItem);
+            FoodItem.arrayIndex = this.snacks.length;
+            this.snacks.push(FoodItem);
             break;
         }
     }
@@ -160,63 +163,63 @@ export class Weekday {
             case Constants.BREAKFAST:
                 // This simultaneously counts up and down from the stating index and continues until 
                 // both the countDown has reached 0 and the countUp has reached the length of the array
-                while ((test1 = countDown > 0) || (test2 = countUp < this.#breakfast.length)) {
+                while ((test1 = countDown > 0) || (test2 = countUp < this.breakfast.length)) {
                     // The countDown is for moving elements at and below the starting index
                     // one slot to the right, which overrides the to-be-removed item and
                     // moves every element below the starting index one to the right
                     if (test1) {
-                        this.#breakfast[countDown] = this.#breakfast[countDown-1];
+                        this.breakfast[countDown] = this.breakfast[countDown-1];
                         countDown--;
                     }
                     // The countUp is for updating all FoodItems.arrayIndex above the removed item index
                     if (test2) {
-                        this.#breakfast[index].arrayIndex -= 1;
+                        this.breakfast[index].arrayIndex -= 1;
                         index++;
                     }
                     // This shifts every element in the array one to the left, effectively undoing the 
                     // right-ward move in countDown (meaning they keep the same position in the array) and
                     // moving every element above the starting index to be one lower, to reflect the 
                     // update to arrayIndex that was done in countUp
-                    this.#breakfast.shift();
+                    this.breakfast.shift();
                 }
                 break;
             case Constants.LUNCH:
-                while ((test1 = countDown > 0) || (test2 = countUp < this.#lunch.length)) {
+                while ((test1 = countDown > 0) || (test2 = countUp < this.lunch.length)) {
                     if (test1) {
-                        this.#lunch[countDown] = this.#lunch[countDown-1];
+                        this.lunch[countDown] = this.lunch[countDown-1];
                         countDown--;
                     }
                     if (test2) {
-                        this.#lunch[index].arrayIndex -= 1;
+                        this.lunch[index].arrayIndex -= 1;
                         index++;
                     }
-                    this.#lunch.shift();
+                    this.lunch.shift();
                 }
                 break;
             case Constants.DINNER:
-                while ((test1 = countDown > 0) || (test2 = countUp < this.#dinner.length)) {
+                while ((test1 = countDown > 0) || (test2 = countUp < this.dinner.length)) {
                     if (test1) {
-                        this.#dinner[countDown] = this.#dinner[countDown-1];
+                        this.dinner[countDown] = this.dinner[countDown-1];
                         countDown--;
                     }
                     if (test2) {
-                        this.#dinner[index].arrayIndex -= 1;
+                        this.dinner[index].arrayIndex -= 1;
                         index++;
                     }
-                    this.#dinner.shift();
+                    this.dinner.shift();
                 }
                 break;
             case Constants.SNACKS:
-                while ((test1 = countDown > 0) || (test2 = countUp < this.#snacks.length)) {
+                while ((test1 = countDown > 0) || (test2 = countUp < this.snacks.length)) {
                     if (test1) {
-                        this.#snacks[countDown] = this.#snacks[countDown-1];
+                        this.snacks[countDown] = this.snacks[countDown-1];
                         countDown--;
                     }
                     if (test2) {
-                        this.#snacks[index].arrayIndex -= 1;
+                        this.snacks[index].arrayIndex -= 1;
                         index++;
                     }
-                    this.#snacks.shift();
+                    this.snacks.shift();
                 }
                 break;
         }
@@ -225,18 +228,18 @@ export class Weekday {
     getMealItems(meal) {
         switch (meal) {
             case Constants.BREAKFAST:
-                return this.#breakfast;
+                return this.breakfast;
             case Constants.LUNCH:
-                return this.#lunch;
+                return this.lunch;
             case Constants.DINNER:
-                return this.#dinner;
+                return this.dinner;
             case Constants.SNACKS:
-                return this.#snacks;
+                return this.snacks;
         }
     }
 
-    #breakfast;
-    #lunch;
-    #dinner;
-    #snacks;
+    breakfast;
+    lunch;
+    dinner;
+    snacks;
 }

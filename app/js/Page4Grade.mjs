@@ -1,4 +1,4 @@
-import { Constants, FoodItem, Weekday } from "./common.js";
+import { Constants, FoodItem, Weekday } from "./common.mjs";
 
 class ReportCard {
     // Constants used in class
