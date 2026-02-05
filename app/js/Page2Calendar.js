@@ -6,6 +6,8 @@ function updateTable(e) {
     meal = document.getElementById("mealSelect").value
     day = document.getElementById("daySelect").value
 
+    test = [text, meal, day]
+    localStorage.setItem('testArray', test)
 
     switch (day) {
         case "sunday":
@@ -186,6 +188,7 @@ function clearTable(e) {
     e.preventDefault()
     //Clearing all lists
 
+    localStorage.removeItem('testArray')
     //Getting day ul by ID
     sunBfast = document.getElementById('sunBfast');
     sunLunch = document.getElementById('sunLunch');
