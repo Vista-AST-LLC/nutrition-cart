@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="../css/Page2Calendar.css">
     <title>Nutrition Cart</title>
     <meta name="description" content="Website companion of Vista-AST's Nutrition Cart">
-    <script src="../js/Page2Calendar.js"></script>
+    <script type="module" src="../js/Page2Calendar.mjs" defer></script>
 </head>
 
 <body>
@@ -31,13 +31,11 @@
 
         <form action="" onsubmit="updateTable(event)" id="inputForm">
             <select name="" id="daySelect">
-                <option value="sunday">Sunday</option>
                 <option value="monday">Monday</option>
                 <option value="tuesday">Tuesday</option>
                 <option value="wednesday">Wednesday</option>
                 <option value="thursday">Thursday</option>
                 <option value="friday">Friday</option>
-                <option value="saturday">Saturday</option>
             </select>
             <select name="" id="mealSelect">
                 <option value="breakfast">Breakfast</option>
@@ -58,9 +56,6 @@
                 <thead>
                     <tr>
                         <th>
-                            Sunday
-                        </th>
-                        <th>
                             Monday
                         </th>
                         <th>
@@ -75,23 +70,10 @@
                         <th>
                             Friday
                         </th>
-                        <th>
-                            Saturday
-                        </th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td id="sunday">
-                            <h3>Breakfast</h3>
-                            <ul id="sunBfast"></ul>
-                            <h3>Lunch</h3>
-                            <ul id="sunLunch"></ul>
-                            <h3>Dinner</h3>
-                            <ul id="sunDinner"></ul>
-                            <h3>Snack</h3>
-                            <ul id="sunSnack"></ul>
-                        </td>
                         <td id="monday">
                             <h3>Breakfast</h3>
                             <ul id="monBfast"></ul>
@@ -141,16 +123,6 @@
                             <ul id="friDinner"></ul>
                             <h3>Snack</h3>
                             <ul id="friSnack"></ul>
-                        </td>
-                        <td id="saturday">
-                            <h3>Breakfast</h3>
-                            <ul id="satBfast"></ul>
-                            <h3>Lunch</h3>
-                            <ul id="satLunch"></ul>
-                            <h3>Dinner</h3>
-                            <ul id="satDinner"></ul>
-                            <h3>Snack</h3>
-                            <ul id="satSnack"></ul>
                         </td>
                     </tr>
                 </tbody>

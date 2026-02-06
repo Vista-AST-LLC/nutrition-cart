@@ -1,4 +1,4 @@
-import { createFoodItem, FoodItem, Weekday, Constants} from "./common.mjs";
+import { createFoodItem, FoodItem, Weekday, Constants } from "./common.mjs";
 
 const foodCodeInput = document.getElementById('foodCode');
 const addFoodButton = document.getElementById('addFoodButton');
@@ -14,9 +14,9 @@ async function addFoodItem(day) {
 
     // Hardcoding Monday for testing
     //if (localStorage.getItem("Monday") == null) {
-        let monday = new Weekday();
-        localStorage.setItem("Monday", JSON.stringify(monday));
-        console.log(JSON.stringify(monday));
+    let monday = new Weekday();
+    localStorage.setItem("Monday", JSON.stringify(monday));
+    console.log(JSON.stringify(monday));
     //}
     let item;
 
@@ -42,7 +42,7 @@ async function addFoodItem(day) {
         codeHelp.classList.remove('hidden');
         showMessage('Food with code "${code}" not found.', 'error');
         foodCodeInput.value = '';
-        return; 
+        return;
     }
 
     // If all checks pass, add the item
