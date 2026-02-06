@@ -4,10 +4,41 @@ const foodCodeInput = document.getElementById('foodCode');
 const addFoodButton = document.getElementById('addFoodButton');
 addFoodButton.addEventListener('click', addFoodItem);
 
-foodCodeInput.addEventListener('keypress', function (e) {
+foodCodeInput.addEventListener('keydown', function (e) {
     if (e.key === 'Enter') {
         addFoodItem();
     }
+});
+
+document.addEventListener("keydown", (e) => {
+    // Always focus the input
+    if (document.activeElement !== foodCodeInput) {
+        foodCodeInput.focus();
+    }
+
+    if (e.key === "Shift") return;
+
+    const now = performance.now();
+    const isScannerInput = (now - keyLastTime) < 60;
+    keyLastTime = now;
+
+    if (!isScannerInput) {
+        keyEntry = e.key;
+        return;
+    }
+
+    if (e.key === "Enter" || e.key === "Tab") {
+        if (keyEntry.length > 0) {
+            foodCodeInput.value = keyEntry;
+            keyEntry = "";
+            foodCodeInput.dispatchEvent(
+                new KeyboardEvent("keydown", { key: "Enter" })
+            );
+        }
+        return;
+    }
+
+    keyEntry += e.key;
 });
 
 async function addFoodItem(day) {
