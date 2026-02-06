@@ -224,29 +224,29 @@ tr:nth-child(even) {
 
 .breakfast {
     background: #dbf2f6;
-    color: #f4d35b;
+    color: yellow;
 }
 
 .breakfast-box {
-    border-left-color: #f4d35b;
+    border-left-color: yellow;
 }
 
 .lunch {
     background: #dbf2f6;
-    color: #2f9a4f;
+    color: green;
 }
 
 .lunch-box {
-    border-left-color: #2f9a4f;
+    border-left-color: green;
 }
 
 .dinner {
     background: #dbf2f6;
-    color: #f5c943;
+    color: orange;
 }
 
 .dinner-box {
-    border-left-color: #f5c943;
+    border-left-color: orange;
 }
 
 .dessert {

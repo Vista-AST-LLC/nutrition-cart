@@ -1,37 +1,11 @@
 // Function to update the table calendar
-function updateTable(e) {
-    e.preventDefault();
+export function updateTable() {
 
     text = document.getElementById("foodInput").value;
     meal = document.getElementById("mealSelect").value
     day = document.getElementById("daySelect").value
 
-    test = [text, meal, day]
-    localStorage.setItem('testArray', test)
-
     switch (day) {
-        case "sunday":
-            switch (meal) {
-                case "breakfast":
-                    sunBfast = document.getElementById("sunBfast")
-                    updateHTML(sunBfast, text)
-                    break
-                case "lunch":
-                    sunLunch = document.getElementById('sunLunch')
-                    updateHTML(sunLunch, text)
-                    break
-                case "dinner":
-                    sunDinner = document.getElementById('sunDinner')
-                    updateHTML(sunDinner, text)
-                    break
-                case "snack":
-                    sunSnack = document.getElementById('sunSnack')
-                    updateHTML(sunSnack, text)
-                    break
-                default:
-                    alert("No meal was selected!")
-            }
-            break
         case "monday":
             switch (meal) {
                 case "breakfast":
@@ -142,28 +116,6 @@ function updateTable(e) {
                     alert("No meal was selected!")
             }
             break
-        case "saturday":
-            switch (meal) {
-                case "breakfast":
-                    satBfast = document.getElementById("satBfast")
-                    updateHTML(satBfast, text)
-                    break
-                case "lunch":
-                    satLunch = document.getElementById('satLunch')
-                    updateHTML(satLunch, text)
-                    break
-                case "dinner":
-                    satDinner = document.getElementById('satDinner')
-                    updateHTML(satDinner, text)
-                    break
-                case "snack":
-                    satSnack = document.getElementById('satSnack')
-                    updateHTML(satSnack, text)
-                    break
-                default:
-                    alert("No meal was selected!")
-            }
-            break
         default:
             alert("No day was selected!")
     }
@@ -190,11 +142,6 @@ function clearTable(e) {
 
     localStorage.removeItem('testArray')
     //Getting day ul by ID
-    sunBfast = document.getElementById('sunBfast');
-    sunLunch = document.getElementById('sunLunch');
-    sunDinner = document.getElementById('sunDinner');
-    sunSnack = document.getElementById('sunSnack');
-
     monBfast = document.getElementById('monBfast');
     monLunch = document.getElementById('monLunch');
     monDinner = document.getElementById('monDinner');
@@ -220,17 +167,7 @@ function clearTable(e) {
     friDinner = document.getElementById('friDinner');
     friSnack = document.getElementById('friSnack');
 
-    satBfast = document.getElementById('satBfast');
-    satLunch = document.getElementById('satLunch');
-    satDinner = document.getElementById('satDinner');
-    satSnack = document.getElementById('satSnack');
-
     //Setting ul element to empty
-    sunBfast.innerHTML = ''
-    sunLunch.innerHTML = ''
-    sunDinner.innerHTML = ''
-    sunSnack.innerHTML = ''
-
     monBfast.innerHTML = ''
     monLunch.innerHTML = ''
     monDinner.innerHTML = ''
@@ -255,9 +192,4 @@ function clearTable(e) {
     friLunch.innerHTML = ''
     friDinner.innerHTML = ''
     friSnack.innerHTML = ''
-
-    satBfast.innerHTML = ''
-    satLunch.innerHTML = ''
-    satDinner.innerHTML = ''
-    satSnack.innerHTML = ''
 }
