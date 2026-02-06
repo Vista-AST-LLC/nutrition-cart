@@ -32,48 +32,6 @@
     margin-right: 5px;
 }
 
-/* Profile Section in Main App */
-.profile-section {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-    padding: 15px;
-    background: white;
-    border-radius: 10px;
-    box-shadow: var(--shadow);
-}
-
-.profile-info {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-}
-
-.profile-avatar {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background: var(--primary-color);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-size: 1.5rem;
-    font-weight: bold;
-}
-
-.profile-details h2 {
-    color: #2c3e50;
-    margin-bottom: 5px;
-    font-size: 1.3rem;
-}
-
-.profile-details p {
-    color: #7f8c8d;
-    font-size: 0.9rem;
-}
-
 header {
     text-align: center;
     margin-bottom: 20px;
@@ -110,49 +68,6 @@ header {
     .main-content {
         flex-direction: column;
     }
-}
-
-.upload-section {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
-
-.file-input-wrapper {
-    position: relative;
-    display: inline-block;
-    width: 100%;
-}
-
-.file-input {
-    position: absolute;
-    left: -9999px;
-}
-
-.file-label {
-    display: block;
-    padding: 12px;
-    background: var(--primary-color);
-    color: white;
-    border-radius: 6px;
-    cursor: pointer;
-    text-align: center;
-    font-weight: 600;
-    transition: all 0.3s ease;
-    font-size: 0.9rem;
-}
-
-.file-label:hover {
-    background: var(--primary-dark);
-    transform: translateY(-2px);
-}
-
-.selected-file {
-    margin-top: 8px;
-    color: #7f8c8d;
-    font-style: italic;
-    text-align: center;
-    font-size: 0.85rem;
 }
 
 .input-section {
@@ -196,22 +111,6 @@ header {
     border-radius: 8px;
     padding: 15px;
     border-left: 4px solid;
-}
-
-.breakfast-box {
-    border-left-color: #f39c12;
-}
-
-.lunch-box {
-    border-left-color: var(--primary-color);
-}
-
-.dinner-box {
-    border-left-color: #9b59b6;
-}
-
-.dessert-box {
-    border-left-color: #e84393;
 }
 
 .category-title {
@@ -324,23 +223,39 @@ tr:nth-child(even) {
 }
 
 .breakfast {
-    background: #ffeaa7;
-    color: #e17055;
+    background: #dbf2f6;
+    color: #f4d35b;
+}
+
+.breakfast-box {
+    border-left-color: #f4d35b;
 }
 
 .lunch {
-    background: #a29bfe;
-    color: white;
+    background: #dbf2f6;
+    color: #2f9a4f;
+}
+
+.lunch-box {
+    border-left-color: #2f9a4f;
 }
 
 .dinner {
-    background: #fd79a8;
-    color: white;
+    background: #dbf2f6;
+    color: #f5c943;
+}
+
+.dinner-box {
+    border-left-color: #f5c943;
 }
 
 .dessert {
-    background: #e84393;
-    color: white;
+    background: #dbf2f6;
+    color: #bc77f5;
+}
+
+.dessert-box {
+    border-left-color: #bc77f5;
 }
 
 .error {
@@ -385,11 +300,6 @@ tr:nth-child(even) {
         gap: 10px;
     }
 
-    .instructions-panel {
-        width: 100%;
-        right: -100%;
-    }
-
     .category-items {
         grid-template-columns: 1fr;
     }
@@ -424,35 +334,5 @@ tr:nth-child(even) {
 
     .welcome-subtitle {
         font-size: 1.2rem;
-    }
-
-    .demographics-form {
-        padding: 20px;
-    }
-
-    .demographics-title {
-        font-size: 1.8rem;
-    }
-
-    .nutrition-progress-table {
-        font-size: 0.75rem;
-    }
-
-    .requirements-table {
-        font-size: 0.7rem;
-    }
-
-    .profile-section {
-        flex-direction: column;
-        gap: 15px;
-        text-align: center;
-    }
-
-    .profile-info {
-        flex-direction: column;
-    }
-
-    .scoring-grid {
-        grid-template-columns: 1fr;
     }
 }

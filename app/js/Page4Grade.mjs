@@ -1,4 +1,4 @@
-import { Constants, FoodItem, Weekday } from "./common.js";
+import { Constants, FoodItem, Weekday } from "./common.mjs";
 
 class ReportCard {
     // Constants used in class
@@ -50,61 +50,61 @@ class ReportCard {
         // from each category and store it in the score array
         while (meals.length > 0) {
             let foodItem = meals.pop();
-            this.#score[SCORE][Constants.CALORIES] += foodItem.calories();
-            this.#score[SCORE][Constants.TOTALFAT] += foodItem.totalFatG();
-            this.#score[SCORE][Constants.SATFAT] += foodItem.satFatG();
-            this.#score[SCORE][Constants.TRANSFAT] += foodItem.transFatG();
-            this.#score[SCORE][Constants.CHOLESTEROL] += foodItem.cholesterolMG();
-            this.#score[SCORE][Constants.SODIUM] += foodItem.sodiumMG();
-            this.#score[SCORE][Constants.CARBS] += foodItem.carbsG();
-            this.#score[SCORE][Constants.FIBER] += foodItem.fiberG();
-            this.#score[SCORE][Constants.SUGAR] += foodItem.sugarsG();
-            this.#score[SCORE][Constants.PROTEIN] += foodItem.proteinG();
+            this.#score[SCORE][Constants.CALORIES] += foodItem.calories;
+            this.#score[SCORE][Constants.TOTALFAT] += foodItem.totalFatG;
+            this.#score[SCORE][Constants.SATFAT] += foodItem.satFatG;
+            this.#score[SCORE][Constants.TRANSFAT] += foodItem.transFatG;
+            this.#score[SCORE][Constants.CHOLESTEROL] += foodItem.cholesterolMG;
+            this.#score[SCORE][Constants.SODIUM] += foodItem.sodiumMG;
+            this.#score[SCORE][Constants.CARBS] += foodItem.carbsG;
+            this.#score[SCORE][Constants.FIBER] += foodItem.fiberG;
+            this.#score[SCORE][Constants.SUGAR] += foodItem.sugarsG;
+            this.#score[SCORE][Constants.PROTEIN] += foodItem.proteinG;
         }
 
         meals = day.getMealItems(Constants.LUNCH);
         while (meals.length > 0) {
             let foodItem = meals.pop();
-            this.#score[SCORE][Constants.CALORIES] += foodItem.calories();
-            this.#score[SCORE][Constants.TOTALFAT] += foodItem.totalFatG();
-            this.#score[SCORE][Constants.SATFAT] += foodItem.satFatG();
-            this.#score[SCORE][Constants.TRANSFAT] += foodItem.transFatG();
-            this.#score[SCORE][Constants.CHOLESTEROL] += foodItem.cholesterolMG();
-            this.#score[SCORE][Constants.SODIUM] += foodItem.sodiumMG();
-            this.#score[SCORE][Constants.CARBS] += foodItem.carbsG();
-            this.#score[SCORE][Constants.FIBER] += foodItem.fiberG();
-            this.#score[SCORE][Constants.SUGAR] += foodItem.sugarsG();
-            this.#score[SCORE][Constants.PROTEIN] += foodItem.proteinG();
+            this.#score[SCORE][Constants.CALORIES] += foodItem.calories;
+            this.#score[SCORE][Constants.TOTALFAT] += foodItem.totalFatG;
+            this.#score[SCORE][Constants.SATFAT] += foodItem.satFatG;
+            this.#score[SCORE][Constants.TRANSFAT] += foodItem.transFatG;
+            this.#score[SCORE][Constants.CHOLESTEROL] += foodItem.cholesterolMG;
+            this.#score[SCORE][Constants.SODIUM] += foodItem.sodiumMG;
+            this.#score[SCORE][Constants.CARBS] += foodItem.carbsG;
+            this.#score[SCORE][Constants.FIBER] += foodItem.fiberG;
+            this.#score[SCORE][Constants.SUGAR] += foodItem.sugarsG;
+            this.#score[SCORE][Constants.PROTEIN] += foodItem.proteinG;
         }
 
         meals = day.getMealItems(Constants.DINNER);
         while (meals.length > 0) {
             let foodItem = meals.pop();
-            this.#score[SCORE][Constants.CALORIES] += foodItem.calories();
-            this.#score[SCORE][Constants.TOTALFAT] += foodItem.totalFatG();
-            this.#score[SCORE][Constants.SATFAT] += foodItem.satFatG();
-            this.#score[SCORE][Constants.TRANSFAT] += foodItem.transFatG();
-            this.#score[SCORE][Constants.CHOLESTEROL] += foodItem.cholesterolMG();
-            this.#score[SCORE][Constants.SODIUM] += foodItem.sodiumMG();
-            this.#score[SCORE][Constants.CARBS] += foodItem.carbsG();
-            this.#score[SCORE][Constants.FIBER] += foodItem.fiberG();
-            this.#score[SCORE][Constants.SUGAR] += foodItem.sugarsG();
-            this.#score[SCORE][Constants.PROTEIN] += foodItem.proteinG();
+            this.#score[SCORE][Constants.CALORIES] += foodItem.calories;
+            this.#score[SCORE][Constants.TOTALFAT] += foodItem.totalFatG;
+            this.#score[SCORE][Constants.SATFAT] += foodItem.satFatG;
+            this.#score[SCORE][Constants.TRANSFAT] += foodItem.transFatG;
+            this.#score[SCORE][Constants.CHOLESTEROL] += foodItem.cholesterolMG;
+            this.#score[SCORE][Constants.SODIUM] += foodItem.sodiumMG;
+            this.#score[SCORE][Constants.CARBS] += foodItem.carbsG;
+            this.#score[SCORE][Constants.FIBER] += foodItem.fiberG;
+            this.#score[SCORE][Constants.SUGAR] += foodItem.sugarsG;
+            this.#score[SCORE][Constants.PROTEIN] += foodItem.proteinG;
         }
 
         meals = day.getMealItems(Constants.SNACKS);
         while (meals.length > 0) {
             let foodItem = meals.pop();
-            this.#score[SCORE][Constants.CALORIES] += foodItem.calories();
-            this.#score[SCORE][Constants.TOTALFAT] += foodItem.totalFatG();
-            this.#score[SCORE][Constants.SATFAT] += foodItem.satFatG();
-            this.#score[SCORE][Constants.TRANSFAT] += foodItem.transFatG();
-            this.#score[SCORE][Constants.CHOLESTEROL] += foodItem.cholesterolMG();
-            this.#score[SCORE][Constants.SODIUM] += foodItem.sodiumMG();
-            this.#score[SCORE][Constants.CARBS] += foodItem.carbsG();
-            this.#score[SCORE][Constants.FIBER] += foodItem.fiberG();
-            this.#score[SCORE][Constants.SUGAR] += foodItem.sugarsG();
-            this.#score[SCORE][Constants.PROTEIN] += foodItem.proteinG();
+            this.#score[SCORE][Constants.CALORIES] += foodItem.calories;
+            this.#score[SCORE][Constants.TOTALFAT] += foodItem.totalFatG;
+            this.#score[SCORE][Constants.SATFAT] += foodItem.satFatG;
+            this.#score[SCORE][Constants.TRANSFAT] += foodItem.transFatG;
+            this.#score[SCORE][Constants.CHOLESTEROL] += foodItem.cholesterolMG;
+            this.#score[SCORE][Constants.SODIUM] += foodItem.sodiumMG;
+            this.#score[SCORE][Constants.CARBS] += foodItem.carbsG;
+            this.#score[SCORE][Constants.FIBER] += foodItem.fiberG;
+            this.#score[SCORE][Constants.SUGAR] += foodItem.sugarsG;
+            this.#score[SCORE][Constants.PROTEIN] += foodItem.proteinG;
         }
 
         // At this point, each category of the score array has the total amount of that
