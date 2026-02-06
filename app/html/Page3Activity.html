@@ -8,7 +8,8 @@
     <link rel="stylesheet" href="../css/Page3Activity.css">
     <title>Nutrition Cart</title>
     <meta name="description" content="Website companion of Vista-AST's Nutrition Cart">
-    <script src="../js/functionality.js" defer></script>
+    <script type="module" src="../js/common.mjs" defer></script>
+    <script type="module" src="../js/Page3Activity.mjs" defer></script>
 </head>
 
 <body>
@@ -28,17 +29,6 @@
                 </ul>
             </div>
         </div>
-        <!-- Profile Section -->
-        <div class="profile-section">
-            <div class="profile-info">
-                <div class="profile-avatar" id="profileAvatar">U</div>
-                <div class="profile-details">
-                    <h2 id="profileName">User Profile</h2>
-                    <p id="profileDetails">Select your age group to get started</p>
-                </div>
-            </div>
-            <button class="basic-button">Change Profile</button>
-        </div>
 
         <!-- Two column section begins here -->
         <main id="main-content">
@@ -46,9 +36,9 @@
                 <div class="card">
                     <h2 class="card-title">Add Food Items</h2>
                     <div class="input-section">
-                        <input type="text" id="foodCode" class="code-input"
-                            placeholder="Enter food code (e.g., B1, L20, D40, F60)" aria-describedby="codeHelp">
-                        <button class="basic-button">Add Food</button>
+                        <input type="text" class="code-input" id="foodCode"
+                            placeholder="Enter food code (e.g., BM01, LS05, DD02)" aria-describedby="codeHelp">
+                        <button class="basic-button" id="addFoodButton">Add Food</button>
                     </div>
                     <div id="codeHelp" class="error-message hidden" aria-live="polite"></div>
                     <button class="basic-button">Show/Hide Data Table</button>
@@ -85,23 +75,6 @@
                                 <tbody id="tableBody"></tbody>
                             </table>
                         </div>
-                    </div>
-                </div>
-
-                <!-- CSV Upload Section -->
-                <div class="card">
-                    <h2 class="card-title">
-                        Upload Your Data
-                        <button class="basic-button">Reset CSV</button>
-                    </h2>
-                    <div class="upload-section">
-                        <div class="file-input-wrapper">
-                            <input type="file" id="csvFile" accept=".csv" class="file-input"
-                                aria-describedby="fileHelp">
-                            <label for="csvFile" class="file-label">Choose CSV File</label>
-                        </div>
-                        <div id="selectedFileName" class="selected-file">No file selected</div>
-                        <div id="fileHelp" class="error-message hidden" aria-live="polite"></div>
                     </div>
                 </div>
 
