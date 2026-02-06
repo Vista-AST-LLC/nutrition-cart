@@ -50,75 +50,69 @@ export async function createFoodItem(barcode) {
 export class FoodItem {
     constructor(data){
         const item = data.split(',');
-        this.#refNumber = item[0];
-        this.#itemName = item[1];
-        this.#portionSize = item[2];
-        this.#calories = parseFloat(item[3]);
-        this.#proteinG = parseFloat(item[4]);
-        this.#proteinDV = item[5];
-        this.#sodiumMG = parseFloat(item[6]);
-        this.#sodiumDV = item[7];
-        this.#totalFatG = parseFloat(item[8]);
-        this.#totalFatDV = item[9];
-        this.#carbsG = parseFloat(item[10]);
-        this.#carbsDV = item[11];
-        this.#fiberG = parseFloat(item[12]);
-        this.#fiberDV = item[13];
-        this.#cholesterolMG = parseFloat(item[14]);
-        this.#cholesterolDV = item[15];
-        this.#satFatG = parseFloat(item[16]);
-        this.#satFatDV = item[17];
-        this.#transFatG = parseFloat(item[18]);
-        this.#transFatDV = item[19];
-        this.#sugarsG = parseFloat(item[20]);
-        this.#sugarsDV = item[21];
+        this.refNumber = item[0];
+        this.itemName = item[1];
+        this.portionSize = item[2];
+        this.calories = parseFloat(item[3]);
+        this.proteinG = parseFloat(item[4]);
+        this.proteinDV = item[5];
+        this.sodiumMG = parseFloat(item[6]);
+        this.sodiumDV = item[7];
+        this.totalFatG = parseFloat(item[8]);
+        this.totalFatDV = item[9];
+        this.carbsG = parseFloat(item[10]);
+        this.carbsDV = item[11];
+        this.fiberG = parseFloat(item[12]);
+        this.fiberDV = item[13];
+        this.cholesterolMG = parseFloat(item[14]);
+        this.cholesterolDV = item[15];
+        this.satFatG = parseFloat(item[16]);
+        this.satFatDV = item[17];
+        this.transFatG = parseFloat(item[18]);
+        this.transFatDV = item[19];
+        this.sugarsG = parseFloat(item[20]);
+        this.sugarsDV = item[21];
+    }
+
+    getData() {
+        return {
+            itemName: this.itemName,
+            calories: this.calories,
+            totalFatG: this.totalFatG,
+            satFatG: this.satFatG,
+            transFatG: this.transFatG,
+            cholesterolMG: this.cholesterolMG,
+            sodiumMG: this.sodiumMG,
+            carbsG: this.carbsG,
+            fiberG: this.fiberG,
+            sugarsG: this.sugarsG,
+            proteinG: this.proteinG
+        }
     }
 
     // These are in the same order they appear in the csv
-    #refNumber;
-    get refNumber() { return this.#refNumber; }
-    #itemName;
-    get itemName() { return this.#itemName; }
-    #portionSize;
-    get portionSize() { return this.#portionSize; }
-    #calories;
-    get calories() { return this.#calories; }
-    #proteinG;
-    get proteinG() { return this.#proteinG; }
-    #proteinDV;
-    get proteinDV() { return this.#proteinDV; }
-    #sodiumMG;
-    get sodiumMG() { return this.#sodiumMG; }
-    #sodiumDV;
-    get sodiumDV() { return this.#sodiumDV; }
-    #totalFatG;
-    get totalFatG() { return this.#totalFatG; }
-    #totalFatDV;
-    get totalFatDV() { return this.#totalFatDV; }
-    #carbsG;
-    get carbsG() { return this.#carbsG; }
-    #carbsDV;
-    get carbsDV() { return this.#carbsDV; }
-    #fiberG;
-    get fiberG() { return this.#fiberG; }
-    #fiberDV;
-    get fiberDV() { return this.#fiberDV; }
-    #cholesterolMG;
-    get cholesterolMG() { return this.#cholesterolMG; }
-    #cholesterolDV;
-    get cholesterolDV() { return this.#cholesterolDV; }
-    #satFatG;
-    get satFatG() { return this.#satFatG; }
-    #satFatDV;
-    get satFatDV() { return this.#satFatDV; }
-    #transFatG;
-    get transFatG() { return this.#transFatG; }
-    #transFatDV;
-    get transFatDV() { return this.#transFatDV; }
-    #sugarsG;
-    get sugarsG() { return this.#sugarsG; }
-    #sugarsDV;
-    get sugarsDV() { return this.#sugarsDV; }
+    refNumber;
+    itemName;
+    portionSize;
+    calories;
+    proteinG;
+    proteinDV;
+    sodiumMG;
+    sodiumDV;
+    totalFatG;
+    totalFatDV;
+    carbsG;
+    carbsDV;
+    fiberG;
+    fiberDV;
+    cholesterolMG;
+    cholesterolDV;
+    satFatG;
+    satFatDV;
+    transFatG;
+    transFatDV;
+    sugarsG;
+    sugarsDV;
 }
 
 export class Weekday {
@@ -130,26 +124,45 @@ export class Weekday {
         this.snacks = [];
     }
 
-    addFoodItem(FoodItem) {
+    static copyFoodItems(copyTo, copyFrom) {
+        while (copyFrom.breakfast.length > 0) {
+            copyTo.addFoodItem(copyFrom.breakfast[0]);
+            copyFrom.breakfast.shift();
+        }
+        while (copyFrom.lunch.length > 0) {
+            copyTo.addFoodItem(copyFrom.lunch[0]);
+            copyFrom.lunch.shift();
+        }
+        while (copyFrom.dinner.length > 0) {
+            copyTo.addFoodItem(copyFrom.dinner[0]);
+            copyFrom.dinner.shift();
+        }
+        while (copyFrom.snacks.length > 0) {
+            copyTo.addFoodItem(copyFrom.snacks[0]);
+            copyFrom.snacks.shift();
+        }
+    }
+
+    addFoodItem(item) {
         // Do a switch on the first char of the ref number (B, L, D, S)
-        switch (FoodItem.refNumber().charAt(0)) {
+        switch (item.refNumber.charAt(0)) {
         case Constants.BREAKFAST:
-            // Add the FoodItems's record of its position
-            FoodItem.arrayIndex = this.breakfast.length;
-            // Add the FoodItem to the array
-            this.breakfast.push(FoodItem);
+            // Add the item's record of its position
+            item.arrayIndex = this.breakfast.length;
+            // Add the item to the array
+            this.breakfast.push(item);
             break;
         case Constants.LUNCH:
-            FoodItem.arrayIndex = this.lunch.length;
-            this.lunch.push(FoodItem);
+            item.arrayIndex = this.lunch.length;
+            this.lunch.push(item);
             break;
         case Constants.DINNER:
-            FoodItem.arrayIndex = this.dinner.length;
-            this.dinner.push(FoodItem);
+            item.arrayIndex = this.dinner.length;
+            this.dinner.push(item);
             break;
         case Constants.SNACKS:
-            FoodItem.arrayIndex = this.snacks.length;
-            this.snacks.push(FoodItem);
+            item.arrayIndex = this.snacks.length;
+            this.snacks.push(item);
             break;
         }
     }

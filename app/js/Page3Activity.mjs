@@ -13,16 +13,12 @@ foodCodeInput.addEventListener('keypress', function (e) {
 async function addFoodItem(day) {
 
     // Hardcoding Monday for testing
-    if (localStorage.getItem("Monday") == null) {
+    //if (localStorage.getItem("Monday") == null) {
         let monday = new Weekday();
         localStorage.setItem("Monday", JSON.stringify(monday));
         console.log(JSON.stringify(monday));
-    }
-
-    day = "Monday";
+    //}
     let item;
-
-    console.log(localStorage.getItem("Monday"))
 
     const code = foodCodeInput.value.trim().toUpperCase();
     const codeHelp = document.getElementById('codeHelp');
@@ -40,9 +36,7 @@ async function addFoodItem(day) {
     }
 
     try {
-        item = await createFoodItem(code)
-            .then(item = item);
-        console.log(item.calories())
+        item = await createFoodItem(code);
     } catch (e) {
         codeHelp.textContent = 'Error: ' + e.message;
         codeHelp.classList.remove('hidden');
@@ -52,8 +46,8 @@ async function addFoodItem(day) {
     }
 
     // If all checks pass, add the item
-
-    day = JSON.parse(localStorage.getItem("Monday"));
+    day = new Weekday();
+    Weekday.copyFoodItems(day, JSON.parse(localStorage.getItem("Monday")));
     day.addFoodItem(item);
 
     // Clear the input field after successful addition
