@@ -1,5 +1,8 @@
 import { createFoodItem, FoodItem, Weekday, Constants} from "./common.mjs";
 
+let keyLastTime = performance.now();
+let keyEntry = '';
+
 const foodCodeInput = document.getElementById('foodCode');
 const addFoodButton = document.getElementById('addFoodButton');
 addFoodButton.addEventListener('click', addFoodItem);
