@@ -11,17 +11,20 @@ foodCodeInput.addEventListener('keydown', function (e) {
 });
 
 document.addEventListener("keydown", (e) => {
-    // Always focus the input
+    // Always focus the input when a key is pressed
     if (document.activeElement !== foodCodeInput) {
         foodCodeInput.focus();
     }
 
+    // According to old logic, ignore shift for scanners
     if (e.key === "Shift") return;
 
+    // If the keys are typed quickly enough, assume it's the scanner
     const now = performance.now();
     const isScannerInput = (now - keyLastTime) < 60;
     keyLastTime = now;
 
+    // If it is not the scanner, return
     if (!isScannerInput) {
         keyEntry = e.key;
         return;
@@ -31,6 +34,7 @@ document.addEventListener("keydown", (e) => {
         if (keyEntry.length > 0) {
             foodCodeInput.value = keyEntry;
             keyEntry = "";
+            // This simulates an enter press for the foodCodeInput box
             foodCodeInput.dispatchEvent(
                 new KeyboardEvent("keydown", { key: "Enter" })
             );
