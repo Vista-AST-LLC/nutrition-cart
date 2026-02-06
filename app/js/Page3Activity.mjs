@@ -13,14 +13,14 @@ foodCodeInput.addEventListener('keydown', function (e) {
     }
 });
 
-document.addEventListener("keydown", (e) => {
+document.addEventListener('keydown', (e) => {
     // Always focus the input when a key is pressed
     if (document.activeElement !== foodCodeInput) {
         foodCodeInput.focus();
     }
 
     // According to old logic, ignore shift for scanners
-    if (e.key === "Shift") return;
+    if (e.key === 'Shift') return;
 
     // If the keys are typed quickly enough, assume it's the scanner
     const now = performance.now();
@@ -33,13 +33,13 @@ document.addEventListener("keydown", (e) => {
         return;
     }
 
-    if (e.key === "Enter" || e.key === "Tab") {
+    if (e.key === 'Enter' || e.key === 'Tab') {
         if (keyEntry.length > 0) {
             foodCodeInput.value = keyEntry;
-            keyEntry = "";
+            keyEntry = '';
             // This simulates an enter press for the foodCodeInput box
             foodCodeInput.dispatchEvent(
-                new KeyboardEvent("keydown", { key: "Enter" })
+                new KeyboardEvent('keydown', { key: 'Enter' })
             );
         }
         return;
@@ -53,7 +53,7 @@ async function addFoodItem(day) {
     // Hardcoding Monday for testing
     //if (localStorage.getItem("Monday") == null) {
         let monday = new Weekday();
-        localStorage.setItem("Monday", JSON.stringify(monday));
+        localStorage.setItem('Monday', JSON.stringify(monday));
         console.log(JSON.stringify(monday));
     //}
     let item;
@@ -85,7 +85,7 @@ async function addFoodItem(day) {
 
     // If all checks pass, add the item
     day = new Weekday();
-    Weekday.copyFoodItems(day, JSON.parse(localStorage.getItem("Monday")));
+    Weekday.copyFoodItems(day, JSON.parse(localStorage.getItem('Monday')));
     day.addFoodItem(item);
 
     // Clear the input field after successful addition
