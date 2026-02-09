@@ -147,93 +147,34 @@ export class Weekday {
         // Do a switch on the first char of the ref number (B, L, D, S)
         switch (item.refNumber.charAt(0)) {
         case Constants.BREAKFAST:
-            // Add the item's record of its position
-            item.arrayIndex = this.breakfast.length;
             // Add the item to the array
             this.breakfast.push(item);
             break;
         case Constants.LUNCH:
-            item.arrayIndex = this.lunch.length;
             this.lunch.push(item);
             break;
         case Constants.DINNER:
-            item.arrayIndex = this.dinner.length;
             this.dinner.push(item);
             break;
         case Constants.SNACKS:
-            item.arrayIndex = this.snacks.length;
             this.snacks.push(item);
             break;
         }
     }
 
-    // The idea behind this removeFoodItem method is as follows:
-    // Preserve FoodItem order keep each FoodItem.arrayIndex correct.
-    removeFoodItem(meal, index) {
-        let countDown = index;
-        let countUp = index+1;
+    async removeFoodItem(meal, index) {
         switch (meal) {
             case Constants.BREAKFAST:
-                // This simultaneously counts up and down from the stating index and continues until 
-                // both the countDown has reached 0 and the countUp has reached the length of the array
-                while ((test1 = countDown > 0) || (test2 = countUp < this.breakfast.length)) {
-                    // The countDown is for moving elements at and below the starting index
-                    // one slot to the right, which overrides the to-be-removed item and
-                    // moves every element below the starting index one to the right
-                    if (test1) {
-                        this.breakfast[countDown] = this.breakfast[countDown-1];
-                        countDown--;
-                    }
-                    // The countUp is for updating all FoodItems.arrayIndex above the removed item index
-                    if (test2) {
-                        this.breakfast[index].arrayIndex -= 1;
-                        index++;
-                    }
-                    // This shifts every element in the array one to the left, effectively undoing the 
-                    // right-ward move in countDown (meaning they keep the same position in the array) and
-                    // moving every element above the starting index to be one lower, to reflect the 
-                    // update to arrayIndex that was done in countUp
-                    this.breakfast.shift();
-                }
+                this.breakfast.splice(index, 1);
                 break;
             case Constants.LUNCH:
-                while ((test1 = countDown > 0) || (test2 = countUp < this.lunch.length)) {
-                    if (test1) {
-                        this.lunch[countDown] = this.lunch[countDown-1];
-                        countDown--;
-                    }
-                    if (test2) {
-                        this.lunch[index].arrayIndex -= 1;
-                        index++;
-                    }
-                    this.lunch.shift();
-                }
+                this.lunch.splice(index, 1);
                 break;
             case Constants.DINNER:
-                while ((test1 = countDown > 0) || (test2 = countUp < this.dinner.length)) {
-                    if (test1) {
-                        this.dinner[countDown] = this.dinner[countDown-1];
-                        countDown--;
-                    }
-                    if (test2) {
-                        this.dinner[index].arrayIndex -= 1;
-                        index++;
-                    }
-                    this.dinner.shift();
-                }
+                this.dinner.splice(index, 1);
                 break;
             case Constants.SNACKS:
-                while ((test1 = countDown > 0) || (test2 = countUp < this.snacks.length)) {
-                    if (test1) {
-                        this.snacks[countDown] = this.snacks[countDown-1];
-                        countDown--;
-                    }
-                    if (test2) {
-                        this.snacks[index].arrayIndex -= 1;
-                        index++;
-                    }
-                    this.snacks.shift();
-                }
+                this.snacks.splice(index, 1);
                 break;
         }
     }
