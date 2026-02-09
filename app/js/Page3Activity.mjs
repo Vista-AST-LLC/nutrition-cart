@@ -1,4 +1,4 @@
-import { createFoodItem, FoodItem, Weekday, Constants} from "./common.mjs";
+import { createFoodItem, FoodItem, Weekday, Constants } from "./common.mjs";
 
 let keyLastTime = performance.now();
 let keyEntry = '';
@@ -80,7 +80,7 @@ async function addFoodItem(day) {
         codeHelp.classList.remove('hidden');
         showMessage('Food with code "${code}" not found.', 'error');
         foodCodeInput.value = '';
-        return; 
+        return;
     }
 
     // If all checks pass, add the item

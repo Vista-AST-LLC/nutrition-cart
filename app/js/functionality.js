@@ -1,10 +1,3 @@
-//********TODS ********
-// 1) Determine best layout for application
-// 2) Fix Food Label entry field
-// 3) Research best way to cacluate nutrition score
-// 4) Resolve responsivness issues Ex) Table
-// 5) Replace age question page with ???? */
-
 // Age Specific Nutrition Requirements from CSV
 const nutritionRequirements = {
     '9-13': {
