@@ -1,128 +1,118 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang='en'>
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/common.css">
-    <link rel="stylesheet" href="../css/Page2Calendar.css">
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <link rel='stylesheet' href='../css/common.css'>
+    <link rel='stylesheet' href='../css/Page2Calendar.css'>
     <title>Nutrition Cart</title>
-    <meta name="description" content="Website companion of Vista-AST's Nutrition Cart">
-    <script type="module" src="../js/Page2Calendar.mjs" defer></script>
+    <meta name='description' content="Website companion of Vista-AST's Nutrition Cart">
+    <script type="module" src='../js/Page2Calendar.mjs' defer></script>
 </head>
 
 <body>
-    <div class="container">
+    <div class='container'>
         <!--Nav-->
-        <div class="nav">
-            <div id="one">
+        <div class='nav'>
+            <div id='one'>
                 <h1>🍎 Nutrition Tracker</h1>
-                <div class="subtitle">Track your daily nutrition intake with ease</div>
+                <div class='subtitle'>Track your daily nutrition intake with ease</div>
             </div>
-            <div id="two">
+            <div id='two'>
                 <ul>
-                    <li><a href="../html/Page1Landing.html">Home</a></li>
-                    <li><a href="../html/Page2Calendar.html">Calendar</a></li>
-                    <li><a href="../html/Page3Activity.html">Activity</a></li>
-                    <li><a href="../html/Page4Grade.html">Grade</a></li>
+                    <li><a href='../html/Page1Landing.html'>Home</a></li>
+                    <li><a href='../html/Page2Calendar.html'>Calendar</a></li>
+                    <li><a href='../html/Page3Activity.html'>Activity</a></li>
+                    <li><a href='../html/Page4Grade.html'>Grade</a></li>
                 </ul>
             </div>
         </div>
 
-        <form action="" onsubmit="updateTable(event)" id="inputForm">
-            <select name="" id="daySelect">
-                <option value="monday">Monday</option>
-                <option value="tuesday">Tuesday</option>
-                <option value="wednesday">Wednesday</option>
-                <option value="thursday">Thursday</option>
-                <option value="friday">Friday</option>
-            </select>
-            <select name="" id="mealSelect">
-                <option value="breakfast">Breakfast</option>
-                <option value="lunch">Lunch</option>
-                <option value="dinner">Dinner</option>
-                <option value="snack">Snack</option>
-            </select>
-            <input type="text" id="foodInput">
-            <div class="form-div">
-                <input id="submitBtn" type="submit">
-                <input id="resetBtn" type="reset" onclick="clearTable(event)">
+        <form action='' id='inputForm'>
+            <input type='text' id='foodInput'>
+            <div class='form-div'>
+                <input id='submitBtn' type='submit'>
+                <input id='resetBtn' type='reset'>
             </div>
         </form>
 
         <!--Calandar Container-->
-        <div id="calendar">
+        <div id='calendar'>
             <table>
                 <thead>
                     <tr>
                         <th>
-                            Monday
+                            <button class="day-button" id="monBtn">Monday</button>
                         </th>
                         <th>
-                            Tuesday
+                            <button class="day-button" id="tuesBtn">Tuesday</button>
+                        </th>
                         </th>
                         <th>
-                            Wednesday
+                            <button class="day-button" id="wedBtn">Wednesday</button>
+
                         </th>
                         <th>
-                            Thursday
+                            <button class="day-button" id="thursBtn">Thursday</button>
+
                         </th>
                         <th>
-                            Friday
+                            <button class="day-button" id="friBtn">Friday</button>
                         </th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td id="monday">
+                        <td id='monday'>
                             <h3>Breakfast</h3>
-                            <ul id="monBfast"></ul>
+                            <ul id='monBfast'></ul>
                             <h3>Lunch</h3>
-                            <ul id="monLunch"></ul>
+                            <ul id='monLunch'></ul>
                             <h3>Dinner</h3>
-                            <ul id="monDinner"></ul>
+                            <ul id='monDinner'></ul>
                             <h3>Snack</h3>
-                            <ul id="monSnack"></ul>
+                            <ul id='monSnack'></ul>
                         </td>
-                        <td id="tuesday">
+                        <td id='tuesday'>
                             <h3>Breakfast</h3>
-                            <ul id="tuesBfast"></ul>
+                            <ul id='tuesBfast'></ul>
                             <h3>Lunch</h3>
-                            <ul id="tuesLunch"></ul>
+                            <ul id='tuesLunch'></ul>
                             <h3>Dinner</h3>
-                            <ul id="tuesDinner"></ul>
+                            <ul id='tuesDinner'></ul>
                             <h3>Snack</h3>
-                            <ul id="tuesSnack"></ul>
+                            <ul id='tuesSnack'></ul>
                         </td>
-                        <td id="wednesday">
+                        <td id='wednesday'>
                             <h3>Breakfast</h3>
-                            <ul id="wedBfast"></ul>
+                            <ul id='wedBfast'></ul>
                             <h3>Lunch</h3>
-                            <ul id="wedLunch"></ul>
+                            <ul id='wedLunch'></ul>
                             <h3>Dinner</h3>
-                            <ul id="wedDinner"></ul>
+                            <ul id='wedDinner'></ul>
                             <h3>Snack</h3>
-                            <ul id="wedSnack"></ul>
+                            <ul id='wedSnack'></ul>
                         </td>
-                        <td id="thursday">
+                        <td id='thursday'>
                             <h3>Breakfast</h3>
-                            <ul id="thursBfast"></ul>
+                            <ul id='thursBfast'></ul>
                             <h3>Lunch</h3>
-                            <ul id="thursLunch"></ul>
+                            <ul id='thursLunch'></ul>
                             <h3>Dinner</h3>
-                            <ul id="thursDinner"></ul>
+                            <ul id='thursDinner'></ul>
                             <h3>Snack</h3>
-                            <ul id="thursSnack"></ul>
+                            <ul id='thursSnack'></ul>
                         </td>
-                        <td id="friday">
+                        <td id='friday'>
                             <h3>Breakfast</h3>
-                            <ul id="friBfast"></ul>
+                            <ul id='friBfast'></ul>
                             <h3>Lunch</h3>
-                            <ul id="friLunch"></ul>
+                            <ul id='friLunch'></ul>
                             <h3>Dinner</h3>
-                            <ul id="friDinner"></ul>
+                            <ul id='friDinner'></ul>
                             <h3>Snack</h3>
-                            <ul id="friSnack"></ul>
+                            <ul id='friSnack'></ul>
                         </td>
                     </tr>
                 </tbody>
