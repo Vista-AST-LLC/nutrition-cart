@@ -99,7 +99,6 @@ const snackItems = document.getElementById('snackItems');
 
 async function updateFoodItems() {
     const activeDay = localStorage.getItem('ActiveDay');
-    console.log(activeDay);
     let day = new Weekday();
     Weekday.copyFoodItems(day, JSON.parse(localStorage.getItem(activeDay)));
 
@@ -111,7 +110,6 @@ async function updateFoodItems() {
     let buttonCount = 0;
     day.breakfast.forEach(item => {
         let trashButtonID = Constants.BREAKFAST + buttonCount++;
-        item.trashButtonID = trashButtonID;
         const div = document.createElement('div');
         div.innerHTML = `
             <div class='food-item'>${item.itemName}
@@ -123,7 +121,6 @@ async function updateFoodItems() {
     buttonCount = 0;
     day.lunch.forEach(item => {
         let trashButtonID = Constants.LUNCH + buttonCount++;
-        item.trashButtonID = trashButtonID;
         const div = document.createElement('div');
         div.innerHTML = `
             <div class='food-item'>${item.itemName}
@@ -135,7 +132,6 @@ async function updateFoodItems() {
     buttonCount = 0;
     day.dinner.forEach(item => {
         let trashButtonID = Constants.DINNER + buttonCount++;
-        item.trashButtonID = trashButtonID;
         const div = document.createElement('div');
         div.innerHTML = `
             <div class='food-item'>${item.itemName}
@@ -147,7 +143,6 @@ async function updateFoodItems() {
     buttonCount = 0;
     day.snacks.forEach(item => {
         let trashButtonID = Constants.SNACKS + buttonCount++;
-        item.trashButtonID = trashButtonID;
         const div = document.createElement('div');
         div.innerHTML = `
             <div class='food-item'>${item.itemName}
@@ -169,7 +164,6 @@ const foodItemsContainer = document.getElementById('foodItemsContainer');
 foodItemsContainer.addEventListener('click', async (e) => {
     if (e.target.classList.contains('trash-button')) {
         const name = e.target.id;
-        console.log(name);
         await removeFoodItemDiv(name);
         await updateFoodItems();
     }

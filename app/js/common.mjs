@@ -42,8 +42,6 @@ export async function createFoodItem(barcode) {
         if (refNumArray[lineNumber] == "END") throw Error("Failed to find barcode match!")
     }
 
-    console.log(itemRows[lineNumber]);
-
     return new FoodItem(itemRows[lineNumber]);
 }
 
