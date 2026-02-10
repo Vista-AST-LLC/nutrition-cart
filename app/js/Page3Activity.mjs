@@ -1,4 +1,5 @@
 import { createFoodItem, FoodItem, Weekday, Constants } from "./common.mjs";
+import { updateTable, clearTable } from "./Page2Calendar.mjs";
 
 let keyLastTime = performance.now();
 let keyEntry = '';

@@ -1,16 +1,7 @@
-//defining variables for each button object
-const monBtn = document.getElementById('monBtn')
-const tuesBtn = document.getElementById('tuesBtn')
-const wedBtn = document.getElementById('wedBtn')
-const thursBtn = document.getElementById('thursBtn')
-const friBtn = document.getElementById('friBtn')
-
-//Calling functions for each button
-monBtn.addEventListener('click', function () { setActiveDay('M') })
-tuesBtn.addEventListener('click', function () { setActiveDay('T') })
-wedBtn.addEventListener('click', function () { setActiveDay('W') })
-thursBtn.addEventListener('click', function () { setActiveDay('TH') })
-friBtn.addEventListener('click', function () { setActiveDay('F') })
+//********THINGS TO CONSIDER********
+//1) How to access correct meal index from localStorage and add it 
+//2) Parameters to add into updateTable() (Day, meal, etc)?
+//3) How to remove values from calendar
 
 // Function to update the table calendar
 export function updateTable() {
@@ -135,9 +126,6 @@ export function updateTable() {
         default:
             alert("No day was selected!")
     }
-
-    document.getElementById('mealSelect').value = 'breakfast'
-    document.getElementById('foodInput').value = ''
 }
 
 async function updateHTML(tag, food) {
@@ -226,7 +214,7 @@ async function resetBackgroundColor(mon, tues, wed, thur, fri) {
 }
 
 //Function to Select the Active Day
-function setActiveDay(day) {
+async function setActiveDay(day) {
     switch (day) {
         case 'M':
             localStorage.setItem("ActiveDay", 'Monday')
@@ -257,5 +245,6 @@ function setActiveDay(day) {
             resetBackgroundColor('monday', 'tuesday', 'wednesday', 'thursday', 'friday')
             break;
     }
-
 }
+
+window.setActiveDay = setActiveDay
