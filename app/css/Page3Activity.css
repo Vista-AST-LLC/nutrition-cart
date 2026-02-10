@@ -249,13 +249,34 @@ tr:nth-child(even) {
     border-left-color: orange;
 }
 
-.dessert {
+.snacks {
     background: #dbf2f6;
     color: #bc77f5;
 }
 
-.dessert-box {
+.snacks-box {
     border-left-color: #bc77f5;
+}
+
+.trash-button {
+    text-decoration: none;
+    background: lightcoral;
+    color: white;
+    border: none;
+    border-radius: 2px;
+    padding: 0px 0px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: large;
+    transition: all 0.3s ease;
+    gap: 8px;
+    width: 25px;
+    margin: auto;
+}
+
+.trash-button:hover {
+    background-color: red;
+    transform: translateY(-2px);
 }
 
 .error {
@@ -321,6 +342,7 @@ tr:nth-child(even) {
     .card {
         padding: 12px;
         margin-bottom: 10px;
+        display: flex;
     }
 
     .card-title {
