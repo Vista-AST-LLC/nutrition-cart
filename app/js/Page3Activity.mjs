@@ -52,9 +52,9 @@ async function addFoodItem(day) {
 
     // Hardcoding Monday for testing
     //if (localStorage.getItem("Monday") == null) {
-        let monday = new Weekday();
-        localStorage.setItem('Monday', JSON.stringify(monday));
-        console.log(JSON.stringify(monday));
+    let monday = new Weekday();
+    localStorage.setItem('Monday', JSON.stringify(monday));
+    console.log(JSON.stringify(monday));
     //}
     let item;
 

@@ -1,6 +1,4 @@
 //defining variables for each button object
-const submitBtn = document.getElementById('submitBtn')
-const restBtn = document.getElementById('resetBtn')
 const monBtn = document.getElementById('monBtn')
 const tuesBtn = document.getElementById('tuesBtn')
 const wedBtn = document.getElementById('wedBtn')
@@ -8,9 +6,6 @@ const thursBtn = document.getElementById('thursBtn')
 const friBtn = document.getElementById('friBtn')
 
 //Calling functions for each button
-submitBtn.addEventListener('click', updateTable)
-restBtn.addEventListener('click', clearTable)
-
 monBtn.addEventListener('click', function () { setActiveDay('M') })
 tuesBtn.addEventListener('click', function () { setActiveDay('T') })
 wedBtn.addEventListener('click', function () { setActiveDay('W') })
@@ -18,7 +13,7 @@ thursBtn.addEventListener('click', function () { setActiveDay('TH') })
 friBtn.addEventListener('click', function () { setActiveDay('F') })
 
 // Function to update the table calendar
-async function updateTable() {
+export function updateTable() {
 
     let text = 'test'
     let meal = "breakfast"
@@ -157,7 +152,7 @@ async function updateHTML(tag, food) {
 }
 
 
-async function clearTable() {
+export function clearTable() {
     //Clearing all lists
 
     localStorage.removeItem('testArray')
