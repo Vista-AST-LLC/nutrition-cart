@@ -55,6 +55,7 @@
     display: flex;
     flex-basis: auto;
     flex-direction: column;
+    text-align: center;
 }
 
 .food-items-container-title {
