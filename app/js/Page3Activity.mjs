@@ -112,7 +112,7 @@ async function updateFoodItems() {
         let trashButtonID = Constants.BREAKFAST + buttonCount++;
         const div = document.createElement('div');
         div.innerHTML = `
-            <div class='food-item'>${item.itemName}
+            <div class='breakfast-food-item'>${item.itemName}
                 <button class='trash-button' id=${trashButtonID}>🗑︎</button>
             </div>
         `;
@@ -123,7 +123,7 @@ async function updateFoodItems() {
         let trashButtonID = Constants.LUNCH + buttonCount++;
         const div = document.createElement('div');
         div.innerHTML = `
-            <div class='food-item'>${item.itemName}
+            <div class='lunch-food-item'>${item.itemName}
                 <button class='trash-button' id=${trashButtonID}>🗑︎</button>
             </div>
         `;
@@ -134,7 +134,7 @@ async function updateFoodItems() {
         let trashButtonID = Constants.DINNER + buttonCount++;
         const div = document.createElement('div');
         div.innerHTML = `
-            <div class='food-item'>${item.itemName}
+            <div class='dinner-food-item'>${item.itemName}
                 <button class='trash-button' id=${trashButtonID}>🗑︎</button>
             </div>
         `;
@@ -145,7 +145,7 @@ async function updateFoodItems() {
         let trashButtonID = Constants.SNACKS + buttonCount++;
         const div = document.createElement('div');
         div.innerHTML = `
-            <div class='food-item'>${item.itemName}
+            <div class='snacks-food-item'>${item.itemName}
                 <button class='trash-button' id=${trashButtonID}>🗑︎</button>
             </div>
         `;
@@ -177,5 +177,20 @@ async function removeFoodItemDiv(name) {
     let activeDay = localStorage.getItem("ActiveDay");
     Weekday.copyFoodItems(day, JSON.parse(localStorage.getItem(activeDay)));
     await day.removeFoodItem(meal, id);
+    localStorage.setItem(activeDay, JSON.stringify(day));
+}
+
+const deleteAllFoodItems = document.getElementById('clearAllFoodItems');
+
+deleteAllFoodItems.addEventListener('click', async (e) => {
+    if (e.target.id === "clearAllFoodItems") {
+        await clearAllFoodItems();
+        await updateFoodItems();
+    }
+});
+
+async function clearAllFoodItems() {
+    let activeDay = localStorage.getItem("ActiveDay");
+    let day = new Weekday();
     localStorage.setItem(activeDay, JSON.stringify(day));
 }
