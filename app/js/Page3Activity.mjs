@@ -4,9 +4,9 @@ import { updateTable, clearTable } from "./Page2Calendar.mjs";
 let keyLastTime = performance.now();
 let keyEntry = '';
 
-let monday = new Weekday();
+/*let monday = new Weekday();
 localStorage.setItem('Monday', JSON.stringify(monday));
-localStorage.setItem('ActiveDay', 'Monday');
+localStorage.setItem('ActiveDay', 'Monday');*/
 
 const foodCodeInput = document.getElementById('foodCode');
 const addFoodButton = document.getElementById('addFoodButton');
@@ -86,6 +86,7 @@ async function addFoodItem() {
     Weekday.copyFoodItems(day, JSON.parse(localStorage.getItem(activeDay)));
     day.addFoodItem(item);
     localStorage.setItem(activeDay, JSON.stringify(day));
+    updateTable(activeDay, JSON.parse(localStorage.getItem(activeDay)))
 
     // Clear the input field after successful addition
     foodCodeInput.value = '';

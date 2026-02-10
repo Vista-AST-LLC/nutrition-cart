@@ -4,20 +4,18 @@
 //3) How to remove values from calendar
 
 // Function to update the table calendar
-export function updateTable() {
-
-    let text = 'test'
-    let meal = "breakfast"
-
-    let day = localStorage.getItem("ActiveDay")
-    console.log(day)
+export function updateTable(day, meal) {
+    let breakfast = meals["breakfast"]
+    let lunch = meals["lunch"]
+    let dinner = meals["dinner"]
+    let snacks = meals["snacks"]
 
     switch (day) {
         case "Monday":
             switch (meal) {
                 case "breakfast":
                     let monBfast = document.getElementById("monBfast")
-                    updateHTML(monBfast, text)
+                    updateHTML(monBfast, meal[0])
                     break
                 case "lunch":
                     let monLunch = document.getElementById('monLunch')
@@ -220,26 +218,31 @@ async function setActiveDay(day) {
             localStorage.setItem("ActiveDay", 'Monday')
             document.getElementById('monday').style.backgroundColor = 'lightgoldenrodyellow'
             updateBackgroundColor('tuesday', 'wednesday', 'thursday', 'friday')
+            window.location.href = '../html/Page3Activity.html'
             break;
         case 'T':
             localStorage.setItem("ActiveDay", 'Tuesday')
             document.getElementById('tuesday').style.backgroundColor = 'lightgoldenrodyellow'
             updateBackgroundColor('monday', 'wednesday', 'thursday', 'friday')
+            window.location.href = '../html/Page3Activity.html'
             break;
         case 'W':
             localStorage.setItem("ActiveDay", 'Wednesday')
             document.getElementById('wednesday').style.backgroundColor = 'lightgoldenrodyellow'
             updateBackgroundColor('monday', 'tuesday', 'thursday', 'friday')
+            window.location.href = '../html/Page3Activity.html'
             break;
         case 'TH':
             localStorage.setItem("ActiveDay", 'Thursday')
             document.getElementById('thursday').style.backgroundColor = 'lightgoldenrodyellow'
             updateBackgroundColor('monday', 'tuesday', 'wednesday', 'friday')
+            window.location.href = '../html/Page3Activity.html'
             break;
         case 'F':
             localStorage.setItem("ActiveDay", 'Friday')
             document.getElementById('friday').style.backgroundColor = 'lightgoldenrodyellow'
             updateBackgroundColor('monday', 'tuesday', 'wednesday', 'thursday')
+            window.location.href = '../html/Page3Activity.html'
             break;
         default:
             resetBackgroundColor('monday', 'tuesday', 'wednesday', 'thursday', 'friday')
