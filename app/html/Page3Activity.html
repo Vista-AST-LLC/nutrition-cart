@@ -34,57 +34,28 @@
         <!-- Two column section begins here -->
         <main id="main-content">
             <div class="main-content">
-                <div class="card">
-                    <h2 class="card-title">Add Food Items</h2>
-                    <div class="input-section">
-                        <input type="text" class="code-input" id="foodCode"
-                            placeholder="Enter food code (e.g., BM01, LS05, DD02)" aria-describedby="codeHelp">
-                        <button class="basic-button" id="addFoodButton">Add Food</button>
-                    </div>
-                    <div id="codeHelp" class="error-message hidden" aria-live="polite"></div>
-                    <button class="basic-button">Show/Hide Data Table</button>
-                    <div id="tableContainer" class="table-container">
-                        <div class="virtual-scroll-container">
-                            <table id="nutritionTable">
-                                <thead>
-                                    <tr>
-                                        <th>Reference #</th>
-                                        <th>Name</th>
-                                        <th>Portion Size</th>
-                                        <th>Calories</th>
-                                        <th>Protein (g)</th>
-                                        <th>Protein (%DV)</th>
-                                        <th>Sodium (mg)</th>
-                                        <th>Sodium (%DV)</th>
-                                        <th>Fats (g)</th>
-                                        <th>Fats (%DV)</th>
-                                        <th>Carbs (g)</th>
-                                        <th>Carbs (%DV)</th>
-                                        <th>Fiber (g)</th>
-                                        <th>Fiber (%DV)</th>
-                                        <th>Cholesterol (mg)</th>
-                                        <th>Cholesterol (%DV)</th>
-                                        <th>Saturdated Fat (g)</th>
-                                        <th>Saturdated Fat (%DV)</th>
-                                        <th>Trans Fat (g)</th>
-                                        <th>Trans Fat (%DV)</th>
-                                        <th>Total Sugars (g)</th>
-                                        <th>Total Sugars (%DV)</th>
-                                        <th>Meal Type</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="tableBody"></tbody>
-                            </table>
+                <div class="double">
+                    <div class="card">
+                        <h2 class="card-title">Add Food Items</h2>
+                        <div class="input-section">
+                            <input type="text" class="code-input" id="foodCode"
+                                placeholder="Enter food code (e.g., BM01, LS05, DD02)" aria-describedby="codeHelp">
+                            <button class="basic-button" id="addFoodButton">Add Food</button>
                         </div>
+                        <div id="codeHelp" class="error-message hidden" aria-live="polite"></div>
+                    </div>
+                    <div class="buttons">
+                        <a class="basic-button" href="../html/Page2Calendar.html">Return To Calendar</a>
+                        <a class="basic-button" href="../html/Page4Grade.html">Go To Grade</a>
                     </div>
                 </div>
 
                 <!--Food Items Section-->
                 <div class="card" id="foodItemsContainer">
-                    <h2 class="card-title">
-                        Your Food Items
-                        <button id="resetCategoriesBtn" class="basic-button">Reset Categories</button>
-                    </h2>
+                    <div class="food-items-container-title">
+                        <h2 class="card-title">Your Food Items</h2>
+                        <button id="clearAllFoodItems" class="delete-all-food-items-button">Delete All</button>
+                    </div>
                     <div class="category-section">
                         <div class="category-box breakfast-box">
                             <div class="category-title">
@@ -158,11 +129,6 @@
                 </div> 
                 -->
             </div>
-            <div id="loading" class="card loading hidden">
-                <span class="loading-spinner" aria-hidden="true"></span> Loading and processing your nutrition data...
-            </div>
-
-            <div id="message" class="hidden" role="alert" aria-live="polite"></div>
         </main>
     </div>
 </body>
