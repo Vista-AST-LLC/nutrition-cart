@@ -1,33 +1,34 @@
 //********THINGS TO CONSIDER********
-//1) How to access correct meal index from localStorage and add it 
-//2) Parameters to add into updateTable() (Day, meal, etc)?
+//1) Updating HTML on Page2Calendar using JavaScript from Page3Activity
+//2) How to access correct meal index from localStorage and add it 
 //3) How to remove values from calendar
 
 // Function to update the table calendar
-export function updateTable(day, meal) {
-    let breakfast = meals["breakfast"]
-    let lunch = meals["lunch"]
-    let dinner = meals["dinner"]
-    let snacks = meals["snacks"]
+export function updateTable(day, meal, data) {
+    let breakfast = data["breakfast"]
+    let lunch = data["lunch"]
+    let dinner = data["dinner"]
+    let snacks = data["snacks"]
 
     switch (day) {
         case "Monday":
             switch (meal) {
-                case "breakfast":
-                    let monBfast = document.getElementById("monBfast")
-                    updateHTML(monBfast, meal[0])
+                case "B":
+                    console.log(breakfast[0]["itemName"])
+                    //let monBfast = document.getElementById("monBfast")
+                    //updateHTML(monBfast, breakfast[0]["itemName"])
                     break
-                case "lunch":
+                case "L":
                     let monLunch = document.getElementById('monLunch')
-                    updateHTML(monLunch, text)
+                    updateHTML(monLunch, lunch[0]["itemName"])
                     break
-                case "dinner":
+                case "D":
                     let monDinner = document.getElementById('monDinner')
-                    updateHTML(monDinner, text)
+                    updateHTML(monDinner, dinner[0]["itemName"])
                     break
-                case "snack":
+                case "S":
                     let monSnack = document.getElementById('monSnack')
-                    updateHTML(monSnack, text)
+                    updateHTML(monSnack, snacks[0]["itemName"])
                     break
                 default:
                     alert("No meal was selected!")
@@ -35,19 +36,19 @@ export function updateTable(day, meal) {
             break
         case "Tuesday":
             switch (meal) {
-                case "breakfast":
+                case "B":
                     let tuesBfast = document.getElementById("tuesBfast")
                     updateHTML(tuesBfast, text)
                     break
-                case "lunch":
+                case "L":
                     let tuesLunch = document.getElementById('tuesLunch')
                     updateHTML(tuesLunch, text)
                     break
-                case "dinner":
+                case "D":
                     let tuesDinner = document.getElementById('tuesDinner')
                     updateHTML(tuesDinner, text)
                     break
-                case "snack":
+                case "S":
                     let tuesSnack = document.getElementById('tuesSnack')
                     updateHTML(tuesSnack, text)
                     break
@@ -57,19 +58,19 @@ export function updateTable(day, meal) {
             break
         case "Wednesday":
             switch (meal) {
-                case "breakfast":
+                case "B":
                     let wedBfast = document.getElementById("wedBfast")
                     updateHTML(wedBfast, text)
                     break
-                case "lunch":
+                case "L":
                     let wedLunch = document.getElementById('wedLunch')
                     updateHTML(wedLunch, text)
                     break
-                case "dinner":
+                case "D":
                     let wedDinner = document.getElementById('wedDinner')
                     updateHTML(wedDinner, text)
                     break
-                case "snack":
+                case "S":
                     let wedSnack = document.getElementById('wedSnack')
                     updateHTML(wedSnack, text)
                     break
@@ -79,19 +80,19 @@ export function updateTable(day, meal) {
             break
         case "Thursday":
             switch (meal) {
-                case "breakfast":
+                case "B":
                     let thursBfast = document.getElementById("thursBfast")
                     updateHTML(thursBfast, text)
                     break
-                case "lunch":
+                case "L":
                     let thursLunch = document.getElementById('thursLunch')
                     updateHTML(thursLunch, text)
                     break
-                case "dinner":
+                case "D":
                     let thursDinner = document.getElementById('thursDinner')
                     updateHTML(thursDinner, text)
                     break
-                case "snack":
+                case "S":
                     let thursSnack = document.getElementById('thursSnack')
                     updateHTML(thursSnack, text)
                     break
@@ -101,19 +102,19 @@ export function updateTable(day, meal) {
             break
         case "Friday":
             switch (meal) {
-                case "breakfast":
+                case "B":
                     let friBfast = document.getElementById("friBfast")
                     updateHTML(friBfast, text)
                     break
-                case "lunch":
+                case "L":
                     let friLunch = document.getElementById('friLunch')
                     updateHTML(friLunch, text)
                     break
-                case "dinner":
+                case "D":
                     let friDinner = document.getElementById('friDinner')
                     updateHTML(friDinner, text)
                     break
-                case "snack":
+                case "S":
                     let friSnack = document.getElementById('friSnack')
                     updateHTML(friSnack, text)
                     break

@@ -58,6 +58,7 @@ async function addFoodItem() {
     let item;
 
     const code = foodCodeInput.value.trim().toUpperCase();
+    const meal = code[0]
     const codeHelp = document.getElementById('codeHelp');
 
     // Reset visual state
@@ -86,7 +87,7 @@ async function addFoodItem() {
     Weekday.copyFoodItems(day, JSON.parse(localStorage.getItem(activeDay)));
     day.addFoodItem(item);
     localStorage.setItem(activeDay, JSON.stringify(day));
-    updateTable(activeDay, JSON.parse(localStorage.getItem(activeDay)))
+    updateTable(activeDay, meal, JSON.parse(localStorage.getItem(activeDay)))
 
     // Clear the input field after successful addition
     foodCodeInput.value = '';
