@@ -122,24 +122,24 @@ export class Weekday {
         this.snacks = [];
     }
 
-    static copyFoodItems(copyTo, copyFrom) {
-        while (copyFrom.breakfast.length > 0) {
-            copyTo.addFoodItem(copyFrom.breakfast[0]);
-            copyFrom.breakfast.shift();
-        }
-        while (copyFrom.lunch.length > 0) {
-            copyTo.addFoodItem(copyFrom.lunch[0]);
-            copyFrom.lunch.shift();
-        }
-        while (copyFrom.dinner.length > 0) {
-            copyTo.addFoodItem(copyFrom.dinner[0]);
-            copyFrom.dinner.shift();
-        }
-        while (copyFrom.snacks.length > 0) {
-            copyTo.addFoodItem(copyFrom.snacks[0]);
-            copyFrom.snacks.shift();
-        }
-    }
+static async fromJSON(parsed) {
+    const day = new Weekday();
+
+    if (!parsed) return day;
+
+    const meals = [
+        ...(parsed.breakfast ?? []),
+        ...(parsed.lunch ?? []),
+        ...(parsed.dinner ?? []),
+        ...(parsed.snacks ?? [])
+    ];
+
+    const items = await Promise.all(meals.map(i => createFoodItem(i.refNum)));
+
+    items.forEach(item => day.addFoodItem(item));
+
+    return day;
+}
 
     addFoodItem(item) {
         // Do a switch on the first char of the ref number (B, L, D, S)

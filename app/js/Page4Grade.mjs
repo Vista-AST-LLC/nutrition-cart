@@ -1,4 +1,81 @@
-import { Constants, FoodItem, Weekday } from "./common.mjs";
+import { createFoodItem, Constants, FoodItem, Weekday } from "./common.mjs";
+
+const gradeButton = document.getElementById("getGradeButton");
+gradeButton.addEventListener('click', async (e) => {
+    gradeButton.style.visibility = 'hidden';
+    
+    let parsedMon = JSON.parse(localStorage.getItem('Monday'));
+    if (!parsedMon) console.log("Parsed day is null: Monday");
+    let mon = await Weekday.fromJSON(parsedMon);
+    let parsedTues = JSON.parse(localStorage.getItem('Tuesday'));
+    if (!parsedTues) console.log("Parsed day is null: Tuesday");
+    let tues = await Weekday.fromJSON(parsedTues);
+    let parsedWed = JSON.parse(localStorage.getItem('Wednesday'));
+    if (!parsedWed) console.log("Parsed day is null: Wednesday");
+    let wed = await Weekday.fromJSON(parsedWed);
+    let parsedThur = JSON.parse(localStorage.getItem('Thursday'));
+    if (!parsedThur) console.log("Parsed day is null: Thursday");
+    let thur = await Weekday.fromJSON(parsedThur);
+    let parsedFri = JSON.parse(localStorage.getItem('Friday'));
+    if (!parsedFri) console.log("Parsed day is null: Friday");
+    let fri = await Weekday.fromJSON(parsedFri);
+    
+    let report = new ReportCard();
+
+    report.addDays([mon, tues, wed, thur, fri]);
+
+    await report.basicGradeAll();
+
+    let totalGradeCircle = document.getElementById('pointsCircle');
+    let totalGrade = (report.score[ReportCard.SCORE][Constants.CALORIES] + report.score[ReportCard.SCORE][Constants.TOTALFAT] + report.score[ReportCard.SCORE][Constants.SATFAT] + report.score[ReportCard.SCORE][Constants.TRANSFAT] + report.score[ReportCard.SCORE][Constants.CHOLESTEROL] + report.score[ReportCard.SCORE][Constants.SODIUM] + report.score[ReportCard.SCORE][Constants.CARBS] + report.score[ReportCard.SCORE][Constants.FIBER] + report.score[ReportCard.SCORE][Constants.SUGAR] + report.score[ReportCard.SCORE][Constants.PROTEIN]) / 10;
+    if (totalGrade > 90) {
+        totalGradeCircle.innerHTML = 'A';
+    } else if (totalGrade > 80) {
+        totalGradeCircle.innerHTML = 'B';
+    } else if (totalGrade > 70) {
+        totalGradeCircle.innerHTML = 'C';
+    } else if (totalGrade > 60) {
+        totalGradeCircle.innerHTML = 'D';
+    } else {
+        totalGradeCircle.innerHTML = 'F';
+    }
+
+    let underGradeCircle = document.getElementById('underPointCircle');
+    underGradeCircle.innerHTML = "Your Grade: " + totalGrade;
+
+    let caloriesCom = document.getElementById('caloriesComments');
+    let caloriesCard = document.getElementById('totalCalories');
+    caloriesCom.innerHTML = report.score[ReportCard.COMMENTS][Constants.CALORIES];
+    caloriesCard.innerHTML = report.score[ReportCard.SCORE][Constants.CALORIES];
+    let fatsCom = document.getElementById('fatsComments');
+    let fatsCard = document.getElementById('totalFats');
+    fatsCom.innerHTML = report.score[ReportCard.COMMENTS][Constants.TOTALFAT];
+    fatsCard.innerHTML = report.score[ReportCard.SCORE][Constants.TOTALFAT];
+    let cholesterolCom = document.getElementById('cholesterolComments');
+    let cholesterolCard = document.getElementById('totalCholesterol');
+    cholesterolCom.innerHTML = report.score[ReportCard.COMMENTS][Constants.CHOLESTEROL];
+    cholesterolCard.innerHTML = report.score[ReportCard.SCORE][Constants.CHOLESTEROL];
+    let sodiumCom = document.getElementById('sodiumComments');
+    let sodiumCard = document.getElementById('totalSodium');
+    sodiumCom.innerHTML = report.score[ReportCard.COMMENTS][Constants.SODIUM];
+    sodiumCard.innerHTML = report.score[ReportCard.SCORE][Constants.SODIUM];
+    let carbsCom = document.getElementById('carbsComments');
+    let carbsCard = document.getElementById('totalCarbs');
+    carbsCom.innerHTML = report.score[ReportCard.COMMENTS][Constants.CARBS];
+    carbsCard.innerHTML = report.score[ReportCard.SCORE][Constants.CARBS];
+    let fiberCom = document.getElementById('fiberComments');
+    let fiberCard = document.getElementById('totalFiber');
+    fiberCom.innerHTML = report.score[ReportCard.COMMENTS][Constants.FIBER];
+    fiberCard.innerHTML = report.score[ReportCard.SCORE][Constants.FIBER];
+    let sugarsCom = document.getElementById('sugarsComments');
+    let sugarsCard = document.getElementById('totalSugars');
+    sugarsCom.innerHTML = report.score[ReportCard.COMMENTS][Constants.SUGAR];
+    sugarsCard.innerHTML = report.score[ReportCard.SCORE][Constants.SUGAR];
+    let proteinCom = document.getElementById('proteinComments');
+    let proteinCard = document.getElementById('totalProtein');
+    proteinCom.innerHTML = report.score[ReportCard.COMMENTS][Constants.PROTEIN];
+    proteinCard.innerHTML = report.score[ReportCard.SCORE][Constants.PROTEIN];
+})
 
 class ReportCard {
     // Constants used in class
@@ -6,183 +83,214 @@ class ReportCard {
 
     // Indices for internal arrays
     static SCORE = 0;
-    static COMMENTS = 1;
+    static AMOUNTS = 1;
+    static COMMENTS = 2;
 
     constructor() {
-        // Initialize the score categories to 0
-        this.#score[0] = [];
-        for (let i = 0; i < 10; i++) {
-            this.#score[0][i] = 0;
-        }
-        
-        // Set the comments index to be an empty array
-        this.#score[1] = [];
+        this.resetScore();
+        this.days = [];
+    }
 
-        this.#days = [];
+    resetScore() {
+        this.score = Array.from({ length: 3 }, () => new Array(10).fill(0));
+        this.score[ReportCard.COMMENTS] = new Array(10).fill('Default Comment');
     }
 
     // This is used to interpolate between values for scoring 
     // Bottom = 0, top = 1
     normalize(bottom, top, value) {
-        return ( (value - bottom) / (top - bottom) ) * MAX_SCORE;
+        return ( (value - bottom) / (top - bottom) ) * ReportCard.MAX_SCORE;
     }
 
     // Add days to the ReportCard, handles individual days and an array of days
     addDays(daysToAdd) {
         if (Array.isArray(daysToAdd)) {
             while (daysToAdd.length > 0) {
-                this.#days.push(daysToAdd.pop());
+                this.days.push(daysToAdd.pop());
             }
         } else {
-            this.#days.push(daysToAdd);
+            this.days.push(daysToAdd);
         }
     }
 
-    basicGradeAll() {
-        while (this.#days.length > 0) {
-            basicGradeDay(this.#days.pop());
+    async basicGradeAll() {
+        this.resetScore();
+        let daysAmount = this.days.length;
+        while (this.days.length > 0) {
+            this.accumulateTotals(this.days.pop());
         }
+        // At this point, each category of the AMOUNTS array has the total amount of
+        // that field for the day, so we send the day's total through the grading rubric 
+        this.score[ReportCard.SCORE][Constants.CALORIES] = this.basicGradeRubric(Constants.CALORIES, (this.score[ReportCard.AMOUNTS][Constants.CALORIES] / daysAmount));
+        this.score[ReportCard.SCORE][Constants.TOTALFAT] = this.basicGradeRubric(Constants.TOTALFAT, (this.score[ReportCard.AMOUNTS][Constants.TOTALFAT] / daysAmount));
+        this.score[ReportCard.SCORE][Constants.SATFAT] = this.basicGradeRubric(Constants.SATFAT, (this.score[ReportCard.AMOUNTS][Constants.SATFAT] / daysAmount));
+        this.score[ReportCard.SCORE][Constants.TRANSFAT] = this.basicGradeRubric(Constants.TRANSFAT, (this.score[ReportCard.AMOUNTS][Constants.TRANSFAT] / daysAmount));
+        this.score[ReportCard.SCORE][Constants.CHOLESTEROL] = this.basicGradeRubric(Constants.CHOLESTEROL, (this.score[ReportCard.AMOUNTS][Constants.CHOLESTEROL] / daysAmount));
+        this.score[ReportCard.SCORE][Constants.SODIUM] = this.basicGradeRubric(Constants.SODIUM, (this.score[ReportCard.AMOUNTS][Constants.SODIUM] / daysAmount));
+        this.score[ReportCard.SCORE][Constants.CARBS] = this.basicGradeRubric(Constants.CARBS, (this.score[ReportCard.AMOUNTS][Constants.CARBS] / daysAmount));
+        this.score[ReportCard.SCORE][Constants.FIBER] = this.basicGradeRubric(Constants.FIBER, (this.score[ReportCard.AMOUNTS][Constants.FIBER] / daysAmount));
+        this.score[ReportCard.SCORE][Constants.SUGAR] = this.basicGradeRubric(Constants.SUGAR, (this.score[ReportCard.AMOUNTS][Constants.SUGAR] / daysAmount));
+        this.score[ReportCard.SCORE][Constants.PROTEIN] = this.basicGradeRubric(Constants.PROTEIN, (this.score[ReportCard.AMOUNTS][Constants.PROTEIN] / daysAmount));
     }
 
-    basicGradeDay(day) {
-        let meals = day.getMealItems(Constants.BREAKFAST);
-        // Meals are stored separately in the Weekday class, so we get all values
-        // from each category and store it in the score array
-        while (meals.length > 0) {
-            let foodItem = meals.pop();
-            this.#score[SCORE][Constants.CALORIES] += foodItem.calories;
-            this.#score[SCORE][Constants.TOTALFAT] += foodItem.totalFatG;
-            this.#score[SCORE][Constants.SATFAT] += foodItem.satFatG;
-            this.#score[SCORE][Constants.TRANSFAT] += foodItem.transFatG;
-            this.#score[SCORE][Constants.CHOLESTEROL] += foodItem.cholesterolMG;
-            this.#score[SCORE][Constants.SODIUM] += foodItem.sodiumMG;
-            this.#score[SCORE][Constants.CARBS] += foodItem.carbsG;
-            this.#score[SCORE][Constants.FIBER] += foodItem.fiberG;
-            this.#score[SCORE][Constants.SUGAR] += foodItem.sugarsG;
-            this.#score[SCORE][Constants.PROTEIN] += foodItem.proteinG;
+    accumulateTotals(day) {
+        for (const mealType of [Constants.BREAKFAST, Constants.LUNCH, Constants.DINNER, Constants.SNACKS]) {
+            for (const foodItem of day.getMealItems(mealType) ?? []) {
+                this.score[ReportCard.AMOUNTS][Constants.CALORIES] += foodItem.calories;
+                this.score[ReportCard.AMOUNTS][Constants.TOTALFAT] += foodItem.totalFatG;
+                this.score[ReportCard.AMOUNTS][Constants.SATFAT] += foodItem.satFatG;
+                this.score[ReportCard.AMOUNTS][Constants.TRANSFAT] += foodItem.transFatG;
+                this.score[ReportCard.AMOUNTS][Constants.CHOLESTEROL] += foodItem.cholesterolMG;
+                this.score[ReportCard.AMOUNTS][Constants.SODIUM] += foodItem.sodiumMG;
+                this.score[ReportCard.AMOUNTS][Constants.CARBS] += foodItem.carbsG;
+                this.score[ReportCard.AMOUNTS][Constants.FIBER] += foodItem.fiberG;
+                this.score[ReportCard.AMOUNTS][Constants.SUGAR] += foodItem.sugarsG;
+                this.score[ReportCard.AMOUNTS][Constants.PROTEIN] += foodItem.proteinG;
+            }
         }
-
-        meals = day.getMealItems(Constants.LUNCH);
-        while (meals.length > 0) {
-            let foodItem = meals.pop();
-            this.#score[SCORE][Constants.CALORIES] += foodItem.calories;
-            this.#score[SCORE][Constants.TOTALFAT] += foodItem.totalFatG;
-            this.#score[SCORE][Constants.SATFAT] += foodItem.satFatG;
-            this.#score[SCORE][Constants.TRANSFAT] += foodItem.transFatG;
-            this.#score[SCORE][Constants.CHOLESTEROL] += foodItem.cholesterolMG;
-            this.#score[SCORE][Constants.SODIUM] += foodItem.sodiumMG;
-            this.#score[SCORE][Constants.CARBS] += foodItem.carbsG;
-            this.#score[SCORE][Constants.FIBER] += foodItem.fiberG;
-            this.#score[SCORE][Constants.SUGAR] += foodItem.sugarsG;
-            this.#score[SCORE][Constants.PROTEIN] += foodItem.proteinG;
-        }
-
-        meals = day.getMealItems(Constants.DINNER);
-        while (meals.length > 0) {
-            let foodItem = meals.pop();
-            this.#score[SCORE][Constants.CALORIES] += foodItem.calories;
-            this.#score[SCORE][Constants.TOTALFAT] += foodItem.totalFatG;
-            this.#score[SCORE][Constants.SATFAT] += foodItem.satFatG;
-            this.#score[SCORE][Constants.TRANSFAT] += foodItem.transFatG;
-            this.#score[SCORE][Constants.CHOLESTEROL] += foodItem.cholesterolMG;
-            this.#score[SCORE][Constants.SODIUM] += foodItem.sodiumMG;
-            this.#score[SCORE][Constants.CARBS] += foodItem.carbsG;
-            this.#score[SCORE][Constants.FIBER] += foodItem.fiberG;
-            this.#score[SCORE][Constants.SUGAR] += foodItem.sugarsG;
-            this.#score[SCORE][Constants.PROTEIN] += foodItem.proteinG;
-        }
-
-        meals = day.getMealItems(Constants.SNACKS);
-        while (meals.length > 0) {
-            let foodItem = meals.pop();
-            this.#score[SCORE][Constants.CALORIES] += foodItem.calories;
-            this.#score[SCORE][Constants.TOTALFAT] += foodItem.totalFatG;
-            this.#score[SCORE][Constants.SATFAT] += foodItem.satFatG;
-            this.#score[SCORE][Constants.TRANSFAT] += foodItem.transFatG;
-            this.#score[SCORE][Constants.CHOLESTEROL] += foodItem.cholesterolMG;
-            this.#score[SCORE][Constants.SODIUM] += foodItem.sodiumMG;
-            this.#score[SCORE][Constants.CARBS] += foodItem.carbsG;
-            this.#score[SCORE][Constants.FIBER] += foodItem.fiberG;
-            this.#score[SCORE][Constants.SUGAR] += foodItem.sugarsG;
-            this.#score[SCORE][Constants.PROTEIN] += foodItem.proteinG;
-        }
-
-        // At this point, each category of the score array has the total amount of that
-        // field for the day, so we send the day's total through the grading rubric 
-        this.#score[SCORE][Constants.CALORIES] = this.basicGradeRubric(Constants.CALORIES, this.#score[SCORE][Constants.CALORIES]);
-        this.#score[SCORE][Constants.TOTALFAT] = this.basicGradeRubric(Constants.TOTALFAT, this.#score[SCORE][Constants.TOTALFAT]);
-        this.#score[SCORE][Constants.SATFAT] = this.basicGradeRubric(Constants.SATFAT, this.#score[SCORE][Constants.SATFAT]);
-        this.#score[SCORE][Constants.TRANSFAT] = this.basicGradeRubric(Constants.TRANSFAT, this.#score[SCORE][Constants.TRANSFAT]);
-        this.#score[SCORE][Constants.CHOLESTEROL] = this.basicGradeRubric(Constants.CHOLESTEROL, this.#score[SCORE][Constants.CHOLESTEROL]);
-        this.#score[SCORE][Constants.SODIUM] = this.basicGradeRubric(Constants.SODIUM, this.#score[SCORE][Constants.SODIUM]);
-        this.#score[SCORE][Constants.CARBS] = this.basicGradeRubric(Constants.CARBS, this.#score[SCORE][Constants.CARBS]);
-        this.#score[SCORE][Constants.FIBER] = this.basicGradeRubric(Constants.FIBER, this.#score[SCORE][Constants.FIBER]);
-        this.#score[SCORE][Constants.SUGAR] = this.basicGradeRubric(Constants.SUGAR, this.#score[SCORE][Constants.SUGAR]);
-        this.#score[SCORE][Constants.PROTEIN] = this.basicGradeRubric(Constants.PROTEIN, this.#score[SCORE][Constants.PROTEIN]);
     }
 
     basicGradeRubric(type, value) {
         switch (type) {
             case Constants.CALORIES:
-                if (value > 4000) return 0;
-                if (value > 2500) return this.normalize(4000, 2500, value);
-                if (value > 1500) return MAX_SCORE;
-                if (value > 1000) return this.normalize(1000, 1500, value);
+                if (value > 4000) { 
+                    this.score[ReportCard.COMMENTS][Constants.CALORIES] = "Way too many calories!";
+                    return 0; }
+                if (value > 2500) { 
+                    this.score[ReportCard.COMMENTS][Constants.CALORIES] = "Could use less calories.";
+                    return this.normalize(4000, 2500, value); }
+                if (value > 1500) { 
+                    this.score[ReportCard.COMMENTS][Constants.CALORIES] = "Good job! You are around the ideal calorie count.";
+                    return ReportCard.MAX_SCORE; }
+                if (value > 1000) { 
+                    this.score[ReportCard.COMMENTS][Constants.CALORIES] = "Not enough calories, you need a little more to stay healty.";
+                    return this.normalize(1000, 1500, value); }
+                this.score[ReportCard.COMMENTS][Constants.CALORIES] = "You don't have nearly enough calories, you will starve!";
                 return 0;
             case Constants.TOTALFAT:
-                if (value > 100) return 0;
-                if (value > 50) return this.normalize(100, 50, value);
-                if (value > 25) return MAX_SCORE;
-                if (value > 0) return this.normalize(0, 25, value);
+                if (value > 100) { 
+                    this.score[ReportCard.COMMENTS][Constants.TOTALFAT] = "Way too many fats!";
+                    return 0; }
+                if (value > 50) { 
+                    this.score[ReportCard.COMMENTS][Constants.TOTALFAT] = "Could use fewer fats.";
+                    return this.normalize(100, 50, value); }
+                if (value > 25) { 
+                    this.score[ReportCard.COMMENTS][Constants.TOTALFAT] = "Good amount of fats.";
+                    return ReportCard.MAX_SCORE; }
+                if (value > 0) { 
+                    this.score[ReportCard.COMMENTS][Constants.TOTALFAT] = "Could use a little more fats!";
+                    return this.normalize(0, 25, value); }
+                this.score[ReportCard.COMMENTS][Constants.TOTALFAT] = "You need more fats!";
                 return 0;
             case Constants.SATFAT:
-                if (value > 40) return 0;
-                if (value > 20) return 0.75 * this.normalize(40, 20, value);
-                if (value > 10) return 0.75 + 0.25 * this.normalize(20, 10, value);
-                return MAX_SCORE;
+                if (value > 40) {
+                    return 0; }
+                if (value > 20) { 
+                    return 0.75 * this.normalize(40, 20, value); }
+                if (value > 10) { 
+                    return 0.75 + 0.25 * this.normalize(20, 10, value); }
+                return ReportCard.MAX_SCORE;
             case Constants.TRANSFAT:
-                if (value > 5) return 0;
-                if (value > 0) return this.normalize(5, 0, value);
-                return MAX_SCORE;
+                if (value > 5) { 
+                    this.score[ReportCard.COMMENTS][Constants.TOTALFAT] = this.score[ReportCard.COMMENTS][Constants.TOTALFAT] + " Also way too much transfat!";
+                    return 0; }
+                if (value > 0) { 
+                    this.score[ReportCard.COMMENTS][Constants.TOTALFAT] = this.score[ReportCard.COMMENTS][Constants.TOTALFAT] + " Also could use less transfat!";
+                    return this.normalize(5, 0, value); }
+                return ReportCard.MAX_SCORE;
             case Constants.CHOLESTEROL:
-                if (value > 500) return 0;
-                if (value > 200) return 0.75 * this.normalize(500, 200, value);
-                if (value > 0) return 0.75 + 0.25 * this.normalize(200, 0, value);
-                return MAX_SCORE;
+                if (value > 500) { 
+                    this.score[ReportCard.COMMENTS][Constants.CHOLESTEROL] = "Way too much cholesterol!";
+                    return 0; }
+                if (value > 200) { 
+                    this.score[ReportCard.COMMENTS][Constants.CHOLESTEROL] = "Could use less cholesterol.";
+                    return 0.75 * this.normalize(500, 200, value); }
+                if (value > 0) { 
+                    this.score[ReportCard.COMMENTS][Constants.CHOLESTEROL] = "Good amount of cholesterol.";
+                    return 0.75 + 0.25 * this.normalize(200, 0, value); }
+                this.score[ReportCard.COMMENTS][Constants.CHOLESTEROL] = "Good job keeping cholesterol low!";
+                return ReportCard.MAX_SCORE;
             case Constants.SODIUM:
-                if (value > 4000) return 0;
-                if (value > 2300) return 0.9 * this.normalize(4000, 2300, value);
-                if (value > 1500) return 0.9 + 0.1 * this.normalize(2300, 1500, value);
-                if (value > 500) return MAX_SCORE;
-                if (value > 0) return this.normalize(0, 500, value);
+                if (value > 4000) { 
+                    this.score[ReportCard.COMMENTS][Constants.SODIUM] = "Way too much sodium!";
+                    return 0; }
+                if (value > 2300) { 
+                    this.score[ReportCard.COMMENTS][Constants.SODIUM] = "Could use less sodium.";
+                    return 0.9 * this.normalize(4000, 2300, value); }
+                if (value > 1500) { 
+                    this.score[ReportCard.COMMENTS][Constants.SODIUM] = "Good amount of sodium.";
+                    return 0.9 + 0.1 * this.normalize(2300, 1500, value); }
+                if (value > 500) { 
+                    this.score[ReportCard.COMMENTS][Constants.SODIUM] = "Great job keeping sodium amount low!";
+                    return ReportCard.MAX_SCORE; }
+                if (value > 0) { 
+                    this.score[ReportCard.COMMENTS][Constants.SODIUM] = "Could use a little more sodium.";
+                    return this.normalize(0, 500, value); }
+                this.score[ReportCard.COMMENTS][Constants.SODIUM] = "Way too little sodium! Sodium is required for your body to function.";
                 return 0;
             case Constants.CARBS:
-                if (value > 500) return 0;
-                if (value > 275) return this.normalize(500, 275, value);
-                if (value > 200) return MAX_SCORE;
-                if (value > 150) return 0.5 + 0.5 * this.normalize(150, 200, value);
-                if (value > 50) return 0.5 * this.normalize(50, 150, value);
+                if (value > 500) { 
+                    this.score[ReportCard.COMMENTS][Constants.CARBS] = "Way too many carbs!";
+                    return 0; }
+                if (value > 275) { 
+                    this.score[ReportCard.COMMENTS][Constants.CARBS] = "Could use less carbs.";
+                    return this.normalize(500, 275, value); }
+                if (value > 200) { 
+                    this.score[ReportCard.COMMENTS][Constants.CARBS] = "Good amount of carbs!";
+                    return ReportCard.MAX_SCORE; }
+                if (value > 150) { 
+                    this.score[ReportCard.COMMENTS][Constants.CARBS] = "Could use a few more carbs.";
+                    return 0.5 + 0.5 * this.normalize(150, 200, value); }
+                if (value > 50) { 
+                    this.score[ReportCard.COMMENTS][Constants.CARBS] = "Need more carbs.";
+                    return 0.5 * this.normalize(50, 150, value); }
+                this.score[ReportCard.COMMENTS][Constants.CARBS] = "Need way more carbs, carbs are necessary for your diet!";
                 return 0;
             case Constants.FIBER:
-                if (value > 100) return 0;
-                if (value > 38) return this.normalize(100, 38, value);
-                if (value > 28) return MAX_SCORE;
-                if (value > 0) return this.normalize(0, 28, value);
+                if (value > 100) { 
+                    this.score[ReportCard.COMMENTS][Constants.FIBER] = "Way too much fiber!";
+                    return 0; }
+                if (value > 38) { 
+                    this.score[ReportCard.COMMENTS][Constants.FIBER] = "Too much fiber, get a little less.";
+                    return this.normalize(100, 38, value); }
+                if (value > 28) { 
+                    this.score[ReportCard.COMMENTS][Constants.FIBER] = "Perfect amount of fiber!";
+                    return ReportCard.MAX_SCORE; }
+                if (value > 0) { 
+                    this.score[ReportCard.COMMENTS][Constants.FIBER] = "Need some more fiber.";
+                    return this.normalize(0, 28, value); }
+                this.score[ReportCard.COMMENTS][Constants.FIBER] = "Not nearly enough fiber!";
                 return 0;
             case Constants.SUGAR:
-                if (value > 100) return 0;
-                if (value > 50) return 0.5 * this.normalize(100, 50, value);
-                if (value > 30) return 0.5 + 0.5 * this.normalize(50, 30, value);
-                return MAX_SCORE;
+                if (value > 100) { 
+                    this.score[ReportCard.COMMENTS][Constants.SUGAR] = "Way too much sugar!";
+                    return 0; }
+                if (value > 50) { 
+                    this.score[ReportCard.COMMENTS][Constants.SUGAR] = "Too much sugar.";
+                    return 0.5 * this.normalize(100, 50, value); }
+                if (value > 30) { 
+                    this.score[ReportCard.COMMENTS][Constants.SUGAR] = "A little too much sugar!";
+                    return 0.5 + 0.5 * this.normalize(50, 30, value); }
+                this.score[ReportCard.COMMENTS][Constants.SUGAR] = "Good job keeping sugar low!";
+                return ReportCard.MAX_SCORE;
             case Constants.PROTEIN:
-                if (value > 150) return 0.5 * MAX_SCORE;
-                if (value > 75) return 0.5 + 0.5 * this.normalize(150, 75, value);
-                if (value > 50) return MAX_SCORE;
-                if (value > 20) return this.normalize(20, 50, value);
-                return 0;            
+                if (value > 150) { 
+                    this.score[ReportCard.COMMENTS][Constants.PROTEIN] = "That is a ton of protein, are you a body builder?!";
+                    return 0.5 * ReportCard.MAX_SCORE; }
+                if (value > 75) { 
+                    this.score[ReportCard.COMMENTS][Constants.PROTEIN] = "That is a lot of protein, are you an athelete?";
+                    return 0.5 + 0.5 * this.normalize(150, 75, value); }
+                if (value > 50) { 
+                    this.score[ReportCard.COMMENTS][Constants.PROTEIN] = "Perfect amount of protein!";
+                    return ReportCard.MAX_SCORE; }
+                if (value > 20) { 
+                    this.score[ReportCard.COMMENTS][Constants.PROTEIN] = "That is not enough protein, add some more.";
+                    return this.normalize(20, 50, value); }
+                this.score[ReportCard.COMMENTS][Constants.PROTEIN] = "That is not nearly enough protein, add some more!";
+                return 0;
         }
     }
 
-    #score; 
-    #days;
+    score; 
+    days;
 }

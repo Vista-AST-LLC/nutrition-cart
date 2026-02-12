@@ -81,8 +81,11 @@ async function addFoodItem() {
 
     // If all checks pass, add the item
     let activeDay = localStorage.getItem('ActiveDay');
-    let day = new Weekday();
-    Weekday.copyFoodItems(day, JSON.parse(localStorage.getItem(activeDay)));
+    let parsed = JSON.parse(localStorage.getItem(activeDay));
+    if (!parsed) {
+        console.log("Parsed day is null: " + activeDay);
+    }
+    let day = await Weekday.fromJSON(parsed);
     day.addFoodItem(item);
     localStorage.setItem(activeDay, JSON.stringify(day));
 
@@ -99,8 +102,11 @@ const snackItems = document.getElementById('snackItems');
 
 async function updateFoodItems() {
     const activeDay = localStorage.getItem('ActiveDay');
-    let day = new Weekday();
-    Weekday.copyFoodItems(day, JSON.parse(localStorage.getItem(activeDay)));
+    let parsed = JSON.parse(localStorage.getItem(activeDay));
+    if (!parsed) {
+        console.log("Parsed day is null: " + activeDay);
+    }
+    let day = await Weekday.fromJSON(parsed);
 
     breakfastItems.innerHTML = '';
     lunchItems.innerHTML = '';
@@ -173,9 +179,12 @@ async function removeFoodItemDiv(name) {
     const target = document.getElementById(name);
     let meal = name[0];
     let id = name.slice(1);
-    let day = new Weekday();
     let activeDay = localStorage.getItem("ActiveDay");
-    Weekday.copyFoodItems(day, JSON.parse(localStorage.getItem(activeDay)));
+    let parsed = JSON.parse(localStorage.getItem(activeDay));
+    if (!parsed) {
+        console.log("Parsed day is null: " + activeDay);
+    }
+    let day = await Weekday.fromJSON(parsed);
     await day.removeFoodItem(meal, id);
     localStorage.setItem(activeDay, JSON.stringify(day));
 }
