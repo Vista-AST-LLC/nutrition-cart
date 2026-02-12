@@ -46,7 +46,7 @@ export async function createFoodItem(barcode) {
 }
 
 export class FoodItem {
-    constructor(data){
+    constructor(data) {
         const item = data.split(',');
         this.refNumber = item[0];
         this.itemName = item[1];
@@ -122,6 +122,7 @@ export class Weekday {
         this.snacks = [];
     }
 
+    //********ERROR HERE WHEN BREAKFAST IS NOT THE FIRST MEAL INPUTTED********
     static copyFoodItems(copyTo, copyFrom) {
         while (copyFrom.breakfast.length > 0) {
             copyTo.addFoodItem(copyFrom.breakfast[0]);
@@ -144,19 +145,19 @@ export class Weekday {
     addFoodItem(item) {
         // Do a switch on the first char of the ref number (B, L, D, S)
         switch (item.refNumber.charAt(0)) {
-        case Constants.BREAKFAST:
-            // Add the item to the array
-            this.breakfast.push(item);
-            break;
-        case Constants.LUNCH:
-            this.lunch.push(item);
-            break;
-        case Constants.DINNER:
-            this.dinner.push(item);
-            break;
-        case Constants.SNACKS:
-            this.snacks.push(item);
-            break;
+            case Constants.BREAKFAST:
+                // Add the item to the array
+                this.breakfast.push(item);
+                break;
+            case Constants.LUNCH:
+                this.lunch.push(item);
+                break;
+            case Constants.DINNER:
+                this.dinner.push(item);
+                break;
+            case Constants.SNACKS:
+                this.snacks.push(item);
+                break;
         }
     }
 

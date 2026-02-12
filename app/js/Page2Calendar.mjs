@@ -15,18 +15,21 @@ export function updateTable(day, meal, data) {
             switch (meal) {
                 case "B":
                     console.log(breakfast[0]["itemName"])
-                    //let monBfast = document.getElementById("monBfast")
-                    //updateHTML(monBfast, breakfast[0]["itemName"])
+                    /*let monBfast = document.getElementById("monBfast")
+                    updateHTML(monBfast, breakfast[0]["itemName"])*/
                     break
                 case "L":
+                    console.log(lunch[0]["itemName"])
                     let monLunch = document.getElementById('monLunch')
                     updateHTML(monLunch, lunch[0]["itemName"])
                     break
                 case "D":
+                    console.log(dinner[0]["itemName"])
                     let monDinner = document.getElementById('monDinner')
                     updateHTML(monDinner, dinner[0]["itemName"])
                     break
                 case "S":
+                    console.lot(snacks[0]["itemName"])
                     let monSnack = document.getElementById('monSnack')
                     updateHTML(monSnack, snacks[0]["itemName"])
                     break
@@ -38,19 +41,19 @@ export function updateTable(day, meal, data) {
             switch (meal) {
                 case "B":
                     let tuesBfast = document.getElementById("tuesBfast")
-                    updateHTML(tuesBfast, text)
+                    updateHTML(tuesBfast, breakfast[0]["itemName"])
                     break
                 case "L":
                     let tuesLunch = document.getElementById('tuesLunch')
-                    updateHTML(tuesLunch, text)
+                    updateHTML(tuesLunch, lunch[0]["itemName"])
                     break
                 case "D":
                     let tuesDinner = document.getElementById('tuesDinner')
-                    updateHTML(tuesDinner, text)
+                    updateHTML(tuesDinner, dinner[0]["itemName"])
                     break
                 case "S":
                     let tuesSnack = document.getElementById('tuesSnack')
-                    updateHTML(tuesSnack, text)
+                    updateHTML(tuesSnack, snacks[0]["itemName"])
                     break
                 default:
                     alert("No meal was selected!")
@@ -60,19 +63,19 @@ export function updateTable(day, meal, data) {
             switch (meal) {
                 case "B":
                     let wedBfast = document.getElementById("wedBfast")
-                    updateHTML(wedBfast, text)
+                    updateHTML(wedBfast, breakfast[0]["itemName"])
                     break
                 case "L":
                     let wedLunch = document.getElementById('wedLunch')
-                    updateHTML(wedLunch, text)
+                    updateHTML(wedLunch, lunch[0]["itemName"])
                     break
                 case "D":
                     let wedDinner = document.getElementById('wedDinner')
-                    updateHTML(wedDinner, text)
+                    updateHTML(wedDinner, dinner[0]["itemName"])
                     break
                 case "S":
                     let wedSnack = document.getElementById('wedSnack')
-                    updateHTML(wedSnack, text)
+                    updateHTML(wedSnack, snacks[0]["itemName"])
                     break
                 default:
                     alert("No meal was selected!")
@@ -82,19 +85,19 @@ export function updateTable(day, meal, data) {
             switch (meal) {
                 case "B":
                     let thursBfast = document.getElementById("thursBfast")
-                    updateHTML(thursBfast, text)
+                    updateHTML(thursBfast, breakfast[0]["itemName"])
                     break
                 case "L":
                     let thursLunch = document.getElementById('thursLunch')
-                    updateHTML(thursLunch, text)
+                    updateHTML(thursLunch, lunch[0]["itemName"])
                     break
                 case "D":
                     let thursDinner = document.getElementById('thursDinner')
-                    updateHTML(thursDinner, text)
+                    updateHTML(thursDinner, dinner[0]["itemName"])
                     break
                 case "S":
                     let thursSnack = document.getElementById('thursSnack')
-                    updateHTML(thursSnack, text)
+                    updateHTML(thursSnack, snacks[0]["itemName"])
                     break
                 default:
                     alert("No meal was selected!")
@@ -104,19 +107,19 @@ export function updateTable(day, meal, data) {
             switch (meal) {
                 case "B":
                     let friBfast = document.getElementById("friBfast")
-                    updateHTML(friBfast, text)
+                    updateHTML(friBfast, breakfast[0]["itemName"])
                     break
                 case "L":
                     let friLunch = document.getElementById('friLunch')
-                    updateHTML(friLunch, text)
+                    updateHTML(friLunch, lunch[0]["itemName"])
                     break
                 case "D":
                     let friDinner = document.getElementById('friDinner')
-                    updateHTML(friDinner, text)
+                    updateHTML(friDinner, dinner[0]["itemName"])
                     break
                 case "S":
                     let friSnack = document.getElementById('friSnack')
-                    updateHTML(friSnack, text)
+                    updateHTML(friSnack, snacks[0]["itemName"])
                     break
                 default:
                     alert("No meal was selected!")
