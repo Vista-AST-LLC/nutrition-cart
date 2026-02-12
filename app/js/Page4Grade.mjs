@@ -27,7 +27,18 @@ gradeButton.addEventListener('click', async (e) => {
     await report.basicGradeAll();
 
     let totalGradeCircle = document.getElementById('pointsCircle');
-    let totalGrade = (report.score[ReportCard.SCORE][Constants.CALORIES] + report.score[ReportCard.SCORE][Constants.TOTALFAT] + report.score[ReportCard.SCORE][Constants.SATFAT] + report.score[ReportCard.SCORE][Constants.TRANSFAT] + report.score[ReportCard.SCORE][Constants.CHOLESTEROL] + report.score[ReportCard.SCORE][Constants.SODIUM] + report.score[ReportCard.SCORE][Constants.CARBS] + report.score[ReportCard.SCORE][Constants.FIBER] + report.score[ReportCard.SCORE][Constants.SUGAR] + report.score[ReportCard.SCORE][Constants.PROTEIN]) / 10;
+    let totalGrade = (
+        report.score[ReportCard.SCORE][Constants.CALORIES]
+        + report.score[ReportCard.SCORE][Constants.TOTALFAT]
+        + report.score[ReportCard.SCORE][Constants.SATFAT]
+        + report.score[ReportCard.SCORE][Constants.TRANSFAT]
+        + report.score[ReportCard.SCORE][Constants.CHOLESTEROL]
+        + report.score[ReportCard.SCORE][Constants.SODIUM]
+        + report.score[ReportCard.SCORE][Constants.CARBS]
+        + report.score[ReportCard.SCORE][Constants.FIBER]
+        + report.score[ReportCard.SCORE][Constants.SUGAR]
+        + report.score[ReportCard.SCORE][Constants.PROTEIN])
+        / 10;
     if (totalGrade > 90) {
         totalGradeCircle.innerHTML = 'A';
     } else if (totalGrade > 80) {

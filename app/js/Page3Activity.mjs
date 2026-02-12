@@ -9,17 +9,18 @@ localStorage.setItem('ActiveDay', 'Monday');
 
 const foodCodeInput = document.getElementById('foodCode');
 const addFoodButton = document.getElementById('addFoodButton');
-addFoodButton.addEventListener('click', function (e) {
-    foodCodeInput.dispatchEvent(
-        new KeyboardEvent('keydown', { key: 'Enter' })
-    );
-});
 
 foodCodeInput.addEventListener('keydown', async function (e) {
     if (e.key === 'Enter') {
         await addFoodItem();
         await updateFoodItems();
     }
+});
+
+addFoodButton.addEventListener('click', function (e) {
+    foodCodeInput.dispatchEvent(
+        new KeyboardEvent('keydown', { key: 'Enter' })
+    );
 });
 
 document.addEventListener('keydown', (e) => {

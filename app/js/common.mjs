@@ -35,7 +35,6 @@ export async function createFoodItem(barcode) {
     })
 
     refNumArray.push("END");
-
     // Using the refNumArray, match the item we are looking for
     let lineNumber = 0;
     for (; !barcode.match(refNumArray[lineNumber]); lineNumber++) {
@@ -134,7 +133,10 @@ static async fromJSON(parsed) {
         ...(parsed.snacks ?? [])
     ];
 
-    const items = await Promise.all(meals.map(i => createFoodItem(i.refNum)));
+    const items = await Promise.all(meals
+        .filter(i => typeof i?.refNumber === "string" && i.refNumber.trim() !== "")
+        .map(i => createFoodItem(i.refNumber))
+    );
 
     items.forEach(item => day.addFoodItem(item));
 
