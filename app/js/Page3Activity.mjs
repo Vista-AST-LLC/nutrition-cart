@@ -1,5 +1,47 @@
 import { createFoodItem, FoodItem, Weekday, Constants } from "./common.mjs";
 
+let active;
+
+//Function to Select the Active Day
+async function setActiveDay(day) {
+    switch (day) {
+        case 'M':
+            localStorage.setItem("ActiveDay", 'Monday')
+            document.getElementById('monday').style.backgroundColor = 'lightgoldenrodyellow'
+            updateBackgroundColor('tuesday', 'wednesday', 'thursday', 'friday')
+            active = 'mon'
+            break;
+        case 'T':
+            localStorage.setItem("ActiveDay", 'Tuesday')
+            document.getElementById('tuesday').style.backgroundColor = 'lightgoldenrodyellow'
+            updateBackgroundColor('monday', 'wednesday', 'thursday', 'friday')
+            active = 'tues'
+            break;
+        case 'W':
+            localStorage.setItem("ActiveDay", 'Wednesday')
+            document.getElementById('wednesday').style.backgroundColor = 'lightgoldenrodyellow'
+            updateBackgroundColor('monday', 'tuesday', 'thursday', 'friday')
+            active = 'wed'
+            break;
+        case 'TH':
+            localStorage.setItem("ActiveDay", 'Thursday')
+            document.getElementById('thursday').style.backgroundColor = 'lightgoldenrodyellow'
+            updateBackgroundColor('monday', 'tuesday', 'wednesday', 'friday')
+            active = 'thurs'
+            break;
+        case 'F':
+            localStorage.setItem("ActiveDay", 'Friday')
+            document.getElementById('friday').style.backgroundColor = 'lightgoldenrodyellow'
+            updateBackgroundColor('monday', 'tuesday', 'wednesday', 'thursday')
+            active = 'fri'
+            break;
+        default:
+            resetBackgroundColor('monday', 'tuesday', 'wednesday', 'thursday', 'friday')
+            active = 'mon'
+            break;
+    }
+}
+
 let keyLastTime = performance.now();
 let keyEntry = '';
 
@@ -96,11 +138,6 @@ async function addFoodItem() {
     codeHelp.classList.add('hidden');
 }
 
-const breakfastItems = document.getElementById('breakfastItems');
-const lunchItems = document.getElementById('lunchItems');
-const dinnerItems = document.getElementById('dinnerItems');
-const snackItems = document.getElementById('snackItems');
-
 async function updateFoodItems() {
     const activeDay = localStorage.getItem('ActiveDay');
     let parsed = JSON.parse(localStorage.getItem(activeDay));
@@ -108,6 +145,11 @@ async function updateFoodItems() {
         console.log("Parsed day is null: " + activeDay);
     }
     let day = await Weekday.fromJSON(parsed);
+
+    const breakfastItems = document.getElementById(`${active}BreakfastItems`);
+    const lunchItems = document.getElementById(`${active}LunchItems`);
+    const dinnerItems = document.getElementById(`${active}DinnerItems`);
+    const snackItems = document.getElementById(`${active}SnackItems`);
 
     breakfastItems.innerHTML = '';
     lunchItems.innerHTML = '';
@@ -159,16 +201,49 @@ async function updateFoodItems() {
         snackItems.append(div);
     });
 
-    document.getElementById('breakfastCount').innerHTML = day.breakfast.length + " Items";
-    document.getElementById('lunchCount').innerHTML = day.lunch.length + " Items";
-    document.getElementById('dinnerCount').innerHTML = day.dinner.length + " Items";
-    document.getElementById('snackCount').innerHTML = day.snacks.length + " Items";
     localStorage.setItem(activeDay, JSON.stringify(day));
 }
 
-const foodItemsContainer = document.getElementById('foodItemsContainer');
+//Functions to Delete Items from Each Day
+const monFoodItemsContainer = document.getElementById('monday');
+const tuesFoodItemsContainer = document.getElementById('tuesday');
+const wedFoodItemsContainer = document.getElementById('wednesday');
+const thursFoodItemsContainer = document.getElementById('thursday');
+const friFoodItemsContainer = document.getElementById('friday');
 
-foodItemsContainer.addEventListener('click', async (e) => {
+monFoodItemsContainer.addEventListener('click', async (e) => {
+    if (e.target.classList.contains('trash-button')) {
+        const name = e.target.id;
+        await removeFoodItemDiv(name);
+        await updateFoodItems();
+    }
+});
+
+tuesFoodItemsContainer.addEventListener('click', async (e) => {
+    if (e.target.classList.contains('trash-button')) {
+        const name = e.target.id;
+        await removeFoodItemDiv(name);
+        await updateFoodItems();
+    }
+});
+
+wedFoodItemsContainer.addEventListener('click', async (e) => {
+    if (e.target.classList.contains('trash-button')) {
+        const name = e.target.id;
+        await removeFoodItemDiv(name);
+        await updateFoodItems();
+    }
+});
+
+thursFoodItemsContainer.addEventListener('click', async (e) => {
+    if (e.target.classList.contains('trash-button')) {
+        const name = e.target.id;
+        await removeFoodItemDiv(name);
+        await updateFoodItems();
+    }
+});
+
+friFoodItemsContainer.addEventListener('click', async (e) => {
     if (e.target.classList.contains('trash-button')) {
         const name = e.target.id;
         await removeFoodItemDiv(name);
@@ -204,3 +279,27 @@ async function clearAllFoodItems() {
     let day = new Weekday();
     localStorage.setItem(activeDay, JSON.stringify(day));
 }
+
+//Calendar Update Functions
+async function updateBackgroundColor(day, dayTwo, dayThree, dayFour) {
+
+    document.getElementById(day).style.backgroundColor = 'white';
+    document.getElementById(dayTwo).style.backgroundColor = 'white';
+    document.getElementById(dayThree).style.backgroundColor = 'white';
+    document.getElementById(dayFour).style.backgroundColor = 'white';
+}
+
+async function resetBackgroundColor(mon, tues, wed, thur, fri) {
+    document.getElementById(mon).style.backgroundColor = 'white';
+    document.getElementById(tues).style.backgroundColor = 'white';
+    document.getElementById(wed).style.backgroundColor = 'white';
+    document.getElementById(thur).style.backgroundColor = 'white';
+    document.getElementById(fri).style.backgroundColor = 'white';
+}
+
+//Modifying calendar based on active day
+document.getElementById('monBtn').addEventListener("click", async function () { setActiveDay('M') })
+document.getElementById('tuesBtn').addEventListener("click", async function () { setActiveDay('T') })
+document.getElementById('wedBtn').addEventListener("click", async function () { setActiveDay('W') })
+document.getElementById('thursBtn').addEventListener("click", async function () { setActiveDay('TH') })
+document.getElementById('friBtn').addEventListener("click", async function () { setActiveDay('F') })
