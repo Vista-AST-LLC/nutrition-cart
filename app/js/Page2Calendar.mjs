@@ -4,11 +4,12 @@
 //3) How to remove values from calendar
 
 // Function to update the table calendar
-export function updateTable(day, meal, data) {
-    let breakfast = data["breakfast"]
-    let lunch = data["lunch"]
-    let dinner = data["dinner"]
-    let snacks = data["snacks"]
+async function updateTable() {
+    let mon = JSON.parse(localStorage.getItem('Monday'))
+    let tues = JSON.parse(localStorage.getItem('Tuesday'))
+    let wed = JSON.parse(localStorage.getItem('Wednesday'))
+    let thurs = JSON.parse(localStorage.getItem('Thursday'))
+    let fri = JSON.parse(localStorage.getItem('Friday'))
 
     switch (day) {
         case "Monday":
@@ -253,5 +254,3 @@ async function setActiveDay(day) {
             break;
     }
 }
-
-window.setActiveDay = setActiveDay

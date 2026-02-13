@@ -17,6 +17,13 @@
     gap: 10px;
 }
 
+@media (max-width: 800px) {
+    .double {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
 .input-section {
     display: flex;
     gap: 8px;
@@ -56,6 +63,13 @@
     flex-basis: auto;
     flex-direction: column;
     text-align: center;
+}
+
+@media (max-width: 800px) {
+    .buttons {
+        display: flex;
+        flex-direction: row;
+    }
 }
 
 .food-items-container-title {

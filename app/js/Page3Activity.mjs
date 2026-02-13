@@ -1,5 +1,4 @@
 import { createFoodItem, FoodItem, Weekday, Constants } from "./common.mjs";
-import { updateTable, clearTable } from "./Page2Calendar.mjs";
 
 let keyLastTime = performance.now();
 let keyEntry = '';
@@ -59,7 +58,6 @@ async function addFoodItem() {
     let item;
 
     const code = foodCodeInput.value.trim().toUpperCase();
-    const meal = code[0]
     const codeHelp = document.getElementById('codeHelp');
 
     // Reset visual state
@@ -91,7 +89,6 @@ async function addFoodItem() {
     let day = await Weekday.fromJSON(parsed);
     day.addFoodItem(item);
     localStorage.setItem(activeDay, JSON.stringify(day));
-    updateTable(activeDay, meal, JSON.parse(localStorage.getItem(activeDay)))
 
     // Clear the input field after successful addition
     foodCodeInput.value = '';

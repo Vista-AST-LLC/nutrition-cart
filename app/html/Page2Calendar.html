@@ -29,89 +29,96 @@
             </div>
         </div>
 
-        <!--Calandar Container-->
-        <div id='calendar'>
-            <table>
-                <thead>
-                    <tr>
-                        <th>
-                            <button class="day-button" id="monBtn" onclick="setActiveDay('M')">Monday</button>
-                        </th>
-                        <th>
-                            <button class="day-button" id="tuesBtn" onclick="setActiveDay('T')">Tuesday</button>
-                        </th>
-                        </th>
-                        <th>
-                            <button class="day-button" id="wedBtn" onclick="setActiveDay('W')">Wednesday</button>
+        <!--Page Title Container-->
+        <div class="card">
+            <div class="meal-plan-title">
+                <h2>Weekly Meal Plan</h2>
+                <button class="update-btn" id="updateBtn" onclick="updateTable()">Update Calendar</button>
+            </div>
 
-                        </th>
-                        <th>
-                            <button class="day-button" id="thursBtn" onclick="setActiveDay('TH')">Thursday</button>
+            <!--Calandar Container-->
+            <div id='calendar'>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>
+                                <button class="day-button" id="monBtn" onclick="setActiveDay('M')">Monday</button>
+                            </th>
+                            <th>
+                                <button class="day-button" id="tuesBtn" onclick="setActiveDay('T')">Tuesday</button>
+                            </th>
+                            </th>
+                            <th>
+                                <button class="day-button" id="wedBtn" onclick="setActiveDay('W')">Wednesday</button>
 
-                        </th>
-                        <th>
-                            <button class="day-button" id="friBtn" onclick="setActiveDay('F')">Friday</button>
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td id='monday'>
-                            <h3>Breakfast</h3>
-                            <ul id='monBfast'></ul>
-                            <h3>Lunch</h3>
-                            <ul id='monLunch'></ul>
-                            <h3>Dinner</h3>
-                            <ul id='monDinner'></ul>
-                            <h3>Snack</h3>
-                            <ul id='monSnack'></ul>
-                        </td>
-                        <td id='tuesday'>
-                            <h3>Breakfast</h3>
-                            <ul id='tuesBfast'></ul>
-                            <h3>Lunch</h3>
-                            <ul id='tuesLunch'></ul>
-                            <h3>Dinner</h3>
-                            <ul id='tuesDinner'></ul>
-                            <h3>Snack</h3>
-                            <ul id='tuesSnack'></ul>
-                        </td>
-                        <td id='wednesday'>
-                            <h3>Breakfast</h3>
-                            <ul id='wedBfast'></ul>
-                            <h3>Lunch</h3>
-                            <ul id='wedLunch'></ul>
-                            <h3>Dinner</h3>
-                            <ul id='wedDinner'></ul>
-                            <h3>Snack</h3>
-                            <ul id='wedSnack'></ul>
-                        </td>
-                        <td id='thursday'>
-                            <h3>Breakfast</h3>
-                            <ul id='thursBfast'></ul>
-                            <h3>Lunch</h3>
-                            <ul id='thursLunch'></ul>
-                            <h3>Dinner</h3>
-                            <ul id='thursDinner'></ul>
-                            <h3>Snack</h3>
-                            <ul id='thursSnack'></ul>
-                        </td>
-                        <td id='friday'>
-                            <h3>Breakfast</h3>
-                            <ul id='friBfast'></ul>
-                            <h3>Lunch</h3>
-                            <ul id='friLunch'></ul>
-                            <h3>Dinner</h3>
-                            <ul id='friDinner'></ul>
-                            <h3>Snack</h3>
-                            <ul id='friSnack'></ul>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+                            </th>
+                            <th>
+                                <button class="day-button" id="thursBtn" onclick="setActiveDay('TH')">Thursday</button>
+
+                            </th>
+                            <th>
+                                <button class="day-button" id="friBtn" onclick="setActiveDay('F')">Friday</button>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td id='monday'>
+                                <h3>Breakfast</h3>
+                                <ul id='monBfast'></ul>
+                                <h3>Lunch</h3>
+                                <ul id='monLunch'></ul>
+                                <h3>Dinner</h3>
+                                <ul id='monDinner'></ul>
+                                <h3>Snack</h3>
+                                <ul id='monSnack'></ul>
+                            </td>
+                            <td id='tuesday'>
+                                <h3>Breakfast</h3>
+                                <ul id='tuesBfast'></ul>
+                                <h3>Lunch</h3>
+                                <ul id='tuesLunch'></ul>
+                                <h3>Dinner</h3>
+                                <ul id='tuesDinner'></ul>
+                                <h3>Snack</h3>
+                                <ul id='tuesSnack'></ul>
+                            </td>
+                            <td id='wednesday'>
+                                <h3>Breakfast</h3>
+                                <ul id='wedBfast'></ul>
+                                <h3>Lunch</h3>
+                                <ul id='wedLunch'></ul>
+                                <h3>Dinner</h3>
+                                <ul id='wedDinner'></ul>
+                                <h3>Snack</h3>
+                                <ul id='wedSnack'></ul>
+                            </td>
+                            <td id='thursday'>
+                                <h3>Breakfast</h3>
+                                <ul id='thursBfast'></ul>
+                                <h3>Lunch</h3>
+                                <ul id='thursLunch'></ul>
+                                <h3>Dinner</h3>
+                                <ul id='thursDinner'></ul>
+                                <h3>Snack</h3>
+                                <ul id='thursSnack'></ul>
+                            </td>
+                            <td id='friday'>
+                                <h3>Breakfast</h3>
+                                <ul id='friBfast'></ul>
+                                <h3>Lunch</h3>
+                                <ul id='friLunch'></ul>
+                                <h3>Dinner</h3>
+                                <ul id='friDinner'></ul>
+                                <h3>Snack</h3>
+                                <ul id='friSnack'></ul>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
-
 </body>
 
 </html>
