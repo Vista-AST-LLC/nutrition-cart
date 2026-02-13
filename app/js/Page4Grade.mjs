@@ -57,35 +57,35 @@ gradeButton.addEventListener('click', async (e) => {
     let caloriesCom = document.getElementById('caloriesComments');
     let caloriesCard = document.getElementById('totalCalories');
     caloriesCom.innerHTML = report.score[ReportCard.COMMENTS][Constants.CALORIES];
-    caloriesCard.innerHTML = Math.round(report.score[ReportCard.AMOUNTS][Constants.CALORIES] / 5);
+    caloriesCard.innerHTML = Math.round(report.score[ReportCard.AMOUNTS][Constants.CALORIES]);
     let fatsCom = document.getElementById('fatsComments');
     let fatsCard = document.getElementById('totalFats');
     fatsCom.innerHTML = report.score[ReportCard.COMMENTS][Constants.TOTALFAT];
-    fatsCard.innerHTML = Math.round(report.score[ReportCard.AMOUNTS][Constants.TOTALFAT] / 5);
+    fatsCard.innerHTML = Math.round(report.score[ReportCard.AMOUNTS][Constants.TOTALFAT]);
     let cholesterolCom = document.getElementById('cholesterolComments');
     let cholesterolCard = document.getElementById('totalCholesterol');
     cholesterolCom.innerHTML = report.score[ReportCard.COMMENTS][Constants.CHOLESTEROL];
-    cholesterolCard.innerHTML = Math.round(report.score[ReportCard.AMOUNTS][Constants.CHOLESTEROL] / 5);
+    cholesterolCard.innerHTML = Math.round(report.score[ReportCard.AMOUNTS][Constants.CHOLESTEROL]);
     let sodiumCom = document.getElementById('sodiumComments');
     let sodiumCard = document.getElementById('totalSodium');
     sodiumCom.innerHTML = report.score[ReportCard.COMMENTS][Constants.SODIUM];
-    sodiumCard.innerHTML = Math.round(report.score[ReportCard.AMOUNTS][Constants.SODIUM] / 5);
+    sodiumCard.innerHTML = Math.round(report.score[ReportCard.AMOUNTS][Constants.SODIUM]);
     let carbsCom = document.getElementById('carbsComments');
     let carbsCard = document.getElementById('totalCarbs');
     carbsCom.innerHTML = report.score[ReportCard.COMMENTS][Constants.CARBS];
-    carbsCard.innerHTML = Math.round(report.score[ReportCard.AMOUNTS][Constants.CARBS] / 5);
+    carbsCard.innerHTML = Math.round(report.score[ReportCard.AMOUNTS][Constants.CARBS]);
     let fiberCom = document.getElementById('fiberComments');
     let fiberCard = document.getElementById('totalFiber');
     fiberCom.innerHTML = report.score[ReportCard.COMMENTS][Constants.FIBER];
-    fiberCard.innerHTML = Math.round(report.score[ReportCard.AMOUNTS][Constants.FIBER] / 5);
+    fiberCard.innerHTML = Math.round(report.score[ReportCard.AMOUNTS][Constants.FIBER]);
     let sugarsCom = document.getElementById('sugarsComments');
     let sugarsCard = document.getElementById('totalSugars');
     sugarsCom.innerHTML = report.score[ReportCard.COMMENTS][Constants.SUGAR];
-    sugarsCard.innerHTML = Math.round(report.score[ReportCard.AMOUNTS][Constants.SUGAR] / 5);
+    sugarsCard.innerHTML = Math.round(report.score[ReportCard.AMOUNTS][Constants.SUGAR]);
     let proteinCom = document.getElementById('proteinComments');
     let proteinCard = document.getElementById('totalProtein');
     proteinCom.innerHTML = report.score[ReportCard.COMMENTS][Constants.PROTEIN];
-    proteinCard.innerHTML = Math.round(report.score[ReportCard.AMOUNTS][Constants.PROTEIN] / 5);
+    proteinCard.innerHTML = Math.round(report.score[ReportCard.AMOUNTS][Constants.PROTEIN]);
 })
 
 class ReportCard {
@@ -128,37 +128,67 @@ class ReportCard {
         this.resetScore();
         let daysAmount = this.days.length;
         while (this.days.length > 0) {
-            this.accumulateTotals(this.days.pop());
+            let dayTotal = this.accumulateTotals(this.days.pop());
+            this.score[ReportCard.SCORE][Constants.CALORIES] += this.basicGradeRubric(Constants.CALORIES, dayTotal[Constants.CALORIES]);
+            this.score[ReportCard.AMOUNTS][Constants.CALORIES] += dayTotal[Constants.CALORIES];
+            this.score[ReportCard.SCORE][Constants.TOTALFAT] += this.basicGradeRubric(Constants.TOTALFAT, dayTotal[Constants.TOTALFAT]);
+            this.score[ReportCard.AMOUNTS][Constants.TOTALFAT] += dayTotal[Constants.TOTALFAT];
+            this.score[ReportCard.SCORE][Constants.SATFAT] += this.basicGradeRubric(Constants.SATFAT, dayTotal[Constants.SATFAT]);
+            this.score[ReportCard.AMOUNTS][Constants.SATFAT] += dayTotal[Constants.SATFAT];
+            this.score[ReportCard.SCORE][Constants.TRANSFAT] += this.basicGradeRubric(Constants.TRANSFAT, dayTotal[Constants.TRANSFAT]);
+            this.score[ReportCard.AMOUNTS][Constants.TRANSFAT] += dayTotal[Constants.TRANSFAT];
+            this.score[ReportCard.SCORE][Constants.CHOLESTEROL] += this.basicGradeRubric(Constants.CHOLESTEROL, dayTotal[Constants.CHOLESTEROL]);
+            this.score[ReportCard.AMOUNTS][Constants.CHOLESTEROL] += dayTotal[Constants.CHOLESTEROL];
+            this.score[ReportCard.SCORE][Constants.SODIUM] += this.basicGradeRubric(Constants.SODIUM, dayTotal[Constants.SODIUM]);
+            this.score[ReportCard.AMOUNTS][Constants.SODIUM] += dayTotal[Constants.SODIUM];
+            this.score[ReportCard.SCORE][Constants.CARBS] += this.basicGradeRubric(Constants.CARBS, dayTotal[Constants.CARBS]);
+            this.score[ReportCard.AMOUNTS][Constants.CARBS] += dayTotal[Constants.CARBS];
+            this.score[ReportCard.SCORE][Constants.FIBER] += this.basicGradeRubric(Constants.FIBER, dayTotal[Constants.FIBER]);
+            this.score[ReportCard.AMOUNTS][Constants.FIBER] += dayTotal[Constants.FIBER];
+            this.score[ReportCard.SCORE][Constants.SUGAR] += this.basicGradeRubric(Constants.SUGAR, dayTotal[Constants.SUGAR]);
+            this.score[ReportCard.AMOUNTS][Constants.SUGAR] += dayTotal[Constants.SUGAR];
+            this.score[ReportCard.SCORE][Constants.PROTEIN] += this.basicGradeRubric(Constants.PROTEIN, dayTotal[Constants.PROTEIN]);
+            this.score[ReportCard.AMOUNTS][Constants.PROTEIN] += dayTotal[Constants.PROTEIN];
         }
-        // At this point, each category of the AMOUNTS array has the total amount of
-        // that field for the day, so we send the day's total through the grading rubric 
-        this.score[ReportCard.SCORE][Constants.CALORIES] = this.basicGradeRubric(Constants.CALORIES, (this.score[ReportCard.AMOUNTS][Constants.CALORIES] / daysAmount));
-        this.score[ReportCard.SCORE][Constants.TOTALFAT] = this.basicGradeRubric(Constants.TOTALFAT, (this.score[ReportCard.AMOUNTS][Constants.TOTALFAT] / daysAmount));
-        this.score[ReportCard.SCORE][Constants.SATFAT] = this.basicGradeRubric(Constants.SATFAT, (this.score[ReportCard.AMOUNTS][Constants.SATFAT] / daysAmount));
-        this.score[ReportCard.SCORE][Constants.TRANSFAT] = this.basicGradeRubric(Constants.TRANSFAT, (this.score[ReportCard.AMOUNTS][Constants.TRANSFAT] / daysAmount));
-        this.score[ReportCard.SCORE][Constants.CHOLESTEROL] = this.basicGradeRubric(Constants.CHOLESTEROL, (this.score[ReportCard.AMOUNTS][Constants.CHOLESTEROL] / daysAmount));
-        this.score[ReportCard.SCORE][Constants.SODIUM] = this.basicGradeRubric(Constants.SODIUM, (this.score[ReportCard.AMOUNTS][Constants.SODIUM] / daysAmount));
-        this.score[ReportCard.SCORE][Constants.CARBS] = this.basicGradeRubric(Constants.CARBS, (this.score[ReportCard.AMOUNTS][Constants.CARBS] / daysAmount));
-        this.score[ReportCard.SCORE][Constants.FIBER] = this.basicGradeRubric(Constants.FIBER, (this.score[ReportCard.AMOUNTS][Constants.FIBER] / daysAmount));
-        this.score[ReportCard.SCORE][Constants.SUGAR] = this.basicGradeRubric(Constants.SUGAR, (this.score[ReportCard.AMOUNTS][Constants.SUGAR] / daysAmount));
-        this.score[ReportCard.SCORE][Constants.PROTEIN] = this.basicGradeRubric(Constants.PROTEIN, (this.score[ReportCard.AMOUNTS][Constants.PROTEIN] / daysAmount));
+        this.score[ReportCard.SCORE][Constants.CALORIES] /= daysAmount;
+        this.score[ReportCard.AMOUNTS][Constants.CALORIES] /= daysAmount;
+        this.score[ReportCard.SCORE][Constants.TOTALFAT] /= daysAmount;
+        this.score[ReportCard.AMOUNTS][Constants.TOTALFAT] /= daysAmount;
+        this.score[ReportCard.SCORE][Constants.SATFAT] /= daysAmount;
+        this.score[ReportCard.AMOUNTS][Constants.SATFAT] /= daysAmount;
+        this.score[ReportCard.SCORE][Constants.TRANSFAT] /= daysAmount;
+        this.score[ReportCard.AMOUNTS][Constants.TRANSFAT] /= daysAmount;
+        this.score[ReportCard.SCORE][Constants.CHOLESTEROL] /= daysAmount;
+        this.score[ReportCard.AMOUNTS][Constants.CHOLESTEROL] /= daysAmount;
+        this.score[ReportCard.SCORE][Constants.SODIUM] /= daysAmount;
+        this.score[ReportCard.AMOUNTS][Constants.SODIUM] /= daysAmount;
+        this.score[ReportCard.SCORE][Constants.CARBS] /= daysAmount;
+        this.score[ReportCard.AMOUNTS][Constants.CARBS] /= daysAmount;
+        this.score[ReportCard.SCORE][Constants.FIBER] /= daysAmount;
+        this.score[ReportCard.AMOUNTS][Constants.FIBER] /= daysAmount;
+        this.score[ReportCard.SCORE][Constants.SUGAR] /= daysAmount;
+        this.score[ReportCard.AMOUNTS][Constants.SUGAR] /= daysAmount;
+        this.score[ReportCard.SCORE][Constants.PROTEIN] /= daysAmount;
+        this.score[ReportCard.AMOUNTS][Constants.PROTEIN] /= daysAmount;
     }
 
     accumulateTotals(day) {
+        let dayTotal = new Array(10).fill(0);
         for (const mealType of [Constants.BREAKFAST, Constants.LUNCH, Constants.DINNER, Constants.SNACKS]) {
             for (const foodItem of day.getMealItems(mealType) ?? []) {
-                this.score[ReportCard.AMOUNTS][Constants.CALORIES] += foodItem.calories;
-                this.score[ReportCard.AMOUNTS][Constants.TOTALFAT] += foodItem.totalFatG;
-                this.score[ReportCard.AMOUNTS][Constants.SATFAT] += foodItem.satFatG;
-                this.score[ReportCard.AMOUNTS][Constants.TRANSFAT] += foodItem.transFatG;
-                this.score[ReportCard.AMOUNTS][Constants.CHOLESTEROL] += foodItem.cholesterolMG;
-                this.score[ReportCard.AMOUNTS][Constants.SODIUM] += foodItem.sodiumMG;
-                this.score[ReportCard.AMOUNTS][Constants.CARBS] += foodItem.carbsG;
-                this.score[ReportCard.AMOUNTS][Constants.FIBER] += foodItem.fiberG;
-                this.score[ReportCard.AMOUNTS][Constants.SUGAR] += foodItem.sugarsG;
-                this.score[ReportCard.AMOUNTS][Constants.PROTEIN] += foodItem.proteinG;
+                dayTotal[Constants.CALORIES] += foodItem.calories;
+                dayTotal[Constants.TOTALFAT] += foodItem.totalFatG;
+                dayTotal[Constants.SATFAT] += foodItem.satFatG;
+                dayTotal[Constants.TRANSFAT] += foodItem.transFatG;
+                dayTotal[Constants.CHOLESTEROL] += foodItem.cholesterolMG;
+                dayTotal[Constants.SODIUM] += foodItem.sodiumMG;
+                dayTotal[Constants.CARBS] += foodItem.carbsG;
+                dayTotal[Constants.FIBER] += foodItem.fiberG;
+                dayTotal[Constants.SUGAR] += foodItem.sugarsG;
+                dayTotal[Constants.PROTEIN] += foodItem.proteinG;
             }
         }
+        return dayTotal;
     }
 
     basicGradeRubric(type, value) {
