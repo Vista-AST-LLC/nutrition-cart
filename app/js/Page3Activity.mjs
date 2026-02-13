@@ -3,9 +3,9 @@ import { createFoodItem, FoodItem, Weekday, Constants } from "./common.mjs";
 let keyLastTime = performance.now();
 let keyEntry = '';
 
-let monday = new Weekday();
+/*let monday = new Weekday();
 localStorage.setItem('Monday', JSON.stringify(monday));
-localStorage.setItem('ActiveDay', 'Monday');
+localStorage.setItem('ActiveDay', 'Monday');*/
 
 const foodCodeInput = document.getElementById('foodCode');
 const addFoodButton = document.getElementById('addFoodButton');

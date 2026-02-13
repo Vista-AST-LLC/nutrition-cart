@@ -45,7 +45,7 @@ export async function createFoodItem(barcode) {
 }
 
 export class FoodItem {
-    constructor(data){
+    constructor(data) {
         const item = data.split(',');
         this.refNumber = item[0];
         this.itemName = item[1];
@@ -121,44 +121,44 @@ export class Weekday {
         this.snacks = [];
     }
 
-static async fromJSON(parsed) {
-    const day = new Weekday();
+    static async fromJSON(parsed) {
+        const day = new Weekday();
 
-    if (!parsed) return day;
+        if (!parsed) return day;
 
-    const meals = [
-        ...(parsed.breakfast ?? []),
-        ...(parsed.lunch ?? []),
-        ...(parsed.dinner ?? []),
-        ...(parsed.snacks ?? [])
-    ];
+        const meals = [
+            ...(parsed.breakfast ?? []),
+            ...(parsed.lunch ?? []),
+            ...(parsed.dinner ?? []),
+            ...(parsed.snacks ?? [])
+        ];
 
-    const items = await Promise.all(meals
-        .filter(i => typeof i?.refNumber === "string" && i.refNumber.trim() !== "")
-        .map(i => createFoodItem(i.refNumber))
-    );
+        const items = await Promise.all(meals
+            .filter(i => typeof i?.refNumber === "string" && i.refNumber.trim() !== "")
+            .map(i => createFoodItem(i.refNumber))
+        );
 
-    items.forEach(item => day.addFoodItem(item));
+        items.forEach(item => day.addFoodItem(item));
 
-    return day;
-}
+        return day;
+    }
 
     addFoodItem(item) {
         // Do a switch on the first char of the ref number (B, L, D, S)
         switch (item.refNumber.charAt(0)) {
-        case Constants.BREAKFAST:
-            // Add the item to the array
-            this.breakfast.push(item);
-            break;
-        case Constants.LUNCH:
-            this.lunch.push(item);
-            break;
-        case Constants.DINNER:
-            this.dinner.push(item);
-            break;
-        case Constants.SNACKS:
-            this.snacks.push(item);
-            break;
+            case Constants.BREAKFAST:
+                // Add the item to the array
+                this.breakfast.push(item);
+                break;
+            case Constants.LUNCH:
+                this.lunch.push(item);
+                break;
+            case Constants.DINNER:
+                this.dinner.push(item);
+                break;
+            case Constants.SNACKS:
+                this.snacks.push(item);
+                break;
         }
     }
 

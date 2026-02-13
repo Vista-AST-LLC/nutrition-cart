@@ -3,7 +3,7 @@ import { createFoodItem, Constants, FoodItem, Weekday } from "./common.mjs";
 const gradeButton = document.getElementById("getGradeButton");
 gradeButton.addEventListener('click', async (e) => {
     gradeButton.style.visibility = 'hidden';
-    
+
     let parsedMon = JSON.parse(localStorage.getItem('Monday'));
     if (!parsedMon) console.log("Parsed day is null: Monday");
     let mon = await Weekday.fromJSON(parsedMon);
@@ -19,7 +19,7 @@ gradeButton.addEventListener('click', async (e) => {
     let parsedFri = JSON.parse(localStorage.getItem('Friday'));
     if (!parsedFri) console.log("Parsed day is null: Friday");
     let fri = await Weekday.fromJSON(parsedFri);
-    
+
     let report = new ReportCard();
 
     report.addDays([mon, tues, wed, thur, fri]);
@@ -110,7 +110,7 @@ class ReportCard {
     // This is used to interpolate between values for scoring 
     // Bottom = 0, top = 1
     normalize(bottom, top, value) {
-        return ( (value - bottom) / (top - bottom) ) * ReportCard.MAX_SCORE;
+        return ((value - bottom) / (top - bottom)) * ReportCard.MAX_SCORE;
     }
 
     // Add days to the ReportCard, handles individual days and an array of days
@@ -164,144 +164,181 @@ class ReportCard {
     basicGradeRubric(type, value) {
         switch (type) {
             case Constants.CALORIES:
-                if (value > 4000) { 
+                if (value > 4000) {
                     this.score[ReportCard.COMMENTS][Constants.CALORIES] = "Way too many calories!";
-                    return 0; }
-                if (value > 2500) { 
+                    return 0;
+                }
+                if (value > 2500) {
                     this.score[ReportCard.COMMENTS][Constants.CALORIES] = "Could use less calories.";
-                    return this.normalize(4000, 2500, value); }
-                if (value > 1500) { 
+                    return this.normalize(4000, 2500, value);
+                }
+                if (value > 1500) {
                     this.score[ReportCard.COMMENTS][Constants.CALORIES] = "Good job! You are around the ideal calorie count.";
-                    return ReportCard.MAX_SCORE; }
-                if (value > 1000) { 
+                    return ReportCard.MAX_SCORE;
+                }
+                if (value > 1000) {
                     this.score[ReportCard.COMMENTS][Constants.CALORIES] = "Not enough calories, you need a little more to stay healty.";
-                    return this.normalize(1000, 1500, value); }
+                    return this.normalize(1000, 1500, value);
+                }
                 this.score[ReportCard.COMMENTS][Constants.CALORIES] = "You don't have nearly enough calories, you will starve!";
                 return 0;
             case Constants.TOTALFAT:
-                if (value > 100) { 
+                if (value > 100) {
                     this.score[ReportCard.COMMENTS][Constants.TOTALFAT] = "Way too many fats!";
-                    return 0; }
-                if (value > 50) { 
+                    return 0;
+                }
+                if (value > 50) {
                     this.score[ReportCard.COMMENTS][Constants.TOTALFAT] = "Could use fewer fats.";
-                    return this.normalize(100, 50, value); }
-                if (value > 25) { 
+                    return this.normalize(100, 50, value);
+                }
+                if (value > 25) {
                     this.score[ReportCard.COMMENTS][Constants.TOTALFAT] = "Good amount of fats.";
-                    return ReportCard.MAX_SCORE; }
-                if (value > 0) { 
+                    return ReportCard.MAX_SCORE;
+                }
+                if (value > 0) {
                     this.score[ReportCard.COMMENTS][Constants.TOTALFAT] = "Could use a little more fats!";
-                    return this.normalize(0, 25, value); }
+                    return this.normalize(0, 25, value);
+                }
                 this.score[ReportCard.COMMENTS][Constants.TOTALFAT] = "You need more fats!";
                 return 0;
             case Constants.SATFAT:
                 if (value > 40) {
-                    return 0; }
-                if (value > 20) { 
-                    return 0.75 * this.normalize(40, 20, value); }
-                if (value > 10) { 
-                    return 0.75 + 0.25 * this.normalize(20, 10, value); }
+                    return 0;
+                }
+                if (value > 20) {
+                    return 0.75 * this.normalize(40, 20, value);
+                }
+                if (value > 10) {
+                    return 0.75 + 0.25 * this.normalize(20, 10, value);
+                }
                 return ReportCard.MAX_SCORE;
             case Constants.TRANSFAT:
-                if (value > 5) { 
+                if (value > 5) {
                     this.score[ReportCard.COMMENTS][Constants.TOTALFAT] = this.score[ReportCard.COMMENTS][Constants.TOTALFAT] + " Also way too much transfat!";
-                    return 0; }
-                if (value > 0) { 
+                    return 0;
+                }
+                if (value > 0) {
                     this.score[ReportCard.COMMENTS][Constants.TOTALFAT] = this.score[ReportCard.COMMENTS][Constants.TOTALFAT] + " Also could use less transfat!";
-                    return this.normalize(5, 0, value); }
+                    return this.normalize(5, 0, value);
+                }
                 return ReportCard.MAX_SCORE;
             case Constants.CHOLESTEROL:
-                if (value > 500) { 
+                if (value > 500) {
                     this.score[ReportCard.COMMENTS][Constants.CHOLESTEROL] = "Way too much cholesterol!";
-                    return 0; }
-                if (value > 200) { 
+                    return 0;
+                }
+                if (value > 200) {
                     this.score[ReportCard.COMMENTS][Constants.CHOLESTEROL] = "Could use less cholesterol.";
-                    return 0.75 * this.normalize(500, 200, value); }
-                if (value > 0) { 
+                    return 0.75 * this.normalize(500, 200, value);
+                }
+                if (value > 0) {
                     this.score[ReportCard.COMMENTS][Constants.CHOLESTEROL] = "Good amount of cholesterol.";
-                    return 0.75 + 0.25 * this.normalize(200, 0, value); }
+                    return 0.75 + 0.25 * this.normalize(200, 0, value);
+                }
                 this.score[ReportCard.COMMENTS][Constants.CHOLESTEROL] = "Good job keeping cholesterol low!";
                 return ReportCard.MAX_SCORE;
             case Constants.SODIUM:
-                if (value > 4000) { 
+                if (value > 4000) {
                     this.score[ReportCard.COMMENTS][Constants.SODIUM] = "Way too much sodium!";
-                    return 0; }
-                if (value > 2300) { 
+                    return 0;
+                }
+                if (value > 2300) {
                     this.score[ReportCard.COMMENTS][Constants.SODIUM] = "Could use less sodium.";
-                    return 0.9 * this.normalize(4000, 2300, value); }
-                if (value > 1500) { 
+                    return 0.9 * this.normalize(4000, 2300, value);
+                }
+                if (value > 1500) {
                     this.score[ReportCard.COMMENTS][Constants.SODIUM] = "Good amount of sodium.";
-                    return 0.9 + 0.1 * this.normalize(2300, 1500, value); }
-                if (value > 500) { 
+                    return 0.9 + 0.1 * this.normalize(2300, 1500, value);
+                }
+                if (value > 500) {
                     this.score[ReportCard.COMMENTS][Constants.SODIUM] = "Great job keeping sodium amount low!";
-                    return ReportCard.MAX_SCORE; }
-                if (value > 0) { 
+                    return ReportCard.MAX_SCORE;
+                }
+                if (value > 0) {
                     this.score[ReportCard.COMMENTS][Constants.SODIUM] = "Could use a little more sodium.";
-                    return this.normalize(0, 500, value); }
+                    return this.normalize(0, 500, value);
+                }
                 this.score[ReportCard.COMMENTS][Constants.SODIUM] = "Way too little sodium! Sodium is required for your body to function.";
                 return 0;
             case Constants.CARBS:
-                if (value > 500) { 
+                if (value > 500) {
                     this.score[ReportCard.COMMENTS][Constants.CARBS] = "Way too many carbs!";
-                    return 0; }
-                if (value > 275) { 
+                    return 0;
+                }
+                if (value > 275) {
                     this.score[ReportCard.COMMENTS][Constants.CARBS] = "Could use less carbs.";
-                    return this.normalize(500, 275, value); }
-                if (value > 200) { 
+                    return this.normalize(500, 275, value);
+                }
+                if (value > 200) {
                     this.score[ReportCard.COMMENTS][Constants.CARBS] = "Good amount of carbs!";
-                    return ReportCard.MAX_SCORE; }
-                if (value > 150) { 
+                    return ReportCard.MAX_SCORE;
+                }
+                if (value > 150) {
                     this.score[ReportCard.COMMENTS][Constants.CARBS] = "Could use a few more carbs.";
-                    return 0.5 + 0.5 * this.normalize(150, 200, value); }
-                if (value > 50) { 
+                    return 0.5 + 0.5 * this.normalize(150, 200, value);
+                }
+                if (value > 50) {
                     this.score[ReportCard.COMMENTS][Constants.CARBS] = "Need more carbs.";
-                    return 0.5 * this.normalize(50, 150, value); }
+                    return 0.5 * this.normalize(50, 150, value);
+                }
                 this.score[ReportCard.COMMENTS][Constants.CARBS] = "Need way more carbs, carbs are necessary for your diet!";
                 return 0;
             case Constants.FIBER:
-                if (value > 100) { 
+                if (value > 100) {
                     this.score[ReportCard.COMMENTS][Constants.FIBER] = "Way too much fiber!";
-                    return 0; }
-                if (value > 38) { 
+                    return 0;
+                }
+                if (value > 38) {
                     this.score[ReportCard.COMMENTS][Constants.FIBER] = "Too much fiber, get a little less.";
-                    return this.normalize(100, 38, value); }
-                if (value > 28) { 
+                    return this.normalize(100, 38, value);
+                }
+                if (value > 28) {
                     this.score[ReportCard.COMMENTS][Constants.FIBER] = "Perfect amount of fiber!";
-                    return ReportCard.MAX_SCORE; }
-                if (value > 0) { 
+                    return ReportCard.MAX_SCORE;
+                }
+                if (value > 0) {
                     this.score[ReportCard.COMMENTS][Constants.FIBER] = "Need some more fiber.";
-                    return this.normalize(0, 28, value); }
+                    return this.normalize(0, 28, value);
+                }
                 this.score[ReportCard.COMMENTS][Constants.FIBER] = "Not nearly enough fiber!";
                 return 0;
             case Constants.SUGAR:
-                if (value > 100) { 
+                if (value > 100) {
                     this.score[ReportCard.COMMENTS][Constants.SUGAR] = "Way too much sugar!";
-                    return 0; }
-                if (value > 50) { 
+                    return 0;
+                }
+                if (value > 50) {
                     this.score[ReportCard.COMMENTS][Constants.SUGAR] = "Too much sugar.";
-                    return 0.5 * this.normalize(100, 50, value); }
-                if (value > 30) { 
+                    return 0.5 * this.normalize(100, 50, value);
+                }
+                if (value > 30) {
                     this.score[ReportCard.COMMENTS][Constants.SUGAR] = "A little too much sugar!";
-                    return 0.5 + 0.5 * this.normalize(50, 30, value); }
+                    return 0.5 + 0.5 * this.normalize(50, 30, value);
+                }
                 this.score[ReportCard.COMMENTS][Constants.SUGAR] = "Good job keeping sugar low!";
                 return ReportCard.MAX_SCORE;
             case Constants.PROTEIN:
-                if (value > 150) { 
+                if (value > 150) {
                     this.score[ReportCard.COMMENTS][Constants.PROTEIN] = "That is a ton of protein, are you a body builder?!";
-                    return 0.5 * ReportCard.MAX_SCORE; }
-                if (value > 75) { 
+                    return 0.5 * ReportCard.MAX_SCORE;
+                }
+                if (value > 75) {
                     this.score[ReportCard.COMMENTS][Constants.PROTEIN] = "That is a lot of protein, are you an athelete?";
-                    return 0.5 + 0.5 * this.normalize(150, 75, value); }
-                if (value > 50) { 
+                    return 0.5 + 0.5 * this.normalize(150, 75, value);
+                }
+                if (value > 50) {
                     this.score[ReportCard.COMMENTS][Constants.PROTEIN] = "Perfect amount of protein!";
-                    return ReportCard.MAX_SCORE; }
-                if (value > 20) { 
+                    return ReportCard.MAX_SCORE;
+                }
+                if (value > 20) {
                     this.score[ReportCard.COMMENTS][Constants.PROTEIN] = "That is not enough protein, add some more.";
-                    return this.normalize(20, 50, value); }
+                    return this.normalize(20, 50, value);
+                }
                 this.score[ReportCard.COMMENTS][Constants.PROTEIN] = "That is not nearly enough protein, add some more!";
                 return 0;
         }
     }
 
-    score; 
+    score;
     days;
 }

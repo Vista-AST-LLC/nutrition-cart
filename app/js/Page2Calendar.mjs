@@ -1,116 +1,126 @@
-// Function to update the table calendar
-export function updateTable() {
+//********THINGS TO CONSIDER********
+//1) Updating HTML on Page2Calendar using JavaScript from Page3Activity
+//2) How to access correct meal index from localStorage and add it 
+//3) How to remove values from calendar
 
-    text = document.getElementById("foodInput").value;
-    meal = document.getElementById("mealSelect").value
-    day = document.getElementById("daySelect").value
+// Function to update the table calendar
+async function updateTable() {
+    let mon = JSON.parse(localStorage.getItem('Monday'))
+    let tues = JSON.parse(localStorage.getItem('Tuesday'))
+    let wed = JSON.parse(localStorage.getItem('Wednesday'))
+    let thurs = JSON.parse(localStorage.getItem('Thursday'))
+    let fri = JSON.parse(localStorage.getItem('Friday'))
 
     switch (day) {
-        case "monday":
+        case "Monday":
             switch (meal) {
-                case "breakfast":
-                    monBfast = document.getElementById("monBfast")
-                    updateHTML(monBfast, text)
+                case "B":
+                    console.log(breakfast[0]["itemName"])
+                    /*let monBfast = document.getElementById("monBfast")
+                    updateHTML(monBfast, breakfast[0]["itemName"])*/
                     break
-                case "lunch":
-                    monLunch = document.getElementById('monLunch')
-                    updateHTML(monLunch, text)
+                case "L":
+                    console.log(lunch[0]["itemName"])
+                    let monLunch = document.getElementById('monLunch')
+                    updateHTML(monLunch, lunch[0]["itemName"])
                     break
-                case "dinner":
-                    monDinner = document.getElementById('monDinner')
-                    updateHTML(monDinner, text)
+                case "D":
+                    console.log(dinner[0]["itemName"])
+                    let monDinner = document.getElementById('monDinner')
+                    updateHTML(monDinner, dinner[0]["itemName"])
                     break
-                case "snack":
-                    monSnack = document.getElementById('monSnack')
-                    updateHTML(monSnack, text)
+                case "S":
+                    console.lot(snacks[0]["itemName"])
+                    let monSnack = document.getElementById('monSnack')
+                    updateHTML(monSnack, snacks[0]["itemName"])
                     break
                 default:
                     alert("No meal was selected!")
             }
             break
-        case "tuesday":
+        case "Tuesday":
             switch (meal) {
-                case "breakfast":
-                    tuesBfast = document.getElementById("tuesBfast")
-                    updateHTML(tuesBfast, text)
+                case "B":
+                    let tuesBfast = document.getElementById("tuesBfast")
+                    updateHTML(tuesBfast, breakfast[0]["itemName"])
                     break
-                case "lunch":
-                    tuesLunch = document.getElementById('tuesLunch')
-                    updateHTML(tuesLunch, text)
+                case "L":
+                    let tuesLunch = document.getElementById('tuesLunch')
+                    updateHTML(tuesLunch, lunch[0]["itemName"])
                     break
-                case "dinner":
-                    tuesDinner = document.getElementById('tuesDinner')
-                    updateHTML(tuesDinner, text)
+                case "D":
+                    let tuesDinner = document.getElementById('tuesDinner')
+                    updateHTML(tuesDinner, dinner[0]["itemName"])
                     break
-                case "snack":
-                    tuesSnack = document.getElementById('tuesSnack')
-                    updateHTML(tuesSnack, text)
+                case "S":
+                    let tuesSnack = document.getElementById('tuesSnack')
+                    updateHTML(tuesSnack, snacks[0]["itemName"])
                     break
                 default:
                     alert("No meal was selected!")
             }
             break
-        case "wednesday":
+        case "Wednesday":
             switch (meal) {
-                case "breakfast":
-                    wedBfast = document.getElementById("wedBfast")
-                    updateHTML(wedBfast, text)
+                case "B":
+                    let wedBfast = document.getElementById("wedBfast")
+                    updateHTML(wedBfast, breakfast[0]["itemName"])
                     break
-                case "lunch":
-                    wedLunch = document.getElementById('wedLunch')
-                    updateHTML(wedLunch, text)
+                case "L":
+                    let wedLunch = document.getElementById('wedLunch')
+                    updateHTML(wedLunch, lunch[0]["itemName"])
                     break
-                case "dinner":
-                    wedDinner = document.getElementById('wedDinner')
-                    updateHTML(wedDinner, text)
+                case "D":
+                    let wedDinner = document.getElementById('wedDinner')
+                    updateHTML(wedDinner, dinner[0]["itemName"])
                     break
-                case "snack":
-                    wedSnack = document.getElementById('wedSnack')
-                    updateHTML(wedSnack, text)
+                case "S":
+                    let wedSnack = document.getElementById('wedSnack')
+                    updateHTML(wedSnack, snacks[0]["itemName"])
                     break
                 default:
                     alert("No meal was selected!")
             }
             break
-        case "thursday":
+        case "Thursday":
             switch (meal) {
-                case "breakfast":
-                    thursBfast = document.getElementById("thursBfast")
-                    updateHTML(thursBfast, text)
+                case "B":
+                    let thursBfast = document.getElementById("thursBfast")
+                    updateHTML(thursBfast, breakfast[0]["itemName"])
                     break
-                case "lunch":
-                    thursLunch = document.getElementById('thursLunch')
-                    updateHTML(thursLunch, text)
+                case "L":
+                    let thursLunch = document.getElementById('thursLunch')
+                    updateHTML(thursLunch, lunch[0]["itemName"])
                     break
-                case "dinner":
-                    thursDinner = document.getElementById('thursDinner')
-                    updateHTML(thursDinner, text)
+                case "D":
+                    let thursDinner = document.getElementById('thursDinner')
+                    updateHTML(thursDinner, dinner[0]["itemName"])
                     break
-                case "snack":
-                    thursSnack = document.getElementById('thursSnack')
-                    updateHTML(thursSnack, text)
+                case "S":
+                    let thursSnack = document.getElementById('thursSnack')
+                    updateHTML(thursSnack, snacks[0]["itemName"])
                     break
                 default:
                     alert("No meal was selected!")
             }
             break
-        case "friday":
+        case "Friday":
             switch (meal) {
-                case "breakfast":
-                    friBfast = document.getElementById("friBfast")
-                    updateHTML(friBfast, text)
+                case "B":
+                    let friBfast = document.getElementById("friBfast")
+                    updateHTML(friBfast, breakfast[0]["itemName"])
                     break
-                case "lunch":
-                    friLunch = document.getElementById('friLunch')
-                    updateHTML(friLunch, text)
+                case "L":
+                    let friLunch = document.getElementById('friLunch')
+                    updateHTML(friLunch, lunch[0]["itemName"])
                     break
-                case "dinner":
-                    friDinner = document.getElementById('friDinner')
-                    updateHTML(friDinner, text)
+                case "D":
+                    let friDinner = document.getElementById('friDinner')
+                    updateHTML(friDinner, dinner[0]["itemName"])
                     break
-                case "snack":
-                    friSnack = document.getElementById('friSnack')
-                    updateHTML(friSnack, text)
+                case "S":
+                    let friSnack = document.getElementById('friSnack')
+                    updateHTML(friSnack, snacks[0]["itemName"])
                     break
                 default:
                     alert("No meal was selected!")
@@ -119,15 +129,11 @@ export function updateTable() {
         default:
             alert("No day was selected!")
     }
-
-    document.getElementById("daySelect").value = 'sunday'
-    document.getElementById('mealSelect').value = 'breakfast'
-    document.getElementById('foodInput').value = ''
 }
 
-function updateHTML(tag, food) {
+async function updateHTML(tag, food) {
 
-    const listItem = document.createElement('li')
+    let listItem = document.createElement('li')
 
     listItem.innerHTML = `
         <h4>${food}</h4>
@@ -136,36 +142,36 @@ function updateHTML(tag, food) {
     tag.appendChild(listItem)
 }
 
-function clearTable(e) {
-    e.preventDefault()
+
+export function clearTable() {
     //Clearing all lists
 
     localStorage.removeItem('testArray')
     //Getting day ul by ID
-    monBfast = document.getElementById('monBfast');
-    monLunch = document.getElementById('monLunch');
-    monDinner = document.getElementById('monDinner');
-    monSnack = document.getElementById('monSnack');
+    let monBfast = document.getElementById('monBfast');
+    let monLunch = document.getElementById('monLunch');
+    let monDinner = document.getElementById('monDinner');
+    let monSnack = document.getElementById('monSnack');
 
-    tuesBfast = document.getElementById('tuesBfast');
-    tuesLunch = document.getElementById('tuesLunch');
-    tuesDinner = document.getElementById('tuesDinner');
-    tuesSnack = document.getElementById('tuesSnack');
+    let tuesBfast = document.getElementById('tuesBfast');
+    let tuesLunch = document.getElementById('tuesLunch');
+    let tuesDinner = document.getElementById('tuesDinner');
+    let tuesSnack = document.getElementById('tuesSnack');
 
-    wedBfast = document.getElementById('wedBfast');
-    wedLunch = document.getElementById('wedLunch');
-    wedDinner = document.getElementById('wedDinner');
-    wedSnack = document.getElementById('wedSnack');
+    let wedBfast = document.getElementById('wedBfast');
+    let wedLunch = document.getElementById('wedLunch');
+    let wedDinner = document.getElementById('wedDinner');
+    let wedSnack = document.getElementById('wedSnack');
 
-    thursBfast = document.getElementById('thursBfast');
-    thursLunch = document.getElementById('thursLunch');
-    thursDinner = document.getElementById('thursDinner');
-    thursSnack = document.getElementById('thursSnack');
+    let thursBfast = document.getElementById('thursBfast');
+    let thursLunch = document.getElementById('thursLunch');
+    let thursDinner = document.getElementById('thursDinner');
+    let thursSnack = document.getElementById('thursSnack');
 
-    friBfast = document.getElementById('friBfast');
-    friLunch = document.getElementById('friLunch');
-    friDinner = document.getElementById('friDinner');
-    friSnack = document.getElementById('friSnack');
+    let friBfast = document.getElementById('friBfast');
+    let friLunch = document.getElementById('friLunch');
+    let friDinner = document.getElementById('friDinner');
+    let friSnack = document.getElementById('friSnack');
 
     //Setting ul element to empty
     monBfast.innerHTML = ''
@@ -192,4 +198,59 @@ function clearTable(e) {
     friLunch.innerHTML = ''
     friDinner.innerHTML = ''
     friSnack.innerHTML = ''
+}
+
+async function updateBackgroundColor(day, dayTwo, dayThree, dayFour) {
+
+    document.getElementById(day).style.backgroundColor = 'lightgray';
+    document.getElementById(dayTwo).style.backgroundColor = 'lightgray';
+    document.getElementById(dayThree).style.backgroundColor = 'lightgray';
+    document.getElementById(dayFour).style.backgroundColor = 'lightgray';
+}
+
+async function resetBackgroundColor(mon, tues, wed, thur, fri) {
+    document.getElementById(mon).style.backgroundColor = 'lightgray';
+    document.getElementById(tues).style.backgroundColor = 'lightgray';
+    document.getElementById(wed).style.backgroundColor = 'lightgray';
+    document.getElementById(thur).style.backgroundColor = 'lightgray';
+    document.getElementById(fri).style.backgroundColor = 'lightgray';
+}
+
+//Function to Select the Active Day
+async function setActiveDay(day) {
+    switch (day) {
+        case 'M':
+            localStorage.setItem("ActiveDay", 'Monday')
+            document.getElementById('monday').style.backgroundColor = 'lightgoldenrodyellow'
+            updateBackgroundColor('tuesday', 'wednesday', 'thursday', 'friday')
+            window.location.href = '../html/Page3Activity.html'
+            break;
+        case 'T':
+            localStorage.setItem("ActiveDay", 'Tuesday')
+            document.getElementById('tuesday').style.backgroundColor = 'lightgoldenrodyellow'
+            updateBackgroundColor('monday', 'wednesday', 'thursday', 'friday')
+            window.location.href = '../html/Page3Activity.html'
+            break;
+        case 'W':
+            localStorage.setItem("ActiveDay", 'Wednesday')
+            document.getElementById('wednesday').style.backgroundColor = 'lightgoldenrodyellow'
+            updateBackgroundColor('monday', 'tuesday', 'thursday', 'friday')
+            window.location.href = '../html/Page3Activity.html'
+            break;
+        case 'TH':
+            localStorage.setItem("ActiveDay", 'Thursday')
+            document.getElementById('thursday').style.backgroundColor = 'lightgoldenrodyellow'
+            updateBackgroundColor('monday', 'tuesday', 'wednesday', 'friday')
+            window.location.href = '../html/Page3Activity.html'
+            break;
+        case 'F':
+            localStorage.setItem("ActiveDay", 'Friday')
+            document.getElementById('friday').style.backgroundColor = 'lightgoldenrodyellow'
+            updateBackgroundColor('monday', 'tuesday', 'wednesday', 'thursday')
+            window.location.href = '../html/Page3Activity.html'
+            break;
+        default:
+            resetBackgroundColor('monday', 'tuesday', 'wednesday', 'thursday', 'friday')
+            break;
+    }
 }
