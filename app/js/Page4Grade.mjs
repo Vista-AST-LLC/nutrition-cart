@@ -52,40 +52,40 @@ gradeButton.addEventListener('click', async (e) => {
     }
 
     let underGradeCircle = document.getElementById('underPointCircle');
-    underGradeCircle.innerHTML = "Your Grade: " + totalGrade;
+    underGradeCircle.innerHTML = "Your Grade: " + Math.round(totalGrade);
 
     let caloriesCom = document.getElementById('caloriesComments');
     let caloriesCard = document.getElementById('totalCalories');
     caloriesCom.innerHTML = report.score[ReportCard.COMMENTS][Constants.CALORIES];
-    caloriesCard.innerHTML = report.score[ReportCard.SCORE][Constants.CALORIES];
+    caloriesCard.innerHTML = Math.round(report.score[ReportCard.AMOUNTS][Constants.CALORIES] / 5);
     let fatsCom = document.getElementById('fatsComments');
     let fatsCard = document.getElementById('totalFats');
     fatsCom.innerHTML = report.score[ReportCard.COMMENTS][Constants.TOTALFAT];
-    fatsCard.innerHTML = report.score[ReportCard.SCORE][Constants.TOTALFAT];
+    fatsCard.innerHTML = Math.round(report.score[ReportCard.AMOUNTS][Constants.TOTALFAT] / 5);
     let cholesterolCom = document.getElementById('cholesterolComments');
     let cholesterolCard = document.getElementById('totalCholesterol');
     cholesterolCom.innerHTML = report.score[ReportCard.COMMENTS][Constants.CHOLESTEROL];
-    cholesterolCard.innerHTML = report.score[ReportCard.SCORE][Constants.CHOLESTEROL];
+    cholesterolCard.innerHTML = Math.round(report.score[ReportCard.AMOUNTS][Constants.CHOLESTEROL] / 5);
     let sodiumCom = document.getElementById('sodiumComments');
     let sodiumCard = document.getElementById('totalSodium');
     sodiumCom.innerHTML = report.score[ReportCard.COMMENTS][Constants.SODIUM];
-    sodiumCard.innerHTML = report.score[ReportCard.SCORE][Constants.SODIUM];
+    sodiumCard.innerHTML = Math.round(report.score[ReportCard.AMOUNTS][Constants.SODIUM] / 5);
     let carbsCom = document.getElementById('carbsComments');
     let carbsCard = document.getElementById('totalCarbs');
     carbsCom.innerHTML = report.score[ReportCard.COMMENTS][Constants.CARBS];
-    carbsCard.innerHTML = report.score[ReportCard.SCORE][Constants.CARBS];
+    carbsCard.innerHTML = Math.round(report.score[ReportCard.AMOUNTS][Constants.CARBS] / 5);
     let fiberCom = document.getElementById('fiberComments');
     let fiberCard = document.getElementById('totalFiber');
     fiberCom.innerHTML = report.score[ReportCard.COMMENTS][Constants.FIBER];
-    fiberCard.innerHTML = report.score[ReportCard.SCORE][Constants.FIBER];
+    fiberCard.innerHTML = Math.round(report.score[ReportCard.AMOUNTS][Constants.FIBER] / 5);
     let sugarsCom = document.getElementById('sugarsComments');
     let sugarsCard = document.getElementById('totalSugars');
     sugarsCom.innerHTML = report.score[ReportCard.COMMENTS][Constants.SUGAR];
-    sugarsCard.innerHTML = report.score[ReportCard.SCORE][Constants.SUGAR];
+    sugarsCard.innerHTML = Math.round(report.score[ReportCard.AMOUNTS][Constants.SUGAR] / 5);
     let proteinCom = document.getElementById('proteinComments');
     let proteinCard = document.getElementById('totalProtein');
     proteinCom.innerHTML = report.score[ReportCard.COMMENTS][Constants.PROTEIN];
-    proteinCard.innerHTML = report.score[ReportCard.SCORE][Constants.PROTEIN];
+    proteinCard.innerHTML = Math.round(report.score[ReportCard.AMOUNTS][Constants.PROTEIN] / 5);
 })
 
 class ReportCard {
