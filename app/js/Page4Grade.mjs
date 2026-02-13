@@ -151,25 +151,25 @@ class ReportCard {
             this.score[ReportCard.AMOUNTS][Constants.PROTEIN] += dayTotal[Constants.PROTEIN];
         }
         this.score[ReportCard.SCORE][Constants.CALORIES] /= daysAmount;
-        this.score[ReportCard.AMOUNTS][Constants.CALORIES] /= daysAmount;
+        this.basicGradeRubricComments(Constants.CALORIES, (this.score[ReportCard.AMOUNTS][Constants.CALORIES] /= daysAmount));
         this.score[ReportCard.SCORE][Constants.TOTALFAT] /= daysAmount;
-        this.score[ReportCard.AMOUNTS][Constants.TOTALFAT] /= daysAmount;
+        this.basicGradeRubricComments(Constants.TOTALFAT, (this.score[ReportCard.AMOUNTS][Constants.TOTALFAT] /= daysAmount));
         this.score[ReportCard.SCORE][Constants.SATFAT] /= daysAmount;
-        this.score[ReportCard.AMOUNTS][Constants.SATFAT] /= daysAmount;
+        this.basicGradeRubricComments(Constants.SATFAT, (this.score[ReportCard.AMOUNTS][Constants.SATFAT] /= daysAmount));
         this.score[ReportCard.SCORE][Constants.TRANSFAT] /= daysAmount;
-        this.score[ReportCard.AMOUNTS][Constants.TRANSFAT] /= daysAmount;
+        this.basicGradeRubricComments(Constants.TRANSFAT, (this.score[ReportCard.AMOUNTS][Constants.TRANSFAT] /= daysAmount));
         this.score[ReportCard.SCORE][Constants.CHOLESTEROL] /= daysAmount;
-        this.score[ReportCard.AMOUNTS][Constants.CHOLESTEROL] /= daysAmount;
+        this.basicGradeRubricComments(Constants.CHOLESTEROL, (this.score[ReportCard.AMOUNTS][Constants.CHOLESTEROL] /= daysAmount));
         this.score[ReportCard.SCORE][Constants.SODIUM] /= daysAmount;
-        this.score[ReportCard.AMOUNTS][Constants.SODIUM] /= daysAmount;
+        this.basicGradeRubricComments(Constants.SODIUM, (this.score[ReportCard.AMOUNTS][Constants.SODIUM] /= daysAmount));
         this.score[ReportCard.SCORE][Constants.CARBS] /= daysAmount;
-        this.score[ReportCard.AMOUNTS][Constants.CARBS] /= daysAmount;
+        this.basicGradeRubricComments(Constants.CARBS, (this.score[ReportCard.AMOUNTS][Constants.CARBS] /= daysAmount));
         this.score[ReportCard.SCORE][Constants.FIBER] /= daysAmount;
-        this.score[ReportCard.AMOUNTS][Constants.FIBER] /= daysAmount;
+        this.basicGradeRubricComments(Constants.FIBER, (this.score[ReportCard.AMOUNTS][Constants.FIBER] /= daysAmount));
         this.score[ReportCard.SCORE][Constants.SUGAR] /= daysAmount;
-        this.score[ReportCard.AMOUNTS][Constants.SUGAR] /= daysAmount;
+        this.basicGradeRubricComments(Constants.SUGAR, (this.score[ReportCard.AMOUNTS][Constants.SUGAR] /= daysAmount));
         this.score[ReportCard.SCORE][Constants.PROTEIN] /= daysAmount;
-        this.score[ReportCard.AMOUNTS][Constants.PROTEIN] /= daysAmount;
+        this.basicGradeRubricComments(Constants.PROTEIN, (this.score[ReportCard.AMOUNTS][Constants.PROTEIN] /= daysAmount));
     }
 
     accumulateTotals(day) {
@@ -195,41 +195,31 @@ class ReportCard {
         switch (type) {
             case Constants.CALORIES:
                 if (value > 4000) {
-                    this.score[ReportCard.COMMENTS][Constants.CALORIES] = "Way too many calories!";
                     return 0;
                 }
                 if (value > 2500) {
-                    this.score[ReportCard.COMMENTS][Constants.CALORIES] = "Could use less calories.";
                     return this.normalize(4000, 2500, value);
                 }
                 if (value > 1500) {
-                    this.score[ReportCard.COMMENTS][Constants.CALORIES] = "Good job! You are around the ideal calorie count.";
                     return ReportCard.MAX_SCORE;
                 }
                 if (value > 1000) {
-                    this.score[ReportCard.COMMENTS][Constants.CALORIES] = "Not enough calories, you need a little more to stay healty.";
                     return this.normalize(1000, 1500, value);
                 }
-                this.score[ReportCard.COMMENTS][Constants.CALORIES] = "You don't have nearly enough calories, you will starve!";
                 return 0;
             case Constants.TOTALFAT:
                 if (value > 100) {
-                    this.score[ReportCard.COMMENTS][Constants.TOTALFAT] = "Way too many fats!";
                     return 0;
                 }
                 if (value > 50) {
-                    this.score[ReportCard.COMMENTS][Constants.TOTALFAT] = "Could use fewer fats.";
                     return this.normalize(100, 50, value);
                 }
                 if (value > 25) {
-                    this.score[ReportCard.COMMENTS][Constants.TOTALFAT] = "Good amount of fats.";
                     return ReportCard.MAX_SCORE;
                 }
                 if (value > 0) {
-                    this.score[ReportCard.COMMENTS][Constants.TOTALFAT] = "Could use a little more fats!";
                     return this.normalize(0, 25, value);
                 }
-                this.score[ReportCard.COMMENTS][Constants.TOTALFAT] = "You need more fats!";
                 return 0;
             case Constants.SATFAT:
                 if (value > 40) {
@@ -244,128 +234,274 @@ class ReportCard {
                 return ReportCard.MAX_SCORE;
             case Constants.TRANSFAT:
                 if (value > 5) {
-                    this.score[ReportCard.COMMENTS][Constants.TOTALFAT] = this.score[ReportCard.COMMENTS][Constants.TOTALFAT] + " Also way too much transfat!";
                     return 0;
                 }
                 if (value > 0) {
-                    this.score[ReportCard.COMMENTS][Constants.TOTALFAT] = this.score[ReportCard.COMMENTS][Constants.TOTALFAT] + " Also could use less transfat!";
                     return this.normalize(5, 0, value);
                 }
                 return ReportCard.MAX_SCORE;
             case Constants.CHOLESTEROL:
                 if (value > 500) {
-                    this.score[ReportCard.COMMENTS][Constants.CHOLESTEROL] = "Way too much cholesterol!";
                     return 0;
                 }
                 if (value > 200) {
-                    this.score[ReportCard.COMMENTS][Constants.CHOLESTEROL] = "Could use less cholesterol.";
                     return 0.75 * this.normalize(500, 200, value);
                 }
                 if (value > 0) {
-                    this.score[ReportCard.COMMENTS][Constants.CHOLESTEROL] = "Good amount of cholesterol.";
                     return 0.75 + 0.25 * this.normalize(200, 0, value);
                 }
-                this.score[ReportCard.COMMENTS][Constants.CHOLESTEROL] = "Good job keeping cholesterol low!";
                 return ReportCard.MAX_SCORE;
             case Constants.SODIUM:
                 if (value > 4000) {
-                    this.score[ReportCard.COMMENTS][Constants.SODIUM] = "Way too much sodium!";
                     return 0;
                 }
                 if (value > 2300) {
-                    this.score[ReportCard.COMMENTS][Constants.SODIUM] = "Could use less sodium.";
                     return 0.9 * this.normalize(4000, 2300, value);
                 }
                 if (value > 1500) {
-                    this.score[ReportCard.COMMENTS][Constants.SODIUM] = "Good amount of sodium.";
                     return 0.9 + 0.1 * this.normalize(2300, 1500, value);
                 }
                 if (value > 500) {
-                    this.score[ReportCard.COMMENTS][Constants.SODIUM] = "Great job keeping sodium amount low!";
                     return ReportCard.MAX_SCORE;
                 }
                 if (value > 0) {
-                    this.score[ReportCard.COMMENTS][Constants.SODIUM] = "Could use a little more sodium.";
                     return this.normalize(0, 500, value);
                 }
-                this.score[ReportCard.COMMENTS][Constants.SODIUM] = "Way too little sodium! Sodium is required for your body to function.";
                 return 0;
             case Constants.CARBS:
                 if (value > 500) {
-                    this.score[ReportCard.COMMENTS][Constants.CARBS] = "Way too many carbs!";
                     return 0;
                 }
                 if (value > 275) {
-                    this.score[ReportCard.COMMENTS][Constants.CARBS] = "Could use less carbs.";
                     return this.normalize(500, 275, value);
                 }
                 if (value > 200) {
-                    this.score[ReportCard.COMMENTS][Constants.CARBS] = "Good amount of carbs!";
                     return ReportCard.MAX_SCORE;
                 }
                 if (value > 150) {
-                    this.score[ReportCard.COMMENTS][Constants.CARBS] = "Could use a few more carbs.";
                     return 0.5 + 0.5 * this.normalize(150, 200, value);
                 }
                 if (value > 50) {
-                    this.score[ReportCard.COMMENTS][Constants.CARBS] = "Need more carbs.";
                     return 0.5 * this.normalize(50, 150, value);
                 }
-                this.score[ReportCard.COMMENTS][Constants.CARBS] = "Need way more carbs, carbs are necessary for your diet!";
                 return 0;
             case Constants.FIBER:
                 if (value > 100) {
-                    this.score[ReportCard.COMMENTS][Constants.FIBER] = "Way too much fiber!";
                     return 0;
                 }
                 if (value > 38) {
-                    this.score[ReportCard.COMMENTS][Constants.FIBER] = "Too much fiber, get a little less.";
                     return this.normalize(100, 38, value);
                 }
                 if (value > 28) {
-                    this.score[ReportCard.COMMENTS][Constants.FIBER] = "Perfect amount of fiber!";
                     return ReportCard.MAX_SCORE;
                 }
                 if (value > 0) {
-                    this.score[ReportCard.COMMENTS][Constants.FIBER] = "Need some more fiber.";
                     return this.normalize(0, 28, value);
                 }
-                this.score[ReportCard.COMMENTS][Constants.FIBER] = "Not nearly enough fiber!";
                 return 0;
             case Constants.SUGAR:
                 if (value > 100) {
-                    this.score[ReportCard.COMMENTS][Constants.SUGAR] = "Way too much sugar!";
                     return 0;
                 }
                 if (value > 50) {
-                    this.score[ReportCard.COMMENTS][Constants.SUGAR] = "Too much sugar.";
                     return 0.5 * this.normalize(100, 50, value);
                 }
                 if (value > 30) {
-                    this.score[ReportCard.COMMENTS][Constants.SUGAR] = "A little too much sugar!";
                     return 0.5 + 0.5 * this.normalize(50, 30, value);
                 }
-                this.score[ReportCard.COMMENTS][Constants.SUGAR] = "Good job keeping sugar low!";
                 return ReportCard.MAX_SCORE;
             case Constants.PROTEIN:
                 if (value > 150) {
-                    this.score[ReportCard.COMMENTS][Constants.PROTEIN] = "That is a ton of protein, are you a body builder?!";
                     return 0.5 * ReportCard.MAX_SCORE;
                 }
                 if (value > 75) {
-                    this.score[ReportCard.COMMENTS][Constants.PROTEIN] = "That is a lot of protein, are you an athelete?";
                     return 0.5 + 0.5 * this.normalize(150, 75, value);
                 }
                 if (value > 50) {
-                    this.score[ReportCard.COMMENTS][Constants.PROTEIN] = "Perfect amount of protein!";
                     return ReportCard.MAX_SCORE;
                 }
                 if (value > 20) {
-                    this.score[ReportCard.COMMENTS][Constants.PROTEIN] = "That is not enough protein, add some more.";
                     return this.normalize(20, 50, value);
                 }
-                this.score[ReportCard.COMMENTS][Constants.PROTEIN] = "That is not nearly enough protein, add some more!";
                 return 0;
+        }
+    }
+
+    basicGradeRubricComments(type, value) {
+        switch (type) {
+            case Constants.CALORIES:
+                if (value > 4000) {
+                    this.score[ReportCard.COMMENTS][Constants.CALORIES] = "Way too many calories!";
+                    break;
+                }
+                if (value > 2500) {
+                    this.score[ReportCard.COMMENTS][Constants.CALORIES] = "Could use less calories.";
+                    break;
+                }
+                if (value > 1500) {
+                    this.score[ReportCard.COMMENTS][Constants.CALORIES] = "Good job! You are around the ideal calorie count.";
+                    break;
+                }
+                if (value > 1000) {
+                    this.score[ReportCard.COMMENTS][Constants.CALORIES] = "Not enough calories, you need a little more to stay healty.";
+                    break;
+                }
+                this.score[ReportCard.COMMENTS][Constants.CALORIES] = "You don't have nearly enough calories, you will starve!";
+                break;
+            case Constants.TOTALFAT:
+                if (value > 100) {
+                    this.score[ReportCard.COMMENTS][Constants.TOTALFAT] = "Way too many fats!";
+                    break;
+                }
+                if (value > 50) {
+                    this.score[ReportCard.COMMENTS][Constants.TOTALFAT] = "Could use fewer fats.";
+                    break;
+                }
+                if (value > 25) {
+                    this.score[ReportCard.COMMENTS][Constants.TOTALFAT] = "Good amount of fats.";
+                    break;
+                }
+                if (value > 0) {
+                    this.score[ReportCard.COMMENTS][Constants.TOTALFAT] = "Could use a little more fats!";
+                    break;
+                }
+                this.score[ReportCard.COMMENTS][Constants.TOTALFAT] = "You need more fats!";
+                break;
+            case Constants.SATFAT:
+                if (value > 40) {
+                    break;
+                }
+                if (value > 20) {
+                    break;
+                }
+                if (value > 10) {
+                    break;
+                }
+                break;
+            case Constants.TRANSFAT:
+                if (value > 5) {
+                    this.score[ReportCard.COMMENTS][Constants.TOTALFAT] = this.score[ReportCard.COMMENTS][Constants.TOTALFAT] + " Also way too much transfat!";
+                    break;
+                }
+                if (value > 0) {
+                    this.score[ReportCard.COMMENTS][Constants.TOTALFAT] = this.score[ReportCard.COMMENTS][Constants.TOTALFAT] + " Also could use less transfat!";
+                    break;
+                }
+                break;
+            case Constants.CHOLESTEROL:
+                if (value > 500) {
+                    this.score[ReportCard.COMMENTS][Constants.CHOLESTEROL] = "Way too much cholesterol!";
+                    break;
+                }
+                if (value > 200) {
+                    this.score[ReportCard.COMMENTS][Constants.CHOLESTEROL] = "Could use less cholesterol.";
+                    break;
+                }
+                if (value > 0) {
+                    this.score[ReportCard.COMMENTS][Constants.CHOLESTEROL] = "Good amount of cholesterol.";
+                    break;
+                }
+                this.score[ReportCard.COMMENTS][Constants.CHOLESTEROL] = "Good job keeping cholesterol low!";
+                break;
+            case Constants.SODIUM:
+                if (value > 4000) {
+                    this.score[ReportCard.COMMENTS][Constants.SODIUM] = "Way too much sodium!";
+                    break;
+                }
+                if (value > 2300) {
+                    this.score[ReportCard.COMMENTS][Constants.SODIUM] = "Could use less sodium.";
+                    break;
+                }
+                if (value > 1500) {
+                    this.score[ReportCard.COMMENTS][Constants.SODIUM] = "Good amount of sodium.";
+                    break;
+                }
+                if (value > 500) {
+                    this.score[ReportCard.COMMENTS][Constants.SODIUM] = "Great job keeping sodium amount low!";
+                    break;
+                }
+                if (value > 0) {
+                    this.score[ReportCard.COMMENTS][Constants.SODIUM] = "Could use a little more sodium.";
+                    break;
+                }
+                this.score[ReportCard.COMMENTS][Constants.SODIUM] = "Way too little sodium! Sodium is required for your body to function.";
+                break;
+            case Constants.CARBS:
+                if (value > 500) {
+                    this.score[ReportCard.COMMENTS][Constants.CARBS] = "Way too many carbs!";
+                    break;
+                }
+                if (value > 275) {
+                    this.score[ReportCard.COMMENTS][Constants.CARBS] = "Could use less carbs.";
+                    break;
+                }
+                if (value > 200) {
+                    this.score[ReportCard.COMMENTS][Constants.CARBS] = "Good amount of carbs!";
+                    break;
+                }
+                if (value > 150) {
+                    this.score[ReportCard.COMMENTS][Constants.CARBS] = "Could use a few more carbs.";
+                    break;
+                }
+                if (value > 50) {
+                    this.score[ReportCard.COMMENTS][Constants.CARBS] = "Need more carbs.";
+                    break;
+                }
+                this.score[ReportCard.COMMENTS][Constants.CARBS] = "Need way more carbs, carbs are necessary for your diet!";
+                break;
+            case Constants.FIBER:
+                if (value > 100) {
+                    this.score[ReportCard.COMMENTS][Constants.FIBER] = "Way too much fiber!";
+                    break;
+                }
+                if (value > 38) {
+                    this.score[ReportCard.COMMENTS][Constants.FIBER] = "Too much fiber, get a little less.";
+                    break;
+                }
+                if (value > 28) {
+                    this.score[ReportCard.COMMENTS][Constants.FIBER] = "Perfect amount of fiber!";
+                    break;
+                }
+                if (value > 0) {
+                    this.score[ReportCard.COMMENTS][Constants.FIBER] = "Need some more fiber.";
+                    break;
+                }
+                this.score[ReportCard.COMMENTS][Constants.FIBER] = "Not nearly enough fiber!";
+                break;
+            case Constants.SUGAR:
+                if (value > 100) {
+                    this.score[ReportCard.COMMENTS][Constants.SUGAR] = "Way too much sugar!";
+                    break;
+                }
+                if (value > 50) {
+                    this.score[ReportCard.COMMENTS][Constants.SUGAR] = "Too much sugar.";
+                    break;
+                }
+                if (value > 30) {
+                    this.score[ReportCard.COMMENTS][Constants.SUGAR] = "A little too much sugar!";
+                    break;
+                }
+                this.score[ReportCard.COMMENTS][Constants.SUGAR] = "Good job keeping sugar low!";
+                break;
+            case Constants.PROTEIN:
+                if (value > 150) {
+                    this.score[ReportCard.COMMENTS][Constants.PROTEIN] = "That is a ton of protein, are you a body builder?!";
+                    break;
+                }
+                if (value > 75) {
+                    this.score[ReportCard.COMMENTS][Constants.PROTEIN] = "That is a lot of protein, are you an athelete?";
+                    break;
+                }
+                if (value > 50) {
+                    this.score[ReportCard.COMMENTS][Constants.PROTEIN] = "Perfect amount of protein!";
+                    break;
+                }
+                if (value > 20) {
+                    this.score[ReportCard.COMMENTS][Constants.PROTEIN] = "That is not enough protein, add some more.";
+                    break;
+                }
+                this.score[ReportCard.COMMENTS][Constants.PROTEIN] = "That is not nearly enough protein, add some more!";
+                break;
         }
     }
 
