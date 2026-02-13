@@ -35,7 +35,6 @@ export async function createFoodItem(barcode) {
     })
 
     refNumArray.push("END");
-
     // Using the refNumArray, match the item we are looking for
     let lineNumber = 0;
     for (; !barcode.match(refNumArray[lineNumber]); lineNumber++) {
@@ -122,24 +121,26 @@ export class Weekday {
         this.snacks = [];
     }
 
-    //********ERROR HERE WHEN BREAKFAST IS NOT THE FIRST MEAL INPUTTED********
-    static copyFoodItems(copyTo, copyFrom) {
-        while (copyFrom.breakfast.length > 0) {
-            copyTo.addFoodItem(copyFrom.breakfast[0]);
-            copyFrom.breakfast.shift();
-        }
-        while (copyFrom.lunch.length > 0) {
-            copyTo.addFoodItem(copyFrom.lunch[0]);
-            copyFrom.lunch.shift();
-        }
-        while (copyFrom.dinner.length > 0) {
-            copyTo.addFoodItem(copyFrom.dinner[0]);
-            copyFrom.dinner.shift();
-        }
-        while (copyFrom.snacks.length > 0) {
-            copyTo.addFoodItem(copyFrom.snacks[0]);
-            copyFrom.snacks.shift();
-        }
+    static async fromJSON(parsed) {
+        const day = new Weekday();
+
+        if (!parsed) return day;
+
+        const meals = [
+            ...(parsed.breakfast ?? []),
+            ...(parsed.lunch ?? []),
+            ...(parsed.dinner ?? []),
+            ...(parsed.snacks ?? [])
+        ];
+
+        const items = await Promise.all(meals
+            .filter(i => typeof i?.refNumber === "string" && i.refNumber.trim() !== "")
+            .map(i => createFoodItem(i.refNumber))
+        );
+
+        items.forEach(item => day.addFoodItem(item));
+
+        return day;
     }
 
     addFoodItem(item) {

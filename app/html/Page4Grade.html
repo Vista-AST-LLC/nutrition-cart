@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="../css/Page4Grade.css">
     <title>Nutrition Cart</title>
     <meta name="description" content="Website companion of Vista-AST's Nutrition Cart">
+    <script type="module" src="../js/common.mjs" defer></script>
     <script type="module" src="../js/Page4Grade.mjs" defer></script>
 </head>
 
@@ -31,202 +32,73 @@
 
         <!--Nutrition Progress Section-->
         <div class="card">
-            <h2 class="card-title">Nutrition Summary</h2>
-            <!-- NEW Nutrition Progress Table -->
-            <div class="nutrition-progress-container">
-                <table class="nutrition-progress-table">
-                    <thead>
-                        <tr>
-                            <th>Nutrient</th>
-                            <th>Your Intake</th>
-                            <th>Daily Goal</th>
-                            <th>Progress</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Calories</td>
-                            <td id="progressCalories">0 kcal</td>
-                            <td id="goalCalories">-</td>
-                            <td>
-                                <div class="progress-bar">
-                                    <div id="caloriesProgress" class="progress-fill" style="width: 0%"></div>
-                                </div>
-                            </td>
-                            <td id="caloriesStatus" class="status-optimal">-</td>
-                        </tr>
-                        <tr>
-                            <td>Protein</td>
-                            <td id="progressProtein">0g</td>
-                            <td id="goalProtein">-</td>
-                            <td>
-                                <div class="progress-bar">
-                                    <div id="proteinProgress" class="progress-fill" style="width: 0%"></div>
-                                </div>
-                            </td>
-                            <td id="proteinStatus" class="status-optimal">-</td>
-                        </tr>
-                        <tr>
-                            <td>Carbohydrates</td>
-                            <td id="progressCarbs">0g</td>
-                            <td id="goalCarbs">-</td>
-                            <td>
-                                <div class="progress-bar">
-                                    <div id="carbsProgress" class="progress-fill" style="width: 0%"></div>
-                                </div>
-                            </td>
-                            <td id="carbsStatus" class="status-optimal">-</td>
-                        </tr>
-                        <tr>
-                            <td>Fiber</td>
-                            <td id="progressFiber">0g</td>
-                            <td id="goalFiber">-</td>
-                            <td>
-                                <div class="progress-bar">
-                                    <div id="fiberProgress" class="progress-fill" style="width: 0%"></div>
-                                </div>
-                            </td>
-                            <td id="fiberStatus" class="status-optimal">-</td>
-                        </tr>
-                        <tr>
-                            <td>Sodium</td>
-                            <td id="progressSodium">0mg</td>
-                            <td id="goalSodium">-</td>
-                            <td>
-                                <div class="progress-bar">
-                                    <div id="sodiumProgress" class="progress-fill" style="width: 0%"></div>
-                                </div>
-                            </td>
-                            <td id="sodiumStatus" class="status-optimal">-</td>
-                        </tr>
-                    </tbody>
-                </table>
+            <div class="nutrition-summary-title">
+                <h2 class="card-title">Nutrition Summary</h2>
+                <button class="get-grade-button" id="getGradeButton">Get Your Grade!</button>
             </div>
 
-            <!-- Age-Specific Requirements Table -->
-            <h3>Age Specific Requirements</h3>
-            <div class="requirements-table-container">
-                <table class="requirements-table">
-                    <thead>
-                        <tr>
-                            <th>Age Group</th>
-                            <th>Calories (kcal/day)</th>
-                            <th>Sodium (mg/day, max)</th>
-                            <th>Cholesterol (mg/day, max)*</th>
-                            <th>Carbohydrate (g/day)**</th>
-                            <th>Protein (g/day, min)</th>
-                            <th>Fiber (g/day, goal)</th>
-                            <th>Total fat (% of kcal)</th>
-                        </tr>
-                    </thead>
-                    <tbody id="requirementsBody">
-                        <!-- Will be populated by JavaScript -->
-                    </tbody>
-                </table>
+            <!--Health Score Section-->
+            <div class="healthScore">
+                <!--Health Score Display-->
+                <div class="scoreCard">
+                    <div class="summary-card points-card">
+                        <div class="points-display">
+                            <div class="points-circle" id="pointsCircle"></div>
+                            <div class="points-label" id="underPointCircle">Your Grade</div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <!--Nutrition Totals Section-->
             <div class="summary-grid">
                 <div class="summary-card calories-card">
-                    <div class="summary-label">Total Calories</div>
+                    <div class="summary-label">Calories</div>
                     <div id="totalCalories" class="summary-value">0</div>
-                    <div class="summary-label">kcal</div>
-                </div>
-                <div class="summary-card protein-card">
-                    <div class="summary-label">Total Protein</div>
-                    <div id="totalProtein" class="summary-value">0</div>
-                    <div class="summary-label">grams</div>
-                </div>
-                <div class="summary-card carbs-card">
-                    <div class="summary-label">Total Carbs</div>
-                    <div id="totalCarbs" class="summary-value">0</div>
-                    <div class="summary-label">grams</div>
+                    <div class="summary-label">points</div>
+                    <div id="caloriesComments" class="comments"></div>
                 </div>
                 <div class="summary-card fats-card">
                     <div class="summary-label">Total Fats</div>
                     <div id="totalFats" class="summary-value">0</div>
-                    <div class="summary-label">grams</div>
+                    <div class="summary-label">points</div>
+                    <div id="fatsComments" class="comments"></div>
+                </div>
+                <div class="summary-card cholesterol-card">
+                    <div class="summary-label">Cholesterol</div>
+                    <div id="totalCholesterol" class="summary-value">0</div>
+                    <div class="summary-label">points</div>
+                    <div id="cholesterolComments" class="comments"></div>
                 </div>
                 <div class="summary-card sodium-card">
-                    <div class="summary-label">Total Sodium</div>
+                    <div class="summary-label">Sodium</div>
                     <div id="totalSodium" class="summary-value">0</div>
-                    <div class="summary-label">mg</div>
+                    <div class="summary-label">points</div>
+                    <div id="sodiumComments" class="comments"></div>
+                </div>
+                <div class="summary-card carbs-card">
+                    <div class="summary-label">Carbs</div>
+                    <div id="totalCarbs" class="summary-value">0</div>
+                    <div class="summary-label">points</div>
+                    <div id="carbsComments" class="comments"></div>
                 </div>
                 <div class="summary-card fiber-card">
-                    <div class="summary-label">Total Fiber</div>
+                    <div class="summary-label">Fiber</div>
                     <div id="totalFiber" class="summary-value">0</div>
-                    <div class="summary-label">grams</div>
+                    <div class="summary-label">points</div>
+                    <div id="fiberComments" class="comments"></div>
                 </div>
-            </div>
-        </div>
-
-        <!--Health Score Section-->
-        <div class="healthScore">
-            <!--Health Score Display-->
-            <div class="scoreCard">
-                <h2 class="card-title">Health Score</h2>
-                <div class="summary-card points-card">
-                    <div class="points-display">
-                        <div class="points-circle" id="pointsCircle">0</div>
-                        <div class="points-label">Health Score</div>
-                        <div class="points-description">Based on your age group requirements</div>
-                    </div>
-                    <div class="points-breakdown">
-                        <div class="points-item">
-                            <div class="points-nutrient">Protein</div>
-                            <div class="points-bar-container">
-                                <div id="proteinBar" class="points-bar positive" style="width: 0%"></div>
-                            </div>
-                            <div id="proteinScore" class="points-score">0</div>
-                        </div>
-                        <div class="points-item">
-                            <div class="points-nutrient">Carbs</div>
-                            <div class="points-bar-container">
-                                <div id="carbsBar" class="points-bar positive" style="width: 0%"></div>
-                            </div>
-                            <div id="carbsScore" class="points-score">0</div>
-                        </div>
-                        <div class="points-item">
-                            <div class="points-nutrient">Fiber</div>
-                            <div class="points-bar-container">
-                                <div id="fiberBar" class="points-bar positive" style="width: 0%"></div>
-                            </div>
-                            <div id="fiberScore" class="points-score">0</div>
-                        </div>
-                        <div class="points-item">
-                            <div class="points-nutrient">Sodium</div>
-                            <div class="points-bar-container">
-                                <div id="sodiumBar" class="points-bar negative" style="width: 0%"></div>
-                            </div>
-                            <div id="sodiumScore" class="points-score">0</div>
-                        </div>
-                    </div>
+                <div class="summary-card sugars-card">
+                    <div class="summary-label">Sugars</div>
+                    <div id="totalSugars" class="summary-value">0</div>
+                    <div class="summary-label">points</div>
+                    <div id="sugarsComments" class="comments"></div>
                 </div>
-            </div>
-
-            <!-- Scoring Explanation Section -->
-            <div class="scoreCard">
-                <h3 class="scoring-title">How Your Health Score is Calculated</h3>
-                <div class="scoring-grid">
-                    <div class="scoring-category scoring-optimal">
-                        <h4>Scoring System (0-100 points)</h4>
-                        <p><strong>80-100 points (Green):</strong> Excellent nutrition! You're meeting or
-                            exceeding most recommendations.</p>
-                        <p><strong>60-79 points (Orange):</strong> Good nutrition, with some areas for
-                            improvement.</p>
-                        <p><strong>0-59 points (Red):</strong> Needs improvement in several nutritional areas.
-                        </p>
-                    </div>
-                    <div class="scoring-category scoring-warning">
-                        <h4>How to Improve Your Score</h4>
-                        <ul>
-                            <li><strong>Increase Protein:</strong> Add lean meats, beans, dairy</li>
-                            <li><strong>Reduce Sodium:</strong> Choose fresh foods over processed</li>
-                            <li><strong>Boost Fiber:</strong> Add fruits, vegetables, whole grains</li>
-                            <li><strong>Balance Carbs:</strong> Choose complex carbs over simple sugars</li>
-                        </ul>
-                    </div>
+                <div class="summary-card protein-card">
+                    <div class="summary-label">Protein</div>
+                    <div id="totalProtein" class="summary-value">0</div>
+                    <div class="summary-label">points</div>
+                    <div id="proteinComments" class="comments"></div>
                 </div>
             </div>
         </div>
