@@ -46,23 +46,23 @@ class DayGrade {
 
         let activeDay = localStorage.getItem('ActiveDay');
         let dayPrefix = '';
-        switch(activeDay) {
+        switch (activeDay) {
             case 'Monday':
-                dayPrefix = '';
+                dayPrefix = 'mon';
                 break;
             case 'Tuesday':
-                dayPrefix = '';
+                dayPrefix = 'tues';
                 break;
             case 'Wednesday':
-                dayPrefix = '';
+                dayPrefix = 'wed';
                 break;
             case 'Thursday':
-                dayPrefix = '';
+                dayPrefix = 'thurs';
                 break;
             case 'Friday':
-                dayPrefix = '';
+                dayPrefix = 'fri';
                 break;
-            default: 
+            default:
                 throw console.error("Day prefix not able to be determined!");
         }
 

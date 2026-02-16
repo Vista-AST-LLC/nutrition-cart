@@ -127,21 +127,29 @@
 }
 
 .category-items {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
     gap: 12px;
 }
 
 .breakfast-food-item {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
     background: #dbf2f6;
     color: yellow;
     border-radius: 6px;
     padding: 12px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
     transition: transform 0.3s;
-    font-size: 1rem;
+    font-size: 14px;
     font-weight: 1000;
     -webkit-text-stroke: 1px black;
+    width: 100%;
 }
 
 .breakfast-food-item:hover {
@@ -158,15 +166,20 @@
 }
 
 .lunch-food-item {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
     background: #dbf2f6;
     color: lightgreen;
     border-radius: 6px;
     padding: 12px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
     transition: transform 0.3s;
-    font-size: 1rem;
+    font-size: 14px;
     font-weight: 1000;
     -webkit-text-stroke: 1px black;
+    width: 100%;
 }
 
 .lunch-title {
@@ -183,14 +196,20 @@
 }
 
 .dinner-food-item {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
     background: #dbf2f6;
     color: orange;
+    border-radius: 6px;
     padding: 12px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
     transition: transform 0.3s;
-    font-size: 1rem;
+    font-size: 14px;
     font-weight: 1000;
     -webkit-text-stroke: 1px black;
+    width: 100%;
 }
 
 .dinner-title {
@@ -207,15 +226,20 @@
 }
 
 .snacks-food-item {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
     background: #dbf2f6;
     color: #bc77f5;
     border-radius: 6px;
     padding: 12px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
     transition: transform 0.3s;
-    font-size: 1rem;
+    font-size: 14px;
     font-weight: 1000;
     -webkit-text-stroke: 1px black;
+    width: 100%;
 }
 
 .snacks-title {
@@ -237,13 +261,12 @@
     color: white;
     border: none;
     border-radius: 2px;
-    padding: 0px 0px;
     cursor: pointer;
     font-weight: 600;
     font-size: large;
     transition: all 0.3s ease;
     gap: 8px;
-    width: 25px;
+    width: 20%;
     margin: auto;
     float: right;
     -webkit-text-stroke: 0px;
@@ -252,6 +275,36 @@
 .trash-button:hover {
     background-color: red;
     transform: translateY(-2px);
+}
+
+@media (max-width:800px) {
+    .breakfast-food-item {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+    }
+
+    .lunch-food-item {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+    }
+
+    .dinner-food-item {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+    }
+
+    .snacks-food-item {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+    }
 }
 
 /********CONTAINER FOR CALENDAR********/
@@ -291,7 +344,6 @@ td {
     background-color: white;
     padding: 10px;
     height: 600px;
-    width: 10%;
     vertical-align: text-top;
     align-items: center;
     justify-items: center;
