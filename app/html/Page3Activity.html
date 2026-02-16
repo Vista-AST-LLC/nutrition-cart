@@ -9,7 +9,6 @@
     <title>Nutrition Cart</title>
     <meta name="description" content="Website companion of Vista-AST's Nutrition Cart">
     <script type="module" src="../js/common.mjs" defer></script>
-    <script type="module" src="../js/Page2Calendar.mjs" defer></script>
     <script type="module" src="../js/Page3Activity.mjs" defer></script>
 </head>
 
@@ -24,14 +23,13 @@
             <div id="two">
                 <ul>
                     <li><a href="../html/Page1Landing.html">Home</a></li>
-                    <li><a href="../html/Page2Calendar.html">Calendar</a></li>
                     <li><a href="../html/Page3Activity.html">Activity</a></li>
                     <li><a href="../html/Page4Grade.html">Grade</a></li>
                 </ul>
             </div>
         </div>
 
-        <!-- Two column section begins here -->
+        <!--Food Input Section-->
         <main id="main-content">
             <div class="main-content">
                 <div class="double">
@@ -45,83 +43,220 @@
                         <div id="codeHelp" class="error-message hidden" aria-live="polite"></div>
                     </div>
                     <div class="buttons">
-                        <a class="basic-button" href="../html/Page2Calendar.html">Return To Calendar</a>
                         <a class="basic-button" href="../html/Page4Grade.html">Go To Grade</a>
                     </div>
                 </div>
 
-                <!--Food Items Section-->
-                <div class="card" id="foodItemsContainer">
-                    <div class="food-items-container-title">
-                        <h2 class="card-title">Your Food Items</h2>
+                <!--Daily Food Item Section-->
+                <div class="card">
+                    <div class="meal-plan-title">
+                        <h2>Weekly Meal Plan</h2>
                         <button id="clearAllFoodItems" class="delete-all-food-items-button">Delete All</button>
                     </div>
-                    <div class="category-section">
-                        <div class="category-box breakfast-box">
-                            <div class="category-title">
-                                <span>Breakfast</span>
-                                <span id="breakfastCount">0 items</span>
-                            </div>
-                            <div id="breakfastItems" class="category-items"></div>
-                        </div>
+                    <div id='calendar'>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <button class="day-button" id="monBtn">
+                                            Monday
+                                        </button>
+                                    </th>
+                                    <th>
+                                        <button class="day-button" id="tuesBtn">
+                                            Tuesday
+                                        </button>
+                                    </th>
+                                    </th>
+                                    <th>
+                                        <button class="day-button" id="wedBtn">
+                                            Wednesday
+                                        </button>
 
-                        <div class="category-box lunch-box">
-                            <div class="category-title">
-                                <span>Lunch</span>
-                                <span id="lunchCount">0 items</span>
-                            </div>
-                            <div id="lunchItems" class="category-items"></div>
-                        </div>
+                                    </th>
+                                    <th>
+                                        <button class="day-button" id="thursBtn">
+                                            Thursday
+                                        </button>
 
-                        <div class="category-box dinner-box">
-                            <div class="category-title">
-                                <span>Dinner</span>
-                                <span id="dinnerCount">0 items</span>
-                            </div>
-                            <div id="dinnerItems" class="category-items"></div>
-                        </div>
+                                    </th>
+                                    <th>
+                                        <button class="day-button" id="friBtn">
+                                            Friday
+                                        </button>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td id='monday'>
+                                        <div class="category-box breakfast-box">
+                                            <div class="category-title">
+                                                <h3 class="breakfast-title">Breakfast</h3>
+                                            </div>
+                                            <div id="monBreakfastItems" class="category-items"></div>
+                                        </div>
+                                        <div class="category-box lunch-box">
+                                            <div class="category-title">
+                                                <h3 class="lunch-title">Lunch</h3>
+                                            </div>
+                                            <div id="monLunchItems" class="category-items"></div>
+                                        </div>
+                                        <div class="category-box dinner-box">
+                                            <div class="category-title">
+                                                <h3 class="dinner-title">Dinner</h3>
+                                            </div>
+                                            <div id="monDinnerItems" class="category-items"></div>
+                                        </div>
+                                        <div class="category-box snacks-box">
+                                            <div class="category-title">
+                                                <h3 class="snacks-title">Dessert/Snacks</h3>
+                                            </div>
+                                            <div id="monSnackItems" class="category-items"></div>
+                                        </div>
+                                    </td>
+                                    <td id='tuesday'>
+                                        <div class="category-box breakfast-box">
+                                            <div class="category-title">
+                                                <h3 class="breakfast-title">Breakfast</h3>
 
-                        <div class="category-box snacks-box">
-                            <div class="category-title">
-                                <span>Dessert/Snacks</span>
-                                <span id="snackCount">0 items</span>
-                            </div>
-                            <div id="snackItems" class="category-items"></div>
-                        </div>
+                                            </div>
+                                            <div id="tuesBreakfastItems" class="category-items"></div>
+                                        </div>
+                                        <div class="category-box lunch-box">
+                                            <div class="category-title">
+                                                <h3 class="lunch-title">Lunch</h3>
+                                            </div>
+                                            <div id="tuesLunchItems" class="category-items"></div>
+                                        </div>
+                                        <div class="category-box dinner-box">
+                                            <div class="category-title">
+                                                <h3 class="dinner-title">Dinner</h3>
+
+                                            </div>
+                                            <div id="tuesDinnerItems" class="category-items"></div>
+                                        </div>
+                                        <div class="category-box snacks-box">
+                                            <div class="category-title">
+                                                <h3 class="snacks-title">Dessert/Snacks</h3>
+                                            </div>
+                                            <div id="tuesSnackItems" class="category-items"></div>
+                                        </div>
+                                    </td>
+                                    <td id='wednesday'>
+                                        <div class="category-box breakfast-box">
+                                            <div class="category-title">
+                                                <h3 class="breakfast-title">Breakfast</h3>
+
+                                            </div>
+                                            <div id="wedBreakfastItems" class="category-items"></div>
+                                        </div>
+                                        <div class="category-box lunch-box">
+                                            <div class="category-title">
+                                                <h3 class="lunch-title">Lunch</h3>
+                                            </div>
+                                            <div id="wedLunchItems" class="category-items"></div>
+                                        </div>
+                                        <div class="category-box dinner-box">
+                                            <div class="category-title">
+                                                <h3 class="dinner-title">Dinner</h3>
+
+                                            </div>
+                                            <div id="wedDinnerItems" class="category-items"></div>
+                                        </div>
+                                        <div class="category-box snacks-box">
+                                            <div class="category-title">
+                                                <h3 class="snacks-title">Dessert/Snacks</h3>
+                                            </div>
+                                            <div id="wedSnackItems" class="category-items"></div>
+                                        </div>
+                                    </td>
+                                    <td id='thursday'>
+                                        <div class="category-box breakfast-box">
+                                            <div class="category-title">
+                                                <h3 class="breakfast-title">Breakfast</h3>
+
+                                            </div>
+                                            <div id="thursBreakfastItems" class="category-items"></div>
+                                        </div>
+                                        <div class="category-box lunch-box">
+                                            <div class="category-title">
+                                                <h3 class="lunch-title">Lunch</h3>
+                                            </div>
+                                            <div id="thursLunchItems" class="category-items"></div>
+                                        </div>
+                                        <div class="category-box dinner-box">
+                                            <div class="category-title">
+                                                <h3 class="dinner-title">Dinner</h3>
+
+                                            </div>
+                                            <div id="thursDinnerItems" class="category-items"></div>
+                                        </div>
+                                        <div class="category-box snacks-box">
+                                            <div class="category-title">
+                                                <h3 class="snacks-title">Dessert/Snacks</h3>
+                                            </div>
+                                            <div id="thursSnackItems" class="category-items"></div>
+                                        </div>
+                                    </td>
+                                    <td id='friday'>
+                                        <div class="category-box breakfast-box">
+                                            <div class="category-title">
+                                                <h3 class="breakfast-title">Breakfast</h3>
+
+                                            </div>
+                                            <div id="friBreakfastItems" class="category-items"></div>
+                                        </div>
+                                        <div class="category-box lunch-box">
+                                            <div class="category-title">
+                                                <h3 class="lunch-title">Lunch</h3>
+                                            </div>
+                                            <div id="friLunchItems" class="category-items"></div>
+                                        </div>
+                                        <div class="category-box dinner-box">
+                                            <div class="category-title">
+                                                <h3 class="dinner-title">Dinner</h3>
+
+                                            </div>
+                                            <div id="friDinnerItems" class="category-items"></div>
+                                        </div>
+                                        <div class="category-box snacks-box">
+                                            <div class="category-title">
+                                                <h3 class="snacks-title">Dessert/Snacks</h3>
+                                            </div>
+                                            <div id="friSnackItems" class="category-items"></div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
-
                 <!-- Citations Section -->
                 <!--
                 <div class="citations-section">
                     <h3 class="citations-title">Data Sources & Citations</h3>
                     <div class="citations-content">
-                        <div class="citation-item">
-                            <span class="citation-number">1.</span> Dietary Guidelines for Americans, 2020–2025.
+                        <div class="citation-item Dietary Guidelines for Americans, 2020–2025.
                             U.S. Department of Agriculture and U.S. Department of Health and Human Services. 9th
                             Edition. December 2020. Available at: https://www.dietaryguidelines.gov
                         </div>
-                        <div class="citation-item">
-                            <span class="citation-number">2.</span> Appendix E‑3 tables (nutrient goals by age).
+                        <div class="citation-item Appendix E‑3 tables (nutrient goals by age).
                             U.S. Department of Agriculture and U.S. Department of Health and Human Services.
                             2015–2020 Dietary Guidelines technical document.
                         </div>
-                        <div class="citation-item">
-                            <span class="citation-number">3.</span> FDA – Daily Values for Nutrition Facts label.
+                        <div class="citation-item FDA – Daily Values for Nutrition Facts label.
                             U.S. Food and Drug Administration. (Updated 2024.)
                             https://www.fda.gov/food/nutrition-facts-label/daily-value-nutrition-and-supplement-facts-labels
                         </div>
-                        <div class="citation-item">
-                            <span class="citation-number">4.</span> FDA – Key Nutrients and Your Family's Health
+                        <div class="citation-item FDA – Key Nutrients and Your Family's Health
                             (kids and teens). U.S. Food and Drug Administration.
                             https://www.fda.gov/media/135619/download
                         </div>
-                        <div class="citation-item">
-                            <span class="citation-number">5.</span> Dietary Reference Intakes for individuals 4–18
+                        <div class="citation-item Dietary Reference Intakes for individuals 4–18
                             years. Institute of Medicine (National Academy of Medicine).
                         </div>
-                        <div class="citation-item">
-                            <span class="citation-number">6.</span> American Heart Association – Dietary
+                        <div class="citation-item American Heart Association – Dietary
                             Recommendations for Healthy Children. (Updated 2024.)
                             https://www.heart.org/en/healthy-living/healthy-eating/eat-smart/nutrition-basics/dietary-recommendations-for-healthy-children
                         </div>
