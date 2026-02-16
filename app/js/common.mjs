@@ -17,6 +17,7 @@ export class Constants {
     static FIBER = 7;
     static SUGAR = 8;
     static PROTEIN = 9;
+    static SCOREAVG = 10;
 }
 
 // This function call should be wrapped in a try-catch
