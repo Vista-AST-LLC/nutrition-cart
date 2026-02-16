@@ -140,68 +140,77 @@ async function addFoodItem() {
 
 async function updateFoodItems() {
     const activeDay = localStorage.getItem('ActiveDay');
-    let parsed = JSON.parse(localStorage.getItem(activeDay));
-    if (!parsed) {
-        console.log("Parsed day is null: " + activeDay);
+    const dayHelp = document.getElementById('dayHelp')
+    dayHelp.classList.add('hidden')
+
+    if (activeDay == null) {
+        foodCodeInput.classList.add('error');
+        dayHelp.textContent = 'Please select a day from the calendar below.'
+        dayHelp.classList.remove('hidden');
+        return;
     }
-    let day = await Weekday.fromJSON(parsed);
+    else {
+        dayHelp.classList.add('hidden');
+        dayHelp.textContent = ''
+        let parsed = JSON.parse(localStorage.getItem(activeDay));
+        if (!parsed) {
+            console.log("Parsed day is null: " + activeDay);
+        }
+        let day = await Weekday.fromJSON(parsed);
 
-    const breakfastItems = document.getElementById(`${active}BreakfastItems`);
-    const lunchItems = document.getElementById(`${active}LunchItems`);
-    const dinnerItems = document.getElementById(`${active}DinnerItems`);
-    const snackItems = document.getElementById(`${active}SnackItems`);
+        const breakfastItems = document.getElementById(`${active}BreakfastItems`);
+        const lunchItems = document.getElementById(`${active}LunchItems`);
+        const dinnerItems = document.getElementById(`${active}DinnerItems`);
+        const snackItems = document.getElementById(`${active}SnackItems`);
 
-    breakfastItems.innerHTML = '';
-    lunchItems.innerHTML = '';
-    dinnerItems.innerHTML = '';
-    snackItems.innerHTML = '';
+        breakfastItems.innerHTML = '';
+        lunchItems.innerHTML = '';
+        dinnerItems.innerHTML = '';
+        snackItems.innerHTML = '';
 
-    let buttonCount = 0;
-    day.breakfast.forEach(item => {
-        let trashButtonID = Constants.BREAKFAST + buttonCount++;
-        const div = document.createElement('div');
-        div.innerHTML = `
-            <div class='breakfast-food-item'>${item.itemName}
-                <button class='trash-button' id=${trashButtonID}>🗑︎</button>
-            </div>
-        `;
-        breakfastItems.append(div);
-    });
-    buttonCount = 0;
-    day.lunch.forEach(item => {
-        let trashButtonID = Constants.LUNCH + buttonCount++;
-        const div = document.createElement('div');
-        div.innerHTML = `
-            <div class='lunch-food-item'>${item.itemName}
-                <button class='trash-button' id=${trashButtonID}>🗑︎</button>
-            </div>
-        `;
-        lunchItems.append(div);
-    });
-    buttonCount = 0;
-    day.dinner.forEach(item => {
-        let trashButtonID = Constants.DINNER + buttonCount++;
-        const div = document.createElement('div');
-        div.innerHTML = `
-            <div class='dinner-food-item'>${item.itemName}
-                <button class='trash-button' id=${trashButtonID}>🗑︎</button>
-            </div>
-        `;
-        dinnerItems.append(div);
-    });
-    buttonCount = 0;
-    day.snacks.forEach(item => {
-        let trashButtonID = Constants.SNACKS + buttonCount++;
-        const div = document.createElement('div');
-        div.innerHTML = `
-            <div class='snacks-food-item'>${item.itemName}
-                <button class='trash-button' id=${trashButtonID}>🗑︎</button>
-            </div>
-        `;
-        snackItems.append(div);
-    });
+        let buttonCount = 0;
+        day.breakfast.forEach(item => {
+            let trashButtonID = Constants.BREAKFAST + buttonCount++;
+            const div = document.createElement('div');
+            div.classList.add('breakfast-food-item')
+            div.innerHTML = `
+                        ${item.itemName}
+                        <button class='trash-button' id=${trashButtonID}>🗑︎</button>`;
+            breakfastItems.append(div);
+        });
+        buttonCount = 0;
+        day.lunch.forEach(item => {
+            let trashButtonID = Constants.LUNCH + buttonCount++;
+            const div = document.createElement('div');
+            div.classList.add('lunch-food-item')
+            div.innerHTML = `
+                    ${item.itemName}
+                    <button class='trash-button' id=${trashButtonID}>🗑︎</button>`;
+            lunchItems.append(div);
+        });
+        buttonCount = 0;
+        day.dinner.forEach(item => {
+            let trashButtonID = Constants.DINNER + buttonCount++;
+            const div = document.createElement('div');
+            div.classList.add('dinner-food-item')
+            div.innerHTML = `
+                    ${item.itemName}
+                    <button class='trash-button' id=${trashButtonID}>🗑︎</button>`;
+            dinnerItems.append(div);
+        });
+        buttonCount = 0;
+        day.snacks.forEach(item => {
+            let trashButtonID = Constants.SNACKS + buttonCount++;
+            const div = document.createElement('div');
+            div.classList.add('snacks-food-item')
+            div.innerHTML = `
+                    ${item.itemName}
+                    <button class='trash-button' id=${trashButtonID}>🗑︎</button>`;
+            snackItems.append(div);
+        });
 
-    localStorage.setItem(activeDay, JSON.stringify(day));
+        localStorage.setItem(activeDay, JSON.stringify(day));
+    }
 }
 
 //Functions to Delete Items from Each Day
