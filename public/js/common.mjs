@@ -23,7 +23,7 @@ export class Constants {
 // This function call should be wrapped in a try-catch
 export async function createFoodItem(barcode) {
     // Fetch the csv and convert it to a string
-    const itemData = await fetch("../../Nutrition-Cart-Data(Updated).csv")
+    const itemData = await fetch("../Nutrition-Cart-Data(Updated).csv")
         .then(itemData => itemData.text())
 
     // Split the itemData string by row (delineated by \n), 
