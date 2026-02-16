@@ -113,7 +113,7 @@
     padding: 15px;
     border-top: 4px solid;
     margin: 25px 0;
-    width: 100%;
+    width: 75%;
 }
 
 .category-title {
@@ -283,7 +283,7 @@ table {
 th {
     border: 4px solid #3498db;
     background-color: white;
-    width: 20%;
+    width: 10%;
 }
 
 td {
@@ -291,7 +291,10 @@ td {
     background-color: white;
     padding: 10px;
     height: 600px;
+    width: 10%;
     vertical-align: text-top;
+    align-items: center;
+    justify-items: center;
 }
 
 .day-button {
@@ -305,11 +308,4 @@ td {
 
 .day-button:hover {
     background-color: lightgoldenrodyellow;
-}
-
-tbody tr td ul {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    margin-left: 10px;
 }
