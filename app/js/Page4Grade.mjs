@@ -39,11 +39,11 @@ class DayGrade {
             score[DayGrade.SCORE][i] = this.basicGradeRubric(i, score[DayGrade.AMOUNTS][i], score);
         }
 
-        totalAmounts = 0;
+        let totalScore = 0;
         for (let i = 0; i < 10; i++) {
-            totalAmounts += score[DayGrade.SCORE][i];
+            totalScore += score[DayGrade.SCORE][i];
         }
-        score[DayGrade.SCORE][Constants.SCOREAVG] = totalAmounts / 10;
+        score[DayGrade.SCORE][Constants.SCOREAVG] = totalScore / 10;
 
         let activeDay = localStorage.getItem('ActiveDay');
         let dayPrefix = '';
