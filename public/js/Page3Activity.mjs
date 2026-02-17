@@ -55,7 +55,8 @@ const addFoodButton = document.getElementById('addFoodButton');
 foodCodeInput.addEventListener('keydown', async function (e) {
     if (e.key === 'Enter') {
         await addFoodItem();
-        await updateFoodItems();
+        //await updateFoodItems();
+        await updateWeekFoodItems();
     }
 });
 
@@ -136,6 +137,90 @@ async function addFoodItem() {
     foodCodeInput.value = '';
     foodCodeInput.classList.remove('error', 'success');
     codeHelp.classList.add('hidden');
+}
+
+async function updateWeekFoodItems() {
+    for (const weekDay of ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']) {
+        let activ;
+        switch (weekDay) {
+        case 'Monday':
+            activ = "mon";
+            break;
+        case 'Tuesday':
+            activ = "tues";
+            break;
+        case 'Wednesday':
+            activ = "wed";
+            break;
+        case 'Thursday':
+            activ = "thurs";
+            break;
+        case 'Friday':
+            activ = "fri";
+            break;
+    }
+
+        let dayHelp = document.getElementById('dayHelp')
+        dayHelp.classList.add('hidden');
+        dayHelp.textContent = ''
+
+        let parsed = JSON.parse(localStorage.getItem(weekDay));
+        if (!parsed) {
+            console.log("Parsed day is null: " + weekDay);
+        }
+        let day = await Weekday.fromJSON(parsed);
+
+        const breakfastItems = document.getElementById(`${activ}BreakfastItems`);
+        const lunchItems = document.getElementById(`${activ}LunchItems`);
+        const dinnerItems = document.getElementById(`${activ}DinnerItems`);
+        const snackItems = document.getElementById(`${activ}SnackItems`);
+
+        breakfastItems.innerHTML = '';
+        lunchItems.innerHTML = '';
+        dinnerItems.innerHTML = '';
+        snackItems.innerHTML = '';
+
+        let buttonCount = 0;
+        day.breakfast.forEach(item => {
+            let trashButtonID = Constants.BREAKFAST + buttonCount++;
+            const div = document.createElement('div');
+            div.classList.add('breakfast-food-item')
+            div.innerHTML = `
+                        ${item.itemName}
+                        <button class='trash-button' id=${trashButtonID}>🗑︎</button>`;
+            breakfastItems.append(div);
+        });
+        buttonCount = 0;
+        day.lunch.forEach(item => {
+            let trashButtonID = Constants.LUNCH + buttonCount++;
+            const div = document.createElement('div');
+            div.classList.add('lunch-food-item')
+            div.innerHTML = `
+                    ${item.itemName}
+                    <button class='trash-button' id=${trashButtonID}>🗑︎</button>`;
+            lunchItems.append(div);
+        });
+        buttonCount = 0;
+        day.dinner.forEach(item => {
+            let trashButtonID = Constants.DINNER + buttonCount++;
+            const div = document.createElement('div');
+            div.classList.add('dinner-food-item')
+            div.innerHTML = `
+                    ${item.itemName}
+                    <button class='trash-button' id=${trashButtonID}>🗑︎</button>`;
+            dinnerItems.append(div);
+        });
+        buttonCount = 0;
+        day.snacks.forEach(item => {
+            let trashButtonID = Constants.SNACKS + buttonCount++;
+            const div = document.createElement('div');
+            div.classList.add('snacks-food-item')
+            div.innerHTML = `
+                    ${item.itemName}
+                    <button class='trash-button' id=${trashButtonID}>🗑︎</button>`;
+            snackItems.append(div);
+        });
+    }
 }
 
 async function updateFoodItems() {
@@ -312,3 +397,269 @@ document.getElementById('tuesBtn').addEventListener("click", async function () {
 document.getElementById('wedBtn').addEventListener("click", async function () { setActiveDay('W') })
 document.getElementById('thursBtn').addEventListener("click", async function () { setActiveDay('TH') })
 document.getElementById('friBtn').addEventListener("click", async function () { setActiveDay('F') })
+
+
+const button1 = document.getElementById('testButton1');
+button1.addEventListener('click', async function () {
+    testFunction1();
+});
+
+const button2 = document.getElementById('testButton2');
+button2.addEventListener('click', async function () {
+    testFunction2();
+});
+
+async function testFunction1() {
+    let activeDay = localStorage.getItem('ActiveDay');
+    const calendar = document.getElementById('calendar');
+    let buttonID;
+    let dayItems;
+    switch (activeDay) {
+        case 'Monday':
+            buttonID = "monBtn";
+            dayItems = "mon";
+            break;
+        case 'Tuesday':
+            buttonID = "tuesBtn";
+            dayItems = "tues";
+            break;
+        case 'Wednesday':
+            buttonID = "wedBtn";
+            dayItems = "wed";
+            break;
+        case 'Thursday':
+            buttonID = "thursBtn";
+            dayItems = "thurs";
+            break;
+        case 'Friday':
+            buttonID = "friBtn";
+            dayItems = "fri";
+            break;
+    }
+
+    calendar.innerHTML = `
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <button class="day-button" id="${buttonID}">
+                                            ${activeDay}
+                                        </button>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td id='${activeDay.toLowerCase}'>
+                                        <div class="category-box breakfast-box">
+                                            <div class="category-title">
+                                                <h3 class="breakfast-title">Breakfast</h3>
+                                            </div>
+                                            <div id="${dayItems}BreakfastItems" class="category-items"></div>
+                                        </div>
+                                        <div class="category-box lunch-box">
+                                            <div class="category-title">
+                                                <h3 class="lunch-title">Lunch</h3>
+                                            </div>
+                                            <div id="${dayItems}LunchItems" class="category-items"></div>
+                                        </div>
+                                        <div class="category-box dinner-box">
+                                            <div class="category-title">
+                                                <h3 class="dinner-title">Dinner</h3>
+                                            </div>
+                                            <div id="${dayItems}DinnerItems" class="category-items"></div>
+                                        </div>
+                                        <div class="category-box snacks-box">
+                                            <div class="category-title">
+                                                <h3 class="snacks-title">Dessert/Snacks</h3>
+                                            </div>
+                                            <div id="${dayItems}SnackItems" class="category-items"></div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+    `;
+}
+
+async function testFunction2() {
+    const calendar = document.getElementById('calendar');
+    calendar.innerHTML = `
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <button class="day-button" id="monBtn">
+                                            Monday
+                                        </button>
+                                    </th>
+                                    <th>
+                                        <button class="day-button" id="tuesBtn">
+                                            Tuesday
+                                        </button>
+                                    </th>
+                                    </th>
+                                    <th>
+                                        <button class="day-button" id="wedBtn">
+                                            Wednesday
+                                        </button>
+
+                                    </th>
+                                    <th>
+                                        <button class="day-button" id="thursBtn">
+                                            Thursday
+                                        </button>
+
+                                    </th>
+                                    <th>
+                                        <button class="day-button" id="friBtn">
+                                            Friday
+                                        </button>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td id='monday'>
+                                        <div class="category-box breakfast-box">
+                                            <div class="category-title">
+                                                <h3 class="breakfast-title">Breakfast</h3>
+                                            </div>
+                                            <div id="monBreakfastItems" class="category-items"></div>
+                                        </div>
+                                        <div class="category-box lunch-box">
+                                            <div class="category-title">
+                                                <h3 class="lunch-title">Lunch</h3>
+                                            </div>
+                                            <div id="monLunchItems" class="category-items"></div>
+                                        </div>
+                                        <div class="category-box dinner-box">
+                                            <div class="category-title">
+                                                <h3 class="dinner-title">Dinner</h3>
+                                            </div>
+                                            <div id="monDinnerItems" class="category-items"></div>
+                                        </div>
+                                        <div class="category-box snacks-box">
+                                            <div class="category-title">
+                                                <h3 class="snacks-title">Dessert/Snacks</h3>
+                                            </div>
+                                            <div id="monSnackItems" class="category-items"></div>
+                                        </div>
+                                    </td>
+                                    <td id='tuesday'>
+                                        <div class="category-box breakfast-box">
+                                            <div class="category-title">
+                                                <h3 class="breakfast-title">Breakfast</h3>
+
+                                            </div>
+                                            <div id="tuesBreakfastItems" class="category-items"></div>
+                                        </div>
+                                        <div class="category-box lunch-box">
+                                            <div class="category-title">
+                                                <h3 class="lunch-title">Lunch</h3>
+                                            </div>
+                                            <div id="tuesLunchItems" class="category-items"></div>
+                                        </div>
+                                        <div class="category-box dinner-box">
+                                            <div class="category-title">
+                                                <h3 class="dinner-title">Dinner</h3>
+
+                                            </div>
+                                            <div id="tuesDinnerItems" class="category-items"></div>
+                                        </div>
+                                        <div class="category-box snacks-box">
+                                            <div class="category-title">
+                                                <h3 class="snacks-title">Dessert/Snacks</h3>
+                                            </div>
+                                            <div id="tuesSnackItems" class="category-items"></div>
+                                        </div>
+                                    </td>
+                                    <td id='wednesday'>
+                                        <div class="category-box breakfast-box">
+                                            <div class="category-title">
+                                                <h3 class="breakfast-title">Breakfast</h3>
+
+                                            </div>
+                                            <div id="wedBreakfastItems" class="category-items"></div>
+                                        </div>
+                                        <div class="category-box lunch-box">
+                                            <div class="category-title">
+                                                <h3 class="lunch-title">Lunch</h3>
+                                            </div>
+                                            <div id="wedLunchItems" class="category-items"></div>
+                                        </div>
+                                        <div class="category-box dinner-box">
+                                            <div class="category-title">
+                                                <h3 class="dinner-title">Dinner</h3>
+
+                                            </div>
+                                            <div id="wedDinnerItems" class="category-items"></div>
+                                        </div>
+                                        <div class="category-box snacks-box">
+                                            <div class="category-title">
+                                                <h3 class="snacks-title">Dessert/Snacks</h3>
+                                            </div>
+                                            <div id="wedSnackItems" class="category-items"></div>
+                                        </div>
+                                    </td>
+                                    <td id='thursday'>
+                                        <div class="category-box breakfast-box">
+                                            <div class="category-title">
+                                                <h3 class="breakfast-title">Breakfast</h3>
+
+                                            </div>
+                                            <div id="thursBreakfastItems" class="category-items"></div>
+                                        </div>
+                                        <div class="category-box lunch-box">
+                                            <div class="category-title">
+                                                <h3 class="lunch-title">Lunch</h3>
+                                            </div>
+                                            <div id="thursLunchItems" class="category-items"></div>
+                                        </div>
+                                        <div class="category-box dinner-box">
+                                            <div class="category-title">
+                                                <h3 class="dinner-title">Dinner</h3>
+
+                                            </div>
+                                            <div id="thursDinnerItems" class="category-items"></div>
+                                        </div>
+                                        <div class="category-box snacks-box">
+                                            <div class="category-title">
+                                                <h3 class="snacks-title">Dessert/Snacks</h3>
+                                            </div>
+                                            <div id="thursSnackItems" class="category-items"></div>
+                                        </div>
+                                    </td>
+                                    <td id='friday'>
+                                        <div class="category-box breakfast-box">
+                                            <div class="category-title">
+                                                <h3 class="breakfast-title">Breakfast</h3>
+
+                                            </div>
+                                            <div id="friBreakfastItems" class="category-items"></div>
+                                        </div>
+                                        <div class="category-box lunch-box">
+                                            <div class="category-title">
+                                                <h3 class="lunch-title">Lunch</h3>
+                                            </div>
+                                            <div id="friLunchItems" class="category-items"></div>
+                                        </div>
+                                        <div class="category-box dinner-box">
+                                            <div class="category-title">
+                                                <h3 class="dinner-title">Dinner</h3>
+
+                                            </div>
+                                            <div id="friDinnerItems" class="category-items"></div>
+                                        </div>
+                                        <div class="category-box snacks-box">
+                                            <div class="category-title">
+                                                <h3 class="snacks-title">Dessert/Snacks</h3>
+                                            </div>
+                                            <div id="friSnackItems" class="category-items"></div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+    `;
+}
