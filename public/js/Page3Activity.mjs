@@ -617,7 +617,7 @@ class DayGrade {
                     return 0.75 * this.normalize(40, 20, value);
                 }
                 if (value > 10) {
-                    return 0.75 + 0.25 * this.normalize(20, 10, value);
+                    return 0.75 * DayGrade.MAX_SCORE + 0.25 * this.normalize(20, 10, value);
                 }
                 return DayGrade.MAX_SCORE;
             case Constants.TRANSFAT:
@@ -637,11 +637,11 @@ class DayGrade {
                 }
                 if (value > 200) {
                     score[DayGrade.COMMENTS][Constants.CHOLESTEROL] = "Could use less cholesterol.";
-                    return 0.75 * this.normalize(200, 500, value);
+                    return 0.75 * this.normalize(500, 200, value);
                 }
                 if (value > 0) {
                     score[DayGrade.COMMENTS][Constants.CHOLESTEROL] = "Good amount of cholesterol.";
-                    return 0.75 + 0.25 * this.normalize(0, 200, value);
+                    return 0.75 * DayGrade.MAX_SCORE + 0.25 * this.normalize(200, 0, value);
                 }
                 score[DayGrade.COMMENTS][Constants.CHOLESTEROL] = "Good job keeping cholesterol low!";
                 return DayGrade.MAX_SCORE;
@@ -656,7 +656,7 @@ class DayGrade {
                 }
                 if (value > 1500) {
                     score[DayGrade.COMMENTS][Constants.SODIUM] = "Good amount of sodium.";
-                    return 0.9 + 0.1 * this.normalize(2300, 1500, value);
+                    return 0.9 * DayGrade.MAX_SCORE + 0.1 * this.normalize(2300, 1500, value);
                 }
                 if (value > 500) {
                     score[DayGrade.COMMENTS][Constants.SODIUM] = "Great job keeping sodium amount low!";
@@ -683,7 +683,7 @@ class DayGrade {
                 }
                 if (value > 150) {
                     score[DayGrade.COMMENTS][Constants.CARBS] = "Could use a few more carbs.";
-                    return 0.5 + 0.5 * this.normalize(150, 200, value);
+                    return 0.5 * DayGrade.MAX_SCORE + 0.5 * this.normalize(150, 200, value);
                 }
                 if (value > 50) {
                     score[DayGrade.COMMENTS][Constants.CARBS] = "Need more carbs.";
@@ -721,7 +721,7 @@ class DayGrade {
                 }
                 if (value > 30) {
                     score[DayGrade.COMMENTS][Constants.SUGAR] = "A little too much sugar!";
-                    return 0.5 + 0.5 * this.normalize(50, 30, value);
+                    return 0.5 * DayGrade.MAX_SCORE + 0.5 * this.normalize(50, 30, value);
                 }
                 score[DayGrade.COMMENTS][Constants.SUGAR] = "Good job keeping sugar low!";
                 return DayGrade.MAX_SCORE;
@@ -732,7 +732,7 @@ class DayGrade {
                 }
                 if (value > 75) {
                     score[DayGrade.COMMENTS][Constants.PROTEIN] = "That is a lot of protein, are you an athelete?";
-                    return 0.5 + 0.5 * this.normalize(150, 75, value);
+                    return 0.5 * DayGrade.MAX_SCORE + 0.5 * this.normalize(150, 75, value);
                 }
                 if (value > 50) {
                     score[DayGrade.COMMENTS][Constants.PROTEIN] = "Perfect amount of protein!";
