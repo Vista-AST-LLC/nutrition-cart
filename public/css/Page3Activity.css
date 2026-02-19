@@ -72,6 +72,34 @@
     }
 }
 
+.button-container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: end;
+    align-items: center;
+    gap: 10px;
+}
+
+.change-view-button {
+    text-decoration: none;
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    width: 150px;
+    margin: 0;
+}
+
+.change-view-button:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-2px);
+}
+
 .food-items-container-title {
     position: relative;
     display: flex;
@@ -412,6 +440,7 @@ td {
     width: 110px;
     margin: auto;
 }
+
 .get-grade-button:hover {
     background: purple;
     transform: translate(-50%, -54%);
@@ -535,7 +564,8 @@ td {
     gap: 15px;
 }
 
-.left, .right {
+.left,
+.right {
     flex: 1;
 }
 
