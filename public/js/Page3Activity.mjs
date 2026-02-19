@@ -45,17 +45,12 @@ async function setActiveDay(day) {
 let keyLastTime = performance.now();
 let keyEntry = '';
 
-/*let monday = new Weekday();
-localStorage.setItem('Monday', JSON.stringify(monday));
-localStorage.setItem('ActiveDay', 'Monday');*/
-
 const foodCodeInput = document.getElementById('foodCode');
 const addFoodButton = document.getElementById('addFoodButton');
 
 foodCodeInput.addEventListener('keydown', async function (e) {
     if (e.key === 'Enter') {
         await addFoodItem();
-        //await updateFoodItems();
         await updateWeekFoodItems();
     }
 });
@@ -346,7 +341,6 @@ friFoodItemsContainer.addEventListener('click', async (e) => {
 });
 
 async function removeFoodItemDiv(name) {
-    const target = document.getElementById(name);
     let meal = name[0];
     let id = name.slice(1);
     let activeDay = localStorage.getItem("ActiveDay");
@@ -410,256 +404,340 @@ button2.addEventListener('click', async function () {
 });
 
 async function testFunction1() {
+    document.getElementById('calendar').style.display = 'none';
     let activeDay = localStorage.getItem('ActiveDay');
-    const calendar = document.getElementById('calendar');
-    let buttonID;
-    let dayItems;
-    switch (activeDay) {
-        case 'Monday':
-            buttonID = "monBtn";
-            dayItems = "mon";
-            break;
-        case 'Tuesday':
-            buttonID = "tuesBtn";
-            dayItems = "tues";
-            break;
-        case 'Wednesday':
-            buttonID = "wedBtn";
-            dayItems = "wed";
-            break;
-        case 'Thursday':
-            buttonID = "thursBtn";
-            dayItems = "thurs";
-            break;
-        case 'Friday':
-            buttonID = "friBtn";
-            dayItems = "fri";
-            break;
+    let parsed = JSON.parse(localStorage.getItem(activeDay));
+    if (!parsed) {
+        console.log("Parsed day is null: " + activeDay);
     }
+    let day = await Weekday.fromJSON(parsed);
 
-    calendar.innerHTML = `
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>
-                                        <button class="day-button" id="${buttonID}">
-                                            ${activeDay}
-                                        </button>
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td id='${activeDay.toLowerCase}'>
-                                        <div class="category-box breakfast-box">
-                                            <div class="category-title">
-                                                <h3 class="breakfast-title">Breakfast</h3>
-                                            </div>
-                                            <div id="${dayItems}BreakfastItems" class="category-items"></div>
-                                        </div>
-                                        <div class="category-box lunch-box">
-                                            <div class="category-title">
-                                                <h3 class="lunch-title">Lunch</h3>
-                                            </div>
-                                            <div id="${dayItems}LunchItems" class="category-items"></div>
-                                        </div>
-                                        <div class="category-box dinner-box">
-                                            <div class="category-title">
-                                                <h3 class="dinner-title">Dinner</h3>
-                                            </div>
-                                            <div id="${dayItems}DinnerItems" class="category-items"></div>
-                                        </div>
-                                        <div class="category-box snacks-box">
-                                            <div class="category-title">
-                                                <h3 class="snacks-title">Dessert/Snacks</h3>
-                                            </div>
-                                            <div id="${dayItems}SnackItems" class="category-items"></div>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-    `;
+    const dayToGrade = document.getElementById('dayToGrade');
+    dayToGrade.style.display = 'block';
+
+    document.getElementById('gradeButtonID').innerHTML = activeDay;
+
+    const gradeBreakfastItems = document.getElementById('gradeBreakfastItems');
+    const gradeLunchItems = document.getElementById('gradeLunchItems');
+    const gradeDinnerItems = document.getElementById('gradeDinnerItems');
+    const gradeSnackItems = document.getElementById('gradeSnackItems');
+
+    gradeBreakfastItems.innerHTML = '';
+    gradeLunchItems.innerHTML = '';
+    gradeDinnerItems.innerHTML = '';
+    gradeSnackItems.innerHTML = '';
+
+    day.breakfast.forEach(item => {
+        const div = document.createElement('div');
+        div.classList.add('breakfast-food-item')
+        div.innerHTML = `
+                    ${item.itemName}`;
+        gradeBreakfastItems.append(div);
+    });
+    day.lunch.forEach(item => {
+        const div = document.createElement('div');
+        div.classList.add('lunch-food-item')
+        div.innerHTML = `
+                ${item.itemName}`;
+        gradeLunchItems.append(div);
+    });
+    day.dinner.forEach(item => {
+        const div = document.createElement('div');
+        div.classList.add('dinner-food-item')
+        div.innerHTML = `
+                ${item.itemName}`;
+        gradeDinnerItems.append(div);
+    });
+    day.snacks.forEach(item => {
+        const div = document.createElement('div');
+        div.classList.add('snacks-food-item')
+        div.innerHTML = `
+                ${item.itemName}`;
+        gradeSnackItems.append(div);
+    });
+
+    new DayGrade(day);
 }
 
 async function testFunction2() {
-    const calendar = document.getElementById('calendar');
-    calendar.innerHTML = `
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>
-                                        <button class="day-button" id="monBtn">
-                                            Monday
-                                        </button>
-                                    </th>
-                                    <th>
-                                        <button class="day-button" id="tuesBtn">
-                                            Tuesday
-                                        </button>
-                                    </th>
-                                    </th>
-                                    <th>
-                                        <button class="day-button" id="wedBtn">
-                                            Wednesday
-                                        </button>
+    document.getElementById('calendar').style.display = 'block';
+    document.getElementById('dayToGrade').style.display = 'none';
+}
 
-                                    </th>
-                                    <th>
-                                        <button class="day-button" id="thursBtn">
-                                            Thursday
-                                        </button>
+class DayGrade {
+    // Constants used in class
+    static MAX_SCORE = 100;
 
-                                    </th>
-                                    <th>
-                                        <button class="day-button" id="friBtn">
-                                            Friday
-                                        </button>
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td id='monday'>
-                                        <div class="category-box breakfast-box">
-                                            <div class="category-title">
-                                                <h3 class="breakfast-title">Breakfast</h3>
-                                            </div>
-                                            <div id="monBreakfastItems" class="category-items"></div>
-                                        </div>
-                                        <div class="category-box lunch-box">
-                                            <div class="category-title">
-                                                <h3 class="lunch-title">Lunch</h3>
-                                            </div>
-                                            <div id="monLunchItems" class="category-items"></div>
-                                        </div>
-                                        <div class="category-box dinner-box">
-                                            <div class="category-title">
-                                                <h3 class="dinner-title">Dinner</h3>
-                                            </div>
-                                            <div id="monDinnerItems" class="category-items"></div>
-                                        </div>
-                                        <div class="category-box snacks-box">
-                                            <div class="category-title">
-                                                <h3 class="snacks-title">Dessert/Snacks</h3>
-                                            </div>
-                                            <div id="monSnackItems" class="category-items"></div>
-                                        </div>
-                                    </td>
-                                    <td id='tuesday'>
-                                        <div class="category-box breakfast-box">
-                                            <div class="category-title">
-                                                <h3 class="breakfast-title">Breakfast</h3>
+    // Indices for arrays
+    static SCORE = 0;
+    static AMOUNTS = 1
+    static COMMENTS = 2;
 
-                                            </div>
-                                            <div id="tuesBreakfastItems" class="category-items"></div>
-                                        </div>
-                                        <div class="category-box lunch-box">
-                                            <div class="category-title">
-                                                <h3 class="lunch-title">Lunch</h3>
-                                            </div>
-                                            <div id="tuesLunchItems" class="category-items"></div>
-                                        </div>
-                                        <div class="category-box dinner-box">
-                                            <div class="category-title">
-                                                <h3 class="dinner-title">Dinner</h3>
+    constructor(day) {
+        let score = Array.from({ length: 3 }, () => new Array(10).fill(0));
+        score[DayGrade.COMMENTS] = new Array(10).fill('Default Comment');
 
-                                            </div>
-                                            <div id="tuesDinnerItems" class="category-items"></div>
-                                        </div>
-                                        <div class="category-box snacks-box">
-                                            <div class="category-title">
-                                                <h3 class="snacks-title">Dessert/Snacks</h3>
-                                            </div>
-                                            <div id="tuesSnackItems" class="category-items"></div>
-                                        </div>
-                                    </td>
-                                    <td id='wednesday'>
-                                        <div class="category-box breakfast-box">
-                                            <div class="category-title">
-                                                <h3 class="breakfast-title">Breakfast</h3>
+        this.accumulateTotals(day, score);
+        for (let i = 0; i < 10; i++) {
+            score[DayGrade.SCORE][i] = this.basicGradeRubric(i, score[DayGrade.AMOUNTS][i], score);
+        }
 
-                                            </div>
-                                            <div id="wedBreakfastItems" class="category-items"></div>
-                                        </div>
-                                        <div class="category-box lunch-box">
-                                            <div class="category-title">
-                                                <h3 class="lunch-title">Lunch</h3>
-                                            </div>
-                                            <div id="wedLunchItems" class="category-items"></div>
-                                        </div>
-                                        <div class="category-box dinner-box">
-                                            <div class="category-title">
-                                                <h3 class="dinner-title">Dinner</h3>
+        let totalScore = 0;
+        for (let i = 0; i < 10; i++) {
+            totalScore += score[DayGrade.SCORE][i];
+        }
+        score[DayGrade.SCORE][Constants.SCOREAVG] = totalScore / 10;
 
-                                            </div>
-                                            <div id="wedDinnerItems" class="category-items"></div>
-                                        </div>
-                                        <div class="category-box snacks-box">
-                                            <div class="category-title">
-                                                <h3 class="snacks-title">Dessert/Snacks</h3>
-                                            </div>
-                                            <div id="wedSnackItems" class="category-items"></div>
-                                        </div>
-                                    </td>
-                                    <td id='thursday'>
-                                        <div class="category-box breakfast-box">
-                                            <div class="category-title">
-                                                <h3 class="breakfast-title">Breakfast</h3>
+        let caloriesCom = document.getElementById('caloriesComments');
+        let caloriesCard = document.getElementById('totalCalories');
+        caloriesCom.innerHTML = score[DayGrade.COMMENTS][Constants.CALORIES];
+        caloriesCard.innerHTML = Math.round(score[DayGrade.AMOUNTS][Constants.CALORIES]);
+        let fatsCom = document.getElementById('fatsComments');
+        let fatsCard = document.getElementById('totalFats');
+        fatsCom.innerHTML = score[DayGrade.COMMENTS][Constants.TOTALFAT];
+        fatsCard.innerHTML = Math.round(score[DayGrade.AMOUNTS][Constants.TOTALFAT]);
+        let cholesterolCom = document.getElementById('cholesterolComments');
+        let cholesterolCard = document.getElementById('totalCholesterol');
+        cholesterolCom.innerHTML = score[DayGrade.COMMENTS][Constants.CHOLESTEROL];
+        cholesterolCard.innerHTML = Math.round(score[DayGrade.AMOUNTS][Constants.CHOLESTEROL]);
+        let sodiumCom = document.getElementById('sodiumComments');
+        let sodiumCard = document.getElementById('totalSodium');
+        sodiumCom.innerHTML = score[DayGrade.COMMENTS][Constants.SODIUM];
+        sodiumCard.innerHTML = Math.round(score[DayGrade.AMOUNTS][Constants.SODIUM]);
+        let carbsCom = document.getElementById('carbsComments');
+        let carbsCard = document.getElementById('totalCarbs');
+        carbsCom.innerHTML = score[DayGrade.COMMENTS][Constants.CARBS];
+        carbsCard.innerHTML = Math.round(score[DayGrade.AMOUNTS][Constants.CARBS]);
+        let fiberCom = document.getElementById('fiberComments');
+        let fiberCard = document.getElementById('totalFiber');
+        fiberCom.innerHTML = score[DayGrade.COMMENTS][Constants.FIBER];
+        fiberCard.innerHTML = Math.round(score[DayGrade.AMOUNTS][Constants.FIBER]);
+        let sugarsCom = document.getElementById('sugarsComments');
+        let sugarsCard = document.getElementById('totalSugars');
+        sugarsCom.innerHTML = score[DayGrade.COMMENTS][Constants.SUGAR];
+        sugarsCard.innerHTML = Math.round(score[DayGrade.AMOUNTS][Constants.SUGAR]);
+        let proteinCom = document.getElementById('proteinComments');
+        let proteinCard = document.getElementById('totalProtein');
+        proteinCom.innerHTML = score[DayGrade.COMMENTS][Constants.PROTEIN];
+        proteinCard.innerHTML = Math.round(score[DayGrade.AMOUNTS][Constants.PROTEIN]);
 
-                                            </div>
-                                            <div id="thursBreakfastItems" class="category-items"></div>
-                                        </div>
-                                        <div class="category-box lunch-box">
-                                            <div class="category-title">
-                                                <h3 class="lunch-title">Lunch</h3>
-                                            </div>
-                                            <div id="thursLunchItems" class="category-items"></div>
-                                        </div>
-                                        <div class="category-box dinner-box">
-                                            <div class="category-title">
-                                                <h3 class="dinner-title">Dinner</h3>
+        let totalGradeCircle = document.getElementById('pointsCircle');
+        if (score[DayGrade.SCORE][Constants.SCOREAVG] > 90) {
+            totalGradeCircle.innerHTML = 'A';
+        } else if (score[DayGrade.SCORE][Constants.SCOREAVG] > 80) {
+            totalGradeCircle.innerHTML = 'B';
+        } else if (score[DayGrade.SCORE][Constants.SCOREAVG] > 70) {
+            totalGradeCircle.innerHTML = 'C';
+        } else if (score[DayGrade.SCORE][Constants.SCOREAVG] > 60) {
+            totalGradeCircle.innerHTML = 'D';
+        } else {
+            totalGradeCircle.innerHTML = 'F';
+        }
 
-                                            </div>
-                                            <div id="thursDinnerItems" class="category-items"></div>
-                                        </div>
-                                        <div class="category-box snacks-box">
-                                            <div class="category-title">
-                                                <h3 class="snacks-title">Dessert/Snacks</h3>
-                                            </div>
-                                            <div id="thursSnackItems" class="category-items"></div>
-                                        </div>
-                                    </td>
-                                    <td id='friday'>
-                                        <div class="category-box breakfast-box">
-                                            <div class="category-title">
-                                                <h3 class="breakfast-title">Breakfast</h3>
+        let underGradeCircle = document.getElementById('underPointCircle');
+        underGradeCircle.innerHTML = "Your Grade: " + Math.round(score[DayGrade.SCORE][Constants.SCOREAVG]);
+    }
 
-                                            </div>
-                                            <div id="friBreakfastItems" class="category-items"></div>
-                                        </div>
-                                        <div class="category-box lunch-box">
-                                            <div class="category-title">
-                                                <h3 class="lunch-title">Lunch</h3>
-                                            </div>
-                                            <div id="friLunchItems" class="category-items"></div>
-                                        </div>
-                                        <div class="category-box dinner-box">
-                                            <div class="category-title">
-                                                <h3 class="dinner-title">Dinner</h3>
+    accumulateTotals(day, score) {
+        let dayTotal = new Array(10).fill(0);
+        for (const mealType of [Constants.BREAKFAST, Constants.LUNCH, Constants.DINNER, Constants.SNACKS]) {
+            for (const foodItem of day.getMealItems(mealType) ?? []) {
+                dayTotal[Constants.CALORIES] += foodItem.calories;
+                dayTotal[Constants.TOTALFAT] += foodItem.totalFatG;
+                dayTotal[Constants.SATFAT] += foodItem.satFatG;
+                dayTotal[Constants.TRANSFAT] += foodItem.transFatG;
+                dayTotal[Constants.CHOLESTEROL] += foodItem.cholesterolMG;
+                dayTotal[Constants.SODIUM] += foodItem.sodiumMG;
+                dayTotal[Constants.CARBS] += foodItem.carbsG;
+                dayTotal[Constants.FIBER] += foodItem.fiberG;
+                dayTotal[Constants.SUGAR] += foodItem.sugarsG;
+                dayTotal[Constants.PROTEIN] += foodItem.proteinG;
+            }
+        }
+        score[DayGrade.AMOUNTS] = dayTotal
+    }
 
-                                            </div>
-                                            <div id="friDinnerItems" class="category-items"></div>
-                                        </div>
-                                        <div class="category-box snacks-box">
-                                            <div class="category-title">
-                                                <h3 class="snacks-title">Dessert/Snacks</h3>
-                                            </div>
-                                            <div id="friSnackItems" class="category-items"></div>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-    `;
+    basicGradeRubric(type, value, score) {
+        switch (type) {
+            case Constants.CALORIES:
+                if (value > 4000) {
+                    score[DayGrade.COMMENTS][Constants.CALORIES] = "Way too many calories!";
+                    return 0;
+                }
+                if (value > 2500) {
+                    score[DayGrade.COMMENTS][Constants.CALORIES] = "Could use less calories.";
+                    return this.normalize(4000, 2500, value);
+                }
+                if (value > 1500) {
+                    score[DayGrade.COMMENTS][Constants.CALORIES] = "Good job! You are around the ideal calorie count.";
+                    return DayGrade.MAX_SCORE;
+                }
+                if (value > 1000) {
+                    score[DayGrade.COMMENTS][Constants.CALORIES] = "Not enough calories, you need a little more to stay healty.";
+                    return this.normalize(1000, 1500, value);
+                }
+                score[DayGrade.COMMENTS][Constants.CALORIES] = "You don't have nearly enough calories, you will starve!";
+                return 0;
+            case Constants.TOTALFAT:
+                if (value > 100) {
+                    score[DayGrade.COMMENTS][Constants.TOTALFAT] = "Way too many fats!";
+                    return 0;
+                }
+                if (value > 50) {
+                    score[DayGrade.COMMENTS][Constants.TOTALFAT] = "Could use fewer fats.";
+                    return this.normalize(100, 50, value);
+                }
+                if (value > 25) {
+                    score[DayGrade.COMMENTS][Constants.TOTALFAT] = "Good amount of fats.";
+                    return DayGrade.MAX_SCORE;
+                }
+                if (value > 0) {
+                    score[DayGrade.COMMENTS][Constants.TOTALFAT] = "Could use a little more fats!";
+                    return this.normalize(0, 25, value);
+                }
+                score[DayGrade.COMMENTS][Constants.TOTALFAT] = "You need more fats!";
+                return 0;
+            case Constants.SATFAT:
+                if (value > 40) {
+                    return 0;
+                }
+                if (value > 20) {
+                    return 0.75 * this.normalize(40, 20, value);
+                }
+                if (value > 10) {
+                    return 0.75 + 0.25 * this.normalize(20, 10, value);
+                }
+                return DayGrade.MAX_SCORE;
+            case Constants.TRANSFAT:
+                if (value > 5) {
+                    score[DayGrade.COMMENTS][Constants.TOTALFAT] = score[DayGrade.COMMENTS][Constants.TOTALFAT] + " Also way too much transfat!";
+                    return 0;
+                }
+                if (value > 0) {
+                    score[DayGrade.COMMENTS][Constants.TOTALFAT] = score[DayGrade.COMMENTS][Constants.TOTALFAT] + " Also could use less transfat!";
+                    return this.normalize(5, 0, value);
+                }
+                return DayGrade.MAX_SCORE;
+            case Constants.CHOLESTEROL:
+                if (value > 500) {
+                    score[DayGrade.COMMENTS][Constants.CHOLESTEROL] = "Way too much cholesterol!";
+                    return 0;
+                }
+                if (value > 200) {
+                    score[DayGrade.COMMENTS][Constants.CHOLESTEROL] = "Could use less cholesterol.";
+                    return 0.75 * this.normalize(500, 200, value);
+                }
+                if (value > 0) {
+                    score[DayGrade.COMMENTS][Constants.CHOLESTEROL] = "Good amount of cholesterol.";
+                    return 0.75 + 0.25 * this.normalize(200, 0, value);
+                }
+                score[DayGrade.COMMENTS][Constants.CHOLESTEROL] = "Good job keeping cholesterol low!";
+                return DayGrade.MAX_SCORE;
+            case Constants.SODIUM:
+                if (value > 4000) {
+                    score[DayGrade.COMMENTS][Constants.SODIUM] = "Way too much sodium!";
+                    return 0;
+                }
+                if (value > 2300) {
+                    score[DayGrade.COMMENTS][Constants.SODIUM] = "Could use less sodium.";
+                    return 0.9 * this.normalize(4000, 2300, value);
+                }
+                if (value > 1500) {
+                    score[DayGrade.COMMENTS][Constants.SODIUM] = "Good amount of sodium.";
+                    return 0.9 + 0.1 * this.normalize(2300, 1500, value);
+                }
+                if (value > 500) {
+                    score[DayGrade.COMMENTS][Constants.SODIUM] = "Great job keeping sodium amount low!";
+                    return DayGrade.MAX_SCORE;
+                }
+                if (value > 0) {
+                    score[DayGrade.COMMENTS][Constants.SODIUM] = "Could use a little more sodium.";
+                    return this.normalize(0, 500, value);
+                }
+                score[DayGrade.COMMENTS][Constants.SODIUM] = "Way too little sodium! Sodium is required for your body to function.";
+                return 0;
+            case Constants.CARBS:
+                if (value > 500) {
+                    score[DayGrade.COMMENTS][Constants.CARBS] = "Way too many carbs!";
+                    return 0;
+                }
+                if (value > 275) {
+                    score[DayGrade.COMMENTS][Constants.CARBS] = "Could use less carbs.";
+                    return this.normalize(500, 275, value);
+                }
+                if (value > 200) {
+                    score[DayGrade.COMMENTS][Constants.CARBS] = "Good amount of carbs!";
+                    return DayGrade.MAX_SCORE;
+                }
+                if (value > 150) {
+                    score[DayGrade.COMMENTS][Constants.CARBS] = "Could use a few more carbs.";
+                    return 0.5 + 0.5 * this.normalize(150, 200, value);
+                }
+                if (value > 50) {
+                    score[DayGrade.COMMENTS][Constants.CARBS] = "Need more carbs.";
+                    return 0.5 * this.normalize(50, 150, value);
+                }
+                score[DayGrade.COMMENTS][Constants.CARBS] = "Need way more carbs, carbs are necessary for your diet!";
+                return 0;
+            case Constants.FIBER:
+                if (value > 100) {
+                    score[DayGrade.COMMENTS][Constants.FIBER] = "Way too much fiber!";
+                    return 0;
+                }
+                if (value > 38) {
+                    score[DayGrade.COMMENTS][Constants.FIBER] = "Too much fiber, get a little less.";
+                    return this.normalize(100, 38, value);
+                }
+                if (value > 28) {
+                    score[DayGrade.COMMENTS][Constants.FIBER] = "Perfect amount of fiber!";
+                    return DayGrade.MAX_SCORE;
+                }
+                if (value > 0) {
+                    score[DayGrade.COMMENTS][Constants.FIBER] = "Need some more fiber.";
+                    return this.normalize(0, 28, value);
+                }
+                score[DayGrade.COMMENTS][Constants.FIBER] = "Not nearly enough fiber!";
+                return 0;
+            case Constants.SUGAR:
+                if (value > 100) {
+                    score[DayGrade.COMMENTS][Constants.SUGAR] = "Way too much sugar!";
+                    return 0;
+                }
+                if (value > 50) {
+                    score[DayGrade.COMMENTS][Constants.SUGAR] = "Too much sugar.";
+                    return 0.5 * this.normalize(100, 50, value);
+                }
+                if (value > 30) {
+                    score[DayGrade.COMMENTS][Constants.SUGAR] = "A little too much sugar!";
+                    return 0.5 + 0.5 * this.normalize(50, 30, value);
+                }
+                score[DayGrade.COMMENTS][Constants.SUGAR] = "Good job keeping sugar low!";
+                return DayGrade.MAX_SCORE;
+            case Constants.PROTEIN:
+                if (value > 150) {
+                    score[DayGrade.COMMENTS][Constants.PROTEIN] = "That is a ton of protein, are you a body builder?!";
+                    return 0.5 * DayGrade.MAX_SCORE;
+                }
+                if (value > 75) {
+                    score[DayGrade.COMMENTS][Constants.PROTEIN] = "That is a lot of protein, are you an athelete?";
+                    return 0.5 + 0.5 * this.normalize(150, 75, value);
+                }
+                if (value > 50) {
+                    score[DayGrade.COMMENTS][Constants.PROTEIN] = "Perfect amount of protein!";
+                    return DayGrade.MAX_SCORE;
+                }
+                if (value > 20) {
+                    score[DayGrade.COMMENTS][Constants.PROTEIN] = "That is not enough protein, add some more.";
+                    return this.normalize(20, 50, value);
+                }
+                score[DayGrade.COMMENTS][Constants.PROTEIN] = "That is not nearly enough protein, add some more!";
+                return 0;
+        }
+    }
+
+    // This is used to interpolate between values for scoring 
+    // Bottom = 0, top = 1
+    normalize(bottom, top, value) {
+        return ((value - bottom) / (top - bottom)) * DayGrade.MAX_SCORE;
+    }
 }
