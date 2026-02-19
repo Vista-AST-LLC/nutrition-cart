@@ -637,11 +637,11 @@ class DayGrade {
                 }
                 if (value > 200) {
                     score[DayGrade.COMMENTS][Constants.CHOLESTEROL] = "Could use less cholesterol.";
-                    return 0.75 * this.normalize(500, 200, value);
+                    return 0.75 * this.normalize(200, 500, value);
                 }
                 if (value > 0) {
                     score[DayGrade.COMMENTS][Constants.CHOLESTEROL] = "Good amount of cholesterol.";
-                    return 0.75 + 0.25 * this.normalize(200, 0, value);
+                    return 0.75 + 0.25 * this.normalize(0, 200, value);
                 }
                 score[DayGrade.COMMENTS][Constants.CHOLESTEROL] = "Good job keeping cholesterol low!";
                 return DayGrade.MAX_SCORE;
