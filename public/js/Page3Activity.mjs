@@ -2,6 +2,11 @@ import { createFoodItem, FoodItem, Weekday, Constants } from "./common.mjs";
 
 let active;
 
+window.addEventListener("load", function () {
+    console.log("function worked")
+})
+
+
 //Function to Select the Active Day
 async function setActiveDay(day) {
     switch (day) {
@@ -14,24 +19,44 @@ async function setActiveDay(day) {
         case 'T':
             localStorage.setItem("ActiveDay", 'Tuesday')
             document.getElementById('tuesday').style.backgroundColor = 'lightgoldenrodyellow'
+            /*const tuesday = document.getElementById('tuesday')
+            const tuesHead = document.getElementById('tuesHead')
+            tuesday.style.backgroundColor = 'lightgoldenrodyellow'
+            tuesday.style.transform = "translateX(-100%)"
+            tuesHead.style.transform = "translateX(-100%)"*/
             updateBackgroundColor('monday', 'wednesday', 'thursday', 'friday')
             active = 'tues'
             break;
         case 'W':
             localStorage.setItem("ActiveDay", 'Wednesday')
             document.getElementById('wednesday').style.backgroundColor = 'lightgoldenrodyellow'
+            /*const wednesday = document.getElementById('wednesday')
+            const wedHead = document.getElementById('wedHead')
+            wednesday.style.backgroundColor = 'lightgoldenrodyellow'
+            wednesday.style.transform = "translateX(-200%)"
+            wedHead.style.transform = "translateX(-200%)"*/
             updateBackgroundColor('monday', 'tuesday', 'thursday', 'friday')
             active = 'wed'
             break;
         case 'TH':
             localStorage.setItem("ActiveDay", 'Thursday')
             document.getElementById('thursday').style.backgroundColor = 'lightgoldenrodyellow'
+            /*const thursday = document.getElementById('thursday')
+            const thursHead = document.getElementById('thursHead')
+            thursday.style.backgroundColor = 'lightgoldenrodyellow'
+            thursday.style.transform = 'translateX(-300%)'
+            thursHead.style.transform = 'translateX(-300%)'*/
             updateBackgroundColor('monday', 'tuesday', 'wednesday', 'friday')
             active = 'thurs'
             break;
         case 'F':
             localStorage.setItem("ActiveDay", 'Friday')
             document.getElementById('friday').style.backgroundColor = 'lightgoldenrodyellow'
+            /*const friday = document.getElementById('friday')
+            const friHead = document.getElementById('friHead')
+            friday.style.backgroundColor = 'lightgoldenrodyellow'
+            friday.style.transform = 'translateX(-400%)'
+            friHead.style.transform = 'translateX(-400%)'*/
             updateBackgroundColor('monday', 'tuesday', 'wednesday', 'thursday')
             active = 'fri'
             break;
