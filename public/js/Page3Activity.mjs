@@ -2,8 +2,8 @@ import { createFoodItem, FoodItem, Weekday, Constants } from "./common.mjs";
 
 let active;
 
-window.addEventListener("load", function () {
-    console.log("function worked")
+window.addEventListener("load", async function () {
+    await updateWeekFoodItems();
 })
 
 
@@ -89,7 +89,7 @@ addFoodButton.addEventListener('click', function (e) {
 document.addEventListener('keydown', (e) => {
     // Always focus the input when a key is pressed
     if (document.activeElement !== foodCodeInput) {
-        foodCodeInput.focus();
+        foodCodeInput.focus({ preventScroll: true });
     }
 
     // According to old logic, ignore shift for scanners
@@ -495,7 +495,7 @@ class DayGrade {
 
     // Indices for arrays
     static SCORE = 0;
-    static AMOUNTS = 1
+    static AMOUNTS = 1;
     static COMMENTS = 2;
 
     constructor(day) {
@@ -514,8 +514,8 @@ class DayGrade {
         score[DayGrade.SCORE][Constants.SCOREAVG] = totalScore / 10;
 
         console.log("Caluclated category points:")
-        console.log("Calories: " + score[DayGrade.SCORE][Constants.CALORIES]);
-        console.log("Total Fats: " + score[DayGrade.SCORE][Constants.TOTALFAT]);
+        console.log("Cal: " + score[DayGrade.SCORE][Constants.CALORIES]);
+        console.log("TotFat: " + score[DayGrade.SCORE][Constants.TOTALFAT]);
         console.log("TFat: " + score[DayGrade.SCORE][Constants.TRANSFAT]);
         console.log("SFat: " + score[DayGrade.SCORE][Constants.SATFAT]);
         console.log("Chol: " + score[DayGrade.SCORE][Constants.CHOLESTEROL]);
@@ -736,17 +736,17 @@ class DayGrade {
                 score[DayGrade.COMMENTS][Constants.FIBER] = "Not nearly enough fiber!";
                 return 0;
             case Constants.SUGAR:
-                if (value > 100) {
+                if (value > 150) {
                     score[DayGrade.COMMENTS][Constants.SUGAR] = "Way too much sugar!";
                     return 0;
                 }
-                if (value > 50) {
+                if (value > 80) {
                     score[DayGrade.COMMENTS][Constants.SUGAR] = "Too much sugar.";
-                    return 0.5 * this.normalize(100, 50, value);
+                    return 0.5 * this.normalize(150, 80, value);
                 }
-                if (value > 30) {
+                if (value > 50) {
                     score[DayGrade.COMMENTS][Constants.SUGAR] = "A little too much sugar!";
-                    return 0.5 * DayGrade.MAX_SCORE + 0.5 * this.normalize(50, 30, value);
+                    return 0.5 * DayGrade.MAX_SCORE + 0.5 * this.normalize(80, 50, value);
                 }
                 score[DayGrade.COMMENTS][Constants.SUGAR] = "Good job keeping sugar low!";
                 return DayGrade.MAX_SCORE;
