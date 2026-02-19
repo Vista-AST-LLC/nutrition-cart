@@ -337,6 +337,7 @@ th {
     border: 4px solid #3498db;
     background-color: white;
     width: 10%;
+    /*transition: all 0.3s ease;*/
 }
 
 td {
@@ -347,6 +348,7 @@ td {
     vertical-align: text-top;
     align-items: center;
     justify-items: center;
+    /*transition: all 0.3s ease;*/
 }
 
 .day-button {
