@@ -488,6 +488,18 @@ class DayGrade {
         }
         score[DayGrade.SCORE][Constants.SCOREAVG] = totalScore / 10;
 
+        console.log("Caluclated category points:")
+        console.log("Calories: " + score[DayGrade.SCORE][Constants.CALORIES]);
+        console.log("Total Fats: " + score[DayGrade.SCORE][Constants.TOTALFAT]);
+        console.log("TFat: " + score[DayGrade.SCORE][Constants.TRANSFAT]);
+        console.log("SFat: " + score[DayGrade.SCORE][Constants.SATFAT]);
+        console.log("Chol: " + score[DayGrade.SCORE][Constants.CHOLESTEROL]);
+        console.log("Sod: " + score[DayGrade.SCORE][Constants.SODIUM]);
+        console.log("Car: " + score[DayGrade.SCORE][Constants.CARBS]);
+        console.log("Fib: " + score[DayGrade.SCORE][Constants.FIBER]);
+        console.log("Sug: " + score[DayGrade.SCORE][Constants.SUGAR]);
+        console.log("Pro: " + score[DayGrade.SCORE][Constants.PROTEIN]);
+
         let caloriesCom = document.getElementById('caloriesComments');
         let caloriesCard = document.getElementById('totalCalories');
         caloriesCom.innerHTML = score[DayGrade.COMMENTS][Constants.CALORIES];
