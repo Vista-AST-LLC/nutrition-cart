@@ -19,44 +19,24 @@ async function setActiveDay(day) {
         case 'T':
             localStorage.setItem("ActiveDay", 'Tuesday')
             document.getElementById('tuesday').style.backgroundColor = 'lightgoldenrodyellow'
-            /*const tuesday = document.getElementById('tuesday')
-            const tuesHead = document.getElementById('tuesHead')
-            tuesday.style.backgroundColor = 'lightgoldenrodyellow'
-            tuesday.style.transform = "translateX(-100%)"
-            tuesHead.style.transform = "translateX(-100%)"*/
             updateBackgroundColor('monday', 'wednesday', 'thursday', 'friday')
             active = 'tues'
             break;
         case 'W':
             localStorage.setItem("ActiveDay", 'Wednesday')
             document.getElementById('wednesday').style.backgroundColor = 'lightgoldenrodyellow'
-            /*const wednesday = document.getElementById('wednesday')
-            const wedHead = document.getElementById('wedHead')
-            wednesday.style.backgroundColor = 'lightgoldenrodyellow'
-            wednesday.style.transform = "translateX(-200%)"
-            wedHead.style.transform = "translateX(-200%)"*/
             updateBackgroundColor('monday', 'tuesday', 'thursday', 'friday')
             active = 'wed'
             break;
         case 'TH':
             localStorage.setItem("ActiveDay", 'Thursday')
             document.getElementById('thursday').style.backgroundColor = 'lightgoldenrodyellow'
-            /*const thursday = document.getElementById('thursday')
-            const thursHead = document.getElementById('thursHead')
-            thursday.style.backgroundColor = 'lightgoldenrodyellow'
-            thursday.style.transform = 'translateX(-300%)'
-            thursHead.style.transform = 'translateX(-300%)'*/
             updateBackgroundColor('monday', 'tuesday', 'wednesday', 'friday')
             active = 'thurs'
             break;
         case 'F':
             localStorage.setItem("ActiveDay", 'Friday')
             document.getElementById('friday').style.backgroundColor = 'lightgoldenrodyellow'
-            /*const friday = document.getElementById('friday')
-            const friHead = document.getElementById('friHead')
-            friday.style.backgroundColor = 'lightgoldenrodyellow'
-            friday.style.transform = 'translateX(-400%)'
-            friHead.style.transform = 'translateX(-400%)'*/
             updateBackgroundColor('monday', 'tuesday', 'wednesday', 'thursday')
             active = 'fri'
             break;
@@ -163,22 +143,22 @@ async function updateWeekFoodItems() {
     for (const weekDay of ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']) {
         let activ;
         switch (weekDay) {
-        case 'Monday':
-            activ = "mon";
-            break;
-        case 'Tuesday':
-            activ = "tues";
-            break;
-        case 'Wednesday':
-            activ = "wed";
-            break;
-        case 'Thursday':
-            activ = "thurs";
-            break;
-        case 'Friday':
-            activ = "fri";
-            break;
-    }
+            case 'Monday':
+                activ = "mon";
+                break;
+            case 'Tuesday':
+                activ = "tues";
+                break;
+            case 'Wednesday':
+                activ = "wed";
+                break;
+            case 'Thursday':
+                activ = "thurs";
+                break;
+            case 'Friday':
+                activ = "fri";
+                break;
+        }
 
         let dayHelp = document.getElementById('dayHelp')
         dayHelp.classList.add('hidden');
@@ -482,21 +462,23 @@ async function animateBoxes() {
     let calBox = document.getElementById('calendar');
     if (animations.length == 0) {
         animations.push(gradeBox.animate([
-            {transform: "scaleX(0)", transformOrigin: "right"},
-            {transform: "scaleX(1)", transformOrigin: "right"}
+            { transform: "scaleX(0)", transformOrigin: "right" },
+            { transform: "scaleX(1)", transformOrigin: "right" }
         ], {
             duration: 600,
             easing: "ease-in-out",
-            fill: "forwards" }));
+            fill: "forwards"
+        }));
         animations.push(calBox.animate([
-            {transform: "scaleX(1)", transformOrigin: "left"},
-            {transform: "scaleX(0)", transformOrigin: "left"}
+            { transform: "scaleX(1)", transformOrigin: "left" },
+            { transform: "scaleX(0)", transformOrigin: "left" }
         ], {
             duration: 600,
             easing: "ease-in-out",
-            fill: "forwards" }));
+            fill: "forwards"
+        }));
     } else {
-        animations.forEach (animation => animation.reverse());
+        animations.forEach(animation => animation.reverse());
         animations = [];
     }
 }
