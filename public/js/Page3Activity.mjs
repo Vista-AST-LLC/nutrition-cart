@@ -2,8 +2,8 @@ import { createFoodItem, FoodItem, Weekday, Constants } from "./common.mjs";
 
 let active;
 
-window.addEventListener("load", function () {
-    console.log("function worked")
+window.addEventListener("load", async function () {
+    await updateWeekFoodItems();
 })
 
 
@@ -89,7 +89,7 @@ addFoodButton.addEventListener('click', function (e) {
 document.addEventListener('keydown', (e) => {
     // Always focus the input when a key is pressed
     if (document.activeElement !== foodCodeInput) {
-        foodCodeInput.focus();
+        foodCodeInput.focus({ preventScroll: true });
     }
 
     // According to old logic, ignore shift for scanners
@@ -411,25 +411,17 @@ async function resetBackgroundColor(mon, tues, wed, thur, fri) {
 }
 
 //Modifying calendar based on active day
-document.getElementById('monBtn').addEventListener("click", async function () { setActiveDay('M') })
-document.getElementById('tuesBtn').addEventListener("click", async function () { setActiveDay('T') })
-document.getElementById('wedBtn').addEventListener("click", async function () { setActiveDay('W') })
-document.getElementById('thursBtn').addEventListener("click", async function () { setActiveDay('TH') })
-document.getElementById('friBtn').addEventListener("click", async function () { setActiveDay('F') })
+document.getElementById('monBtn').addEventListener("click", async function () { setActiveDay('M') });
+document.getElementById('tuesBtn').addEventListener("click", async function () { setActiveDay('T') });
+document.getElementById('wedBtn').addEventListener("click", async function () { setActiveDay('W') });
+document.getElementById('thursBtn').addEventListener("click", async function () { setActiveDay('TH') });
+document.getElementById('friBtn').addEventListener("click", async function () { setActiveDay('F') });
 
+document.getElementById('gradeDayBackButton').addEventListener('click', async function () {
+    await animateBoxes();
+})
 
-const button1 = document.getElementById('testButton1');
-button1.addEventListener('click', async function () {
-    testFunction1();
-});
-
-const button2 = document.getElementById('testButton2');
-button2.addEventListener('click', async function () {
-    testFunction2();
-});
-
-async function testFunction1() {
-    document.getElementById('calendar').style.display = 'none';
+document.getElementById('gradeDayButton').addEventListener('click', async function () {
     let activeDay = localStorage.getItem('ActiveDay');
     let parsed = JSON.parse(localStorage.getItem(activeDay));
     if (!parsed) {
@@ -437,8 +429,7 @@ async function testFunction1() {
     }
     let day = await Weekday.fromJSON(parsed);
 
-    const dayToGrade = document.getElementById('dayToGrade');
-    dayToGrade.style.display = 'block';
+    animateBoxes();
 
     document.getElementById('gradeButtonID').innerHTML = activeDay;
 
@@ -482,11 +473,32 @@ async function testFunction1() {
     });
 
     new DayGrade(day);
-}
+})
 
-async function testFunction2() {
-    document.getElementById('calendar').style.display = 'block';
-    document.getElementById('dayToGrade').style.display = 'none';
+let animations = [];
+
+async function animateBoxes() {
+    let gradeBox = document.getElementById('dayToGrade');
+    let calBox = document.getElementById('calendar');
+    if (animations.length == 0) {
+        animations.push(gradeBox.animate([
+            {transform: "scaleX(0)", transformOrigin: "right"},
+            {transform: "scaleX(1)", transformOrigin: "right"}
+        ], {
+            duration: 600,
+            easing: "ease-in-out",
+            fill: "forwards" }));
+        animations.push(calBox.animate([
+            {transform: "scaleX(1)", transformOrigin: "left"},
+            {transform: "scaleX(0)", transformOrigin: "left"}
+        ], {
+            duration: 600,
+            easing: "ease-in-out",
+            fill: "forwards" }));
+    } else {
+        animations.forEach (animation => animation.reverse());
+        animations = [];
+    }
 }
 
 class DayGrade {
@@ -495,7 +507,7 @@ class DayGrade {
 
     // Indices for arrays
     static SCORE = 0;
-    static AMOUNTS = 1
+    static AMOUNTS = 1;
     static COMMENTS = 2;
 
     constructor(day) {
@@ -514,8 +526,8 @@ class DayGrade {
         score[DayGrade.SCORE][Constants.SCOREAVG] = totalScore / 10;
 
         console.log("Caluclated category points:")
-        console.log("Calories: " + score[DayGrade.SCORE][Constants.CALORIES]);
-        console.log("Total Fats: " + score[DayGrade.SCORE][Constants.TOTALFAT]);
+        console.log("Cal: " + score[DayGrade.SCORE][Constants.CALORIES]);
+        console.log("TotFat: " + score[DayGrade.SCORE][Constants.TOTALFAT]);
         console.log("TFat: " + score[DayGrade.SCORE][Constants.TRANSFAT]);
         console.log("SFat: " + score[DayGrade.SCORE][Constants.SATFAT]);
         console.log("Chol: " + score[DayGrade.SCORE][Constants.CHOLESTEROL]);
@@ -650,9 +662,9 @@ class DayGrade {
                     score[DayGrade.COMMENTS][Constants.TOTALFAT] = score[DayGrade.COMMENTS][Constants.TOTALFAT] + " Also way too much transfat!";
                     return 0;
                 }
-                if (value > 0) {
+                if (value > 1) {
                     score[DayGrade.COMMENTS][Constants.TOTALFAT] = score[DayGrade.COMMENTS][Constants.TOTALFAT] + " Also could use less transfat!";
-                    return this.normalize(5, 0, value);
+                    return this.normalize(5, 1, value);
                 }
                 return DayGrade.MAX_SCORE;
             case Constants.CHOLESTEROL:
@@ -736,17 +748,17 @@ class DayGrade {
                 score[DayGrade.COMMENTS][Constants.FIBER] = "Not nearly enough fiber!";
                 return 0;
             case Constants.SUGAR:
-                if (value > 100) {
+                if (value > 150) {
                     score[DayGrade.COMMENTS][Constants.SUGAR] = "Way too much sugar!";
                     return 0;
                 }
-                if (value > 50) {
+                if (value > 80) {
                     score[DayGrade.COMMENTS][Constants.SUGAR] = "Too much sugar.";
-                    return 0.5 * this.normalize(100, 50, value);
+                    return 0.5 * this.normalize(150, 80, value);
                 }
-                if (value > 30) {
+                if (value > 50) {
                     score[DayGrade.COMMENTS][Constants.SUGAR] = "A little too much sugar!";
-                    return 0.5 * DayGrade.MAX_SCORE + 0.5 * this.normalize(50, 30, value);
+                    return 0.5 * DayGrade.MAX_SCORE + 0.5 * this.normalize(80, 50, value);
                 }
                 score[DayGrade.COMMENTS][Constants.SUGAR] = "Good job keeping sugar low!";
                 return DayGrade.MAX_SCORE;

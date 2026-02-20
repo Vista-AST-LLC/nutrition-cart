@@ -11,19 +11,6 @@
     }
 }
 
-.double {
-    display: flex;
-    flex-direction: row;
-    gap: 10px;
-}
-
-@media (max-width: 800px) {
-    .double {
-        display: flex;
-        flex-direction: column;
-    }
-}
-
 .input-section {
     display: flex;
     gap: 8px;
@@ -392,6 +379,13 @@ td {
     background-color: lightgoldenrodyellow;
 }
 
+.panel-container {
+    display: grid;
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+
 /*********GRADE TABLE STYLING********/
 .grade-menu {
     display: flex;
@@ -423,10 +417,6 @@ td {
 }
 
 .get-grade-button {
-    position: absolute;
-    top: 35%;
-    left: 50%;
-    transform: translate(-50%, -50%);
     text-decoration: none;
     background: #8e44ad;
     color: white;
@@ -439,6 +429,10 @@ td {
     gap: 8px;
     width: 110px;
     margin: auto;
+    position: absolute; 
+    top: 4.5%; 
+    left: 50%; 
+    transform: translate(-50%, -50%)
 }
 
 .get-grade-button:hover {

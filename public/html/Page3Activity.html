@@ -30,329 +30,330 @@
         </div>
 
         <!--Food Input Section-->
-        <main id="main-content">
-            <div class="main-content">
-                <div class="double">
-                    <div class="card">
-                        <h2 class="card-title">Add Food Items</h2>
-                        <div class="input-section">
-                            <input type="text" class="code-input" id="foodCode"
-                                placeholder="Enter food code (e.g., BM01, LS05, DD02)" aria-describedby="codeHelp">
-                            <button class="basic-button" id="addFoodButton">Add Food</button>
-                        </div>
-                        <div id="codeHelp" class="error-message hidden" aria-live="polite"></div>
-                        <div id="dayHelp" class="error-message hidden" aria-live="polite"></div>
+        <main id="main-content" style="position: relative;">
+            <div class="main-content" style="overflow: hidden;">
+                <div class="card">
+                    <h2 class="card-title">Add Food Items</h2>
+                    <div class="input-section">
+                        <input type="text" class="code-input" id="foodCode"
+                            placeholder="Enter food code (e.g., BM01, LS05, DD02)" aria-describedby="codeHelp">
+                        <button class="basic-button" id="addFoodButton">Add Food</button>
                     </div>
-                    <div class="buttons">
-                        <a class="basic-button" href="../html/Page4Grade.html">Go To Grade</a>
-                    </div>
+                    <div id="codeHelp" class="error-message hidden" aria-live="polite"></div>
+                    <div id="dayHelp" class="error-message hidden" aria-live="polite"></div>
                 </div>
 
-                <!--Daily Food Item Section-->
-                <div class="card" id='calendar'>
-                    <div class="meal-plan-title">
-                        <h2 style="width: 45%;">Weekly Meal Plan</h2>
-                        <div class="button-container">
-                            <button class="change-view-button" id="testButton1">See Daily Grade</button>
-                            <button id="clearAllFoodItems" class="delete-all-food-items-button">Delete All</button>
+                <div class="panel-container">
+                    <!--Daily Food Item Section-->
+                    <div class="card" id='calendar'
+                        style="transform: scaleX(1); transform-origin: left; contain: layout paint; grid-area: 1/1;">
+                        <div class="meal-plan-title">
+                            <h2 style="width: 45%;">Weekly Meal Plan</h2>
+                            <button id="gradeDayButton" class="get-grade-button">Grade Day</button>
+                            <div class="button-container">
+                                <button class="change-view-button" id="testButton1">See Daily Grade</button>
+                                <button id="clearAllFoodItems" class="delete-all-food-items-button">Delete Day</button>
+                            </div>
+                        </div>
+                        <div>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th id="monHead">
+                                            <button class="day-button" id="monBtn">
+                                                Monday
+                                            </button>
+                                        </th>
+                                        <th id="tuesHead">
+                                            <button class="day-button" id="tuesBtn">
+                                                Tuesday
+                                            </button>
+                                        </th>
+                                        <th id="wedHead">
+                                            <button class="day-button" id="wedBtn">
+                                                Wednesday
+                                            </button>
+                                        </th>
+                                        <th id="thursHead">
+                                            <button class="day-button" id="thursBtn">
+                                                Thursday
+                                            </button>
+                                        </th>
+                                        <th id="friHead">
+                                            <button class="day-button" id="friBtn">
+                                                Friday
+                                            </button>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td id='monday'>
+                                            <div class="category-box breakfast-box">
+                                                <div class="category-title">
+                                                    <h3 class="breakfast-title">Breakfast</h3>
+                                                </div>
+                                                <div id="monBreakfastItems" class="category-items"></div>
+                                            </div>
+                                            <div class="category-box lunch-box">
+                                                <div class="category-title">
+                                                    <h3 class="lunch-title">Lunch</h3>
+                                                </div>
+                                                <div id="monLunchItems" class="category-items"></div>
+                                            </div>
+                                            <div class="category-box dinner-box">
+                                                <div class="category-title">
+                                                    <h3 class="dinner-title">Dinner</h3>
+                                                </div>
+                                                <div id="monDinnerItems" class="category-items"></div>
+                                            </div>
+                                            <div class="category-box snacks-box">
+                                                <div class="category-title">
+                                                    <h3 class="snacks-title">Dessert/Snacks</h3>
+                                                </div>
+                                                <div id="monSnackItems" class="category-items"></div>
+                                            </div>
+                                        </td>
+                                        <td id='tuesday'>
+                                            <div class="category-box breakfast-box">
+                                                <div class="category-title">
+                                                    <h3 class="breakfast-title">Breakfast</h3>
+                                                </div>
+                                                <div id="tuesBreakfastItems" class="category-items"></div>
+                                            </div>
+                                            <div class="category-box lunch-box">
+                                                <div class="category-title">
+                                                    <h3 class="lunch-title">Lunch</h3>
+                                                </div>
+                                                <div id="tuesLunchItems" class="category-items"></div>
+                                            </div>
+                                            <div class="category-box dinner-box">
+                                                <div class="category-title">
+                                                    <h3 class="dinner-title">Dinner</h3>
+                                                </div>
+                                                <div id="tuesDinnerItems" class="category-items"></div>
+                                            </div>
+                                            <div class="category-box snacks-box">
+                                                <div class="category-title">
+                                                    <h3 class="snacks-title">Dessert/Snacks</h3>
+                                                </div>
+                                                <div id="tuesSnackItems" class="category-items"></div>
+                                            </div>
+                                        </td>
+                                        <td id='wednesday'>
+                                            <div class="category-box breakfast-box">
+                                                <div class="category-title">
+                                                    <h3 class="breakfast-title">Breakfast</h3>
+                                                </div>
+                                                <div id="wedBreakfastItems" class="category-items"></div>
+                                            </div>
+                                            <div class="category-box lunch-box">
+                                                <div class="category-title">
+                                                    <h3 class="lunch-title">Lunch</h3>
+                                                </div>
+                                                <div id="wedLunchItems" class="category-items"></div>
+                                            </div>
+                                            <div class="category-box dinner-box">
+                                                <div class="category-title">
+                                                    <h3 class="dinner-title">Dinner</h3>
+                                                </div>
+                                                <div id="wedDinnerItems" class="category-items"></div>
+                                            </div>
+                                            <div class="category-box snacks-box">
+                                                <div class="category-title">
+                                                    <h3 class="snacks-title">Dessert/Snacks</h3>
+                                                </div>
+                                                <div id="wedSnackItems" class="category-items"></div>
+                                            </div>
+                                        </td>
+                                        <td id='thursday'>
+                                            <div class="category-box breakfast-box">
+                                                <div class="category-title">
+                                                    <h3 class="breakfast-title">Breakfast</h3>
+                                                </div>
+                                                <div id="thursBreakfastItems" class="category-items"></div>
+                                            </div>
+                                            <div class="category-box lunch-box">
+                                                <div class="category-title">
+                                                    <h3 class="lunch-title">Lunch</h3>
+                                                </div>
+                                                <div id="thursLunchItems" class="category-items"></div>
+                                            </div>
+                                            <div class="category-box dinner-box">
+                                                <div class="category-title">
+                                                    <h3 class="dinner-title">Dinner</h3>
+                                                </div>
+                                                <div id="thursDinnerItems" class="category-items"></div>
+                                            </div>
+                                            <div class="category-box snacks-box">
+                                                <div class="category-title">
+                                                    <h3 class="snacks-title">Dessert/Snacks</h3>
+                                                </div>
+                                                <div id="thursSnackItems" class="category-items"></div>
+                                            </div>
+                                        </td>
+                                        <td id='friday'>
+                                            <div class="category-box breakfast-box">
+                                                <div class="category-title">
+                                                    <h3 class="breakfast-title">Breakfast</h3>
+                                                </div>
+                                                <div id="friBreakfastItems" class="category-items"></div>
+                                            </div>
+                                            <div class="category-box lunch-box">
+                                                <div class="category-title">
+                                                    <h3 class="lunch-title">Lunch</h3>
+                                                </div>
+                                                <div id="friLunchItems" class="category-items"></div>
+                                            </div>
+                                            <div class="category-box dinner-box">
+                                                <div class="category-title">
+                                                    <h3 class="dinner-title">Dinner</h3>
+                                                </div>
+                                                <div id="friDinnerItems" class="category-items"></div>
+                                            </div>
+                                            <div class="category-box snacks-box">
+                                                <div class="category-title">
+                                                    <h3 class="snacks-title">Dessert/Snacks</h3>
+                                                </div>
+                                                <div id="friSnackItems" class="category-items"></div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
-                    <div>
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th id="monHead">
-                                        <button class="day-button" id="monBtn">
-                                            Monday
-                                        </button>
-                                    </th>
-                                    <th id="tuesHead">
-                                        <button class="day-button" id="tuesBtn">
-                                            Tuesday
-                                        </button>
-                                    </th>
-                                    <th id="wedHead">
-                                        <button class="day-button" id="wedBtn">
-                                            Wednesday
-                                        </button>
-                                    </th>
-                                    <th id="thursHead">
-                                        <button class="day-button" id="thursBtn">
-                                            Thursday
-                                        </button>
-                                    </th>
-                                    <th id="friHead">
-                                        <button class="day-button" id="friBtn">
-                                            Friday
-                                        </button>
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td id='monday'>
-                                        <div class="category-box breakfast-box">
-                                            <div class="category-title">
-                                                <h3 class="breakfast-title">Breakfast</h3>
+                    <div class="card" id="dayToGrade"
+                        style="transform: scaleX(0); transform-origin: right; contain: layout paint; grid-area: 1/1;">
+                        <div class="meal-plan-title">
+                            <h2>Day Grade</h2>
+                            <button id="gradeDayBackButton" class="get-grade-button">Go Back</button>
+                            <button class="change-view-button" id="testButton2">View Full Calendar</button>
+                        </div>
+                        <div class="grade-menu">
+                            <table style="width: 20%; margin: 1%;">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            <button class="day-button" id="gradeButtonID">
+                                                Default Day
+                                            </button>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td id='gradeDay'>
+                                            <div class="category-box breakfast-box">
+                                                <div class="category-title">
+                                                    <h3 class="breakfast-title">Breakfast</h3>
+                                                </div>
+                                                <div id="gradeBreakfastItems" class="category-items"></div>
                                             </div>
-                                            <div id="monBreakfastItems" class="category-items"></div>
-                                        </div>
-                                        <div class="category-box lunch-box">
-                                            <div class="category-title">
-                                                <h3 class="lunch-title">Lunch</h3>
+                                            <div class="category-box lunch-box">
+                                                <div class="category-title">
+                                                    <h3 class="lunch-title">Lunch</h3>
+                                                </div>
+                                                <div id="gradeLunchItems" class="category-items"></div>
                                             </div>
-                                            <div id="monLunchItems" class="category-items"></div>
-                                        </div>
-                                        <div class="category-box dinner-box">
-                                            <div class="category-title">
-                                                <h3 class="dinner-title">Dinner</h3>
+                                            <div class="category-box dinner-box">
+                                                <div class="category-title">
+                                                    <h3 class="dinner-title">Dinner</h3>
+                                                </div>
+                                                <div id="gradeDinnerItems" class="category-items"></div>
                                             </div>
-                                            <div id="monDinnerItems" class="category-items"></div>
-                                        </div>
-                                        <div class="category-box snacks-box">
-                                            <div class="category-title">
-                                                <h3 class="snacks-title">Dessert/Snacks</h3>
+                                            <div class="category-box snacks-box">
+                                                <div class="category-title">
+                                                    <h3 class="snacks-title">Dessert/Snacks</h3>
+                                                </div>
+                                                <div id="gradeSnackItems" class="category-items"></div>
                                             </div>
-                                            <div id="monSnackItems" class="category-items"></div>
-                                        </div>
-                                    </td>
-                                    <td id='tuesday'>
-                                        <div class="category-box breakfast-box">
-                                            <div class="category-title">
-                                                <h3 class="breakfast-title">Breakfast</h3>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="grade-day-grade" style="margin: 1%;">
+                                <!--Health Score Section-->
+                                <div class="healthScore">
+                                    <div class="left"></div>
+                                    <!--Health Score Display-->
+                                    <div class="scoreCard">
+                                        <div class="summary-card points-card">
+                                            <div class="points-display">
+                                                <div class="points-circle" id="pointsCircle"></div>
+                                                <div class="points-label" id="underPointCircle">Your Grade</div>
                                             </div>
-                                            <div id="tuesBreakfastItems" class="category-items"></div>
-                                        </div>
-                                        <div class="category-box lunch-box">
-                                            <div class="category-title">
-                                                <h3 class="lunch-title">Lunch</h3>
-                                            </div>
-                                            <div id="tuesLunchItems" class="category-items"></div>
-                                        </div>
-                                        <div class="category-box dinner-box">
-                                            <div class="category-title">
-                                                <h3 class="dinner-title">Dinner</h3>
-                                            </div>
-                                            <div id="tuesDinnerItems" class="category-items"></div>
-                                        </div>
-                                        <div class="category-box snacks-box">
-                                            <div class="category-title">
-                                                <h3 class="snacks-title">Dessert/Snacks</h3>
-                                            </div>
-                                            <div id="tuesSnackItems" class="category-items"></div>
-                                        </div>
-                                    </td>
-                                    <td id='wednesday'>
-                                        <div class="category-box breakfast-box">
-                                            <div class="category-title">
-                                                <h3 class="breakfast-title">Breakfast</h3>
-                                            </div>
-                                            <div id="wedBreakfastItems" class="category-items"></div>
-                                        </div>
-                                        <div class="category-box lunch-box">
-                                            <div class="category-title">
-                                                <h3 class="lunch-title">Lunch</h3>
-                                            </div>
-                                            <div id="wedLunchItems" class="category-items"></div>
-                                        </div>
-                                        <div class="category-box dinner-box">
-                                            <div class="category-title">
-                                                <h3 class="dinner-title">Dinner</h3>
-                                            </div>
-                                            <div id="wedDinnerItems" class="category-items"></div>
-                                        </div>
-                                        <div class="category-box snacks-box">
-                                            <div class="category-title">
-                                                <h3 class="snacks-title">Dessert/Snacks</h3>
-                                            </div>
-                                            <div id="wedSnackItems" class="category-items"></div>
-                                        </div>
-                                    </td>
-                                    <td id='thursday'>
-                                        <div class="category-box breakfast-box">
-                                            <div class="category-title">
-                                                <h3 class="breakfast-title">Breakfast</h3>
-                                            </div>
-                                            <div id="thursBreakfastItems" class="category-items"></div>
-                                        </div>
-                                        <div class="category-box lunch-box">
-                                            <div class="category-title">
-                                                <h3 class="lunch-title">Lunch</h3>
-                                            </div>
-                                            <div id="thursLunchItems" class="category-items"></div>
-                                        </div>
-                                        <div class="category-box dinner-box">
-                                            <div class="category-title">
-                                                <h3 class="dinner-title">Dinner</h3>
-                                            </div>
-                                            <div id="thursDinnerItems" class="category-items"></div>
-                                        </div>
-                                        <div class="category-box snacks-box">
-                                            <div class="category-title">
-                                                <h3 class="snacks-title">Dessert/Snacks</h3>
-                                            </div>
-                                            <div id="thursSnackItems" class="category-items"></div>
-                                        </div>
-                                    </td>
-                                    <td id='friday'>
-                                        <div class="category-box breakfast-box">
-                                            <div class="category-title">
-                                                <h3 class="breakfast-title">Breakfast</h3>
-                                            </div>
-                                            <div id="friBreakfastItems" class="category-items"></div>
-                                        </div>
-                                        <div class="category-box lunch-box">
-                                            <div class="category-title">
-                                                <h3 class="lunch-title">Lunch</h3>
-                                            </div>
-                                            <div id="friLunchItems" class="category-items"></div>
-                                        </div>
-                                        <div class="category-box dinner-box">
-                                            <div class="category-title">
-                                                <h3 class="dinner-title">Dinner</h3>
-                                            </div>
-                                            <div id="friDinnerItems" class="category-items"></div>
-                                        </div>
-                                        <div class="category-box snacks-box">
-                                            <div class="category-title">
-                                                <h3 class="snacks-title">Dessert/Snacks</h3>
-                                            </div>
-                                            <div id="friSnackItems" class="category-items"></div>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                <div class="card" id="dayToGrade" style="display: none;">
-                    <div class="meal-plan-title">
-                        <h2>Day Grade</h2>
-                        <button class="change-view-button" id="testButton2">View Full Calendar</button>
-                    </div>
-                    <div class="grade-menu">
-                        <table style="width: 20%; margin: 1%;">
-                            <thead>
-                                <tr>
-                                    <th>
-                                        <button class="day-button" id="gradeButtonID">
-                                            Default Day
-                                        </button>
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td id='gradeDay'>
-                                        <div class="category-box breakfast-box">
-                                            <div class="category-title">
-                                                <h3 class="breakfast-title">Breakfast</h3>
-                                            </div>
-                                            <div id="gradeBreakfastItems" class="category-items"></div>
-                                        </div>
-                                        <div class="category-box lunch-box">
-                                            <div class="category-title">
-                                                <h3 class="lunch-title">Lunch</h3>
-                                            </div>
-                                            <div id="gradeLunchItems" class="category-items"></div>
-                                        </div>
-                                        <div class="category-box dinner-box">
-                                            <div class="category-title">
-                                                <h3 class="dinner-title">Dinner</h3>
-                                            </div>
-                                            <div id="gradeDinnerItems" class="category-items"></div>
-                                        </div>
-                                        <div class="category-box snacks-box">
-                                            <div class="category-title">
-                                                <h3 class="snacks-title">Dessert/Snacks</h3>
-                                            </div>
-                                            <div id="gradeSnackItems" class="category-items"></div>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <div class="grade-day-grade" style="margin: 1%;">
-                            <!--Health Score Section-->
-                            <div class="healthScore">
-                                <div class="left"></div>
-                                <!--Health Score Display-->
-                                <div class="scoreCard">
-                                    <div class="summary-card points-card">
-                                        <div class="points-display">
-                                            <div class="points-circle" id="pointsCircle"></div>
-                                            <div class="points-label" id="underPointCircle">Your Grade</div>
                                         </div>
                                     </div>
+                                    <div class="right"></div>
                                 </div>
-                                <div class="right"></div>
-                            </div>
 
-                            <!--Nutrition Totals Section-->
-                            <div class="summary-grid">
-                                <div class="summary-card calories-card">
-                                    <div class="summary-label">Daily Target</div>
-                                    <div>2000-2500 kcal</div>
-                                    <div class="summary-label">Your Daily Average Calories</div>
-                                    <div id="totalCalories" class="summary-value">0</div>
-                                    <div class="summary-label">kcals</div>
-                                    <div id="caloriesComments" class="comments"></div>
-                                </div>
-                                <div class="summary-card fats-card">
-                                    <div class="summary-label">Daily Target</div>
-                                    <div>25-50 grams</div>
-                                    <div class="summary-label">Your Daily Average Total Fats</div>
-                                    <div id="totalFats" class="summary-value">0</div>
-                                    <div class="summary-label">grams</div>
-                                    <div id="fatsComments" class="comments"></div>
-                                </div>
-                                <div class="summary-card cholesterol-card">
-                                    <div class="summary-label">Daily Target</div>
-                                    <div>0-150 milligrams</div>
-                                    <div class="summary-label">Your Daily Average Cholesterol</div>
-                                    <div id="totalCholesterol" class="summary-value">0</div>
-                                    <div class="summary-label">milligrams</div>
-                                    <div id="cholesterolComments" class="comments"></div>
-                                </div>
-                                <div class="summary-card sodium-card">
-                                    <div class="summary-label">Daily Target</div>
-                                    <div>1000-2000 milligrams</div>
-                                    <div class="summary-label">Your Daily Average Sodium</div>
-                                    <div id="totalSodium" class="summary-value">0</div>
-                                    <div class="summary-label">milligrams</div>
-                                    <div id="sodiumComments" class="comments"></div>
-                                </div>
-                                <div class="summary-card carbs-card">
-                                    <div class="summary-label">Daily Target</div>
-                                    <div>200-275 grams</div>
-                                    <div class="summary-label">Your Daily Average Carbs</div>
-                                    <div id="totalCarbs" class="summary-value">0</div>
-                                    <div class="summary-label">grams</div>
-                                    <div id="carbsComments" class="comments"></div>
-                                </div>
-                                <div class="summary-card fiber-card">
-                                    <div class="summary-label">Daily Target</div>
-                                    <div>28-38 grams</div>
-                                    <div class="summary-label">Your Daily Average Fiber</div>
-                                    <div id="totalFiber" class="summary-value">0</div>
-                                    <div class="summary-label">grams</div>
-                                    <div id="fiberComments" class="comments"></div>
-                                </div>
-                                <div class="summary-card sugars-card">
-                                    <div class="summary-label">Daily Target</div>
-                                    <div>0-30 grams</div>
-                                    <div class="summary-label">Your Daily Average Sugars</div>
-                                    <div id="totalSugars" class="summary-value">0</div>
-                                    <div class="summary-label">grams</div>
-                                    <div id="sugarsComments" class="comments"></div>
-                                </div>
-                                <div class="summary-card protein-card">
-                                    <div class="summary-label">Daily Target</div>
-                                    <div>50-75 grams</div>
-                                    <div class="summary-label">Your Daily Average Protein</div>
-                                    <div id="totalProtein" class="summary-value">0</div>
-                                    <div class="summary-label">grams</div>
-                                    <div id="proteinComments" class="comments"></div>
+                                <!--Nutrition Totals Section-->
+                                <div class="summary-grid">
+                                    <div class="summary-card calories-card">
+                                        <div class="summary-label">Daily Target</div>
+                                        <div>2000-2500 kcal</div>
+                                        <div class="summary-label">Your Daily Average Calories</div>
+                                        <div id="totalCalories" class="summary-value">0</div>
+                                        <div class="summary-label">kcals</div>
+                                        <div id="caloriesComments" class="comments"></div>
+                                    </div>
+                                    <div class="summary-card fats-card">
+                                        <div class="summary-label">Daily Target</div>
+                                        <div>25-50 grams</div>
+                                        <div class="summary-label">Your Daily Average Total Fats</div>
+                                        <div id="totalFats" class="summary-value">0</div>
+                                        <div class="summary-label">grams</div>
+                                        <div id="fatsComments" class="comments"></div>
+                                    </div>
+                                    <div class="summary-card cholesterol-card">
+                                        <div class="summary-label">Daily Target</div>
+                                        <div>0-150 milligrams</div>
+                                        <div class="summary-label">Your Daily Average Cholesterol</div>
+                                        <div id="totalCholesterol" class="summary-value">0</div>
+                                        <div class="summary-label">milligrams</div>
+                                        <div id="cholesterolComments" class="comments"></div>
+                                    </div>
+                                    <div class="summary-card sodium-card">
+                                        <div class="summary-label">Daily Target</div>
+                                        <div>1000-2000 milligrams</div>
+                                        <div class="summary-label">Your Daily Average Sodium</div>
+                                        <div id="totalSodium" class="summary-value">0</div>
+                                        <div class="summary-label">milligrams</div>
+                                        <div id="sodiumComments" class="comments"></div>
+                                    </div>
+                                    <div class="summary-card carbs-card">
+                                        <div class="summary-label">Daily Target</div>
+                                        <div>200-275 grams</div>
+                                        <div class="summary-label">Your Daily Average Carbs</div>
+                                        <div id="totalCarbs" class="summary-value">0</div>
+                                        <div class="summary-label">grams</div>
+                                        <div id="carbsComments" class="comments"></div>
+                                    </div>
+                                    <div class="summary-card fiber-card">
+                                        <div class="summary-label">Daily Target</div>
+                                        <div>28-38 grams</div>
+                                        <div class="summary-label">Your Daily Average Fiber</div>
+                                        <div id="totalFiber" class="summary-value">0</div>
+                                        <div class="summary-label">grams</div>
+                                        <div id="fiberComments" class="comments"></div>
+                                    </div>
+                                    <div class="summary-card sugars-card">
+                                        <div class="summary-label">Daily Target</div>
+                                        <div>0-50 grams</div>
+                                        <div class="summary-label">Your Daily Average Sugars</div>
+                                        <div id="totalSugars" class="summary-value">0</div>
+                                        <div class="summary-label">grams</div>
+                                        <div id="sugarsComments" class="comments"></div>
+                                    </div>
+                                    <div class="summary-card protein-card">
+                                        <div class="summary-label">Daily Target</div>
+                                        <div>50-75 grams</div>
+                                        <div class="summary-label">Your Daily Average Protein</div>
+                                        <div id="totalProtein" class="summary-value">0</div>
+                                        <div class="summary-label">grams</div>
+                                        <div id="proteinComments" class="comments"></div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
