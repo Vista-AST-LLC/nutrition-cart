@@ -1,3 +1,4 @@
+/********BASIC COLORS FOR ENTIRE APPLICATION********/
 :root {
     --primary-color: #3498db;
     --primary-dark: #2980b9;
@@ -16,6 +17,7 @@
     --shadow-hover: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
+/********UNIVERSAL CONTAINER STYLING********/
 * {
     margin: 0;
     padding: 0;

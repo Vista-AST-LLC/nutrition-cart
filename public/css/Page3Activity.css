@@ -345,7 +345,8 @@ td {
     display: grid;
     position: relative;
     width: 100%;
-    overflow: hidden;
+    overflow-x: auto;
+    overflow-y: auto;
     margin: 15px 0;
 }
 
