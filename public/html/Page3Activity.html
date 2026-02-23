@@ -44,11 +44,10 @@
 
             <div class="panel-container">
                 <!--Daily Food Item Section-->
-                <div class="card" id='calendar'
-                    style="transform: scaleX(1); transform-origin: left; contain: layout paint; grid-area: 1/1;">
+                <div class="card" id='calendar'>
                     <!--Page Header-->
                     <div class="meal-plan-title">
-                        <h2 style="width: 45%;">Weekly Meal Plan</h2>
+                        <h2 class="meal-plan-h2">Weekly Meal Plan</h2>
                         <div class="button-container">
                             <button id="gradeDayButton" class="get-grade-button">Grade Day</button>
                             <button id="clearAllFoodItems" class="delete-all-food-items-button">Delete Day</button>
@@ -223,14 +222,13 @@
                     </div>
                 </div>
                 <!--Individual Day Grade Section-->
-                <div class="card" id="dayToGrade"
-                    style="transform: scaleX(0); transform-origin: right; contain: layout paint; grid-area: 1/1;">
+                <div class="card" id="dayToGrade">
                     <div class="meal-plan-title">
                         <h2>Day Grade</h2>
                         <button id="gradeDayBackButton" class="get-grade-button">View Full Calendar</button>
                     </div>
                     <div class="grade-menu">
-                        <table style="width: 20%; margin: 1%;">
+                        <table id="individualDay">
                             <thead>
                                 <tr>
                                     <th>
@@ -271,10 +269,9 @@
                                 </tr>
                             </tbody>
                         </table>
-                        <div class="grade-day-grade" style="margin: 1%;">
+                        <div class="grade-day-grade">
                             <!--Health Score Section-->
                             <div class="healthScore">
-                                <div class="left"></div>
                                 <!--Health Score Display-->
                                 <div class="scoreCard">
                                     <div class="summary-card points-card">
@@ -284,7 +281,6 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="right"></div>
                             </div>
 
                             <!--Nutrition Totals Section-->
