@@ -65,6 +65,10 @@
     margin: 15px 0;
 }
 
+.meal-plan-h2 {
+    width: 45%;
+}
+
 /****STYLING TABLE TITLE****/
 table {
     width: 100%;
@@ -160,6 +164,7 @@ td {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    text-align: center;
     align-items: center;
     width: 100%;
     gap: 12px;
@@ -350,6 +355,20 @@ td {
     margin: 15px 0;
 }
 
+.panel-container #calendar {
+    transform: scaleX(1);
+    transform-origin: left;
+    contain: layout paint;
+    grid-area: 1/1;
+}
+
+.panel-container #dayToGrade {
+    transform: scaleX(0);
+    transform-origin: right;
+    contain: layout paint;
+    grid-area: 1/1;
+}
+
 /*********GRADE TABLE STYLING********/
 .grade-menu {
     display: flex;
@@ -357,8 +376,34 @@ td {
     justify-content: space-between;
 }
 
+.grade-menu #individualDay {
+    width: 20%;
+    margin: 1%;
+}
+
 .grade-day-grade {
     width: 80%;
+    margin: 1%;
+}
+
+@media (max-width: 800px) {
+    .grade-menu {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .grade-menu #individualDay {
+        width: 100%;
+        margin: 1%;
+    }
+
+    .grade-day-grade {
+        width: 100%;
+        margin: 1%;
+    }
 }
 
 /* Nutrition Progress Table Styles */
