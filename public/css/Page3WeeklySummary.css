@@ -35,6 +35,7 @@
     width: 110px;
     margin: auto;
 }
+
 .get-grade-button:hover {
     background: purple;
     transform: translate(-50%, -54%);
@@ -91,7 +92,7 @@
 }
 
 .sugars-card {
-    border-top-color: black; 
+    border-top-color: black;
 }
 
 .protein-card {
