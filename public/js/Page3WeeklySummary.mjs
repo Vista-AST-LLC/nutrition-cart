@@ -1,0 +1,52 @@
+document.addEventListener('DOMContentLoaded', async function () {
+    console.log("Page Loaded!")
+
+    let monData = await populateData('mon');
+    let tuesData = await populateData('tues');
+    let wedData = await populateData('wed');
+    let thursData = await populateData('thurs');
+    let friData = await populateData('fri');
+
+    updateHTML("mondayScore", "mondayComments", monData);
+    updateHTML("tuesdayScore", "tuesdayComments", tuesData);
+    updateHTML("wednesdayScore", "wednesdayComments", wedData);
+    updateHTML("thursdayScore", "thursdayComments", thursData);
+    updateHTML("fridayScore", "fridayComments", friData);
+
+})
+
+async function populateData(dayString) {
+    let data;
+
+    try {
+        data = JSON.parse(localStorage.getItem(`${dayString}Score`));
+    } catch (error) {
+        data = null
+        console.error(error)
+    }
+
+    return data
+}
+
+async function updateHTML(score, comments, data) {
+
+    if (!data) {
+        console.log("Data is null")
+        return;
+    }
+    else {
+        console.log("Data is not null: " + data)
+        document.getElementById(score).innerHTML = `Grade ${data["Grade"]}: ${Math.round(data["Score"])}`
+        document.getElementById(comments).innerHTML = `                   
+    <ul>
+        <li>${data["Calorie Comments"]}</li>
+        <li>${data["Carbs Comments"]}</li>
+        <li>${data["Cholesterol Comments"]}</li>
+        <li>${data["Fiber Comments"]}</li>
+        <li>${data["Protein Comments"]}</li>
+        <li>${data["Sodium Comments"]}</li>
+        <li>${data["Sugar Comments"]}</li>
+        <li>${data["Total Fat Comments"]}</li>
+    </ul>`
+    }
+}
