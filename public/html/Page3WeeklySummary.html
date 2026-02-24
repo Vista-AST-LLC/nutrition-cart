@@ -38,7 +38,7 @@
                 <div class="page-title">
                     <h2>Weekly Summary</h2>
                 </div>
-                <div>
+                <div id="calendar">
                     <table>
                         <thead>
                             <tr class="sum-header">
@@ -62,24 +62,59 @@
                         <tbody>
                             <tr>
                                 <td id='monday'>
-                                    <h3 id="mondayScore"></h3>
-                                    <div id="mondayComments"></div>
+                                    <div class="day-container">
+                                        <div class="points-display">
+                                            <div class="points-circle" id="mondayScore"></div>
+                                            <div class="points-label" id="mondayGrade"></div>
+                                        </div>
+                                        <div class="day-comments">
+                                            <div id="mondayComments"></div>
+                                        </div>
+                                    </div>
                                 </td>
                                 <td id='tuesday'>
-                                    <h3 id="tuesdayScore"></h3>
-                                    <div id="tuesdayComments"></div>
+                                    <div class="day-container">
+                                        <div class="points-display">
+                                            <div class="points-circle" id="tuesdayScore"></div>
+                                            <div class="points-label" id="tuesdayGrade"></div>
+                                        </div>
+                                        <div class="day-comments">
+                                            <div id="tuesdayComments"></div>
+                                        </div>
+                                    </div>
                                 </td>
                                 <td id='wednesday'>
-                                    <h3 id="wednesdayScore"></h3>
-                                    <div id="wednesdayComments"></div>
+                                    <div class="day-container">
+                                        <div class="points-display">
+                                            <div class="points-circle" id="wednesdayScore"></div>
+                                            <div class="points-label" id="wednesdayGrade"></div>
+                                        </div>
+                                        <div class="day-comments">
+                                            <div id="wednesdayComments"></div>
+                                        </div>
+                                    </div>
                                 </td>
                                 <td id='thursday'>
-                                    <h3 id="thursdayScore"></h3>
-                                    <div id="thursdayComments"></div>
+                                    <div class="day-container">
+                                        <div class="points-display">
+                                            <div class="points-circle" id="thursdayScore"></div>
+                                            <div class="points-label" id="thursdayGrade"></div>
+                                        </div>
+                                        <div class="day-comments">
+                                            <div id="thursdayComments"></div>
+                                        </div>
+                                    </div>
                                 </td>
                                 <td id='friday'>
-                                    <h3 id="fridayScore"></h3>
-                                    <div id="fridayComments"></div>
+                                    <div class="day-container">
+                                        <div class="points-display">
+                                            <div class="points-circle" id="fridayScore"></div>
+                                            <div class="points-label" id="fridayGrade"></div>
+                                        </div>
+                                        <div class="day-comments">
+                                            <div id="fridayComments"></div>
+                                        </div>
+                                    </div>
                                 </td>
                             </tr>
                         </tbody>

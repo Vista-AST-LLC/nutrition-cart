@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     let thursData = await populateData('thurs');
     let friData = await populateData('fri');
 
-    updateHTML("mondayScore", "mondayComments", monData);
+    updateHTML("mondayScore", "mondayComments", "mondayGrade", monData);
     updateHTML("tuesdayScore", "tuesdayComments", tuesData);
     updateHTML("wednesdayScore", "wednesdayComments", wedData);
     updateHTML("thursdayScore", "thursdayComments", thursData);
@@ -28,7 +28,7 @@ async function populateData(dayString) {
     return data
 }
 
-async function updateHTML(score, comments, data) {
+async function updateHTML(score, comments, grade, data) {
 
     if (!data) {
         console.log("Data is null")
@@ -36,7 +36,8 @@ async function updateHTML(score, comments, data) {
     }
     else {
         console.log("Data is not null: " + data)
-        document.getElementById(score).innerHTML = `Grade ${data["Grade"]}: ${Math.round(data["Score"])}`
+        document.getElementById(score).innerHTML = `${Math.round(data["Score"])}`
+        document.getElementById(grade).innerHTML = `Grade: ${data["Grade"]}`
         document.getElementById(comments).innerHTML = `                   
     <ul>
         <li>${data["Calorie Comments"]}</li>

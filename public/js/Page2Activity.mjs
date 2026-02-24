@@ -584,7 +584,7 @@ class DayGrade {
             "Carbs Comments": score[DayGrade.COMMENTS][Constants.CARBS],
             "Fiber Comments": score[DayGrade.COMMENTS][Constants.FIBER],
             "Sugar Comments": score[DayGrade.COMMENTS][Constants.SUGAR],
-            "Protein Comments": Math.round(score[DayGrade.COMMENTS][Constants.PROTEIN])
+            "Protein Comments": score[DayGrade.COMMENTS][Constants.PROTEIN]
         }
         localStorage.setItem(`${active}Score`, JSON.stringify(scoreData))
         underGradeCircle.innerHTML = "Your Grade: " + Math.round(score[DayGrade.SCORE][Constants.SCOREAVG]);
