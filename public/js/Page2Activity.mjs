@@ -2,9 +2,11 @@ import { createFoodItem, DayGrade, Weekday, Constants } from "./common.mjs";
 
 let active;
 
-document.addEventListener("load", async function () {
+let refresh = true;
+if (refresh) {
     await updateWeekFoodItems();
-})
+    refresh = false;
+}
 
 
 //Function to Select the Active Day

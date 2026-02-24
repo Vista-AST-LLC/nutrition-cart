@@ -1,15 +1,14 @@
 import { createFoodItem, DayGrade, Weekday, Constants } from "./common.mjs";
 
-document.addEventListener("load", async function () {
-    console.log(this.localStorage.getItem('SingleDay'));
-    if (!this.localStorage.getItem('SingleDay')) {
+let refresh = true;
+if (refresh) {
+    await updateFoodItems();
+    refresh = false;
+    if (!localStorage.getItem('SingleDay')) {
         let day = new Weekday();
         this.localStorage.setItem('SingleDay', JSON.stringify(day));
     }
-    console.log(this.localStorage.getItem('SingleDay'));
-
-    await updateFoodItems();
-});
+}
 
 let keyLastTime = performance.now();
 let keyEntry = '';
