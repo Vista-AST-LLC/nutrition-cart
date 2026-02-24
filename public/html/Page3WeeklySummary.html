@@ -5,10 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/common.css">
-    <link rel="stylesheet" href="../css/Page3WeeklySummary.css">
+    <link rel="stylesheet" href="../css/Page2Activity.css">
     <title>Nutrition Cart</title>
     <meta name="description" content="Website companion of Vista-AST's Nutrition Cart">
-    <script type="module" src="../js/common.mjs" defer></script>
     <script type="module" src="../js/Page3WeeklySummary.mjs" defer></script>
 </head>
 
@@ -31,10 +30,111 @@
                 </ul>
             </div>
         </div>
-
-        <div class="card">
-
-        </div>
+        <main id="main-content">
+            <div class="card">
+                <!--Page Header-->
+                <div class="meal-plan-title">
+                    <h2 class="meal-plan-h2">Week Grade</h2>
+                </div>
+                <div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th id="monHead">
+                                    <div>
+                                        Monday
+                                    </div>
+                                </th>
+                                <th id="tuesHead">
+                                    <div>
+                                        Tuesday
+                                    </div>
+                                </th>
+                                <th id="wedHead">
+                                    <div>
+                                        Wednesday
+                                    </div>
+                                </th>
+                                <th id="thursHead">
+                                    <div>
+                                        Thursday
+                                    </div>
+                                </th>
+                                <th id="friHead">
+                                    <div>
+                                        Friday
+                                    </div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td id='monday'>
+                                     <div class="healthScore">
+                                        <div class="scoreCard">
+                                            <div class="summary-card points-card">
+                                                <div class="points-display">
+                                                    <div class="points-circle" id="monPointsCircle"></div>
+                                                    <div class="points-label" id="monUnderPointCircle"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td id='tuesday'>
+                                    <div class="healthScore">
+                                        <div class="scoreCard">
+                                            <div class="summary-card points-card">
+                                                <div class="points-display">
+                                                    <div class="points-circle" id="tuesPointsCircle"></div>
+                                                    <div class="points-label" id="tuesUnderPointCircle"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td id='wednesday'>
+                                    <div class="healthScore">
+                                        <div class="scoreCard">
+                                            <div class="summary-card points-card">
+                                                <div class="points-display">
+                                                    <div class="points-circle" id="wedPointsCircle"></div>
+                                                    <div class="points-label" id="wedUnderPointCircle"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td id='thursday'>
+                                    <div class="healthScore">
+                                        <div class="scoreCard">
+                                            <div class="summary-card points-card">
+                                                <div class="points-display">
+                                                    <div class="points-circle" id="thursPointsCircle"></div>
+                                                    <div class="points-label" id="thursUnderPointCircle"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td id='friday'>
+                                    <div class="healthScore">
+                                        <div class="scoreCard">
+                                            <div class="summary-card points-card">
+                                                <div class="points-display">
+                                                    <div class="points-circle" id="friPointsCircle"></div>
+                                                    <div class="points-label" id="friUnderPointCircle"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
     </div>
 
 </body>
