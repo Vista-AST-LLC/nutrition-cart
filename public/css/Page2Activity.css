@@ -101,8 +101,12 @@ td {
     border: none;
 }
 
-.day-button:hover {
+.day-button-selected {
     background-color: lightgoldenrodyellow;
+}
+
+.day-button:hover {
+    background-color: rgb(246, 246, 86);
 }
 
 /****TABLE FOOD ITEM STYLING****/

@@ -13,30 +13,35 @@ async function setActiveDay(day) {
         case 'M':
             localStorage.setItem("ActiveDay", 'Monday')
             document.getElementById('monday').style.backgroundColor = 'lightgoldenrodyellow'
+            document.getElementById('monBtn').classList.add('day-button-selected')
             updateBackgroundColor('tuesday', 'wednesday', 'thursday', 'friday')
             active = 'mon'
             break;
         case 'T':
             localStorage.setItem("ActiveDay", 'Tuesday')
             document.getElementById('tuesday').style.backgroundColor = 'lightgoldenrodyellow'
+            document.getElementById('tuesBtn').classList.add('day-button-selected')
             updateBackgroundColor('monday', 'wednesday', 'thursday', 'friday')
             active = 'tues'
             break;
         case 'W':
             localStorage.setItem("ActiveDay", 'Wednesday')
             document.getElementById('wednesday').style.backgroundColor = 'lightgoldenrodyellow'
+            document.getElementById('wedBtn').classList.add('day-button-selected')
             updateBackgroundColor('monday', 'tuesday', 'thursday', 'friday')
             active = 'wed'
             break;
         case 'TH':
             localStorage.setItem("ActiveDay", 'Thursday')
             document.getElementById('thursday').style.backgroundColor = 'lightgoldenrodyellow'
+            document.getElementById('thursBtn').classList.add('day-button-selected')
             updateBackgroundColor('monday', 'tuesday', 'wednesday', 'friday')
             active = 'thurs'
             break;
         case 'F':
             localStorage.setItem("ActiveDay", 'Friday')
             document.getElementById('friday').style.backgroundColor = 'lightgoldenrodyellow'
+            document.getElementById('friBtn').classList.add('day-button-selected')
             updateBackgroundColor('monday', 'tuesday', 'wednesday', 'thursday')
             active = 'fri'
             break;
@@ -375,19 +380,59 @@ async function clearAllFoodItems() {
 
 //Calendar Update Functions
 async function updateBackgroundColor(day, dayTwo, dayThree, dayFour) {
-
-    document.getElementById(day).style.backgroundColor = 'white';
-    document.getElementById(dayTwo).style.backgroundColor = 'white';
-    document.getElementById(dayThree).style.backgroundColor = 'white';
-    document.getElementById(dayFour).style.backgroundColor = 'white';
+    let days = [day, dayTwo, dayThree, dayFour];
+    for (const day of days) {
+        switch (day) {
+            case 'monday':
+                document.getElementById(day).style.backgroundColor = 'white';
+                document.getElementById('monBtn').classList.remove('day-button-selected');
+                break;
+            case 'tuesday':
+                document.getElementById(day).style.backgroundColor = 'white';
+                document.getElementById('tuesBtn').classList.remove('day-button-selected');
+                break;
+            case 'wednesday':
+                document.getElementById(day).style.backgroundColor = 'white';
+                document.getElementById('wedBtn').classList.remove('day-button-selected');
+                break;
+            case 'thursday':
+                document.getElementById(day).style.backgroundColor = 'white';
+                document.getElementById('thursBtn').classList.remove('day-button-selected');
+                break;
+            case 'friday':
+                document.getElementById(day).style.backgroundColor = 'white';
+                document.getElementById('friBtn').classList.remove('day-button-selected');
+                break;
+        }
+    }
 }
 
 async function resetBackgroundColor(mon, tues, wed, thur, fri) {
-    document.getElementById(mon).style.backgroundColor = 'white';
-    document.getElementById(tues).style.backgroundColor = 'white';
-    document.getElementById(wed).style.backgroundColor = 'white';
-    document.getElementById(thur).style.backgroundColor = 'white';
-    document.getElementById(fri).style.backgroundColor = 'white';
+    let days = [mon, tues, wed, thur, fri];
+    for (const day of days) {
+        switch (day) {
+            case 'monday':
+                document.getElementById(day).style.backgroundColor = 'white';
+                document.getElementById('monBtn').classList.remove('day-button-selected');
+                break;
+            case 'tuesday':
+                document.getElementById(day).style.backgroundColor = 'white';
+                document.getElementById('tuesBtn').classList.remove('day-button-selected');
+                break;
+            case 'wednesday':
+                document.getElementById(day).style.backgroundColor = 'white';
+                document.getElementById('wedBtn').classList.remove('day-button-selected');
+                break;
+            case 'thursday':
+                document.getElementById(day).style.backgroundColor = 'white';
+                document.getElementById('thursBtn').classList.remove('day-button-selected');
+                break;
+            case 'friday':
+                document.getElementById(day).style.backgroundColor = 'white';
+                document.getElementById('friBtn').classList.remove('day-button-selected');
+                break;
+        }
+    }
 }
 
 //Modifying calendar based on active day
