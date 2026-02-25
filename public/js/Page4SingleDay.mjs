@@ -1,0 +1,203 @@
+import { createFoodItem, DayGrade, Weekday, Constants } from "./common.mjs";
+
+let refresh = true;
+if (refresh) {
+    await updateFoodItems();
+    refresh = false;
+    if (!localStorage.getItem('SingleDay')) {
+        let day = new Weekday();
+        this.localStorage.setItem('SingleDay', JSON.stringify(day));
+    }
+}
+
+let keyLastTime = performance.now();
+let keyEntry = '';
+
+const singleFoodCodeInput = document.getElementById('singleFoodCode');
+const singleAddFoodButton = document.getElementById('singleAddFoodButton');
+
+singleFoodCodeInput.addEventListener('keydown', async function (e) {
+    if (e.key === 'Enter') {
+        await addFoodItem();
+        await updateFoodItems();
+    }
+});
+
+singleAddFoodButton.addEventListener('click', function (e) {
+    singleFoodCodeInput.dispatchEvent(
+        new KeyboardEvent('keydown', { key: 'Enter' })
+    );
+});
+
+document.addEventListener('keydown', (e) => {
+    // Always focus the input when a key is pressed
+    if (document.activeElement !== singleFoodCodeInput) {
+        singleFoodCodeInput.focus({ preventScroll: true });
+    }
+
+    // According to old logic, ignore shift for scanners
+    if (e.key === 'Shift') return;
+
+    // If the keys are typed quickly enough, assume it's the scanner
+    const now = performance.now();
+    const isScannerInput = (now - keyLastTime) < 60;
+    keyLastTime = now;
+
+    // If it is not the scanner, return
+    if (!isScannerInput) {
+        keyEntry = e.key;
+        return;
+    }
+
+    if (e.key === 'Enter' || e.key === 'Tab') {
+        if (keyEntry.length > 0) {
+            singleFoodCodeInput.value = keyEntry;
+            keyEntry = '';
+        }
+        return;
+    }
+
+    keyEntry += e.key;
+});
+
+async function addFoodItem() {
+    let item;
+
+    const code = singleFoodCodeInput.value.trim().toUpperCase();
+    const codeHelp = document.getElementById('codeHelp');
+
+    // Reset visual state
+    singleFoodCodeInput.classList.remove('error', 'success');
+    codeHelp.classList.add('hidden');
+
+    if (!code) {
+        singleFoodCodeInput.classList.add('error');
+        codeHelp.textContent = 'Please enter a food code.';
+        codeHelp.classList.remove('hidden');
+        return;
+    }
+
+    try {
+        item = await createFoodItem(code);
+    } catch (e) {
+        codeHelp.textContent = 'Error: ' + e.message;
+        codeHelp.classList.remove('hidden');
+        singleFoodCodeInput.value = '';
+        return;
+    }
+
+    // If all checks pass, add the item
+    let activeDay = 'SingleDay';
+    let parsed = JSON.parse(localStorage.getItem(activeDay));
+    if (!parsed) {
+        console.log("Parsed day is null: " + activeDay);
+    }
+    let day = await Weekday.fromJSON(parsed);
+    day.addFoodItem(item);
+    localStorage.setItem(activeDay, JSON.stringify(day));
+
+    // Clear the input field after successful addition
+    singleFoodCodeInput.value = '';
+    singleFoodCodeInput.classList.remove('error', 'success');
+    codeHelp.classList.add('hidden');
+}
+
+async function updateFoodItems() {
+    const activeDay = 'SingleDay';
+    const dayHelp = document.getElementById('dayHelp');
+
+    dayHelp.classList.add('hidden');
+    dayHelp.textContent = ''
+    let parsed = JSON.parse(localStorage.getItem(activeDay));
+    if (!parsed) {
+        console.log("Parsed day is null: " + activeDay);
+    }
+    let day = await Weekday.fromJSON(parsed);
+
+    const singleBreakfastItems = document.getElementById(`singleBreakfastItems`);
+    const singleLunchItems = document.getElementById(`singleLunchItems`);
+    const singleDinnerItems = document.getElementById(`singleDinnerItems`);
+    const singleSnackItems = document.getElementById(`singleSnackItems`);
+
+    singleBreakfastItems.innerHTML = '';
+    singleLunchItems.innerHTML = '';
+    singleDinnerItems.innerHTML = '';
+    singleSnackItems.innerHTML = '';
+
+    let buttonCount = 0;
+    day.breakfast.forEach(item => {
+        let trashButtonID = Constants.BREAKFAST + buttonCount++;
+        const div = document.createElement('div');
+        div.classList.add('breakfast-food-item')
+        div.innerHTML = `
+                    ${item.itemName}
+                    <button class='trash-button' id=${trashButtonID}>🗑︎</button>`;
+        singleBreakfastItems.append(div);
+    });
+    buttonCount = 0;
+    day.lunch.forEach(item => {
+        let trashButtonID = Constants.LUNCH + buttonCount++;
+        const div = document.createElement('div');
+        div.classList.add('lunch-food-item')
+        div.innerHTML = `
+                ${item.itemName}
+                <button class='trash-button' id=${trashButtonID}>🗑︎</button>`;
+        singleLunchItems.append(div);
+    });
+    buttonCount = 0;
+    day.dinner.forEach(item => {
+        let trashButtonID = Constants.DINNER + buttonCount++;
+        const div = document.createElement('div');
+        div.classList.add('dinner-food-item')
+        div.innerHTML = `
+                ${item.itemName}
+                <button class='trash-button' id=${trashButtonID}>🗑︎</button>`;
+        singleDinnerItems.append(div);
+    });
+    buttonCount = 0;
+    day.snacks.forEach(item => {
+        let trashButtonID = Constants.SNACKS + buttonCount++;
+        const div = document.createElement('div');
+        div.classList.add('snacks-food-item')
+        div.innerHTML = `
+                ${item.itemName}
+                <button class='trash-button' id=${trashButtonID}>🗑︎</button>`;
+        singleSnackItems.append(div);
+    });
+
+    localStorage.setItem(activeDay, JSON.stringify(day));
+}
+
+const singleDayFoodItemsContainer = document.getElementById('singleDay');
+
+singleDayFoodItemsContainer.addEventListener('click', async (e) => {
+    if (e.target.classList.contains('trash-button')) {
+        const name = e.target.id;
+        await removeFoodItemDiv(name);
+        await updateFoodItems();
+    }
+});
+
+async function removeFoodItemDiv(name) {
+    let meal = name[0];
+    let id = name.slice(1);
+    let activeDay = 'SingleDay';
+    let parsed = JSON.parse(localStorage.getItem(activeDay));
+    if (!parsed) {
+        console.log("Parsed day is null: " + activeDay);
+    }
+    let day = await Weekday.fromJSON(parsed);
+    await day.removeFoodItem(meal, id);
+    localStorage.setItem(activeDay, JSON.stringify(day));
+}
+
+document.getElementById('singleDayGradeButton').addEventListener('click', async function () {
+    let activeDay = 'SingleDay';
+    let parsed = JSON.parse(localStorage.getItem(activeDay));
+    if (!parsed) {
+        console.log("Parsed day is null: " + activeDay);
+    }
+    let day = await Weekday.fromJSON(parsed);
+
+    new DayGrade(day);
+})
