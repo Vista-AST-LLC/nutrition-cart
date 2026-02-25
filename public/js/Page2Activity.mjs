@@ -377,6 +377,7 @@ deleteAllFoodItems.addEventListener('click', async (e) => {
 async function clearAllFoodItems() {
     let activeDay = localStorage.getItem("ActiveDay");
     let day = new Weekday();
+    localStorage.setItem(`${active}Score`, null)
     localStorage.setItem(activeDay, JSON.stringify(day));
 }
 
