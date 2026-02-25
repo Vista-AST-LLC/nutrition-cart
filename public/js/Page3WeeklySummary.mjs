@@ -8,10 +8,10 @@ document.addEventListener('DOMContentLoaded', async function () {
     let friData = await populateData('fri');
 
     updateHTML("mondayScore", "mondayComments", "mondayGrade", monData);
-    updateHTML("tuesdayScore", "tuesdayComments", tuesData);
-    updateHTML("wednesdayScore", "wednesdayComments", wedData);
-    updateHTML("thursdayScore", "thursdayComments", thursData);
-    updateHTML("fridayScore", "fridayComments", friData);
+    updateHTML("tuesdayScore", "tuesdayComments", "tuesdayGrade", tuesData);
+    updateHTML("wednesdayScore", "wednesdayComments", "wednesdayGrade", wedData);
+    updateHTML("thursdayScore", "thursdayComments", "thursdayGrade", thursData);
+    updateHTML("fridayScore", "fridayComments", "fridayGrade", friData);
 
 })
 
