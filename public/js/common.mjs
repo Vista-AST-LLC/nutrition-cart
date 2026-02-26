@@ -203,85 +203,73 @@ export class DayGrade {
     // Constants used in class
     static MAX_SCORE = 100;
 
+    score = [];
+
     // Indices for arrays
     static SCORE = 0;
     static AMOUNTS = 1;
     static COMMENTS = 2;
 
-    constructor(day, active) {
-        let score = Array.from({ length: 3 }, () => new Array(10).fill(0));
-        score[DayGrade.COMMENTS] = new Array(10).fill('Default Comment');
+    constructor(day) {
+        this.score = Array.from({ length: 3 }, () => new Array(10).fill(0));
+        this.score[DayGrade.COMMENTS] = new Array(10).fill('Default Comment');
 
-        this.accumulateTotals(day, score);
+        this.accumulateTotals(day);
         for (let i = 0; i < 10; i++) {
-            score[DayGrade.SCORE][i] = this.basicGradeRubric(i, score[DayGrade.AMOUNTS][i], score);
+            this.score[DayGrade.SCORE][i] = this.basicGradeRubric(i, this.score[DayGrade.AMOUNTS][i]);
         }
 
         let totalScore = 0;
         for (let i = 0; i < 10; i++) {
-            totalScore += score[DayGrade.SCORE][i];
+            totalScore += this.score[DayGrade.SCORE][i];
         }
-        score[DayGrade.SCORE][Constants.SCOREAVG] = totalScore / 10;
+        this.score[DayGrade.SCORE][Constants.SCOREAVG] = totalScore / 10;
+    }
 
-        console.log("Caluclated category points:")
-        console.log("Cal: " + score[DayGrade.SCORE][Constants.CALORIES]);
-        console.log("TotFat: " + score[DayGrade.SCORE][Constants.TOTALFAT]);
-        console.log("TFat: " + score[DayGrade.SCORE][Constants.TRANSFAT]);
-        console.log("SFat: " + score[DayGrade.SCORE][Constants.SATFAT]);
-        console.log("Chol: " + score[DayGrade.SCORE][Constants.CHOLESTEROL]);
-        console.log("Sod: " + score[DayGrade.SCORE][Constants.SODIUM]);
-        console.log("Car: " + score[DayGrade.SCORE][Constants.CARBS]);
-        console.log("Fib: " + score[DayGrade.SCORE][Constants.FIBER]);
-        console.log("Sug: " + score[DayGrade.SCORE][Constants.SUGAR]);
-        console.log("Pro: " + score[DayGrade.SCORE][Constants.PROTEIN]);
-
+    fillHTML() {
         let caloriesCom = document.getElementById('caloriesComments');
         let caloriesCard = document.getElementById('totalCalories');
-        caloriesCom.innerHTML = score[DayGrade.COMMENTS][Constants.CALORIES];
-        caloriesCard.innerHTML = Math.round(score[DayGrade.AMOUNTS][Constants.CALORIES]);
+        caloriesCom.innerHTML = this.score[DayGrade.COMMENTS][Constants.CALORIES];
+        caloriesCard.innerHTML = Math.round(this.score[DayGrade.AMOUNTS][Constants.CALORIES]);
         let fatsCom = document.getElementById('fatsComments');
         let fatsCard = document.getElementById('totalFats');
-        fatsCom.innerHTML = score[DayGrade.COMMENTS][Constants.TOTALFAT];
-        fatsCard.innerHTML = Math.round(score[DayGrade.AMOUNTS][Constants.TOTALFAT]);
+        fatsCom.innerHTML = this.score[DayGrade.COMMENTS][Constants.TOTALFAT];
+        fatsCard.innerHTML = Math.round(this.score[DayGrade.AMOUNTS][Constants.TOTALFAT]);
         let cholesterolCom = document.getElementById('cholesterolComments');
         let cholesterolCard = document.getElementById('totalCholesterol');
-        cholesterolCom.innerHTML = score[DayGrade.COMMENTS][Constants.CHOLESTEROL];
-        cholesterolCard.innerHTML = Math.round(score[DayGrade.AMOUNTS][Constants.CHOLESTEROL]);
+        cholesterolCom.innerHTML = this.score[DayGrade.COMMENTS][Constants.CHOLESTEROL];
+        cholesterolCard.innerHTML = Math.round(this.score[DayGrade.AMOUNTS][Constants.CHOLESTEROL]);
         let sodiumCom = document.getElementById('sodiumComments');
         let sodiumCard = document.getElementById('totalSodium');
-        sodiumCom.innerHTML = score[DayGrade.COMMENTS][Constants.SODIUM];
-        sodiumCard.innerHTML = Math.round(score[DayGrade.AMOUNTS][Constants.SODIUM]);
+        sodiumCom.innerHTML = this.score[DayGrade.COMMENTS][Constants.SODIUM];
+        sodiumCard.innerHTML = Math.round(this.score[DayGrade.AMOUNTS][Constants.SODIUM]);
         let carbsCom = document.getElementById('carbsComments');
         let carbsCard = document.getElementById('totalCarbs');
-        carbsCom.innerHTML = score[DayGrade.COMMENTS][Constants.CARBS];
-        carbsCard.innerHTML = Math.round(score[DayGrade.AMOUNTS][Constants.CARBS]);
+        carbsCom.innerHTML = this.score[DayGrade.COMMENTS][Constants.CARBS];
+        carbsCard.innerHTML = Math.round(this.score[DayGrade.AMOUNTS][Constants.CARBS]);
         let fiberCom = document.getElementById('fiberComments');
         let fiberCard = document.getElementById('totalFiber');
-        fiberCom.innerHTML = score[DayGrade.COMMENTS][Constants.FIBER];
-        fiberCard.innerHTML = Math.round(score[DayGrade.AMOUNTS][Constants.FIBER]);
+        fiberCom.innerHTML = this.score[DayGrade.COMMENTS][Constants.FIBER];
+        fiberCard.innerHTML = Math.round(this.score[DayGrade.AMOUNTS][Constants.FIBER]);
         let sugarsCom = document.getElementById('sugarsComments');
         let sugarsCard = document.getElementById('totalSugars');
-        sugarsCom.innerHTML = score[DayGrade.COMMENTS][Constants.SUGAR];
-        sugarsCard.innerHTML = Math.round(score[DayGrade.AMOUNTS][Constants.SUGAR]);
+        sugarsCom.innerHTML = this.score[DayGrade.COMMENTS][Constants.SUGAR];
+        sugarsCard.innerHTML = Math.round(this.score[DayGrade.AMOUNTS][Constants.SUGAR]);
         let proteinCom = document.getElementById('proteinComments');
         let proteinCard = document.getElementById('totalProtein');
-        proteinCom.innerHTML = score[DayGrade.COMMENTS][Constants.PROTEIN];
-        proteinCard.innerHTML = Math.round(score[DayGrade.AMOUNTS][Constants.PROTEIN]);
+        proteinCom.innerHTML = this.score[DayGrade.COMMENTS][Constants.PROTEIN];
+        proteinCard.innerHTML = Math.round(this.score[DayGrade.AMOUNTS][Constants.PROTEIN]);
 
         let grade;
 
         let totalGradeCircle = document.getElementById('pointsCircle');
-        if (score[DayGrade.SCORE][Constants.SCOREAVG] > 90) {
-            grade = 'A'
+        if (this.score[DayGrade.SCORE][Constants.SCOREAVG] > 90) {
             totalGradeCircle.innerHTML = 'A';
-        } else if (score[DayGrade.SCORE][Constants.SCOREAVG] > 80) {
-            grade = 'B'
+        } else if (this.score[DayGrade.SCORE][Constants.SCOREAVG] > 80) {
             totalGradeCircle.innerHTML = 'B';
-        } else if (score[DayGrade.SCORE][Constants.SCOREAVG] > 70) {
-            grade = 'C'
+        } else if (this.score[DayGrade.SCORE][Constants.SCOREAVG] > 70) {
             totalGradeCircle.innerHTML = 'C';
-        } else if (score[DayGrade.SCORE][Constants.SCOREAVG] > 60) {
-            grade = 'D'
+        } else if (this.score[DayGrade.SCORE][Constants.SCOREAVG] > 60) {
             totalGradeCircle.innerHTML = 'D';
         } else {
             grade = 'F'
@@ -302,11 +290,10 @@ export class DayGrade {
         }
 
         let underGradeCircle = document.getElementById('underPointCircle');
-        localStorage.setItem(`${active}Score`, JSON.stringify(scoreData))
-        underGradeCircle.innerHTML = "Your Grade: " + Math.round(score[DayGrade.SCORE][Constants.SCOREAVG]);
+        underGradeCircle.innerHTML = "Your Grade: " + Math.round(this.score[DayGrade.SCORE][Constants.SCOREAVG]);
     }
 
-    accumulateTotals(day, score) {
+    accumulateTotals(day) {
         let dayTotal = new Array(10).fill(0);
         for (const mealType of [Constants.BREAKFAST, Constants.LUNCH, Constants.DINNER, Constants.SNACKS]) {
             for (const foodItem of day.getMealItems(mealType) ?? []) {
@@ -322,48 +309,48 @@ export class DayGrade {
                 dayTotal[Constants.PROTEIN] += foodItem.proteinG;
             }
         }
-        score[DayGrade.AMOUNTS] = dayTotal
+        this.score[DayGrade.AMOUNTS] = dayTotal
     }
 
-    basicGradeRubric(type, value, score) {
+    basicGradeRubric(type, value) {
         switch (type) {
             case Constants.CALORIES:
                 if (value > 4000) {
-                    score[DayGrade.COMMENTS][Constants.CALORIES] = "Way too many calories!";
+                    this.score[DayGrade.COMMENTS][Constants.CALORIES] = "Way too many calories!";
                     return 0;
                 }
                 if (value > 2500) {
-                    score[DayGrade.COMMENTS][Constants.CALORIES] = "Could use less calories.";
+                    this.score[DayGrade.COMMENTS][Constants.CALORIES] = "Could use less calories.";
                     return this.normalize(4000, 2500, value);
                 }
                 if (value > 1500) {
-                    score[DayGrade.COMMENTS][Constants.CALORIES] = "Good job! You are around the ideal calorie count.";
+                    this.score[DayGrade.COMMENTS][Constants.CALORIES] = "Good job! You are around the ideal calorie count.";
                     return DayGrade.MAX_SCORE;
                 }
                 if (value > 1000) {
-                    score[DayGrade.COMMENTS][Constants.CALORIES] = "Not enough calories, you need a little more to stay healty.";
+                    this.score[DayGrade.COMMENTS][Constants.CALORIES] = "Not enough calories, you need a little more to stay healty.";
                     return this.normalize(1000, 1500, value);
                 }
-                score[DayGrade.COMMENTS][Constants.CALORIES] = "You don't have nearly enough calories, you will starve!";
+                this.score[DayGrade.COMMENTS][Constants.CALORIES] = "You don't have nearly enough calories, you will starve!";
                 return 0;
             case Constants.TOTALFAT:
                 if (value > 100) {
-                    score[DayGrade.COMMENTS][Constants.TOTALFAT] = "Way too many fats!";
+                    this.score[DayGrade.COMMENTS][Constants.TOTALFAT] = "Way too many fats!";
                     return 0;
                 }
                 if (value > 50) {
-                    score[DayGrade.COMMENTS][Constants.TOTALFAT] = "Could use fewer fats.";
+                    this.score[DayGrade.COMMENTS][Constants.TOTALFAT] = "Could use fewer fats.";
                     return this.normalize(100, 50, value);
                 }
                 if (value > 25) {
-                    score[DayGrade.COMMENTS][Constants.TOTALFAT] = "Good amount of fats.";
+                    this.score[DayGrade.COMMENTS][Constants.TOTALFAT] = "Good amount of fats.";
                     return DayGrade.MAX_SCORE;
                 }
                 if (value > 0) {
-                    score[DayGrade.COMMENTS][Constants.TOTALFAT] = "Could use a little more fats!";
+                    this.score[DayGrade.COMMENTS][Constants.TOTALFAT] = "Could use a little more fats!";
                     return this.normalize(0, 25, value);
                 }
-                score[DayGrade.COMMENTS][Constants.TOTALFAT] = "You need more fats!";
+                this.score[DayGrade.COMMENTS][Constants.TOTALFAT] = "You need more fats!";
                 return 0;
             case Constants.SATFAT:
                 if (value > 40) {
@@ -378,127 +365,127 @@ export class DayGrade {
                 return DayGrade.MAX_SCORE;
             case Constants.TRANSFAT:
                 if (value > 5) {
-                    score[DayGrade.COMMENTS][Constants.TOTALFAT] = score[DayGrade.COMMENTS][Constants.TOTALFAT] + " Also way too much transfat!";
+                    this.score[DayGrade.COMMENTS][Constants.TOTALFAT] = this.score[DayGrade.COMMENTS][Constants.TOTALFAT] + " Also way too much transfat!";
                     return 0;
                 }
                 if (value > 1) {
-                    score[DayGrade.COMMENTS][Constants.TOTALFAT] = score[DayGrade.COMMENTS][Constants.TOTALFAT] + " Also could use less transfat!";
+                    this.score[DayGrade.COMMENTS][Constants.TOTALFAT] = this.score[DayGrade.COMMENTS][Constants.TOTALFAT] + " Also could use less transfat!";
                     return this.normalize(5, 1, value);
                 }
                 return DayGrade.MAX_SCORE;
             case Constants.CHOLESTEROL:
                 if (value > 500) {
-                    score[DayGrade.COMMENTS][Constants.CHOLESTEROL] = "Way too much cholesterol!";
+                    this.score[DayGrade.COMMENTS][Constants.CHOLESTEROL] = "Way too much cholesterol!";
                     return 0;
                 }
                 if (value > 200) {
-                    score[DayGrade.COMMENTS][Constants.CHOLESTEROL] = "Could use less cholesterol.";
+                    this.score[DayGrade.COMMENTS][Constants.CHOLESTEROL] = "Could use less cholesterol.";
                     return 0.75 * this.normalize(500, 200, value);
                 }
                 if (value > 0) {
-                    score[DayGrade.COMMENTS][Constants.CHOLESTEROL] = "Good amount of cholesterol.";
+                    this.score[DayGrade.COMMENTS][Constants.CHOLESTEROL] = "Good amount of cholesterol.";
                     return 0.75 * DayGrade.MAX_SCORE + 0.25 * this.normalize(200, 0, value);
                 }
-                score[DayGrade.COMMENTS][Constants.CHOLESTEROL] = "Good job keeping cholesterol low!";
+                this.score[DayGrade.COMMENTS][Constants.CHOLESTEROL] = "Good job keeping cholesterol low!";
                 return DayGrade.MAX_SCORE;
             case Constants.SODIUM:
                 if (value > 4000) {
-                    score[DayGrade.COMMENTS][Constants.SODIUM] = "Way too much sodium!";
+                    this.score[DayGrade.COMMENTS][Constants.SODIUM] = "Way too much sodium!";
                     return 0;
                 }
                 if (value > 2300) {
-                    score[DayGrade.COMMENTS][Constants.SODIUM] = "Could use less sodium.";
+                    this.score[DayGrade.COMMENTS][Constants.SODIUM] = "Could use less sodium.";
                     return 0.9 * this.normalize(4000, 2300, value);
                 }
                 if (value > 1500) {
-                    score[DayGrade.COMMENTS][Constants.SODIUM] = "Good amount of sodium.";
+                    this.score[DayGrade.COMMENTS][Constants.SODIUM] = "Good amount of sodium.";
                     return 0.9 * DayGrade.MAX_SCORE + 0.1 * this.normalize(2300, 1500, value);
                 }
                 if (value > 500) {
-                    score[DayGrade.COMMENTS][Constants.SODIUM] = "Great job keeping sodium amount low!";
+                    this.score[DayGrade.COMMENTS][Constants.SODIUM] = "Great job keeping sodium amount low!";
                     return DayGrade.MAX_SCORE;
                 }
                 if (value > 0) {
-                    score[DayGrade.COMMENTS][Constants.SODIUM] = "Could use a little more sodium.";
+                    this.score[DayGrade.COMMENTS][Constants.SODIUM] = "Could use a little more sodium.";
                     return this.normalize(0, 500, value);
                 }
-                score[DayGrade.COMMENTS][Constants.SODIUM] = "Way too little sodium! Sodium is required for your body to function.";
+                this.score[DayGrade.COMMENTS][Constants.SODIUM] = "Way too little sodium! Sodium is required for your body to function.";
                 return 0;
             case Constants.CARBS:
                 if (value > 500) {
-                    score[DayGrade.COMMENTS][Constants.CARBS] = "Way too many carbs!";
+                    this.score[DayGrade.COMMENTS][Constants.CARBS] = "Way too many carbs!";
                     return 0;
                 }
                 if (value > 275) {
-                    score[DayGrade.COMMENTS][Constants.CARBS] = "Could use less carbs.";
+                    this.score[DayGrade.COMMENTS][Constants.CARBS] = "Could use less carbs.";
                     return this.normalize(500, 275, value);
                 }
                 if (value > 200) {
-                    score[DayGrade.COMMENTS][Constants.CARBS] = "Good amount of carbs!";
+                    this.score[DayGrade.COMMENTS][Constants.CARBS] = "Good amount of carbs!";
                     return DayGrade.MAX_SCORE;
                 }
                 if (value > 150) {
-                    score[DayGrade.COMMENTS][Constants.CARBS] = "Could use a few more carbs.";
+                    this.score[DayGrade.COMMENTS][Constants.CARBS] = "Could use a few more carbs.";
                     return 0.5 * DayGrade.MAX_SCORE + 0.5 * this.normalize(150, 200, value);
                 }
                 if (value > 50) {
-                    score[DayGrade.COMMENTS][Constants.CARBS] = "Need more carbs.";
+                    this.score[DayGrade.COMMENTS][Constants.CARBS] = "Need more carbs.";
                     return 0.5 * this.normalize(50, 150, value);
                 }
-                score[DayGrade.COMMENTS][Constants.CARBS] = "Need way more carbs, carbs are necessary for your diet!";
+                this.score[DayGrade.COMMENTS][Constants.CARBS] = "Need way more carbs, carbs are necessary for your diet!";
                 return 0;
             case Constants.FIBER:
                 if (value > 100) {
-                    score[DayGrade.COMMENTS][Constants.FIBER] = "Way too much fiber!";
+                    this.score[DayGrade.COMMENTS][Constants.FIBER] = "Way too much fiber!";
                     return 0;
                 }
                 if (value > 38) {
-                    score[DayGrade.COMMENTS][Constants.FIBER] = "Too much fiber, get a little less.";
+                    this.score[DayGrade.COMMENTS][Constants.FIBER] = "Too much fiber, get a little less.";
                     return this.normalize(100, 38, value);
                 }
                 if (value > 28) {
-                    score[DayGrade.COMMENTS][Constants.FIBER] = "Perfect amount of fiber!";
+                    this.score[DayGrade.COMMENTS][Constants.FIBER] = "Perfect amount of fiber!";
                     return DayGrade.MAX_SCORE;
                 }
                 if (value > 0) {
-                    score[DayGrade.COMMENTS][Constants.FIBER] = "Need some more fiber.";
+                    this.score[DayGrade.COMMENTS][Constants.FIBER] = "Need some more fiber.";
                     return this.normalize(0, 28, value);
                 }
-                score[DayGrade.COMMENTS][Constants.FIBER] = "Not nearly enough fiber!";
+                this.score[DayGrade.COMMENTS][Constants.FIBER] = "Not nearly enough fiber!";
                 return 0;
             case Constants.SUGAR:
                 if (value > 150) {
-                    score[DayGrade.COMMENTS][Constants.SUGAR] = "Way too much sugar!";
+                    this.score[DayGrade.COMMENTS][Constants.SUGAR] = "Way too much sugar!";
                     return 0;
                 }
                 if (value > 80) {
-                    score[DayGrade.COMMENTS][Constants.SUGAR] = "Too much sugar.";
+                    this.score[DayGrade.COMMENTS][Constants.SUGAR] = "Too much sugar.";
                     return 0.5 * this.normalize(150, 80, value);
                 }
                 if (value > 50) {
-                    score[DayGrade.COMMENTS][Constants.SUGAR] = "A little too much sugar!";
+                    this.score[DayGrade.COMMENTS][Constants.SUGAR] = "A little too much sugar!";
                     return 0.5 * DayGrade.MAX_SCORE + 0.5 * this.normalize(80, 50, value);
                 }
-                score[DayGrade.COMMENTS][Constants.SUGAR] = "Good job keeping sugar low!";
+                this.score[DayGrade.COMMENTS][Constants.SUGAR] = "Good job keeping sugar low!";
                 return DayGrade.MAX_SCORE;
             case Constants.PROTEIN:
                 if (value > 150) {
-                    score[DayGrade.COMMENTS][Constants.PROTEIN] = "That is a ton of protein, are you a body builder?!";
+                    this.score[DayGrade.COMMENTS][Constants.PROTEIN] = "That is a ton of protein, are you a body builder?!";
                     return 0.5 * DayGrade.MAX_SCORE;
                 }
                 if (value > 75) {
-                    score[DayGrade.COMMENTS][Constants.PROTEIN] = "That is a lot of protein, are you an athelete?";
+                    this.score[DayGrade.COMMENTS][Constants.PROTEIN] = "That is a lot of protein, are you an athelete?";
                     return 0.5 * DayGrade.MAX_SCORE + 0.5 * this.normalize(150, 75, value);
                 }
                 if (value > 50) {
-                    score[DayGrade.COMMENTS][Constants.PROTEIN] = "Perfect amount of protein!";
+                    this.score[DayGrade.COMMENTS][Constants.PROTEIN] = "Perfect amount of protein!";
                     return DayGrade.MAX_SCORE;
                 }
                 if (value > 20) {
-                    score[DayGrade.COMMENTS][Constants.PROTEIN] = "That is not enough protein, add some more.";
+                    this.score[DayGrade.COMMENTS][Constants.PROTEIN] = "That is not enough protein, add some more.";
                     return this.normalize(20, 50, value);
                 }
-                score[DayGrade.COMMENTS][Constants.PROTEIN] = "That is not nearly enough protein, add some more!";
+                this.score[DayGrade.COMMENTS][Constants.PROTEIN] = "That is not nearly enough protein, add some more!";
                 return 0;
         }
     }
