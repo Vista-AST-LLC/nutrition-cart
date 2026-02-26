@@ -1,15 +1,8 @@
 /********FOOD INPUT SECTION*********/
-.main-content {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    gap: 20px;
-}
-
 .input-section {
     display: flex;
     gap: 8px;
-    margin-bottom: 15px;
+    margin: 15px 0;
 }
 
 .code-input {
@@ -46,52 +39,7 @@
     gap: 10px;
 }
 
-/**Container for Calendar**/
-#calendar {
-    overflow-x: auto;
-    overflow-y: auto;
-    border-radius: 8px;
-    width: 100%;
-    height: 100%;
-    margin: auto;
-}
-
-.meal-plan-title {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    margin: 15px 0;
-}
-
-.meal-plan-h2 {
-    width: 45%;
-}
-
 /****STYLING TABLE TITLE****/
-table {
-    width: 100%;
-    margin: auto;
-    border-collapse: collapse;
-}
-
-th {
-    border: 4px solid #3498db;
-    background-color: white;
-    width: 10%;
-}
-
-td {
-    border: 4px solid #3498db;
-    background-color: white;
-    padding: 10px;
-    height: 600px;
-    vertical-align: text-top;
-    align-items: center;
-    justify-items: center;
-}
-
 .day-button {
     background-color: white;
     font-weight: bold;

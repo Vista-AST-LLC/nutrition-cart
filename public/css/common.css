@@ -39,7 +39,6 @@ body {
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 15px;
     margin: 0 auto;
 }
 
@@ -59,17 +58,56 @@ select:focus-visible {
     will-change: transform;
     backface-visibility: hidden;
     transform: translateZ(0);
+    margin: 20px 0;
 }
 
-.card-title {
-    font-size: 1.3rem;
-    color: #2c3e50;
-    margin-bottom: 15px;
-    padding-bottom: 8px;
-    border-bottom: 1px solid var(--border-color);
+/**Container for Calendar**/
+#calendar {
+    overflow-x: auto;
+    overflow-y: auto;
+    border-radius: 8px;
+    width: 100%;
+    height: 100%;
+    margin: auto;
+}
+
+.page-title {
+    width: 100%;
     display: flex;
+    flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    margin: 15px 0;
+}
+
+h2 {
+    font-size: 1.3rem;
+    color: #2c3e50;
+    align-items: center;
+    width: 45%;
+}
+
+/*********TABLE STYLES********/
+table {
+    width: 100%;
+    margin: auto;
+    border-collapse: collapse;
+}
+
+th {
+    border: 4px solid #3498db;
+    background-color: white;
+    width: 10%;
+}
+
+td {
+    border: 4px solid #3498db;
+    background-color: white;
+    padding: 10px;
+    height: 600px;
+    vertical-align: text-top;
+    align-items: center;
+    justify-items: center;
 }
 
 /********NAV BAR STYLES********/
