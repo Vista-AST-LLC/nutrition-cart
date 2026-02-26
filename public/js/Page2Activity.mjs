@@ -500,7 +500,8 @@ document.getElementById('gradeDayButton').addEventListener('click', async functi
         gradeSnackItems.append(div);
     });
 
-    new DayGrade(day, active);
+    let grade = new DayGrade(day);
+    grade.fillHTML();
 })
 
 let animations = [];

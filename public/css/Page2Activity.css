@@ -435,7 +435,7 @@
 }
 
 .cholesterol-card {
-    border-top-color: black;
+    border-top-color: palevioletred;
     box-shadow: var(--shadow);
 }
 
@@ -455,7 +455,7 @@
 }
 
 .sugars-card {
-    border-top-color: black;
+    border-top-color: lightblue;
     box-shadow: var(--shadow);
 }
 
