@@ -226,7 +226,7 @@ export class DayGrade {
         this.score[DayGrade.SCORE][Constants.SCOREAVG] = totalScore / 10;
     }
 
-    fillHTML() {
+    fillHTML(active) {
         let caloriesCom = document.getElementById('caloriesComments');
         let caloriesCard = document.getElementById('totalCalories');
         caloriesCom.innerHTML = this.score[DayGrade.COMMENTS][Constants.CALORIES];
@@ -264,33 +264,39 @@ export class DayGrade {
 
         let totalGradeCircle = document.getElementById('pointsCircle');
         if (this.score[DayGrade.SCORE][Constants.SCOREAVG] > 90) {
+            grade = 'A'
             totalGradeCircle.innerHTML = 'A';
         } else if (this.score[DayGrade.SCORE][Constants.SCOREAVG] > 80) {
+            grade = 'B'
             totalGradeCircle.innerHTML = 'B';
         } else if (this.score[DayGrade.SCORE][Constants.SCOREAVG] > 70) {
+            grade = 'C'
             totalGradeCircle.innerHTML = 'C';
         } else if (this.score[DayGrade.SCORE][Constants.SCOREAVG] > 60) {
+            grade = 'D'
             totalGradeCircle.innerHTML = 'D';
         } else {
             grade = 'F'
             totalGradeCircle.innerHTML = 'F';
         }
 
-        let scoreData = {
-            "Score": score[DayGrade.SCORE][Constants.SCOREAVG],
-            "Grade": grade,
-            "Calorie Comments": score[DayGrade.COMMENTS][Constants.CALORIES],
-            "Total Fat Comments": score[DayGrade.COMMENTS][Constants.TOTALFAT],
-            "Cholesterol Comments": score[DayGrade.COMMENTS][Constants.CHOLESTEROL],
-            "Sodium Comments": score[DayGrade.COMMENTS][Constants.SODIUM],
-            "Carbs Comments": score[DayGrade.COMMENTS][Constants.CARBS],
-            "Fiber Comments": score[DayGrade.COMMENTS][Constants.FIBER],
-            "Sugar Comments": score[DayGrade.COMMENTS][Constants.SUGAR],
-            "Protein Comments": score[DayGrade.COMMENTS][Constants.PROTEIN]
-        }
-
         let underGradeCircle = document.getElementById('underPointCircle');
         underGradeCircle.innerHTML = "Your Grade: " + Math.round(this.score[DayGrade.SCORE][Constants.SCOREAVG]);
+
+        let scoreData = {
+            "Score": Math.round(this.score[DayGrade.SCORE][Constants.SCOREAVG]),
+            "Grade": grade,
+            "Calorie Comments": this.score[DayGrade.COMMENTS][Constants.CALORIES],
+            "Total Fat Comments": this.score[DayGrade.COMMENTS][Constants.TOTALFAT],
+            "Cholesterol Comments": this.score[DayGrade.COMMENTS][Constants.CHOLESTEROL],
+            "Sodium Comments": this.score[DayGrade.COMMENTS][Constants.SODIUM],
+            "Carbs Comments": this.score[DayGrade.COMMENTS][Constants.CARBS],
+            "Fiber Comments": this.score[DayGrade.COMMENTS][Constants.FIBER],
+            "Sugar Comments": this.score[DayGrade.COMMENTS][Constants.SUGAR],
+            "Protein Comments": this.score[DayGrade.COMMENTS][Constants.PROTEIN]
+        }
+
+        localStorage.setItem(`${active}Score`, JSON.stringify(scoreData))
     }
 
     accumulateTotals(day) {

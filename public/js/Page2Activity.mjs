@@ -501,7 +501,7 @@ document.getElementById('gradeDayButton').addEventListener('click', async functi
     });
 
     let grade = new DayGrade(day);
-    grade.fillHTML();
+    grade.fillHTML(active);
 })
 
 let animations = [];
