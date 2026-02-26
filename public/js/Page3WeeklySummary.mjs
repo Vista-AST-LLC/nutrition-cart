@@ -1,57 +1,53 @@
-import { Constants, DayGrade, Weekday } from "./common.mjs"
+document.addEventListener('DOMContentLoaded', async function () {
+    console.log("Page Loaded!")
 
-let reload = true;
-if (reload) {
-    reload = false;
-    await fillGrades();
+    let monData = await populateData('mon');
+    let tuesData = await populateData('tues');
+    let wedData = await populateData('wed');
+    let thursData = await populateData('thurs');
+    let friData = await populateData('fri');
+
+    updateHTML("mondayScore", "mondayComments", "mondayGrade", monData);
+    updateHTML("tuesdayScore", "tuesdayComments", "tuesdayGrade", tuesData);
+    updateHTML("wednesdayScore", "wednesdayComments", "wednesdayGrade", wedData);
+    updateHTML("thursdayScore", "thursdayComments", "thursdayGrade", thursData);
+    updateHTML("fridayScore", "fridayComments", "fridayGrade", friData);
+
+})
+
+async function populateData(dayString) {
+    let data;
+
+    try {
+        data = JSON.parse(localStorage.getItem(`${dayString}Score`));
+    } catch (error) {
+        data = null
+        console.error(error)
+    }
+
+    return data
 }
 
-async function getDays() {
-    let monday = new DayGrade(await Weekday.fromJSON(JSON.parse(localStorage.getItem('Monday'))));
-    monday.circ = 'monPointsCircle';
-    monday.underCirc = 'monUnderPointCircle';
-    monday.comments = 'monComments';
-    let tuesday = new DayGrade(await Weekday.fromJSON(JSON.parse(localStorage.getItem('Tuesday'))));
-    tuesday.circ = 'tuesPointsCircle';
-    tuesday.underCirc = 'tuesUnderPointCircle';
-    tuesday.comments = 'tuesComments';
-    let wednesday = new DayGrade(await Weekday.fromJSON(JSON.parse(localStorage.getItem('Wednesday'))));
-    wednesday.circ = 'wedPointsCircle';
-    wednesday.underCirc = 'wedUnderPointCircle';
-    wednesday.comments = 'wedComments'
-    let thursday = new DayGrade(await Weekday.fromJSON(JSON.parse(localStorage.getItem('Thursday'))));
-    thursday.circ = 'thursPointsCircle';
-    thursday.underCirc = 'thursUnderPointCircle';
-    thursday.comments = 'thursComments';
-    let friday = new DayGrade(await Weekday.fromJSON(JSON.parse(localStorage.getItem('Friday'))));
-    friday.circ = 'friPointsCircle';
-    friday.underCirc = 'friUnderPointCircle';
-    friday.comments = 'friComments';
+async function updateHTML(score, comments, grade, data) {
 
-    return [monday, tuesday, wednesday, thursday, friday];
-}
-
-async function fillGrades() {
-    let days = await getDays();
-    days.forEach(day => {
-        let grade = day.score[DayGrade.SCORE][Constants.SCOREAVG];
-        if (grade > 90) {
-            document.getElementById(day.circ).innerHTML = 'A';
-            document.getElementById(day.comments).innerHTML = 'Great job with this day! No more work needed here!';
-        } else if (grade > 80) {
-            document.getElementById(day.circ).innerHTML = 'B';
-            document.getElementById(day.comments).innerHTML = 'Pretty good work!';
-        } else if (grade > 70) {
-            document.getElementById(day.circ).innerHTML = 'C';
-            document.getElementById(day.comments).innerHTML = 'Not too bad, but could you do better?';
-        } else if (grade > 60) {
-            document.getElementById(day.circ).innerHTML = 'D';
-            document.getElementById(day.comments).innerHTML = 'This day needs some more work, go back to the Activity page click on this day, then click on Grade Day. It will tell you what needs fixing.';
-        } else {
-            document.getElementById(day.circ).innerHTML = 'F';
-            document.getElementById(day.comments).innerHTML = 'This day needs some more work, go back to the Activity page click on this day, then click on Grade Day. It will tell you what needs fixing.';
-        }
-
-        document.getElementById(day.underCirc).innerHTML = Math.round(grade);
-    });
+    if (!data) {
+        console.log("Data is null")
+        return;
+    }
+    else {
+        console.log("Data is not null: " + data)
+        document.getElementById(score).innerHTML = `${Math.round(data["Score"])}`
+        document.getElementById(grade).innerHTML = `Grade: ${data["Grade"]}`
+        document.getElementById(comments).innerHTML = `                   
+    <ul>
+        <li>${data["Calorie Comments"]}</li>
+        <li>${data["Carbs Comments"]}</li>
+        <li>${data["Cholesterol Comments"]}</li>
+        <li>${data["Fiber Comments"]}</li>
+        <li>${data["Protein Comments"]}</li>
+        <li>${data["Sodium Comments"]}</li>
+        <li>${data["Sugar Comments"]}</li>
+        <li>${data["Total Fat Comments"]}</li>
+    </ul>`
+    }
 }

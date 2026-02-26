@@ -5,9 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/common.css">
-    <link rel="stylesheet" href="../css/Page2Activity.css">
+    <link rel="stylesheet" href="../css/Page3WeeklySummary.css">
     <title>Nutrition Cart</title>
     <meta name="description" content="Website companion of Vista-AST's Nutrition Cart">
+    <script type="module" src="../js/common.mjs" defer></script>
     <script type="module" src="../js/Page3WeeklySummary.mjs" defer></script>
 </head>
 
@@ -30,118 +31,89 @@
                 </ul>
             </div>
         </div>
-        <main id="main-content">
+
+        <main>
             <div class="card">
                 <!--Page Header-->
-                <div class="meal-plan-title">
-                    <h2 class="meal-plan-h2">Your Grades for the Week</h2>
+                <div class="page-title">
+                    <h2>Weekly Summary</h2>
                 </div>
-                <div>
+                <div id="calendar">
                     <table>
                         <thead>
-                            <tr>
+                            <tr class="sum-header">
                                 <th id="monHead">
-                                    <div>
-                                        Monday
-                                    </div>
+                                    Monday
                                 </th>
                                 <th id="tuesHead">
-                                    <div>
-                                        Tuesday
-                                    </div>
+                                    Tuesday
                                 </th>
                                 <th id="wedHead">
-                                    <div>
-                                        Wednesday
-                                    </div>
+                                    Wednesday
                                 </th>
                                 <th id="thursHead">
-                                    <div>
-                                        Thursday
-                                    </div>
+                                    Thursday
                                 </th>
                                 <th id="friHead">
-                                    <div>
-                                        Friday
-                                    </div>
+                                    Friday
                                 </th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
                                 <td id='monday'>
-                                     <div class="healthScore">
-                                        <div class="scoreCard">
-                                            <div class="summary-card points-card">
-                                                <div class="points-display">
-                                                    <div class="points-circle" id="monPointsCircle"></div>
-                                                    <div class="points-label" id="monUnderPointCircle"></div>
-                                                </div>
-                                            </div>
+                                    <div class="day-container">
+                                        <div class="points-display">
+                                            <div class="points-circle" id="mondayScore"></div>
+                                            <div class="points-label" id="mondayGrade"></div>
                                         </div>
-                                    </div>
-                                    <div class="summary-card calories-card">
-                                        <div id="monComments" class="comments"></div>
+                                        <div class="day-comments">
+                                            <div id="mondayComments"></div>
+                                        </div>
                                     </div>
                                 </td>
                                 <td id='tuesday'>
-                                    <div class="healthScore">
-                                        <div class="scoreCard">
-                                            <div class="summary-card points-card">
-                                                <div class="points-display">
-                                                    <div class="points-circle" id="tuesPointsCircle"></div>
-                                                    <div class="points-label" id="tuesUnderPointCircle"></div>
-                                                </div>
-                                            </div>
+                                    <div class="day-container">
+                                        <div class="points-display">
+                                            <div class="points-circle" id="tuesdayScore"></div>
+                                            <div class="points-label" id="tuesdayGrade"></div>
                                         </div>
-                                    </div>
-                                    <div class="summary-card sodium-card">
-                                        <div id="tuesComments" class="comments"></div>
+                                        <div class="day-comments">
+                                            <div id="tuesdayComments"></div>
+                                        </div>
                                     </div>
                                 </td>
                                 <td id='wednesday'>
-                                    <div class="healthScore">
-                                        <div class="scoreCard">
-                                            <div class="summary-card points-card">
-                                                <div class="points-display">
-                                                    <div class="points-circle" id="wedPointsCircle"></div>
-                                                    <div class="points-label" id="wedUnderPointCircle"></div>
-                                                </div>
-                                            </div>
+                                    <div class="day-container">
+                                        <div class="points-display">
+                                            <div class="points-circle" id="wednesdayScore"></div>
+                                            <div class="points-label" id="wednesdayGrade"></div>
                                         </div>
-                                    </div>
-                                    <div class="summary-card protein-card">
-                                        <div id="wedComments" class="comments"></div>
+                                        <div class="day-comments">
+                                            <div id="wednesdayComments"></div>
+                                        </div>
                                     </div>
                                 </td>
                                 <td id='thursday'>
-                                    <div class="healthScore">
-                                        <div class="scoreCard">
-                                            <div class="summary-card points-card">
-                                                <div class="points-display">
-                                                    <div class="points-circle" id="thursPointsCircle"></div>
-                                                    <div class="points-label" id="thursUnderPointCircle"></div>
-                                                </div>
-                                            </div>
+                                    <div class="day-container">
+                                        <div class="points-display">
+                                            <div class="points-circle" id="thursdayScore"></div>
+                                            <div class="points-label" id="thursdayGrade"></div>
                                         </div>
-                                    </div>
-                                    <div class="summary-card sugars-card">
-                                        <div id="thursComments" class="comments"></div>
+                                        <div class="day-comments">
+                                            <div id="thursdayComments"></div>
+                                        </div>
                                     </div>
                                 </td>
                                 <td id='friday'>
-                                    <div class="healthScore">
-                                        <div class="scoreCard">
-                                            <div class="summary-card points-card">
-                                                <div class="points-display">
-                                                    <div class="points-circle" id="friPointsCircle"></div>
-                                                    <div class="points-label" id="friUnderPointCircle"></div>
-                                                </div>
-                                            </div>
+                                    <div class="day-container">
+                                        <div class="points-display">
+                                            <div class="points-circle" id="fridayScore"></div>
+                                            <div class="points-label" id="fridayGrade"></div>
                                         </div>
-                                    </div>
-                                    <div class="summary-card carbs-card">
-                                        <div id="friComments" class="comments"></div>
+                                        <div class="day-comments">
+                                            <div id="fridayComments"></div>
+                                        </div>
                                     </div>
                                 </td>
                             </tr>
@@ -150,6 +122,8 @@
                 </div>
             </div>
         </main>
+
+
     </div>
 
 </body>
