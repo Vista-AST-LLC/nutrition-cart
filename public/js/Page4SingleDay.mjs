@@ -199,5 +199,6 @@ document.getElementById('singleDayGradeButton').addEventListener('click', async 
     }
     let day = await Weekday.fromJSON(parsed);
 
-    new DayGrade(day);
+    let grade = new DayGrade(day);
+    grade.fillHTML();
 })
