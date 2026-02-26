@@ -1,0 +1,96 @@
+.title {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 15px 0;
+    white-space: nowrap;
+}
+
+.leaderboard-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.leaderboard-sub-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.leaderboard {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    justify-content: space-between;
+    padding: 20px;
+    border-radius: 16px;
+    border: 8px solid;
+    border-color: lightgrey;
+    list-style: none;
+    counter-reset: leaderboard-counter;
+    background-color: white;
+    box-shadow: var(--shadow);
+}
+
+.leaderboard li {
+    display: flex;
+    flex-direction: row;
+    counter-increment: leaderboard-counter;
+    align-items: center;
+    background: #f8f9fa;
+    justify-content: space-between;
+    border-radius: 8px;
+    padding: 10px;
+    margin: 1px 0;
+    width: 100%;
+    border-top: 4px solid;
+    border-top-color: whitesmoke;
+    border-left: 4px solid;
+    border-left-color: whitesmoke;
+}
+
+.leaderboard li .rank::before {
+    content: counter(leaderboard-counter) ".";
+    font-weight: bold;
+    display: inline-block;
+    width: 25px;
+    color: black
+}
+
+.leaderboard .first-place {
+    border-top-color: gold;
+    border-left-color: gold;
+}
+
+.leaderboard .second-place {
+    border-top-color: silver;
+    border-left-color: silver;
+}
+
+.leaderboard .third-place {
+    border-top-color: #A97042;
+    border-left-color: #A97042;
+}
+
+.leaderboard .name {
+    color: red;
+    font-weight: 700;
+}
+
+.leaderboard .counterName {
+    display: flex;
+    align-items: center;
+}
+
+.leaderboard .score {
+    color: blue;
+}
+
+.space-filler {
+    flex-grow: 1;
+}
+
+.space-filler-set-size {
+    width: 200px;
+}
