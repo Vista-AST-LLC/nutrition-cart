@@ -226,7 +226,8 @@ export class DayGrade {
         this.score[DayGrade.SCORE][Constants.SCOREAVG] = totalScore / 10;
     }
 
-    fillHTML(active) {
+    fillHTML() {
+        let active = localStorage.getItem("Active")
         let caloriesCom = document.getElementById('caloriesComments');
         let caloriesCard = document.getElementById('totalCalories');
         caloriesCom.innerHTML = this.score[DayGrade.COMMENTS][Constants.CALORIES];

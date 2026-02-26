@@ -14,6 +14,7 @@ async function setActiveDay(day) {
     switch (day) {
         case 'M':
             localStorage.setItem("ActiveDay", 'Monday')
+            localStorage.setItem("Active", 'mon')
             document.getElementById('monday').style.backgroundColor = 'lightgoldenrodyellow'
             document.getElementById('monBtn').classList.add('day-button-selected')
             updateBackgroundColor('tuesday', 'wednesday', 'thursday', 'friday')
@@ -21,6 +22,7 @@ async function setActiveDay(day) {
             break;
         case 'T':
             localStorage.setItem("ActiveDay", 'Tuesday')
+            localStorage.setItem("Active", 'tues')
             document.getElementById('tuesday').style.backgroundColor = 'lightgoldenrodyellow'
             document.getElementById('tuesBtn').classList.add('day-button-selected')
             updateBackgroundColor('monday', 'wednesday', 'thursday', 'friday')
@@ -28,6 +30,7 @@ async function setActiveDay(day) {
             break;
         case 'W':
             localStorage.setItem("ActiveDay", 'Wednesday')
+            localStorage.setItem("Active", 'wed')
             document.getElementById('wednesday').style.backgroundColor = 'lightgoldenrodyellow'
             document.getElementById('wedBtn').classList.add('day-button-selected')
             updateBackgroundColor('monday', 'tuesday', 'thursday', 'friday')
@@ -35,6 +38,7 @@ async function setActiveDay(day) {
             break;
         case 'TH':
             localStorage.setItem("ActiveDay", 'Thursday')
+            localStorage.setItem("Active", 'thurs')
             document.getElementById('thursday').style.backgroundColor = 'lightgoldenrodyellow'
             document.getElementById('thursBtn').classList.add('day-button-selected')
             updateBackgroundColor('monday', 'tuesday', 'wednesday', 'friday')
@@ -42,6 +46,7 @@ async function setActiveDay(day) {
             break;
         case 'F':
             localStorage.setItem("ActiveDay", 'Friday')
+            localStorage.setItem("Active", 'fri')
             document.getElementById('friday').style.backgroundColor = 'lightgoldenrodyellow'
             document.getElementById('friBtn').classList.add('day-button-selected')
             updateBackgroundColor('monday', 'tuesday', 'wednesday', 'thursday')
@@ -49,6 +54,7 @@ async function setActiveDay(day) {
             break;
         default:
             resetBackgroundColor('monday', 'tuesday', 'wednesday', 'thursday', 'friday')
+            localStorage.setItem("Active", 'mon')
             active = 'mon'
             break;
     }
@@ -501,7 +507,7 @@ document.getElementById('gradeDayButton').addEventListener('click', async functi
     });
 
     let grade = new DayGrade(day);
-    grade.fillHTML(active);
+    grade.fillHTML();
 })
 
 let animations = [];
