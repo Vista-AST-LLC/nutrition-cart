@@ -298,7 +298,7 @@ export class DayGrade {
             "Carbs Comments": score[DayGrade.COMMENTS][Constants.CARBS],
             "Fiber Comments": score[DayGrade.COMMENTS][Constants.FIBER],
             "Sugar Comments": score[DayGrade.COMMENTS][Constants.SUGAR],
-            "Protein Comments": Math.round(score[DayGrade.COMMENTS][Constants.PROTEIN])
+            "Protein Comments": score[DayGrade.COMMENTS][Constants.PROTEIN]
         }
 
         let underGradeCircle = document.getElementById('underPointCircle');
