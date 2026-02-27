@@ -12,7 +12,7 @@ if (reload) {
     entries.set("test6", {score: 86});
 
     let objVersion = JSON.stringify(Object.fromEntries(entries));
-    localStorage.setItem('WeekLeaderboard', objVersion);
+    //localStorage.setItem('WeekLeaderboard', objVersion);
 
     
     entries.set("test1", {score: 54});
@@ -23,7 +23,7 @@ if (reload) {
     entries.set("test6", {score: 92});
     
     objVersion = JSON.stringify(Object.fromEntries(entries));
-    localStorage.setItem('DayLeaderboard', objVersion);
+    //localStorage.setItem('DayLeaderboard', objVersion);
     await populateLeaderboards();
 }
 
