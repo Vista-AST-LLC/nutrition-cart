@@ -24,6 +24,6 @@ function areSetsEqual (a, b) {
 adminButtons.addEventListener('click', () => {
     let objVersion = JSON.stringify(Object.fromEntries(new Map()));
     localStorage.setItem('WeekLeaderboard', objVersion);
-    localStorage.setItem('DayLeaderboard', objVersion);
+    localStorage.setItem('SingleLeaderboard', objVersion);
     adminButtons.innerHTML = `<a class="admin-button">Leaderboards Cleared!</a>`;
 })
