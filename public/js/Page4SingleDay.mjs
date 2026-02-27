@@ -1,5 +1,5 @@
 import { createFoodItem, DayGrade, Weekday, Constants } from "./common.mjs";
-import { clean } from '/src/index.js'; 
+import { clean } from './profanity-cleaner/index.mjs'; 
 
 let grade;
 let refresh = true;
@@ -205,6 +205,7 @@ document.getElementById('singleDayGradeButton').addEventListener('click', async 
     let user = userName.value.trim();
     if (user == '') return;
     user = clean(user);
+    userName.value = user;
     let leaderboardEntries = JSON.parse(localStorage.getItem('SingleLeaderboard')) || [];
     let entries = new Map(Object.entries(leaderboardEntries));
 
