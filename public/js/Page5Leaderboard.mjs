@@ -29,6 +29,9 @@ if (reload) {
 async function populateLeaderboards() {
     // WEEK VERSION
     let leaderboardEntries = JSON.parse(localStorage.getItem('WeekLeaderboard'));
+    if (leaderboardEntries == null) {
+        leaderboardEntries = [];
+    }
     let sorted = Object.entries(leaderboardEntries)
         .sort((a,b) => b[1].score - a[1].score);
 
@@ -51,6 +54,9 @@ async function populateLeaderboards() {
 
     // DAY VERSION
     leaderboardEntries = JSON.parse(localStorage.getItem('SingleLeaderboard'));
+    if (leaderboardEntries == null) {
+        leaderboardEntries = [];
+    }
     sorted = Object.entries(leaderboardEntries)
         .sort((a,b) => b[1].score - a[1].score);
     leaderboard = document.getElementById('singleLeaderboard');
