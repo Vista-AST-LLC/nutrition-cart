@@ -1,5 +1,5 @@
 import { createFoodItem, DayGrade, Weekday, Constants } from "./common.mjs";
-import { clean } from '/profanity-cleaner/profanity-cleaner.js';
+const { clean } = require('/profanity-cleaner/');
 
 let grade;
 let refresh = true;
