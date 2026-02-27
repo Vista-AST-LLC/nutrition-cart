@@ -4,7 +4,7 @@ let reload = true;
 if (reload) {
     reload = false;
     const entries = new Map();
-    entries.set("test1", {score: 87});
+    entries.set("test1l3945289325[", {score: 87});
     entries.set("test2", {score: 90});
     entries.set("test3", {score: 45});
     entries.set("test4", {score: 99});
@@ -46,7 +46,6 @@ async function populateLeaderboards() {
             <span class="rank"></span>
             <div class="name">${name}</div>
         </div>
-        <div class="space-filler-set-size"></div>
         <div class="score">${info.score}</div>`;
         leaderboard.append(li);
     });
@@ -67,7 +66,6 @@ async function populateLeaderboards() {
             <span class="rank"></span>
             <div class="name">${name}</div>
         </div>
-        <div class="space-filler-set-size"></div>
         <div class="score">${info.score}</div>`;
         leaderboard.append(li);
     });

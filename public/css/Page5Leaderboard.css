@@ -10,18 +10,21 @@
 .leaderboard-container {
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
 }
 
 .leaderboard-sub-container {
     display: flex;
     flex-direction: column;
     align-items: center;
+    flex-grow: 1;
 }
 
 .leaderboard {
     display: flex;
     flex-direction: column;
     flex-grow: 1;
+    width: 100%;
     justify-content: space-between;
     padding: 20px;
     border-radius: 16px;
@@ -44,6 +47,7 @@
     padding: 10px;
     margin: 1px 0;
     width: 100%;
+    min-width: 200px;
     border-top: 4px solid;
     border-top-color: whitesmoke;
     border-left: 4px solid;
@@ -88,9 +92,5 @@
 }
 
 .space-filler {
-    flex-grow: 1;
-}
-
-.space-filler-set-size {
-    width: 200px;
+    width: 15%;
 }
