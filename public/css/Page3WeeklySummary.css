@@ -30,12 +30,23 @@ table .sum-header th {
     gap: 5px;
 }
 
+/********WEEKLY AVERAGE SCORE CONTAINER*******/
+.weekly-avg {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin: 15px 0;
+}
+
 /********POINTS DISPLAY CONTAINER********/
 .points-display {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-bottom: 15px;
+    margin: 15px 0;
 }
 
 .points-circle {
