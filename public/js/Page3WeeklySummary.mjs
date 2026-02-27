@@ -1,5 +1,5 @@
 import { Constants, DayGrade, Weekday } from "./common.mjs"
-import { clean } from '/node_modules/profanity-cleaner/src/index.js'; 
+import { clean } from '/src/index.js'; 
 
 let grade;
 let reload = true;
