@@ -4,8 +4,6 @@ This program is an educational aid for students learning about nutritional caree
 
 ### This is a Node.js + Express server that serves static files, and requires both to already be installed.
 
-There is also a dependency on the node package 'profanity-cleaner'
-
 #### To launch the server: 
 + Open the root folder ("nutrition-cart") with powershell.
 + Run "node .\app.js"
