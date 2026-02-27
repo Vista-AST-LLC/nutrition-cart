@@ -234,3 +234,12 @@ h1 {
     background-color: var(--primary-dark);
     transform: translateY(-2px);
 }
+
+.username-input {
+    width: 300px;
+    padding: 10px 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    font-size: 0.9rem;
+    transition: border-color 0.3s;
+}

@@ -1,11 +1,12 @@
 import { Constants, DayGrade, Weekday } from "./common.mjs"
+import { clean } from './profanity-cleaner/index.mjs'; 
 
-document.addEventListener('DOMContentLoaded', async function () {
-    console.log("Page Loaded!")
-
+let grade;
+let reload = true;
+if (reload) {
+    reload = false;
     await fillGrades();
-
-})
+}
 
 async function getDays() {
     let monday = new DayGrade(await Weekday.fromJSON(JSON.parse(localStorage.getItem('Monday'))));
@@ -66,16 +67,16 @@ async function fillGrades() {
         totalScore += grade
     });
 
-    let avg = Math.round(totalScore / 5)
+    grade = Math.round((totalScore / 5) * 100) / 100;
     let avgGrade;
 
-    if (avg > 90) {
+    if (grade > 90) {
         avgGrade = 'A'
-    } else if (avg > 80) {
+    } else if (grade > 80) {
         avgGrade = 'B'
-    } else if (avg > 70) {
+    } else if (grade > 70) {
         avgGrade = 'C'
-    } else if (avg > 60) {
+    } else if (grade > 60) {
         avgGrade = 'D'
     } else {
         avgGrade = 'F'
@@ -85,10 +86,28 @@ async function fillGrades() {
     <div class="day-container">
         <h2>Weekly Average</h2>
         <div class="points-display">
-            <div class="points-circle">${avgGrade}</div>
-            <div class="points-label">Your average for the week is: ${avg}</div>
+            <div class="points-circle rainbow">${avgGrade}</div>
+            <div class="points-label">Your score for the week: ${grade}</div>
         </div>
         <div></div>                                    
     </div>
     `
 }
+
+const userName = document.getElementById('userName');
+
+document.getElementById('submitGrade').addEventListener('click', () => {
+    let user = userName.value.trim();
+    if (user == '') return;
+    user = clean(user);
+    userName.value = user;
+    let leaderboardEntries = JSON.parse(localStorage.getItem('WeekLeaderboard'));
+    let entries = new Map(Object.entries(leaderboardEntries));
+
+    entries.set(user, {score: grade});
+    
+    let objVersion = JSON.stringify(Object.fromEntries(entries));
+    localStorage.setItem('WeekLeaderboard', objVersion);
+
+    document.getElementById('submitGrade').style.visibility = 'hidden';
+});
