@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/Page5Leaderboard.css">
+    <title>Nutrition Cart</title>
+    <meta name="description" content="Website companion of Vista-AST's Nutrition Cart">
+    <script type="module" src="../js/Page5Leaderboard.mjs" defer></script>
+</head>
+
+<body>
+    <div class="container">
+        <!--Nav-->
+        <div class="nav">
+            <div id="one">
+                <h1>🍎 Nutrition Tracker</h1>
+                <div class="subtitle">Track your daily nutrition intake with ease</div>
+            </div>
+            <div id="two">
+                <ul>
+                    <ul>
+                        <li><a href='../index.html'>Home</a></li>
+                        <li><a href="../html/Page2Activity.html">Activity</a></li>
+                        <li><a href="../html/Page3WeeklySummary.html">Weekly Summary</a></li>
+                        <li><a href="../html/Page4Grade.html">Grade</a></li>
+                    </ul>
+                </ul>
+            </div>
+        </div>
+
+        <main>
+            <div class="card">
+                <div class="leaderboard-container">
+                    <div class="space-filler"></div>
+                    <div class="leaderboard-sub-container">
+                        <div class="title">
+                            <h2>Week Leaderboard</h2>
+                        </div>
+                        <ol class="leaderboard" id="weekLeaderboard"></ol>
+                    </div>
+                    <div class="space-filler"></div>
+                    <div class="leaderboard-sub-container">
+                        <div class="title">
+                            <h2>Single Day Leaderboard</h2>
+                        </div>
+                        <ol class="leaderboard" id="dayLeaderboard"></ol>
+                    </div>
+                    <div class="space-filler"></div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+
+</html>
