@@ -1,5 +1,7 @@
 import { createFoodItem, DayGrade, Weekday, Constants } from "./common.mjs";
+import { clean } from 'profanity-cleaner';
 
+let grade;
 let refresh = true;
 if (refresh) {
     await updateFoodItems();
@@ -31,7 +33,7 @@ singleAddFoodButton.addEventListener('click', function (e) {
 
 document.addEventListener('keydown', (e) => {
     // Always focus the input when a key is pressed
-    if (document.activeElement !== singleFoodCodeInput) {
+    if (document.activeElement !== singleFoodCodeInput && document.activeElement !== userName) {
         singleFoodCodeInput.focus({ preventScroll: true });
     }
 
@@ -165,6 +167,12 @@ async function updateFoodItems() {
         singleSnackItems.append(div);
     });
 
+    let fillGradeInfo = new DayGrade(day);
+    fillGradeInfo.fillHTML();
+
+    grade = fillGradeInfo.score[DayGrade.SCORE][Constants.SCOREAVG];
+    grade = Math.round(grade * 100) / 100;
+
     localStorage.setItem(activeDay, JSON.stringify(day));
 }
 
@@ -191,14 +199,19 @@ async function removeFoodItemDiv(name) {
     localStorage.setItem(activeDay, JSON.stringify(day));
 }
 
-document.getElementById('singleDayGradeButton').addEventListener('click', async function () {
-    let activeDay = 'SingleDay';
-    let parsed = JSON.parse(localStorage.getItem(activeDay));
-    if (!parsed) {
-        console.log("Parsed day is null: " + activeDay);
-    }
-    let day = await Weekday.fromJSON(parsed);
 
-    let grade = new DayGrade(day);
-    grade.fillHTML();
+const userName = document.getElementById('userName');
+document.getElementById('singleDayGradeButton').addEventListener('click', async function () {
+    let user = userName.value.trim();
+    if (user == '') return;
+    user = clean(user);
+    let leaderboardEntries = JSON.parse(localStorage.getItem('SingleLeaderboard')) || [];
+    let entries = new Map(Object.entries(leaderboardEntries));
+
+    entries.set(user, {score: grade});
+    
+    let objVersion = JSON.stringify(Object.fromEntries(entries));
+    localStorage.setItem('SingleLeaderboard', objVersion);
+
+    document.getElementById('singleDayGradeButton').style.visibility = 'hidden';
 })

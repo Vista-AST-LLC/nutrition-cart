@@ -1,5 +1,4 @@
 
-
 let reload = true;
 if (reload) {
     reload = false;
@@ -51,10 +50,10 @@ async function populateLeaderboards() {
     });
 
     // DAY VERSION
-    leaderboardEntries = JSON.parse(localStorage.getItem('DayLeaderboard'));
+    leaderboardEntries = JSON.parse(localStorage.getItem('SingleLeaderboard'));
     sorted = Object.entries(leaderboardEntries)
         .sort((a,b) => b[1].score - a[1].score);
-    leaderboard = document.getElementById('dayLeaderboard');
+    leaderboard = document.getElementById('singleLeaderboard');
 
     sorted.forEach(([name, info], position) => {
         const li = document.createElement('li');
