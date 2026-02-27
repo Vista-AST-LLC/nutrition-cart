@@ -5,7 +5,7 @@ const PORT = 8888;
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/vendor', express.static(path.join(__dirname, 'node_modules/profanity-cleaner')));
+app.use(express.static(path.join(__dirname, 'node_modules/profanity-cleaner/src')));
 
 app.listen(PORT, () => {
 	console.log('Server is running');
