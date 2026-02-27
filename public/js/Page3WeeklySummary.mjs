@@ -34,6 +34,8 @@ async function getDays() {
 
 async function fillGrades() {
     let days = await getDays();
+
+    let totalScore = 0;
     days.forEach(day => {
         let grade = day.score[DayGrade.SCORE][Constants.SCOREAVG];
         if (grade > 90) {
@@ -61,5 +63,32 @@ async function fillGrades() {
     </ul>`
 
         document.getElementById(day.rating).innerHTML = `Your score is: ${Math.round(grade)}`;
+        totalScore += grade
     });
+
+    let avg = Math.round(totalScore / 5)
+    let avgGrade;
+
+    if (avg > 90) {
+        avgGrade = 'A'
+    } else if (avg > 80) {
+        avgGrade = 'B'
+    } else if (avg > 70) {
+        avgGrade = 'C'
+    } else if (avg > 60) {
+        avgGrade = 'D'
+    } else {
+        avgGrade = 'F'
+    }
+
+    document.getElementById("weeklyAvg").innerHTML = `
+    <div class="day-container">
+        <h2>Weekly Average</h2>
+        <div class="points-display">
+            <div class="points-circle">${avgGrade}</div>
+            <div class="points-label">Your average for the week is: ${avg}</div>
+        </div>
+        <div></div>                                    
+    </div>
+    `
 }
