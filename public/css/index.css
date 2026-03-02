@@ -23,6 +23,7 @@
     text-align: center;
 }
 
+/*******Home Page Buttons Styling********/
 .button-container {
     width: 50%;
     margin: 15px auto;
@@ -75,7 +76,7 @@
     font-weight: 900;
     width: 200px;
     margin: 10px;
-    
+
 }
 
 .admin-button:hover {

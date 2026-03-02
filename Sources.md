@@ -13,3 +13,6 @@
 - https://www.w3schools.com/css/css_table_style.asp: Assisted in understanding how to style table
 - https://www.w3schools.com/js/js_function_return.asp: Helped clarify how to set variable equal to a function's returned value
 - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/length: Provided explanation on how to use JavaScript array's length function
+- https://stackoverflow.com/questions/64323338/disabled-button-not-being-styled-correctly: Used to help style diabled buttons
+- https://stackoverflow.com/questions/31701644/how-to-make-a-popup-box-using-html-code: Assisted in generating popup box when hitting clear 
+- https://stackoverflow.com/questions/3014649/how-to-disable-html-button-using-javascript: Helped figure out how to disable a button 

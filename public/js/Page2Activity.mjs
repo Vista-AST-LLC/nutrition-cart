@@ -1,8 +1,8 @@
 import { createFoodItem, DayGrade, Weekday, Constants } from "./common.mjs";
 
 let active;
-
 let refresh = true;
+
 if (refresh) {
     await updateWeekFoodItems();
     refresh = false;
@@ -60,6 +60,7 @@ async function setActiveDay(day) {
     }
 }
 
+//********Adding Food Items Buttons/Data Validation********/
 let keyLastTime = performance.now();
 let keyEntry = '';
 
@@ -110,6 +111,7 @@ document.addEventListener('keydown', (e) => {
     keyEntry += e.key;
 });
 
+//********Function to Add Foot Item Using Food Reference Code********/
 async function addFoodItem() {
     let item;
 
@@ -152,6 +154,7 @@ async function addFoodItem() {
     codeHelp.classList.add('hidden');
 }
 
+//********Function to Update Every Day of the Week********/
 async function updateWeekFoodItems() {
     for (const weekDay of ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']) {
         let activ;
@@ -236,6 +239,7 @@ async function updateWeekFoodItems() {
     }
 }
 
+//*********Function to Update Individual Day*********/
 async function updateFoodItems() {
     const activeDay = localStorage.getItem('ActiveDay');
     const dayHelp = document.getElementById('dayHelp')
@@ -371,20 +375,68 @@ async function removeFoodItemDiv(name) {
     localStorage.setItem(activeDay, JSON.stringify(day));
 }
 
-const deleteAllFoodItems = document.getElementById('clearAllFoodItems');
+//********Removing Data from Individual Day********
+const deleteSingleFoodItems = document.getElementById('clearSingleFoodItems');
 
-deleteAllFoodItems.addEventListener('click', async (e) => {
-    if (e.target.id === "clearAllFoodItems") {
-        await clearAllFoodItems();
+deleteSingleFoodItems.addEventListener('click', async (e) => {
+    if (e.target.id === "clearSingleFoodItems") {
+        await clearSingleDayFoodItems();
         await updateFoodItems();
     }
 });
 
-async function clearAllFoodItems() {
+async function clearSingleDayFoodItems() {
     let activeDay = localStorage.getItem("ActiveDay");
     let day = new Weekday();
-    localStorage.setItem(`${active}Score`, null)
     localStorage.setItem(activeDay, JSON.stringify(day));
+}
+
+//********Clearing All Data for Every Day*********/
+const clearAllPopUp = document.getElementById('clearAllPopUp')
+const clearAllFoodItems = document.getElementById('clearAllFoodItems')
+const confirmDeleteAll = document.getElementById('confirmDeleteBtn')
+const cancelClear = document.getElementById('cancelBtn')
+
+clearAllFoodItems.addEventListener('click', async (e) => {
+    if (e.target.id === "clearAllFoodItems") {
+        clearAllPopUp.style.display = 'flex'
+        clearAllFoodItems.disabled = true
+        deleteSingleFoodItems.disabled = true
+        addFoodButton.disabled = true
+        document.getElementById('gradeDayButton').disabled = true
+    }
+})
+
+cancelClear.addEventListener('click', async (e) => {
+    if (e.target.id === "cancelBtn") {
+        clearAllPopUp.style.display = 'none'
+        clearAllFoodItems.disabled = false
+        deleteSingleFoodItems.disabled = false
+        addFoodButton.disabled = false
+        document.getElementById('gradeDayButton').disabled = false
+    }
+})
+
+confirmDeleteAll.addEventListener('click', async (e) => {
+    if (e.target.id === "confirmDeleteBtn") {
+        clearAllPopUp.style.display = 'none'
+        clearAllFoodItems.disabled = false
+        deleteSingleFoodItems.disabled = false
+        addFoodButton.disabled = false
+        document.getElementById('gradeDayButton').disabled = false
+        await deleteAllFoodItems()
+        await updateWeekFoodItems()
+    }
+})
+
+async function deleteAllFoodItems() {
+    let days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']
+
+    days.forEach(item => {
+        localStorage.setItem("ActiveDay", item)
+        let day = new Weekday()
+        localStorage.setItem(item, JSON.stringify(day))
+    })
 }
 
 //Calendar Update Functions
@@ -451,6 +503,8 @@ document.getElementById('wedBtn').addEventListener("click", async function () { 
 document.getElementById('thursBtn').addEventListener("click", async function () { setActiveDay('TH') });
 document.getElementById('friBtn').addEventListener("click", async function () { setActiveDay('F') });
 
+
+//*********Grade Day Container Slide Animations********/
 document.getElementById('gradeDayBackButton').addEventListener('click', async function () {
     await animateBoxes();
 })

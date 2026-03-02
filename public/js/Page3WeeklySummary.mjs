@@ -1,5 +1,5 @@
 import { Constants, DayGrade, Weekday } from "./common.mjs"
-import { clean } from './profanity-cleaner/index.mjs'; 
+import { clean } from './profanity-cleaner/index.mjs';
 
 let grade;
 let reload = true;
@@ -8,6 +8,7 @@ if (reload) {
     await fillGrades();
 }
 
+//********Function to retrieve each day's data from the activity screen and return it as an object********/
 async function getDays() {
     let monday = new DayGrade(await Weekday.fromJSON(JSON.parse(localStorage.getItem('Monday'))));
     monday.grade = 'mondayGrade';
@@ -33,6 +34,7 @@ async function getDays() {
     return [monday, tuesday, wednesday, thursday, friday];
 }
 
+/**Function to calculate the grades and populate the comments based on the data retrieved from the getDays() function********/
 async function fillGrades() {
     let days = await getDays();
 
@@ -94,6 +96,7 @@ async function fillGrades() {
     `
 }
 
+//********Function to submit grade and username to be used in leaderboard********/
 const userName = document.getElementById('userName');
 
 document.getElementById('submitGrade').addEventListener('click', () => {
@@ -104,8 +107,8 @@ document.getElementById('submitGrade').addEventListener('click', () => {
     let leaderboardEntries = JSON.parse(localStorage.getItem('WeekLeaderboard'));
     let entries = new Map(Object.entries(leaderboardEntries));
 
-    entries.set(user, {score: grade});
-    
+    entries.set(user, { score: grade });
+
     let objVersion = JSON.stringify(Object.fromEntries(entries));
     localStorage.setItem('WeekLeaderboard', objVersion);
 
