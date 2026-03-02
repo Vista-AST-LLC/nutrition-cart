@@ -230,4 +230,5 @@ document.getElementById('singleDayGradeButton').addEventListener('click', async 
     localStorage.setItem('SingleLeaderboard', objVersion);
 
     document.getElementById('singleDayGradeButton').style.visibility = 'hidden';
+    userName.value = ''
 })

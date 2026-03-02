@@ -113,4 +113,5 @@ document.getElementById('submitGrade').addEventListener('click', () => {
     localStorage.setItem('WeekLeaderboard', objVersion);
 
     document.getElementById('submitGrade').style.visibility = 'hidden';
+    userName.value = ''
 });
