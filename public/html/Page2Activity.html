@@ -42,6 +42,15 @@
             </div>
 
             <div class="panel-container">
+                <!--Clear All Confirmation Pop-Up Window-->
+                <div id="clearAllPopUp" class="clear-all-pop-up" style="display: none;">
+                    <h2>Are you sure you want to clear each day's data?</h2>
+                    <div class="clear-btn-container">
+                        <button id="confirmDeleteBtn" class="delete-all-food-items-button">Clear Data</button>
+                        <button id="cancelBtn" class="basic-button">Cancel</button>
+                    </div>
+                </div>
+
                 <!--Daily Food Item Section-->
                 <div class="card" id='calendar'>
                     <!--Page Header-->
@@ -49,7 +58,9 @@
                         <h2>Weekly Meal Plan</h2>
                         <div class="button-container">
                             <button id="gradeDayButton" class="get-grade-button">Grade Day</button>
-                            <button id="clearAllFoodItems" class="delete-all-food-items-button">Delete Day</button>
+                            <button id="clearSingleFoodItems" class="delete-single-day-food-items-button">Delete
+                                Day</button>
+                            <button id="clearAllFoodItems" class="delete-all-food-items-button">Clear All</button>
                         </div>
                     </div>
                     <div>
@@ -220,6 +231,7 @@
                         </table>
                     </div>
                 </div>
+
                 <!--Individual Day Grade Section-->
                 <div class="card" id="dayToGrade">
                     <div class="page-title">

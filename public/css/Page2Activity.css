@@ -68,7 +68,7 @@
     justify-content: left;
 }
 
-.delete-all-food-items-button {
+.delete-single-day-food-items-button {
     text-decoration: none;
     background: coral;
     color: white;
@@ -82,9 +82,38 @@
     margin: 0;
 }
 
-.delete-all-food-items-button:hover {
-    background: red;
+.delete-single-day-food-items-button:hover {
+    background: #D16C00;
     transform: translateY(-2px);
+}
+
+.delete-single-day-food-items-button:disabled {
+    pointer-events: none;
+    background: #D16C00;
+}
+
+.delete-all-food-items-button {
+    text-decoration: none;
+    background: red;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    width: 110px;
+    margin: 0;
+}
+
+.delete-all-food-items-button:hover {
+    background: #D10000;
+    transform: translateY(-2px);
+}
+
+.delete-all-food-items-button:disabled {
+    pointer-events: none;
+    background: #D10000;
 }
 
 .category-section {
@@ -120,6 +149,54 @@
     align-items: center;
     width: 100%;
     gap: 12px;
+}
+
+/********CLEAR ALL POP UP STYLING********/
+.clear-all-pop-up {
+    width: 60%;
+    height: 200px;
+    padding: 10px;
+    margin: 15px auto;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0 4px 4px 0 black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.clear-all-pop-up h2 {
+    width: 100%;
+    font-size: large;
+    text-align: center;
+}
+
+.clear-btn-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin: 15px auto;
+    padding: 10px;
+}
+
+@media (max-width: 800px) {
+    .clear-btn-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        width: 100%;
+    }
 }
 
 /**Breakfast Food Item Styling**/
@@ -383,7 +460,7 @@
 
 .get-grade-button {
     text-decoration: none;
-    background-color: #8e44ad;
+    background: #8e44ad;
     color: white;
     border: none;
     border-radius: 6px;
@@ -397,8 +474,13 @@
 }
 
 .get-grade-button:hover {
-    background-color: purple;
+    background: purple;
     transform: translateY(-2px);
+}
+
+.get-grade-button:disabled {
+    pointer-events: none;
+    background: purple;
 }
 
 .summary-grid {
@@ -543,23 +625,59 @@
     -o-animation: rainbow 18s ease infinite;
     animation: rainbow 18s ease infinite;
 }
+
 @-webkit-keyframes rainbow {
-    0%{background-position:0% 82%}
-    50%{background-position:100% 19%}
-    100%{background-position:0% 82%}
+    0% {
+        background-position: 0% 82%
+    }
+
+    50% {
+        background-position: 100% 19%
+    }
+
+    100% {
+        background-position: 0% 82%
+    }
 }
+
 @-moz-keyframes rainbow {
-    0%{background-position:0% 82%}
-    50%{background-position:100% 19%}
-    100%{background-position:0% 82%}
+    0% {
+        background-position: 0% 82%
+    }
+
+    50% {
+        background-position: 100% 19%
+    }
+
+    100% {
+        background-position: 0% 82%
+    }
 }
+
 @-o-keyframes rainbow {
-    0%{background-position:0% 82%}
-    50%{background-position:100% 19%}
-    100%{background-position:0% 82%}
+    0% {
+        background-position: 0% 82%
+    }
+
+    50% {
+        background-position: 100% 19%
+    }
+
+    100% {
+        background-position: 0% 82%
+    }
 }
-@keyframes rainbow { 
-    0%{background-position:0% 82%}
-    50%{background-position:100% 19%}
-    100%{background-position:0% 82%}
+
+@keyframes rainbow {
+    0% {
+        background-position: 0% 82%
+    }
+
+    50% {
+        background-position: 100% 19%
+    }
+
+    100% {
+        background-position: 0% 82%
+    }
 }

@@ -1,5 +1,5 @@
 import { createFoodItem, DayGrade, Weekday, Constants } from "./common.mjs";
-import { clean } from './profanity-cleaner/index.mjs'; 
+import { clean } from './profanity-cleaner/index.mjs';
 
 let grade;
 let refresh = true;
@@ -199,7 +199,22 @@ async function removeFoodItemDiv(name) {
     localStorage.setItem(activeDay, JSON.stringify(day));
 }
 
+//********Function used to delete all food item data********/
+const deleteFoodItems = document.getElementById('clearFoodItems');
 
+deleteFoodItems.addEventListener('click', async (e) => {
+    if (e.target.id === "clearFoodItems") {
+        await clearFoodItems();
+        await updateFoodItems();
+    }
+});
+
+async function clearFoodItems() {
+    let day = new Weekday();
+    localStorage.setItem("SingleDay", JSON.stringify(day));
+}
+
+//********Function to submit grade and username to be used in leaderboard********/
 const userName = document.getElementById('userName');
 document.getElementById('singleDayGradeButton').addEventListener('click', async function () {
     let user = userName.value.trim();
@@ -209,8 +224,8 @@ document.getElementById('singleDayGradeButton').addEventListener('click', async 
     let leaderboardEntries = JSON.parse(localStorage.getItem('SingleLeaderboard')) || [];
     let entries = new Map(Object.entries(leaderboardEntries));
 
-    entries.set(user, {score: grade});
-    
+    entries.set(user, { score: grade });
+
     let objVersion = JSON.stringify(Object.fromEntries(entries));
     localStorage.setItem('SingleLeaderboard', objVersion);
 

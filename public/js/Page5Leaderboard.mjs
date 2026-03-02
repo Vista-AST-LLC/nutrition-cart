@@ -2,30 +2,11 @@
 let reload = true;
 if (reload) {
     reload = false;
-    const entries = new Map();
-    entries.set("test1l3945289325[", {score: 87});
-    entries.set("test2", {score: 90});
-    entries.set("test3", {score: 45});
-    entries.set("test4", {score: 99});
-    entries.set("test5", {score: 75});
-    entries.set("test6", {score: 86});
 
-    let objVersion = JSON.stringify(Object.fromEntries(entries));
-    //localStorage.setItem('WeekLeaderboard', objVersion);
-
-    
-    entries.set("test1", {score: 54});
-    entries.set("test2", {score: 82});
-    entries.set("test3", {score: 94});
-    entries.set("test4", {score: 76});
-    entries.set("test5", {score: 75});
-    entries.set("test6", {score: 92});
-    
-    objVersion = JSON.stringify(Object.fromEntries(entries));
-    //localStorage.setItem('DayLeaderboard', objVersion);
     await populateLeaderboards();
 }
 
+//********Function to Populate Leaderboards using data retrieved from LocalStorage********/
 async function populateLeaderboards() {
     // WEEK VERSION
     let leaderboardEntries = JSON.parse(localStorage.getItem('WeekLeaderboard'));
@@ -33,7 +14,7 @@ async function populateLeaderboards() {
         leaderboardEntries = [];
     }
     let sorted = Object.entries(leaderboardEntries)
-        .sort((a,b) => b[1].score - a[1].score);
+        .sort((a, b) => b[1].score - a[1].score);
 
     let leaderboard = document.getElementById('weekLeaderboard');
     leaderboard.innerHTML = '';
@@ -58,7 +39,7 @@ async function populateLeaderboards() {
         leaderboardEntries = [];
     }
     sorted = Object.entries(leaderboardEntries)
-        .sort((a,b) => b[1].score - a[1].score);
+        .sort((a, b) => b[1].score - a[1].score);
     leaderboard = document.getElementById('singleLeaderboard');
 
     sorted.forEach(([name, info], position) => {
