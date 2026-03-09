@@ -128,9 +128,10 @@ td {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    align-items: center;
+    align-items: flex-start;
     text-align: center;
     flex: 1;
+    margin-left: 2%;
 }
 
 .nav #two {
