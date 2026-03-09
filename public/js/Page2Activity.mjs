@@ -4,10 +4,10 @@ let active;
 let refresh = true;
 
 if (refresh) {
+    localStorage.setItem('ActiveDay', null);
     await updateWeekFoodItems();
     refresh = false;
 }
-
 
 //Function to Select the Active Day
 async function setActiveDay(day) {
@@ -54,6 +54,7 @@ async function setActiveDay(day) {
             break;
         default:
             resetBackgroundColor('monday', 'tuesday', 'wednesday', 'thursday', 'friday')
+            localStorage.setItem("ActiveDay", 'Monday')
             localStorage.setItem("Active", 'mon')
             active = 'mon'
             break;
@@ -392,13 +393,37 @@ async function clearSingleDayFoodItems() {
 }
 
 //********Clearing All Data for Every Day*********/
+
 const clearAllPopUp = document.getElementById('clearAllPopUp')
 const clearAllFoodItems = document.getElementById('clearAllFoodItems')
 const confirmDeleteAll = document.getElementById('confirmDeleteBtn')
 const cancelClear = document.getElementById('cancelBtn')
 
+let clearallAnimation = [];
+async function animateClearAll() {
+    if (clearallAnimation.length == 0) {
+        const animation = clearAllPopUp.animate([
+            { transform: "scaleX(0)", transformOrigin: "bottom" },
+            { transform: "scaleX(1)", transformOrigin: "bottom" }
+        ], {
+            duration: 300,
+            easing: "ease-in-out",
+            fill: "forwards"
+        });
+
+        clearallAnimation.push(animation);
+        return animation.finished;
+    } else {
+        const animation = clearallAnimation[0];
+        animation.reverse();
+        clearallAnimation = [];
+        return animation.finished;
+    }
+}
+
 clearAllFoodItems.addEventListener('click', async (e) => {
     if (e.target.id === "clearAllFoodItems") {
+        animateClearAll();
         clearAllPopUp.style.display = 'flex'
         clearAllFoodItems.disabled = true
         deleteSingleFoodItems.disabled = true
@@ -409,6 +434,7 @@ clearAllFoodItems.addEventListener('click', async (e) => {
 
 cancelClear.addEventListener('click', async (e) => {
     if (e.target.id === "cancelBtn") {
+        await animateClearAll();
         clearAllPopUp.style.display = 'none'
         clearAllFoodItems.disabled = false
         deleteSingleFoodItems.disabled = false
@@ -419,6 +445,7 @@ cancelClear.addEventListener('click', async (e) => {
 
 confirmDeleteAll.addEventListener('click', async (e) => {
     if (e.target.id === "confirmDeleteBtn") {
+        await animateClearAll();
         clearAllPopUp.style.display = 'none'
         clearAllFoodItems.disabled = false
         deleteSingleFoodItems.disabled = false
@@ -431,12 +458,15 @@ confirmDeleteAll.addEventListener('click', async (e) => {
 
 async function deleteAllFoodItems() {
     let days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']
+    let lastActive = localStorage.getItem('ActiveDay')
 
     days.forEach(item => {
         localStorage.setItem("ActiveDay", item)
         let day = new Weekday()
         localStorage.setItem(item, JSON.stringify(day))
     })
+
+    localStorage.setItem('ActiveDay', lastActive)
 }
 
 //Calendar Update Functions
@@ -564,13 +594,13 @@ document.getElementById('gradeDayButton').addEventListener('click', async functi
     grade.fillHTML();
 })
 
-let animations = [];
+let boxAnimations = [];
 
 async function animateBoxes() {
     let gradeBox = document.getElementById('dayToGrade');
     let calBox = document.getElementById('calendar');
-    if (animations.length == 0) {
-        animations.push(gradeBox.animate([
+    if (boxAnimations.length == 0) {
+        boxAnimations.push(gradeBox.animate([
             { transform: "scaleX(0)", transformOrigin: "right" },
             { transform: "scaleX(1)", transformOrigin: "right" }
         ], {
@@ -578,7 +608,7 @@ async function animateBoxes() {
             easing: "ease-in-out",
             fill: "forwards"
         }));
-        animations.push(calBox.animate([
+        boxAnimations.push(calBox.animate([
             { transform: "scaleX(1)", transformOrigin: "left" },
             { transform: "scaleX(0)", transformOrigin: "left" }
         ], {
@@ -587,7 +617,7 @@ async function animateBoxes() {
             fill: "forwards"
         }));
     } else {
-        animations.forEach(animation => animation.reverse());
-        animations = [];
+        boxAnimations.forEach(animation => animation.reverse());
+        boxAnimations = [];
     }
 }
