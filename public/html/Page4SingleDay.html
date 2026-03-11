@@ -41,6 +41,15 @@
             </div>
 
             <div class="panel-container">
+                <!--Clear All Confirmation Pop-Up Window-->
+                <div id="clearAllPopUp" class="clear-all-pop-up" style="display: none;">
+                    <h2>Are you sure you want to clear the day's mealplan? <br>This cannot be undone.</h2>
+                    <div class="clear-btn-container">
+                        <button id="confirmDeleteBtn" class="delete-all-food-items-button">Clear Data</button>
+                        <button id="cancelBtn" class="basic-button">Cancel</button>
+                    </div>
+                </div>
+
                 <div class="card" id="calendar">
                     <div class="page-title">
                         <h2>Single Day</h2>
@@ -49,8 +58,7 @@
                                 aria-describedby="codeHelp">
                             <button id="singleDayGradeButton" class="get-grade-button rainbow"
                                 style="width: 110px;">Submit to Leaderboard</button>
-                            <button id="clearFoodItems" class="delete-single-day-food-items-button">Delete
-                                Day</button>
+                            <button id="clearFoodItems" class="delete-single-day-food-items-button">Delete Day</button>
                         </div>
                     </div>
                     <div class="grade-menu">

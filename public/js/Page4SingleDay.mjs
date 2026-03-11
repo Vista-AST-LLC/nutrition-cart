@@ -199,21 +199,6 @@ async function removeFoodItemDiv(name) {
     localStorage.setItem(activeDay, JSON.stringify(day));
 }
 
-//********Function used to delete all food item data********/
-const deleteFoodItems = document.getElementById('clearFoodItems');
-
-deleteFoodItems.addEventListener('click', async (e) => {
-    if (e.target.id === "clearFoodItems") {
-        await clearFoodItems();
-        await updateFoodItems();
-    }
-});
-
-async function clearFoodItems() {
-    let day = new Weekday();
-    localStorage.setItem("SingleDay", JSON.stringify(day));
-}
-
 //********Function to submit grade and username to be used in leaderboard********/
 const userName = document.getElementById('userName');
 document.getElementById('singleDayGradeButton').addEventListener('click', async function () {
@@ -232,3 +217,59 @@ document.getElementById('singleDayGradeButton').addEventListener('click', async 
     document.getElementById('singleDayGradeButton').style.visibility = 'hidden';
     userName.value = ''
 })
+
+const clearAllPopUp = document.getElementById('clearAllPopUp');
+const deleteFoodItems = document.getElementById('clearFoodItems');
+const confirmDeleteAll = document.getElementById('confirmDeleteBtn');
+const cancelClear = document.getElementById('cancelBtn');
+
+//********Function used to delete all food item data********/
+async function clearFoodItems() {
+    let day = new Weekday();
+    localStorage.setItem("SingleDay", JSON.stringify(day));
+}
+
+let clearallAnimation = [];
+async function animateClearAll() {
+    if (clearallAnimation.length == 0) {
+        const animation = clearAllPopUp.animate([
+            { transform: "scaleX(0)", transformOrigin: "bottom" },
+            { transform: "scaleX(1)", transformOrigin: "bottom" }
+        ], {
+            duration: 300,
+            easing: "ease-in-out",
+            fill: "forwards"
+        });
+
+        clearallAnimation.push(animation);
+        return animation.finished;
+    } else {
+        const animation = clearallAnimation[0];
+        animation.reverse();
+        clearallAnimation = [];
+        return animation.finished;
+    }
+}
+
+deleteFoodItems.addEventListener('click', async (e) => {
+    if (e.target.id === "clearFoodItems") {
+        animateClearAll();
+        clearAllPopUp.style.display = 'flex';
+    }
+});
+
+cancelClear.addEventListener('click', async (e) => {
+    if (e.target.id === "cancelBtn") {
+        await animateClearAll();
+        clearAllPopUp.style.display = 'none';
+    }
+});
+
+confirmDeleteAll.addEventListener('click', async (e) => {
+    if (e.target.id === "confirmDeleteBtn") {
+        await animateClearAll();
+        clearAllPopUp.style.display = 'none';
+        await clearFoodItems();
+        await updateFoodItems();
+    }
+});

@@ -151,54 +151,6 @@
     gap: 12px;
 }
 
-/********CLEAR ALL POP UP STYLING********/
-.clear-all-pop-up {
-    width: 60%;
-    height: 200px;
-    padding: 10px;
-    margin: 15px auto;
-    background-color: white;
-    border-radius: 5px;
-    box-shadow: 0 4px 4px 0 black;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    z-index: 1;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-}
-
-.clear-all-pop-up h2 {
-    width: 100%;
-    font-size: large;
-    text-align: center;
-}
-
-.clear-btn-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    gap: 15px;
-    margin: 15px auto;
-    padding: 10px;
-}
-
-@media (max-width: 800px) {
-    .clear-btn-container {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        gap: 10px;
-        width: 100%;
-    }
-}
-
 /**Breakfast Food Item Styling**/
 .breakfast-food-item {
     display: flex;
@@ -469,7 +421,7 @@
     font-weight: 600;
     transition: all 0.3s ease;
     gap: 8px;
-    width: 150px;
+    width: 110px;
     margin: 0;
 }
 
@@ -485,7 +437,8 @@
 
 .summary-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
     gap: 15px;
     margin-top: 15px;
 }

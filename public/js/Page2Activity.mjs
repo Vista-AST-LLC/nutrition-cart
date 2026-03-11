@@ -378,11 +378,19 @@ async function removeFoodItemDiv(name) {
 
 //********Removing Data from Individual Day********
 const deleteSingleFoodItems = document.getElementById('clearSingleFoodItems');
+let deletingFullWeek = true;
 
 deleteSingleFoodItems.addEventListener('click', async (e) => {
     if (e.target.id === "clearSingleFoodItems") {
-        await clearSingleDayFoodItems();
-        await updateFoodItems();
+        animateClearAll();
+        deletingFullWeek = false;
+        let day = localStorage.getItem('ActiveDay');
+        clearButtonContent.innerHTML = `Are you sure you want to clear ${day}'s mealplan? <br>This cannot be undone.`;
+        clearAllPopUp.style.display = 'flex'
+        clearAllFoodItems.disabled = true
+        deleteSingleFoodItems.disabled = true
+        addFoodButton.disabled = true
+        document.getElementById('gradeDayButton').disabled = true
     }
 });
 
@@ -398,6 +406,7 @@ const clearAllPopUp = document.getElementById('clearAllPopUp')
 const clearAllFoodItems = document.getElementById('clearAllFoodItems')
 const confirmDeleteAll = document.getElementById('confirmDeleteBtn')
 const cancelClear = document.getElementById('cancelBtn')
+const clearButtonContent = document.getElementById('clearButtonContent');
 
 let clearallAnimation = [];
 async function animateClearAll() {
@@ -424,6 +433,8 @@ async function animateClearAll() {
 clearAllFoodItems.addEventListener('click', async (e) => {
     if (e.target.id === "clearAllFoodItems") {
         animateClearAll();
+        deletingFullWeek = true;
+        clearButtonContent.innerHTML = `Are you sure you want to clear each day's mealplan? <br>This cannot be undone.`;
         clearAllPopUp.style.display = 'flex'
         clearAllFoodItems.disabled = true
         deleteSingleFoodItems.disabled = true
@@ -451,8 +462,13 @@ confirmDeleteAll.addEventListener('click', async (e) => {
         deleteSingleFoodItems.disabled = false
         addFoodButton.disabled = false
         document.getElementById('gradeDayButton').disabled = false
-        await deleteAllFoodItems()
-        await updateWeekFoodItems()
+        if (deletingFullWeek) {
+            await deleteAllFoodItems();
+            await updateWeekFoodItems();
+        } else {
+            await clearSingleDayFoodItems();
+            await updateFoodItems();
+        }
     }
 })
 
