@@ -83,3 +83,7 @@
     background-color: red;
     transform: translateY(-2px);
 }
+
+.space-taker {
+    height: 50px;
+}
