@@ -201,7 +201,8 @@ async function removeFoodItemDiv(name) {
 
 //********Function to submit grade and username to be used in leaderboard********/
 const userName = document.getElementById('userName');
-document.getElementById('singleDayGradeButton').addEventListener('click', async function () {
+const submitToLeaderboardButton = document.getElementById('singleDayGradeButton');
+submitToLeaderboardButton.addEventListener('click', async function () {
     let user = userName.value.trim();
     if (user == '') return;
     user = clean(user);
@@ -255,6 +256,9 @@ deleteFoodItems.addEventListener('click', async (e) => {
     if (e.target.id === "clearFoodItems") {
         animateClearAll();
         clearAllPopUp.style.display = 'flex';
+        singleAddFoodButton.disabled = true;
+        deleteFoodItems.disabled = true;
+        submitToLeaderboardButton.disabled = true;
     }
 });
 
@@ -262,6 +266,9 @@ cancelClear.addEventListener('click', async (e) => {
     if (e.target.id === "cancelBtn") {
         await animateClearAll();
         clearAllPopUp.style.display = 'none';
+        singleAddFoodButton.disabled = false;
+        deleteFoodItems.disabled = false;
+        submitToLeaderboardButton.disabled = false;
     }
 });
 
@@ -269,6 +276,9 @@ confirmDeleteAll.addEventListener('click', async (e) => {
     if (e.target.id === "confirmDeleteBtn") {
         await animateClearAll();
         clearAllPopUp.style.display = 'none';
+        singleAddFoodButton.disabled = false;
+        deleteFoodItems.disabled = false;
+        submitToLeaderboardButton.disabled = false;
         await clearFoodItems();
         await updateFoodItems();
     }

@@ -380,11 +380,12 @@ async function removeFoodItemDiv(name) {
 const deleteSingleFoodItems = document.getElementById('clearSingleFoodItems');
 let deletingFullWeek = true;
 
-deleteSingleFoodItems.addEventListener('click', async (e) => {
+deleteSingleFoodItems.addEventListener('click', (e) => {
     if (e.target.id === "clearSingleFoodItems") {
+        let day = localStorage.getItem('ActiveDay');
+        if (day == null) return;
         animateClearAll();
         deletingFullWeek = false;
-        let day = localStorage.getItem('ActiveDay');
         clearButtonContent.innerHTML = `Are you sure you want to clear ${day}'s mealplan? <br>This cannot be undone.`;
         clearAllPopUp.style.display = 'flex'
         clearAllFoodItems.disabled = true
