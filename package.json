@@ -1,6 +1,5 @@
 {
   "dependencies": {
-    "express": "^5.2.1",
-    "profanity-cleaner": "^0.0.3"
+    "express": "^5.2.1"
   }
 }
