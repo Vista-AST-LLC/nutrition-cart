@@ -189,11 +189,18 @@ function colorPointsCircle(gradeScore) {
     } else if (gradeScore <= 95) {
         // yellow -> green
         color = 60 + (gradeScore - 70) / 25 * 60;
-    } else {
+    } else if (gradeScore <= 99.5) {
         color = 120; // full green
+    } else {
+        color = false;
     }
 
-    document.getElementById('pointsCircle').style.backgroundColor = `hsl(${color}, 75%, 40%)`;
+    if (color) {
+        document.getElementById('pointsCircle').classList.remove('rainbow');
+        document.getElementById('pointsCircle').style.backgroundColor = `hsl(${color}, 75%, 40%)`;
+    } else {
+        document.getElementById('pointsCircle').classList.add('rainbow');
+    }
 }
 
 const singleDayFoodItemsContainer = document.getElementById('singleDay');

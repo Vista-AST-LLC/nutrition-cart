@@ -129,9 +129,16 @@ function colorPointsCircle(gradeScore, circle) {
     } else if (gradeScore <= 95) {
         // yellow -> green
         color = 60 + (gradeScore - 70) / 25 * 60;
-    } else {
+    } else if (gradeScore <= 99.5) {
         color = 120; // full green
+    } else {
+        color = false;
     }
 
-    document.getElementById(circle).style.backgroundColor = `hsl(${color}, 75%, 40%)`;
+    if (color) {
+        document.getElementById(circle).classList.remove('rainbow');
+        document.getElementById(circle).style.backgroundColor = `hsl(${color}, 75%, 40%)`;
+    } else {
+        document.getElementById(circle).classList.add('rainbow');
+    }
 }
