@@ -609,7 +609,27 @@ document.getElementById('gradeDayButton').addEventListener('click', async functi
 
     let grade = new DayGrade(day);
     grade.fillHTML();
+    let gradeScore = grade.score[DayGrade.SCORE][Constants.SCOREAVG];
+    colorPointsCircle(gradeScore);
 })
+
+function colorPointsCircle(gradeScore) {
+    let color;
+
+    if (gradeScore <= 50) {
+        color = 0; // red
+    } else if (gradeScore <= 70) {
+        // red -> yellow
+        color = (gradeScore - 50) / 20 * 60;
+    } else if (gradeScore <= 95) {
+        // yellow -> green
+        color = 60 + (gradeScore - 70) / 25 * 60;
+    } else {
+        color = 120; // full green
+    }
+
+    document.getElementById('pointsCircle').style.backgroundColor = `hsl(${color}, 75%, 40%)`;
+}
 
 let boxAnimations = [];
 

@@ -21,7 +21,7 @@ async function getDays() {
     let wednesday = new DayGrade(await Weekday.fromJSON(JSON.parse(localStorage.getItem('Wednesday'))));
     wednesday.grade = 'wednesdayGrade';
     wednesday.rating = 'wednesdayScore';
-    wednesday.comments = 'wednesdayComments'
+    wednesday.comments = 'wednesdayComments';
     let thursday = new DayGrade(await Weekday.fromJSON(JSON.parse(localStorage.getItem('Thursday'))));
     thursday.grade = 'thursdayGrade';
     thursday.rating = 'thursdayScore';
@@ -52,6 +52,8 @@ async function fillGrades() {
         } else {
             document.getElementById(day.grade).innerHTML = 'F';
         }
+
+        colorPointsCircle(grade, day.grade);
 
         document.getElementById(day.comments).innerHTML = `                   
     <ul>
@@ -115,3 +117,21 @@ document.getElementById('submitGrade').addEventListener('click', () => {
     document.getElementById('submitGrade').style.visibility = 'hidden';
     userName.value = ''
 });
+
+function colorPointsCircle(gradeScore, circle) {
+    let color;
+
+    if (gradeScore <= 50) {
+        color = 0; // red
+    } else if (gradeScore <= 70) {
+        // red -> yellow
+        color = (gradeScore - 50) / 20 * 60;
+    } else if (gradeScore <= 95) {
+        // yellow -> green
+        color = 60 + (gradeScore - 70) / 25 * 60;
+    } else {
+        color = 120; // full green
+    }
+
+    document.getElementById(circle).style.backgroundColor = `hsl(${color}, 75%, 40%)`;
+}

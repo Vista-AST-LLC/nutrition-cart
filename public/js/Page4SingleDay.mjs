@@ -173,7 +173,27 @@ async function updateFoodItems() {
     grade = fillGradeInfo.score[DayGrade.SCORE][Constants.SCOREAVG];
     grade = Math.round(grade * 100) / 100;
 
+    colorPointsCircle(grade);
+
     localStorage.setItem(activeDay, JSON.stringify(day));
+}
+
+function colorPointsCircle(gradeScore) {
+    let color;
+
+    if (gradeScore <= 50) {
+        color = 0; // red
+    } else if (gradeScore <= 70) {
+        // red -> yellow
+        color = (gradeScore - 50) / 20 * 60;
+    } else if (gradeScore <= 95) {
+        // yellow -> green
+        color = 60 + (gradeScore - 70) / 25 * 60;
+    } else {
+        color = 120; // full green
+    }
+
+    document.getElementById('pointsCircle').style.backgroundColor = `hsl(${color}, 75%, 40%)`;
 }
 
 const singleDayFoodItemsContainer = document.getElementById('singleDay');
