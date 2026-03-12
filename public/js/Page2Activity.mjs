@@ -383,7 +383,7 @@ let deletingFullWeek = true;
 deleteSingleFoodItems.addEventListener('click', (e) => {
     if (e.target.id === "clearSingleFoodItems") {
         let day = localStorage.getItem('ActiveDay');
-        if (day == null) return;
+        if (day == 'null') return;
         animateClearAll();
         deletingFullWeek = false;
         clearButtonContent.innerHTML = `Are you sure you want to clear ${day}'s mealplan? <br>This cannot be undone.`;
