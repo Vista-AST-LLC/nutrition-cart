@@ -214,7 +214,7 @@ export class DayGrade {
         this.score = Array.from({ length: 3 }, () => new Array(10).fill(0));
         this.score[DayGrade.COMMENTS] = new Array(10).fill('Default Comment');
 
-        this.accumulateTotals(day);
+        DayGrade.accumulateTotals(day, this.score);
         for (let i = 0; i < 10; i++) {
             this.score[DayGrade.SCORE][i] = this.basicGradeRubric(i, this.score[DayGrade.AMOUNTS][i]);
         }
@@ -277,7 +277,7 @@ export class DayGrade {
         underGradeCircle.innerHTML = "Your Score: " + Math.round(this.score[DayGrade.SCORE][Constants.SCOREAVG]);
     }
 
-    accumulateTotals(day) {
+    static accumulateTotals(day, array) {
         let dayTotal = new Array(10).fill(0);
         for (const mealType of [Constants.BREAKFAST, Constants.LUNCH, Constants.DINNER, Constants.SNACKS]) {
             for (const foodItem of day.getMealItems(mealType) ?? []) {
@@ -293,7 +293,7 @@ export class DayGrade {
                 dayTotal[Constants.PROTEIN] += foodItem.proteinG;
             }
         }
-        this.score[DayGrade.AMOUNTS] = dayTotal
+        array[DayGrade.AMOUNTS] = dayTotal
     }
 
     basicGradeRubric(type, value) {
