@@ -182,7 +182,7 @@ function colorPointsCircle(gradeScore) {
     let color;
 
     if (gradeScore <= 50) {
-        color = 0; // red
+        color = 0.1; // red
     } else if (gradeScore <= 70) {
         // red -> yellow
         color = (gradeScore - 50) / 20 * 60;
