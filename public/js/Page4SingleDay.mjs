@@ -1,5 +1,6 @@
 import { createFoodItem, DayGrade, Weekday, Constants } from "./common.mjs";
 import { clean } from './profanity-cleaner/index.mjs';
+import { OptimalMealplanFinder } from './optimalMealplanFinder.mjs';
 
 let grade;
 let refresh = true;
@@ -8,7 +9,7 @@ if (refresh) {
     refresh = false;
     if (!localStorage.getItem('SingleDay')) {
         let day = new Weekday();
-        this.localStorage.setItem('SingleDay', JSON.stringify(day));
+        localStorage.setItem('SingleDay', JSON.stringify(day));
     }
 }
 
@@ -309,4 +310,13 @@ confirmDeleteAll.addEventListener('click', async (e) => {
         await clearFoodItems();
         await updateFoodItems();
     }
+});
+
+document.getElementById('getMealplan').addEventListener('click', async () => {
+    document.getElementById('getMealplan').disabled = true;
+    const finder = new OptimalMealplanFinder();
+    let mealplan = await finder.findMealplan();
+    localStorage.setItem('SingleDay', JSON.stringify(mealplan));
+    await updateFoodItems();
+    document.getElementById('getMealplan').disabled = false;
 });
