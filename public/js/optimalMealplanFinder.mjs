@@ -3,9 +3,10 @@ import { createFoodItem, Weekday, DayGrade, Constants } from "./common.mjs";
 export class OptimalMealplanFinder {
     constructor() {}
 
-    static upperErr = 1.1;
-    static lowerErr = 0.9;
+    static upperErr = 1.15;
+    static lowerErr = 0.85;
 
+    // From light testing, this appears to increase the average calerie amount, which was consistently too low before
     static potentialsMult = [
         0.3, // CALORIES = 0;
         1.0, // TOTALFAT = 1;
@@ -17,7 +18,7 @@ export class OptimalMealplanFinder {
         1.0, // FIBER = 7;
         1.0, // SUGAR = 8;
         1.0, // PROTEIN = 9;
-    ]
+    ];
 
     static upperThreshold = [
         2499.9, // CALORIES = 0;
@@ -31,6 +32,7 @@ export class OptimalMealplanFinder {
         49.9,   // SUGAR = 8;
         74.9    // PROTEIN = 9;
     ];
+
     static lowerThreshold = [
         1500, // CALORIES = 0;
         25,   // TOTALFAT = 1;
@@ -44,16 +46,16 @@ export class OptimalMealplanFinder {
         50    // PROTEIN = 9;
     ];
 
-    avgUpperLower(index) {
-        return (OptimalMealplanFinder.lowerThreshold[index] + OptimalMealplanFinder.upperThreshold[index]) / 2;
-    }
-
     static allFoodItems = [
         'BD01', 'BD02', 'BD03', 'BD05', 'BM01', 'BM02', 'BM03', 'BM04', 'BM05', 'BM06', 'BM07', 'BM08', 'BS01', 'BS02', 'BS03', 'BS04', 'BS05', 'BS06', 'BS07', 
-        'DD01', 'DD02', 'DD04', 'DD05', 'DM01', 'DM02', 'DM03', 'DM04', 'DM05', 'DM06', 'DM07', 'DS01', 'DS02', 'DS03', 'DS04', 'DS05', 'DS06', 'DS07', 'DS08', 
+        'DD01', 'DD02', 'DD04', 'DD05', /*'DM01', */'DM02', 'DM03', 'DM04', 'DM05', 'DM06', 'DM07', 'DS01', 'DS02', 'DS03', 'DS04', 'DS05', 'DS06', 'DS07', 'DS08', 
         'LD01', 'LD02', 'LD04', 'LD05', 'LM01', 'LM02', 'LM03', 'LM04', 'LM05', 'LM06', 'LM07', 'LM08', 'LS01', 'LS02', 'LS03', 'LS04', 'LS05', 'LS06', 'LS07', 
         'SD01', 'SD02', 'SD03', 'SD04', 'SD05', 'SD06', 'SD07', 'SD08', 'SD09', 'SD10', 'SS01', 'SS02', 'SS03', 'SS04', 'SS05', 'SS06', 'SS07', 'SS08', 'SS09', 'SS10'
     ];
+
+    avgUpperLower(index) {
+        return (OptimalMealplanFinder.lowerThreshold[index] + OptimalMealplanFinder.upperThreshold[index]) / 2;
+    }
 
     random(min, max) {
         min = Math.ceil(min);
@@ -91,8 +93,6 @@ export class OptimalMealplanFinder {
             const pass = rateFoodItem(foodItem);
             if (pass) useableItems.push(foodItem);
         }
-
-        console.log(useableItems.length)
 
         const itemPotential = (item) => {
             let potential = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
@@ -180,11 +180,10 @@ export class OptimalMealplanFinder {
         }
 
         while (averageScore < OptimalMealplanFinder.lowerErr || averageScore > OptimalMealplanFinder.upperErr) {
-            //console.log(attemptsInWhileLoop);
             attemptsInWhileLoop++;
 
-            if (attemptsInWhileLoop % 1000 == 0) {
-                console.log("x1000");
+            if (attemptsInWhileLoop % 10000 == 0) {
+                console.log("0000");
             }
             // Ensure at the beginning of the loop, each meal has at least 1 item
             if (mealplan.breakfast.length < 1) {
