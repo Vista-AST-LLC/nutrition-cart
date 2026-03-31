@@ -611,6 +611,7 @@ document.getElementById('gradeDayButton').addEventListener('click', async functi
     grade.fillHTML();
     let gradeScore = grade.score[DayGrade.SCORE][Constants.SCOREAVG];
     colorPointsCircle(gradeScore);
+    textColor();
 })
 
 function colorPointsCircle(gradeScore) {
@@ -635,6 +636,65 @@ function colorPointsCircle(gradeScore) {
         document.getElementById('pointsCircle').style.backgroundColor = `hsl(${color}, 75%, 40%)`;
     } else {
         document.getElementById('pointsCircle').classList.add('rainbow');
+    }
+}
+
+function textColor() {
+        const upperThreshold = [
+        2499.9, // CALORIES = 0;
+        49.9,   // TOTALFAT = 1;
+        199.9,  // CHOLESTEROL = 4;
+        2000, // SODIUM = 5;
+        274.9,  // CARBS = 6;
+        37.9,   // FIBER = 7;
+        49.9,   // SUGAR = 8;
+        74.9    // PROTEIN = 9;
+    ];
+
+    const lowerThreshold = [
+        1500, // CALORIES = 0;
+        25,   // TOTALFAT = 1;
+        0,    // CHOLESTEROL = 4;
+        1000,  // SODIUM = 5;
+        200,  // CARBS = 6;
+        28,   // FIBER = 7;
+        0,    // SUGAR = 8;
+        50    // PROTEIN = 9;
+    ];
+    
+    const caloriesCard = document.getElementById('totalCalories');
+    const fatsCard = document.getElementById('totalFats');
+    const cholesterolCard = document.getElementById('totalCholesterol');
+    const sodiumCard = document.getElementById('totalSodium');
+    const carbsCard = document.getElementById('totalCarbs');
+    const fiberCard = document.getElementById('totalFiber');
+    const sugarsCard = document.getElementById('totalSugars');
+    const proteinCard = document.getElementById('totalProtein');
+
+    const items = [
+        caloriesCard,
+        fatsCard,
+        cholesterolCard,
+        sodiumCard,
+        carbsCard,
+        fiberCard,
+        sugarsCard,
+        proteinCard
+    ];
+
+    for (let i = 0; i < 8; i++) {
+        let amount = items[i].innerHTML;
+        if (amount < (lowerThreshold[i] / 2)) {
+            items[i].style.color = 'red';
+        } else if (amount < lowerThreshold[i]) {
+            items[i].style.color = 'gold';
+        } else if (amount < upperThreshold[i]) {
+            items[i].style.color = 'green';
+        } else if (amount < (upperThreshold[i] * 2)) {
+            items[i].style.color = 'gold';
+        } else {
+            items[i].style.color = 'red';
+        }
     }
 }
 
